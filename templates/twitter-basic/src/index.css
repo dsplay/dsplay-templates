@@ -1,0 +1,306 @@
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 2vh;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 2%;
+    font-family: Roboto, sans-serif;
+    background-color: black;
+    color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/twitter-basic.-background-h.jpg');
+    background-size: cover;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+.App {
+    /* background-color: bisque; */
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.user-profile {
+    /* background-color:burlywood; */
+    position: relative;
+    height: 20%;
+    display: block;
+}
+
+.post {
+    /* background-color: greenyellow; */
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    height: 80%;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+            animation: fadein 2s;
+
+}
+
+.user-picture {
+    /* background-color: coral; */
+    position: absolute;
+    width: 9rem;
+    height: 9rem;
+    background-size: contain;
+    border-radius: 4.5rem;
+    margin: auto;
+    left: 0;
+    top:0; bottom:0;
+    vertical-align: middle;
+}
+
+.user-info {
+    /* background-color: chartreuse; */
+    position: absolute;
+    display: inline-block;
+    left: 10rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 8rem;
+}
+
+.user-name {
+    /* background-color: aquamarine; */
+    display: block;
+    font-size: 3em;
+    font-weight: bold;
+    padding: .3rem;
+    font-family: Oswald;
+}
+
+.user-screen-name {
+    /* background-color: bisque; */
+    display: block;
+    font-weight: bold;
+    color: #B9D0FF;
+    padding: .2rem;
+    font-size: 2.3em;
+}
+
+.content {
+    /* background-color: blueviolet; */
+    box-sizing: border-box;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;    
+    display: inline-block;
+    /* position: relative; */
+}
+
+.with-media .content {
+    width: 45%;
+}
+
+.text-wrapper {
+    /* background-color: chocolate; */
+    box-sizing: border-box;
+    height: 71%;
+    display: block;
+    font-size: 2.3em;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+}
+
+.with-media .text-wrapper {
+    font-size: 1.5em;
+}
+
+.text-ratio {
+    /* background-color: #333; */
+    height: 100%;
+    display: inline-table;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.with-media .text-ratio {
+    padding-right: 1rem;
+}
+
+.post-text {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.media {
+    /* background-color: darkolivegreen; */
+    box-sizing: border-box;
+    vertical-align: top;
+    display: inline-block;
+    width: 55%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: .3rem solid #B9D0FF;
+}
+
+.info-container {
+    /* background-color: aqua; */
+    box-sizing: border-box;
+    display: inline-block;
+    height: 10.6rem;
+    width: 30rem;
+    font-size: 2.3rem;
+    position: absolute;
+    bottom: 0;
+    /* overflow: hidden; */
+}
+
+.info-box {
+    display: table;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 1rem;
+    padding: .5rem 3rem .5rem .5rem;
+    overflow: hidden;
+    color: #333;
+    width: 25rem;
+    /* position: relative; */
+}
+
+.info {
+    /* background-color: #FFFF99; */
+    display: table-cell;
+    /* position: absolute; */
+    top: 0;
+    bottom: 0;
+    /* left: 10rem; */
+    text-align: center;
+    margin: auto;
+    height: 5rem;
+    /* width: 30rem; */
+    vertical-align: middle;
+}
+
+.hashtag {
+    font-style: italic;
+    color: #FFFF99;
+}
+
+.mention {
+    font-weight: bold;
+    color: #FFFF99;
+}
+
+.text-wrapper a {
+    text-decoration: none;
+    color: #B9D0FF;
+}
+
+.qrcode-container {
+    display: table-cell;
+    background-color: white;
+    padding: .5rem .5rem 0 .5rem;
+}
+
+.created-at {
+    /* margin-left: .5rem; */
+    font-size: 2rem;
+    font-style: italic;
+    color: #7e7e7e;
+}
+
+.stats {
+    font-weight: bold;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+    color: #6d6d6d;
+}
+
+.portrait {
+    display: none !important;
+}
+
+@media screen and (orientation:portrait) {
+
+    .landscape {
+        display: none !important;
+    }
+
+    .portrait {
+        display: inherit !important;
+    }
+
+    html {
+        font-size: 2vw;
+    }
+
+    body {
+        background-image: url('images/twitter-basic.-background-v.jpg');
+    }
+    .user-profile {
+        height: 11%;
+    }
+
+    .post {
+        box-sizing: border-box;
+        height: 87.5%;
+    }
+
+    .content {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .with-media .content {
+        height: 55%;
+        width: 100%;
+    }
+
+    .media {
+        box-sizing: border-box;
+        margin-top: 2%;
+        width: 100%;
+        height: 45%;
+        display: block;
+    }
+
+    .text-wrapper {
+        height: 86%;
+        padding-right: 0;
+    }
+
+    .with-media .text-wrapper {
+        height: 74%;
+    }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.debug {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .5);
+    font-size: 2rem;
+    z-index: 1000;
+    display: none;
+}
