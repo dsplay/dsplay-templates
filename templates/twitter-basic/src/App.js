@@ -35,6 +35,7 @@ class App extends Component {
 
         return (
             <div className="App">
+                 <i className="flaticon-twitter logo"></i>
                 <div className="debug">{orientation}({width}x{height})</div>
                 <UserProfile {...user} />
                 <Posts posts={selectedPosts} pageDuration={pageDuration}/>

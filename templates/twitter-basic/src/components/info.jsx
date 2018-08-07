@@ -36,7 +36,7 @@ function Info({
                     <span className="created-at">{moment(created).format('L')}</span><br/>
                     <span className="created-at">{moment(created).format('HH:mm:ss')}</span>
                     <div className="stats">
-                        <i className="flaticon-retweet"></i>{shares}
+                        <i className="flaticon-retweet-arrows-couple-symbol-square-variant"></i>{shares}
                         &nbsp;&nbsp;
                         <i className="flaticon-heart-outline"></i>{likes}
                     </div>

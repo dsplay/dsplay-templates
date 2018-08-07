@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 21/07/2018 22:37
+  	Creation date: 07/08/2018 00:57
   	*/
 
 @font-face {
@@ -23,13 +23,12 @@
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-    font-family: Flaticon;
-    /* font-size: 20px; */
-    font-style: normal;
-    margin-left: 10px;
-    margin-right: 10px;
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
 }
 
 .flaticon-heart-outline:before { content: "\f100"; }
-.flaticon-comment-white-oval-bubble:before { content: "\f101"; }
-.flaticon-retweet:before { content: "\f102"; }
+.flaticon-twitter:before { content: "\f101"; }
+.flaticon-retweet-arrows-couple-symbol-square-variant:before { content: "\f102"; }

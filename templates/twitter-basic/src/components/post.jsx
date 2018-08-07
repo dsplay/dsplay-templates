@@ -37,6 +37,19 @@ function PostContent({
     );
 }
 
+const PostMedia = ({
+    type,
+    urls: {
+        md: url,
+    },
+    className,
+}) => (
+    <div className={`media ${className}`} style={{ backgroundImage: `url("${url}")`}}>
+        { type === 'video' && <div className="playWrapper"/> }
+    </div>
+);
+
+
 
 function Post({
     text = '',
@@ -45,11 +58,6 @@ function Post({
 }) {
 
     const withMedia = media && media.length > 0;
-
-    // text = '';
-    // for (let i = 0; i < 280; i++) {
-    //     text += 'W';
-    // }
 
     const sizeMap = {
         '20': 3,
@@ -73,13 +81,13 @@ function Post({
     return (
         <div className={`post ${withMedia ? 'with-media' : ''}`}>
 
-            { withMedia && <div className="media portrait" style={{ backgroundImage: `url("${media[0].urls.md}")`}} /> }
+            { withMedia && <PostMedia {...media[0]} className="portrait" /> }
             
             <div className="content">
                 <PostContent text={text} info={info} ratio={ratio} />
             </div>
 
-            { withMedia && <div className="media landscape" style={{ backgroundImage: `url("${media[0].urls.md}")`}} /> }
+            { withMedia && <PostMedia {...media[0]} className="landscape" /> }
             
         </div>
     )
