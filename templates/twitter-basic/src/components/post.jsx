@@ -1,35 +1,44 @@
 import React from 'react';
 import Info from './info';
+import { tval } from '../util/template';
+
+const hashtagColor = tval('hashtag_color', '#FFFF99');
+const linkColor = tval('link_color', '#B9D0FF');
+const mentionColor = tval('mention_color', '#FFFF99');
+const primaryColor = tval('primary_color', 'white');
+const textColor = tval('text_color', primaryColor);
 
 function highlight(text = '') {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    text = text.replace(urlRegex, function(url) {
-        return '<a href="' + url + '">' + url + '</a>';
-    });
 
     const hashtagRegex = /(#[^\s]+)/g;
     text = text.replace(hashtagRegex, function(url) {
-        return '<span class="hashtag"' + url + '">' + url + '</span>';
+        return `<span class="hashtag" style="color: ${hashtagColor}">${url}</span>`;
+    });
+
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    text = text.replace(urlRegex, function(url) {
+        return `<a href="${url}" style="color: ${linkColor};">${url}</a>`;
     });
 
     const mentionRegex = /(@[^\s]+)/g;
     text = text.replace(mentionRegex, function(url) {
-        return '<span class="mention"' + url + '">' + url + '</span>';
+        return `<span class="mention" style="color: ${mentionColor}">${url}</span>`;
     });
 
     return text;
 }
 
 function PostContent({
+    id,
     text,
     info,
     ratio,
 }) {
     return (
         <React.Fragment>
-            <div className="text-wrapper" key={info.link}>
+            <div className="text-wrapper" key={id}>
                 <div className="text-ratio" style={{ fontSize: `${ratio}em` }}>
-                    <div className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text) }} />
+                    <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text) }} />
                 </div>
             </div> 
             <Info {...info} />
@@ -54,6 +63,7 @@ const PostMedia = ({
 function Post({
     text = '',
     media,
+    id,
     ...info
 }) {
 
@@ -84,7 +94,7 @@ function Post({
             { withMedia && <PostMedia {...media[0]} className="portrait" /> }
             
             <div className="content">
-                <PostContent text={text} info={info} ratio={ratio} />
+                <PostContent id={id} text={text} info={info} ratio={ratio} />
             </div>
 
             { withMedia && <PostMedia {...media[0]} className="landscape" /> }

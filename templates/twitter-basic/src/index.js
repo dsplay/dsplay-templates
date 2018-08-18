@@ -1,5 +1,6 @@
 import 'core-js/fn/set';
 import 'core-js/fn/map';
+import 'core-js/es6/array';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

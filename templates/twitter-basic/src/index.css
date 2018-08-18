@@ -14,8 +14,9 @@ body {
     color: whitesmoke;
     width: 100%;
     height: 100%;
-    background-image: url('images/twitter-basic.-background-h.jpg');
+    background-image: url('images/twitter-basic-background.jpg');
     background-size: cover;
+    background-position: center;
 }
 
 
@@ -27,15 +28,16 @@ body {
     margin: 0 .5rem 0 .5rem;
 }
 
-.logo {
+#logo {
     position: absolute;
     top: 1.5rem;
     right: 1.3rem;
+    color: #B9D0FF;
 }
 
-.logo:after, .logo:before {
+#logo i:after, #logo i:before {
     font-size: 7rem !important;
-    color: #B9D0FF !important;
+    color: inherit;
 }
 
 #root {
@@ -48,6 +50,7 @@ body {
     width: 100%;
     height: 100%;
     display: block;
+    opacity: 0;
 }
 
 .user-profile {
@@ -67,6 +70,11 @@ body {
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
             animation: fadein 2s;
 
+}
+
+.fadeIn {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+            animation: fadein 2s;
 }
 
 .user-picture {
@@ -286,7 +294,7 @@ body {
     }
 
     body {
-        background-image: url('images/twitter-basic.-background-v.jpg');
+        /* background-image: url('images/twitter-basic.-background-v.jpg'); */
     }
     .user-profile {
         height: 11%;
