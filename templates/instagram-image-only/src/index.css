@@ -116,6 +116,29 @@ body {
     border: .15em solid rgb(240, 197, 231);
     position: relative;
     border-radius: 1.3em;
+    overflow: hidden;
+}
+
+.media-slider {
+    width: 200%;
+    height: 100%;
+}
+
+.media-slider.slide {
+    transition-duration:.5s;
+    -webkit-transition-duration:.5s;
+    transform:translateX(-50%);
+    -ms-transform:translateX(-50%); /* prefix for IE 9 */
+    -webkit-transform:translateX(-50%); /* prefix for Safari and Chrome */
+}
+
+.media-item {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat
 }
 
 .mediaThumb .overlay {

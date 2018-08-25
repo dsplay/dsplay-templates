@@ -1,5 +1,6 @@
 import React from 'react';
 import UserProfile from './user-profile';
+import MediaSlider from './media-slider';
 import { tbval } from '../util/template';
 
 const showUserInfo = tbval('show_user_info', true);
@@ -20,10 +21,12 @@ const PostMedia = ({
 function Post({
     media,
     user,
+    duration,
     ...info
 }) {
 
     const withMedia = media && media.length > 0;
+    const maxMediaToShow = Math.min(media.length, Math.max(1, Math.floor(duration / 1000)));
 
     return (
         <div className={`post ${withMedia ? 'with-media' : ''}`}>
@@ -33,7 +36,8 @@ function Post({
                 </div>
             }
 
-            { withMedia && <PostMedia {...media[0]} /> }
+            { withMedia && media[0].type === 'image' && media.length > 1 && <MediaSlider media={media.slice(0, maxMediaToShow)} duration={Math.floor(duration / maxMediaToShow)} /> }
+            { (withMedia && (media[0].type === 'video' || media.length === 1 )) && <PostMedia {...media[0]} /> }
             
             <div className="content landscape">
                 { showUserInfo && <UserProfile className="landscape" {...user} /> }
