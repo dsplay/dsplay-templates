@@ -115,7 +115,7 @@ body {
     background-repeat: no-repeat;
     border: .15em solid rgb(240, 197, 231);
     position: relative;
-    border-radius: 1.3em;
+    /* border-radius: 1.3em; */
     overflow: hidden;
 }
 
@@ -154,7 +154,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.3) url("images/play-button.png") no-repeat scroll center center / 25em 25em;
-    border-radius: 1.3em;
+    /* border-radius: 1.3em; */
 }
 
 .portrait {
