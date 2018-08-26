@@ -3,7 +3,10 @@ const template = window.dsplay_template || window.template || {};
 // export const val = (key, defaultValue) => template[key] !== undefined && template[key] !== null ? template[key] : defaultValue;
 export const val = (key, defaultValue) => template[key] ? template[key] : defaultValue;
 
-export const bval = (key, defaultValue) => val(key, defaultValue ? 'true' : 'false').toLowerCase() === 'true';
+export const bval = (key, defaultValue) => {
+    const stringVal = val(key, defaultValue ? 'true' : 'false').toLowerCase();
+    return stringVal === 'true' || stringVal === '1';
+}
 
 export const ival = (key, defaultValue) => parseInt(val(key, defaultValue));
 
