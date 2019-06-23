@@ -24,7 +24,7 @@ var template = {
 var config = {
     // config parameters
     locale: 'pt_br',
-    orientation: 'portrait',
+    orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
     // Android SDK version
     osVersion: 16,
     // DSPLAY App version code
