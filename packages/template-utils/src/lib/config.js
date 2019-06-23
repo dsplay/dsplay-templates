@@ -1,3 +1,5 @@
-const template = window.dsplay_config || window.config || {};
+const config = window.dsplay_config || window.config || {};
 
-const isVertical = () => template.orientarion === 'portrait';
+export const isVertical = () => config.orientation === 'portrait';
+
+export default config;

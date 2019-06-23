@@ -1,16 +1,20 @@
-import * as template from './template';
-import * as config from './config';
+import * as templateUtil from './template';
+import * as configUtil from './config';
 
-export {
-    template,
-    config,
-}
+export { default as media } from './media';
+export { default as config } from './config';
+export { default as template } from './template';
 
+// custom template vars
 
-export const tval = template.val;
+export const tval = templateUtil.val;
 
-export const tbval = template.bval;
+export const tbval = templateUtil.bval;
 
-export const tival = template.ival;
+export const tival = templateUtil.ival;
 
-export const tfval = template.fval;
+export const tfval = templateUtil.fval;
+
+// config
+
+export const isVertical = configUtil.isVertical();
