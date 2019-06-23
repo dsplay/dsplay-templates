@@ -1,16 +1,16 @@
-# template-utils
+# @dsplay/template-utils
 
-Helper library for woring with custom templates in DSPLAY
+A helper library for working with custom templates in [DSPLAY](https://dsplay.tv)
 
-### install
+### Installation
 
 ```
 npm i -S @dsplay/template-utils
 ```
 
-### usage
+### Usage
 
-Follows a simple React example (easily adapted for inferior technologies :P)
+Follows a simple React example (easily adaptable for inferior technologies :P)
 
 ```jsx
 import {
