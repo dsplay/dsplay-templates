@@ -5,6 +5,7 @@
   "author": "Paulo Coutinho (pc@dsplay.tv)",
   "dependencies": {
     "@dsplay/template-utils": "^1.0.3",
+    "core-js": "^3.2.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",

@@ -45,6 +45,15 @@ const {
     },
 } = media;
 
+const {
+    fontRatio,
+    scaledDensity,
+    xdpi,
+    ydpi,
+    width,
+    height,
+} = config;
+
 moment.locale('pt-BR');
 
 // Create our number formatter.
@@ -60,7 +69,7 @@ function MegaSena() {
     let lastPrize;
     let winnersText;
     if (winners > 0) {
-        winnersText = `${winners} ganhadores`;
+        winnersText = `${winners} ganhador${winners === 1 ? '' : 'es'}`;
         lastPrize = amount;
     } else {
         winnersText = `Acumulou`;
@@ -106,7 +115,12 @@ function MegaSena() {
             <div className="last-round flex v">
                 <div className="title">Último Resultado</div>
                 <div className="numbers">
-                    {numbers.map(number => <Ball key={number} value={number} />)}
+                    <span>
+                        {numbers.slice(0, 3).map(number => <Ball key={number} value={number} />)}
+                    </span>
+                    <span>
+                        {numbers.slice(3).map(number => <Ball key={number} value={number} />)}
+                    </span>
                 </div>
                 <div className="result">
                     <span className="winner">{winnersText}</span> (R$
@@ -126,7 +140,11 @@ function MegaSena() {
             </div>
             <div className="spacer3" />
             <div className="special-prizes">
-                Acumulado para Mega da Virada: R$ <strong>
+                Acumulado para Mega da Virada:
+                <strong>
+                    &nbsp;
+                    R$
+                    &nbsp;
                     <CountUp
                         duration={5}
                         start={0}

@@ -1,0 +1,172 @@
+.time-mania.banner-v
+
+    // 640h
+
+    font-size: .25em
+
+    @media screen and (min-width: 120px)
+
+        font-size: .29em
+
+    // 1280h
+
+    @media screen and (min-height: 1280px)
+
+        font-size: .33em
+
+        @media screen and (min-width: 80px) 
+
+            font-size: .45em
+
+        @media screen and (min-width: 180px) 
+
+            font-size: .54em
+
+        @media screen and (min-width: 300px) 
+
+            font-size: .55em
+
+    // 1920w
+
+    @media screen and (min-height: 1920px)
+
+        font-size: .34em
+
+        @media screen and (min-width: 150px) 
+
+            font-size: .69em
+
+        @media screen and (min-width: 300px) 
+
+            font-size: .85em
+
+        @media screen and (min-width: 450px) 
+
+            font-size: .9em
+
+    // 3840w
+
+    @media screen and (min-height: 3840px)
+
+        font-size: .34em
+
+        @media screen and (min-width: 300px) 
+
+            font-size: 1.4em
+
+        @media screen and (min-width: 600px) 
+
+            font-size: 1.7em
+
+        @media screen and (min-width: 900px) 
+
+            font-size: 1.8em
+
+    // 7680w
+
+    @media screen and (min-height: 7680px)
+
+        font-size: .34em
+
+        @media screen and (min-width: 300px) 
+
+            font-size: 1.8em
+
+        @media screen and (min-width: 600px) 
+
+            font-size: 2.8em
+
+        @media screen and (min-width: 1200px) 
+
+            font-size: 3.4em
+
+        @media screen and (min-width: 1800px) 
+
+            font-size: 3.6em
+
+
+    flex-direction: column
+
+    .header
+        flex-direction: column
+        // height: auto
+        width: 100%
+
+        .logo 
+            padding: 1em 0
+            flex-direction: column
+            width: 100%
+            justify-self: flex-start
+            span
+                word-break: break-all
+                font-size: 1.5em
+                margin-top: .5em
+
+    .spacer1
+        flex-grow: 1
+    .spacer2
+        flex-grow: 1
+    .spacer3
+        flex-grow: 1
+
+    .next-round
+        width: auto
+
+        .title
+            font-size: 2em
+            text-align: center
+            margin-bottom: 1em
+
+        .date
+            display: none
+        
+        .estimated-prize
+            border-radius: 2em
+            width: auto
+            padding: 3em 0
+            margin-top: 0em
+            writing-mode: vertical-lr
+            text-orientation: upright
+            
+
+            .currency-symbol
+                font-size: 2em
+
+            .value-container
+                position: relative
+                letter-spacing: -.5em
+                font-size: 4.5em
+                font-family: Oswald
+
+
+    .last-round
+
+        padding: 1em 0em 2em 0em
+        width: 80%
+        margin-bottom: 0em
+
+        .title
+            font-size: 1.5em
+            text-align: center
+
+        .results
+            flex-direction: column
+        
+                
+            .numbers
+                font-size: 2.5em
+                margin-top: .5em
+                flex-direction: column
+
+                span
+                    display: inline-flex
+                    flex-direction: column
+                    
+                    .ball
+
+            .result
+                display: none
+        .info
+            display: none
+    .special-prizes
+        display: none
