@@ -13,11 +13,12 @@ var template = {
     currency_api_key: '305dc77b8ca4ceed39e7',
 
     // RSS config
-    // rss_url: 'https://www.reddit.com/.rss',
-    rss_url: 'http://rss.home.uol.com.br/index.xml',
+    rss_url: 'https://www.reddit.com/.rss',
+    // rss_url: 'http://rss.home.uol.com.br/index.xml',
     
     // sponsor config
-    sponsor_logo: 'https://cdn.designcrowd.com/blog/2016/January/top-company-logos-black/2_Disney_400.png',
+    // sponsor_logo: 'https://cdn.designcrowd.com/blog/2016/January/top-company-logos-black/2_Disney_400.png',
+    sponsor_logo: 'https://cdn0.capterra-static.com/logos/150/2105153-1566335117.png',
 
     // weather config
     weatherbit_api_key: 'a9cd6a708e2944bcb36378f9ba36d1bc',
