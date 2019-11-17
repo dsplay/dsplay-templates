@@ -39,9 +39,9 @@ This template has many configuration variables as the following table show:
 | `bg_color`            | All      | color   |                                                                                                                                                                                   |
 | `bg_image`            | All      | image   |                                                                                                                                                                                   |
 | `text_color`          | All      | color   |                                                                                                                                                                                   |
-| `rss_logo_box_color`  | All      | color   |                                                                                                                                                                                   |
-| `currency_box_color`  | All      | color   |                                                                                                                                                                                   |
-| `currency_text_color` | All      | color   |                                                                                                                                                                                   |
+| `rss_logo_box_color`  | RSS      | color   |                                                                                                                                                                                   |
+| `currency_box_color`  | Currency | color   |                                                                                                                                                                                   |
+| `currency_text_color` | Currency | color   |                                                                                                                                                                                   |
 
 
 ## Customizing
