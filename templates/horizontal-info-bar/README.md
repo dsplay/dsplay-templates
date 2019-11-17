@@ -18,7 +18,7 @@ This template has 5 widgets:
 
 All widget are optional and will depend on the provided template variables.
 
-![Screenshot](assets/screenshot.png)
+![Screenshot](assets/screenshot-01.png)
 
 ### Configuration
 
