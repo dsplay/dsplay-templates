@@ -8,8 +8,8 @@ module.exports = [
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'dsplay-template-utils.js',
-    library: 'webpackNumbers',
-    libraryTarget: 'umd',
+    library: 'dsplayTemplateUtils',
+    // libraryTarget: 'umd',
   },
   devtool,
   optimization: {
