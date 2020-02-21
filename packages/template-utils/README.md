@@ -4,11 +4,19 @@ A helper library for working with custom templates in [DSPLAY](https://dsplay.tv
 
 ### Installation
 
+#### ES Module
 ```
 npm i -S @dsplay/template-utils
 ```
 
+#### UMD
+```html
+<script src="https://unpkg.com/@dsplay/template-utils"></script>
+```
+
 ### Usage
+
+#### ES Module
 
 Follows a simple React example (easily adaptable for inferior technologies :P)
 
@@ -52,4 +60,17 @@ function MyComponent() {
     )
 }
 
+```
+
+
+#### UMD
+
+```js
+// dsplayTemplateUtils var is exported by UMD module.
+
+var fontSize = dsplayTemplateUtils.tval('base_font_size', '1.5em');
+console.log(fontSize);
+
+var titleOpacity = dsplayTemplateUtils.tfval('title_opacity', 1);
+console.log(titleOpacity);
 ```
