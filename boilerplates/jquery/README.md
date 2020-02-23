@@ -1,10 +1,10 @@
 ![DSPLAY - Digital Signage](https://developers.dsplay.tv/assets/images/dsplay-logo.png)
 
-# DSPLAY - JavaScript Template Boilerplate
+# DSPLAY - jQuery Template Boilerplate
 
-This is a Vanilla JavaScript boilerplate for building [HTML-based templates](https://developers.dsplay.tv/docs/html-templates) for [DSPLAY - Digital Signage](https://dsplay.tv/) platform.
+This is a [jQuery](https://jquery.com/) boilerplate for building [HTML-based templates](https://developers.dsplay.tv/docs/html-templates) for [DSPLAY - Digital Signage](https://dsplay.tv/) platform.
 
-You can use this project as a skeleton for creating a new HTML Template with pure JavaScript, without any extra library. If you prefer to use a JS library, check the [other boilerplates](https://developers.dsplay.tv/docs/html-templates/boilerplates/) available.
+You can use this project as a skeleton for creating a new HTML Template with jQuery. If you prefer to use another JS library, check the [other boilerplates](https://developers.dsplay.tv/docs/html-templates/boilerplates/) available.
 
 ## Directory Structure
 
@@ -16,6 +16,7 @@ You can use this project as a skeleton for creating a new HTML Template with pur
 |   |   |-- app.js
 |   |   |-- dsplay-data.js  <-- can be located anywhere in the template structure
 |   |   |-- dsplay-template-utils.js
+|   |   |-- jquery.js
 |   |
 |   |-- images
 |   |-- styles
