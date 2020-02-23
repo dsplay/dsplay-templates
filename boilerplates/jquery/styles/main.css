@@ -6,7 +6,6 @@ html, body, #root {
 }
 
 #root {
-    opacity: 0;
     color: white;
     display: flex;
     flex-direction: column;

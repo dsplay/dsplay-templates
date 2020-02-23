@@ -1,6 +1,7 @@
 "use strict";
 
 $(function () {
+    $('#root').hide();
 
     // here we can apply the dsplay-data.js values to your template using jQuery
 
@@ -25,5 +26,5 @@ $(function () {
     var titleOpacity = u.tfval('title_opacity', 1);
     $('.title').css({ opacity: titleOpacity });
 
-    $('#root').css({ opacity: 1 });
+    $('#root').fadeIn();
 });
