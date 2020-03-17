@@ -22,7 +22,7 @@ All widget are optional and will depend on the provided template variables.
 
 ### Configuration
 
-This template has many configuration variables as the following table show:
+This template has many configuration variables as the following table shows:
 
 | Variable              | Widget   | Type    | Description                                                                                                                                                                       |
 |-----------------------|----------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -56,11 +56,17 @@ npm i
 npm start
 ```
 
-
-### Release build
+## Packing (release build)
 
 To create a release build of the template, ready to be uploaded to DSPLAY, just run:
 
 ```
 npm run zip
+```
+
+It will generate a `template.zip` file ready to be deployed to [DSPLAY Web Manager](https://manager.dsplay.tv/template/create)
+
+## More
+
+The see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
 ```
