@@ -35,7 +35,7 @@ function Reaction({
 
   return (
     <span className="reaction">
-      <img src={reactionsMap[type]} />
+      <img src={reactionsMap[type]} alt="" />
       <span className="count">{count}</span>
     </span>
   );
@@ -78,10 +78,10 @@ function Info({
         }
         <div className="info">
           <span className={`created-at ${reactions ? '' : 'no-reactions'}`}>
-            <FitText>{moment(created).format('L')}</FitText>
-          </span>
-          <span className={`created-at ${reactions ? '' : 'no-reactions'}`}>
-            <FitText>{moment(created).format('HH:mm:ss')}</FitText>
+            <FitText>
+              {moment(created).format('L')}<br/>
+              {moment(created).format('HH:mm:ss')}
+            </FitText>
           </span>
           <span className="reactions">
             <Reaction type="like" count={like} />

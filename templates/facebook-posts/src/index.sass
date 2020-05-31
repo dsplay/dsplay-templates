@@ -35,23 +35,21 @@ body
   width: 100%
   height: 100%
 
-
 .fade-in
-  @include animation(fadeIn 1s ease-in)
+  +animation(fadeIn 1s ease-in)
 
-.portrait
+.portrait-only
   display: none !important
 
-.landscape
-    display: inherit !important
+.landscape-only
+  display: inherit !important
 
 @media screen and (orientation:portrait)
 
   html
-    font-size: 2vw
 
-  .landscape
+  .landscape-only
     display: none !important
 
-  .portrait
+  .portrait-only
     display: inherit !important

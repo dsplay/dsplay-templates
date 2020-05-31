@@ -13,10 +13,12 @@ function UserProfile({
 }) {
   return (
     <div className={`user-profile ${className}`}>
-      <div className="user-picture" style={{ backgroundImage: `url("${pic}")` }} />
       <div className="user-info">
         <span className="user-name" style={{ color: fullNameColor }}>
-          <FitText style={{ justifyContent: 'flex-start' }}>{name}</FitText>
+          <FitText>
+            <div className="user-picture" style={{ backgroundImage: `url("${pic}")` }} />
+            <span className="name">{name}</span>
+          </FitText>
         </span>
       </div>
     </div>

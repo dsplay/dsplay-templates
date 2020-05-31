@@ -19,7 +19,8 @@
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "prezip": "npm run build",
-        "zip": "rm -rf build/test-assets && ./build.sh"
+        "zip": "rm -rf build/test-assets && ./build.sh",
+        "serve": "npm run build && serve -s -p 3000 build"
     },
     "homepage": "./",
     "browserslist": [

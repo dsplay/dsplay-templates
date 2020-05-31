@@ -1,20 +1,18 @@
 import React from 'react';
-import { tval, tbval } from '@dsplay/template-utils';
 import Info from '../info/info';
 import UserProfile from '../user-profile/user-profile';
 import MediaSlider from '../media-slider/media-slider';
-import './post.sass';
 import FitText from '../fit-text/fit-text';
-import { useScreenInfo, PORTRAIT, BANNER_V } from '../../util/screen';
-
-const primaryColor = tval('primary_color', 'white');
-const secondaryColor = tval('secondary_color', '#FFFF99');
-const hashtagColor = tval('hashtag_color', secondaryColor);
-const linkColor = tval('link_color', '#B9D0FF');
-const mentionColor = tval('mention_color', secondaryColor);
-const phoneColor = tval('phone_color', secondaryColor);
-const textColor = tval('text_color', primaryColor);
-const showInfo = tbval('show_info', true);
+import { useScreenInfo, PORTRAIT, BANNER_V, SQUARED, BANNER_H } from '../../util/screen';
+import {
+  hashtagColor,
+  linkColor,
+  mentionColor,
+  phoneColor,
+  textColor,
+  textBgColor
+} from '../../util/styles';
+import './post.sass';
 
 function highlight(text = '') {
   const hashtagRegex = /(#[^\s]+)/g;
@@ -50,15 +48,16 @@ function PostContent({
   info,
 }) {
 
+  const style = {
+    backgroundColor: textBgColor, 
+  }
+
   return (
-    <>
-      <div className="text-wrapper">
-        <FitText>
-          <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text) }} />
-        </FitText>
-      </div>
-      {showInfo && <Info {...info} />}
-    </>
+    <div className="text-wrapper" style={style}>
+      <FitText>
+        <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text) }} />
+      </FitText>
+    </div>
   );
 }
 
@@ -73,7 +72,8 @@ function Post({
   const maxMediaToShow = Math.min(media.length, Math.max(1, Math.floor(duration / 1000)));
   let finalText = text;
   const { screenFormat } = useScreenInfo();
-  const portrait = screenFormat === PORTRAIT || screenFormat === BANNER_V;
+  const profileFirst = screenFormat === PORTRAIT || screenFormat === BANNER_V || screenFormat === BANNER_H || screenFormat === SQUARED;
+  const infoOutsideContent = screenFormat === SQUARED || screenFormat === BANNER_H;
 
   const limit = withMedia ? 400 : 700;
 
@@ -83,14 +83,16 @@ function Post({
 
   return (
     <div className={`post ${withMedia ? 'with-media' : ''}`}>
-      {portrait && <UserProfile {...user} />}
+      {profileFirst && <UserProfile {...user} />}
 
       {withMedia && <MediaSlider media={media.slice(0, maxMediaToShow)} duration={Math.floor(duration / maxMediaToShow)} />}
 
       <div className="content">
-        {!portrait && <UserProfile {...user} />}
+        {!profileFirst && <UserProfile {...user} />}
         <PostContent text={finalText} info={info} />
+        {!infoOutsideContent && <Info {...info} />}
       </div>
+      {infoOutsideContent && <Info {...info} />}
 
     </div>
   )

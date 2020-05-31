@@ -1,5 +1,5 @@
 .user-profile
-  background-color: burlywood
+  // background-color: burlywood
   position: relative
   height: 20%
   display: flex
@@ -11,26 +11,71 @@
     width: 15vh
     height: 15vh
     background-size: cover
+    background-repeat: no-repeat
     border-radius: 7.5vh
-    vertical-align: middle
+    flex-shrink: 0
+    // vertical-align: middle
 
   .user-info
     // background-color: chartreuse
     display: inline-flex
-    width: 60%
+    width: 80%
     align-items: center
-    height: 50%
+    height: 90%
 
     .user-name
       // background-color: aquamarine
       height: 100%
       width: 100%
-      display: block
+      display: flex
       font-weight: bold
       padding: .2vh
       font-family: Oswald
-      margin-left: 3vh
+      // margin-left: 3vh
+      text-align: center
+      align-items: center
+      justify-content: center
+
+      .name
+        margin-left: 2vh
 
 .portrait
+
   .user-profile
     height: 11%
+
+    .user-picture
+      width: 15vw
+      height: 15vw
+      border-radius: 7.5vw
+
+.squared
+  
+  .user-profile
+    height: 16%
+
+    .user-picture
+      width: 12vw
+      height: 12vw
+
+.banner-h
+
+  .user-profile
+    height: 100vh
+    width: 200vh
+    min-width: 200vh
+    flex-shrink: 0
+
+    .user-info
+      width: 200vh
+      min-width: 200vh
+
+      .user-picture
+        width: 90vh
+        height: 90vh
+        border-radius: 45vh
+      .user-name
+        width: 200vh
+        height: 100vh
+      .name
+        margin-left: 10vh

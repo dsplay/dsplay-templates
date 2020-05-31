@@ -9,8 +9,8 @@ var dsplay_config = {
 };
 
 var dsplay_media = {
-    duration: 60000,
-    postCount: 10,
+    duration: 200000,
+    postCount: 15,
 
     // for json service based media
     // result: { "validity": "2018-08-13T18:22:55.238Z", "showOutdated": true, "data": {} },
@@ -20,12 +20,27 @@ var dsplay_media = {
 
 var dsplay_template = {
     // template parameter
+    bg_horizontal: '../test-assets/bg-facebook2.png',
+    bg_vertical: '../test-assets/bg-facebook.png',
     overlay: '../test-assets/dsplay-logo.png',
+    overlay_position: 'top-right',
     // image_fit: 'stretch',
     // image_fit: 'cover',
-    image_fit: 'contain',
+    // image_fit: 'contain',
     logo: '../test-assets/dsplay-logo.png',
-
+    // link_color: 'purple',
+    // color_1: '#000',
+    color_2: '#51a8b1',
+    // color_3: '#ff0',
+    // color_4: '#5fa',
+    text_color: 'grey',
+    border_color: 'cyan',
+    hashtag_color: 'yellow',
+    mention_color: 'green',
+    phone_color: 'red',
+    link_color: 'pink',
+    // text_bg_color: '#fff',
+    text_bg_opacity: '.6',
 };
 
 

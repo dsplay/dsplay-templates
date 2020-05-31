@@ -1,13 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { tval } from '@dsplay/template-utils';
 import { useInterval } from '../../hooks/use-interval';
+import { DEFAULT_IMAGE_FIT } from '../../util/defaults';
+import { borderColor, overlay, overlayPosition, imageFit } from '../../util/styles';
 import './media-slider.sass';
-
-const secondaryColor = tval('secondary_color', '#55F');
-const borderColor = tval('border_color', secondaryColor);
-const overlay = tval('overlay');
-const overlayPosition = tval('overlay_position', 'top-left');
-const imageFit = tval('image_fit', 'cover');
 
 const overlayStyle = {
   'top-right': {
@@ -48,15 +43,15 @@ function MediaItem({
     stretch: '100% 100%',
   };
 
-  const backgroundSize = sizeMap[imageFit] || 'cover';
+  const backgroundSize = sizeMap[imageFit] || DEFAULT_IMAGE_FIT;
 
   return (
     <div className="media-item-container" >
-      {imageFit === 'contain' && <div className="media-item-bg" style={{ backgroundImage: `url('${url}')`, backgroundSize: 'cover' }} />}
+      <div className="media-item-bg" style={{ backgroundImage: `url('${url}')`, backgroundSize: 'cover' }} />
       <div className="media-item" style={{ backgroundImage: `url('${url}')`, backgroundSize }} >
-        {type === 'video' && <div className="playWrapper" />}
-        {overlay && <img alt="overlay" className="photo-overlay" style={{ ...overlayStyle[overlayPosition] }} src={overlay} />}
       </div>
+      {type === 'video' && <div className="playWrapper" />}
+      {overlay && <img alt="overlay" className="photo-overlay" style={{ ...overlayStyle[overlayPosition] }} src={overlay} />}
     </div>
   );
 }

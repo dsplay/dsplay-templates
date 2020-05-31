@@ -1,86 +1,98 @@
 .post
-  background-color: greenyellow
-  box-sizing: border-box
+  // background-color: greenyellow
   display: block
   position: relative
   height: 100%
   padding: 0
 
-.content
-  background-color: blueviolet
-  box-sizing: border-box
-  vertical-align: top
-  width: 100%
-  height: 100%    
-  display: inline-block
-  padding: 0
-  position: relative
+  .content
+    // background-color: blueviolet
+    vertical-align: top
+    width: 100%
+    height: 100%    
+    display: inline-block
+    padding: 0
+    position: relative
+
+    .text-wrapper
+      height: 55%
+      display: block
+      margin-top: 2vh
+      margin-bottom: 2vh
+      
+      overflow: hidden
+      word-wrap: break-word
+      word-break: break-word
+      text-align: center
+      text-overflow: ellipsis
+
+      .post-text
+        // background-color: lime
+        display: table-cell
+        vertical-align: middle
+        padding: 5vh
+
+  &.with-media
+    .content
+      width: 45%
+
+    .text-wrapper
+      margin-left: 3vh
 
 
-.with-media .content
-  width: 44.9%
-
-
-.text-wrapper
-  background-color: chocolate
-  box-sizing: border-box
-  height: 55%
-  display: block
-  font-size: 2.3em
-  margin-top: 1rem
-  margin-bottom: 1rem
-  padding-left: 2rem
-  overflow: hidden
-  word-wrap: break-word
-  word-break: break-word
-  text-align: center
-  text-overflow: ellipsis
-
-.with-media .text-wrapper
-  font-size: 1.7em
-
-
-.text-ratio
-  /* background-color: #333 */
-  height: 100%
-  display: inline-table
-  padding-right: 0
-  padding-left: 0
-
-
-.with-media .text-ratio
-  padding-right: 1rem
-
-
-.post-text
-  display: table-cell
-  vertical-align: middle
 
 .portrait
   .post
-    box-sizing: border-box
-    height: 87.5%
-
+    // height: 87.5%
 
     .content
-      display: block
-      height: 100%
+      height: 89%
       width: 100%
-
-    .media
-      box-sizing: border-box
-      margin-top: 2%
-      width: 100%
-      height: 60%
-      display: block
 
       .text-wrapper
-        height: 20%
-        padding-right: 0
+        padding-left: 0
+        height: 81%
 
-    &.with-media .content
-      height: 40%
+        .post-text
+          padding: 5vw
+
+    &.with-media
+      .content
+        height: 38%
+        width: 100%
+        .text-wrapper
+          height: 55%
+          margin-left: 0
+
+
+.squared
+  .post
+    .content
+      display: inline-block
+      margin-top: 0
+      height: 60%
       width: 100%
 
+      .text-wrapper
+        height: 100%
+        .post-text
+          padding: 2vw
 
-    
+    &.with-media
+      .content
+        height: 60%
+        width: 40%
+
+.banner-h
+  .post
+    display: flex
+    .content
+      width: 75vw
+      // height: 100%
+      .text-wrapper
+        margin-top: 0 
+        height: 100%
+
+    &.with-media
+      .content
+        width: 62vw
