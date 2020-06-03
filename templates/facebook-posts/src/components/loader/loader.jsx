@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import './loader.sass';
-import spinner from '../../images/loader.gif';
+// import spinner from '../../images/loader.gif';
+import logo from '../../images/logo.png';
+
 import { LANDSCAPE, PORTRAIT, SQUARED, BANNER_H, BANNER_V, useScreenInfo } from '../../util/screen';
 
 // component
@@ -40,7 +42,7 @@ const Loader = (props) => {
   return (
     <div {...props} className={`loader ${props.className || ''}`} >
       <div>
-        <img src={spinner} alt="" style={imageStyle} />
+        <img className="bounce-in-fwd" src={logo} alt="" style={imageStyle} />
       </div>
       <div className="hidden" >
         {/* put your fonts here */}

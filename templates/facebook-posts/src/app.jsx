@@ -8,6 +8,7 @@ import { waitForFonts } from './util/fonts';
 import { useScreenInfo, PORTRAIT, BANNER_V } from './util/screen';
 import defaultBg from './images/bg.png';
 import './app.sass';
+import { wait } from './util/time';
 
 // one time template config
 const horizontalBackground = tval('bg_horizontal', defaultBg);
@@ -35,14 +36,23 @@ function App() {
   useEffect(() => {
     if (loading) {
       (async () => {
-        await waitForFonts();
+        await Promise.all([
+          wait(2000),
+          waitForFonts(),
+        ]);
+        
         setLoading(false);
       })();
     }
   }, [loading]);
 
+  let content;
+
   if (loading) {
-    return (<Loader />);
+    content = (<Loader />);
+    return content;
+  } else {
+    content = (<Main />);
   }
 
   const appStyle = {
@@ -54,7 +64,7 @@ function App() {
       className={`app fade-in ${screenFormat}`}
       style={appStyle}
     >
-      <Main />
+      {content}
     </div>
   )
 }
