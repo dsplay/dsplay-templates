@@ -1,0 +1,260 @@
+.app
+  padding: 0 !important
+
+@mixin respond($breakpoint) 
+  @if($breakpoint == 1920w)
+    @media (max-width: 1920px) { @content }
+  
+  @if($breakpoint == 1280w)
+    @media (max-width: 1280px) { @content }
+  
+  @if($breakpoint == 1080w)
+    @media (max-width: 1080px) { @content }
+  
+  @if($breakpoint == 720w)
+    @media (max-width: 720px) { @content }
+
+  @if($breakpoint == 720h)
+    @media (max-height: 720px) { @content }
+
+  @if($breakpoint == square-1280)
+    @media (min-height: 1280px) and (min-width: 1280px) { @content }
+  
+  @if($breakpoint == square-1920)
+    @media (min-height: 1920px) and (min-width: 1920px) { @content }
+
+label
+  text-transform: uppercase
+
+.flex-container 
+    height: 100vh
+    width: 100vw
+    display: -ms-flexbox
+    display: -webkit-flex
+    display: flex
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
+    -webkit-flex-wrap: wrap
+    -ms-flex-wrap: wrap
+    flex-wrap: wrap
+    -webkit-justify-content: center
+    -ms-flex-pack: center
+    justify-content: center
+    -webkit-align-content: center
+    -ms-flex-line-pack: center
+    align-content: center
+    -webkit-align-items: flex-start
+    -ms-flex-align: start
+    align-items: flex-start
+    @include respond(720w)
+    @include respond(1080w)
+      -webkit-flex-direction: column
+      -ms-flex-direction: column
+      flex-direction: column
+
+.flex-item,
+.weather-item
+    display: -ms-flexbox
+    display: -webkit-flex
+    display: flex
+    -webkit-flex-direction: column
+    -ms-flex-direction: column
+    flex-direction: column    
+    -webkit-justify-content: center
+    -ms-flex-pack: center
+    justify-content: center
+    -webkit-align-content: center
+    -ms-flex-line-pack: center
+    align-content: center
+
+
+.flex-item:nth-child(1)
+    height: 100%
+    width: 60vw
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 0 1 auto
+    -ms-flex: 0 1 auto
+    flex: 0 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    @include respond(square-1920)
+    @include respond(square-1280)
+        height: 100vh
+        width: 100vw
+    @include respond(720w)
+    @include respond(1080w)
+        height: 50vh
+        width: 100vw
+
+.flex-item:nth-child(2)
+    height: 100%
+    width: 40vw
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 0 1 auto
+    -ms-flex: 0 1 auto
+    flex: 0 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    background: #f0f0f0
+    @include respond(square-1920)
+    @include respond(square-1280)
+      display: none
+    @include respond(720w)
+    @include respond(1080w)
+        height: 50vh
+        width: 100vw
+
+
+.section-row
+    display: -ms-flexbox
+    display: -webkit-flex
+    display: flex
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
+    -webkit-flex-wrap: wrap
+    -ms-flex-wrap: wrap
+    flex-wrap: wrap
+    -webkit-justify-content: center
+    -ms-flex-pack: center
+    justify-content: center
+    -webkit-align-content: center
+    -ms-flex-line-pack: center
+    align-content: center
+    -webkit-align-items: center
+    -ms-flex-align: center
+    align-items: center
+
+.today,
+.city
+    height: 4rem
+    margin: 1rem
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 1 1 auto
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+.city
+  font-family: "Roboto 400"
+
+
+.weather-description
+  height: 4rem
+  text-transform: capitalize
+
+
+.current-temperature
+  font-family: 'Roboto 300'
+  text-shadow: -5px 0px 2px #494949
+  height: 18rem
+  @include respond(720h)
+    height: 12rem
+  @include respond(720w)
+    height: 12rem
+
+
+.current-min-temperature
+  height: 6rem
+  @include respond(720h)
+    height: 4rem
+  @include respond(720w)
+    height: 4rem 
+
+.current-min-temperature-label
+  font-size: 3rem
+  margin-right: 1rem
+
+
+// Forecast
+.weather-item
+  font-family: 'Roboto 300'
+  color: #999
+  height: 25vh
+  margin: 2rem 6rem
+
+
+.forecast-list-header
+  margin: 0 2rem
+  border-bottom: 1px solid rgba(211, 216, 224, 0.88)
+
+.w-day,
+.w-date
+  font-family: 'Roboto 300'
+  height: 3rem
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+
+
+.w-min-temperature,
+.w-max-temperature
+  height: 3em
+  margin: 0 1rem
+  label
+    font-size: 2rem
+
+.w-min-temperature
+  color: #44848d
+
+
+.w-max-temperature
+   color: #c57d7d
+   
+
+.icon-weather-today img
+  width: 8rem
+  height: auto
+
+
+.icon-weather-list img
+  width:  5rem
+
+//Background styles
+    
+.weather-thunderstorm
+  background: linear-gradient(-45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)
+
+.weather-drizzle
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+
+.weather-rain
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)
+
+.weather-snow
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #724e8a 0%, #445e8d 50%, #6f5c8f 100%)
+
+.weather-mist-smoke-fog-haze
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+
+.weather-clearsky
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+
+.weather-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%) 
+
+.weather-unknown-precipitation
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
