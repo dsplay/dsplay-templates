@@ -81,7 +81,7 @@ function Main() {
               <Icon weatherCode={weather.current.code}></Icon>
             </div>
             <div className="current-temperature">
-              <FitText>{Math.floor(weather.current.value)}º</FitText>
+              <FitText>{Math.floor(weather.current.temp)}º</FitText>
             </div>
           </div>
           <div className="section-row">
