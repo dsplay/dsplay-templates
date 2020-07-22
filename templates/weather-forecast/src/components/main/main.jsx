@@ -42,13 +42,13 @@ const listItems = forecastList.map((forecastList) => (
       </div>
       <div className="w-min-temperature">
         <FitText>
-          <label>min</label>
+          min
         </FitText>
         <FitText>{Math.floor(forecastList.min)+"º"}</FitText>
       </div>
       <div className="w-max-temperature">
         <FitText>
-          <label>max</label>
+          max
         </FitText>
         <FitText>{Math.floor(forecastList.max)+"º"}</FitText>
       </div>
@@ -60,7 +60,7 @@ function Main() {
   return (
     <div className="main">
       <div className="flex-container">
-        <div className={"flex-item " + weatherBackground(weather.current.code)}>
+        <div className={"flex-item " + weatherBackground(weather.current.code, weather.current.sunset, weather.current.sunrise)}>
           <div className="section-row">
             <div className="today">
               <FitText>Hoje</FitText>

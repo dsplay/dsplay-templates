@@ -1,162 +1,61 @@
 import React from "react";
+import moment from 'moment';
+
+
+//Getting the current date-time  
+var hours = moment().format('hh:mm');
 
 const weatherBack = (code) => {
-  switch (code) {
-    case 200:
-      return "weather-thunderstorm";
-      break;
 
-    case 201:
-      return "weather-thunderstorm";
-      break;
+  var codes = {
+    "200": "weather-thunderstorm",  // Thunderstorm with light rain	
+    "201": "weather-thunderstorm",  // Thunderstorm with rain
+    "202": "weather-thunderstorm",  // Thunderstorm with heavy rain
+    "230": "weather-thunderstorm",  // Thunderstorm with light drizzle
+    "231": "weather-thunderstorm",  // Thunderstorm with drizzle	
+    "232": "weather-thunderstorm",  // Thunderstorm with heavy drizzle
+    "233": "weather-thunderstorm",  // Thunderstorm with Hail
 
-    case 202:
-      return "weather-thunderstorm";
-      break;
+    "300": "weather-drizzle",       // Light Drizzle
+    "301": "weather-drizzle",       // Drizzle
+    "302": "weather-drizzle",       // Heavy Drizzle
 
-    case 230:
-      return "weather-thunderstorm";
-      break;
+    "500": "weather-rain",          // Light Rain
+    "501": "weather-rain",          // Moderate Rain
+    "502": "weather-rain",          // Heavy Rain
+    "511": "weather-rain",          // Freezing rain
+    "520": "weather-rain",          // Light shower rain
+    "521": "weather-rain",          // Shower rain
+    "522": "weather-rain",          // Heavy shower rain
 
-    case 231:
-      return "weather-thunderstorm";
-      break;
+    "600": "weather-snow",          // Light snow
+    "601": "weather-snow",          // Snow
+    "602": "weather-snow",          // Heavy Snow
+    "610": "weather-snow",          // Mix snow/rain	
+    "611": "weather-snow",          // Sleet
+    "612": "weather-snow",          // Heavy sleet
+    "621": "weather-snow",          // Snow shower
+    "622": "weather-snow",          // Heavy snow shower
+    "623": "weather-snow",          // Flurries
 
-    case 232:
-      return "weather-thunderstorm";
-      break;
+    "700": "weather-mist-smoke-fog-haze", // Mist
+    "711": "weather-mist-smoke-fog-haze", // Smoke
+    "721": "weather-mist-smoke-fog-haze", // Haze
+    "731": "weather-mist-smoke-fog-haze", // Sand/dust
+    "741": "weather-mist-smoke-fog-haze", // Fog
+    "751": "weather-mist-smoke-fog-haze", // Freezing Fog
 
-    case 233:
-      return "weather-thunderstorm";
-      break;
+    "800": "weather-clearsky",   // Clear sky
 
-    case 300:
-      return "weather-drizzle";
-      break;
+    "801": "weather-few-clouds",  // Few clouds
+    "802": "weather-scattered-clouds",  // Scattered clouds
+    "803": "weather-broken-clouds",  // Broken clouds
+    "804": "weather-overcast-clouds",  // Overcast clouds
 
-    case 301:
-      return "weather-drizzle";
-      break;
+    "900": "weather-unknown-precipitation"  // Unknown Precipitation
+  };
 
-    case 302:
-      return "weather-drizzle";
-      break;
-
-    case 500:
-      return "weather-rain";
-      break;
-
-    case 501:
-      return "weather-rain";
-      break;
-
-    case 502:
-      return "weather-rain";
-      break;
-
-    case 511:
-      return "weather-rain";
-      break;
-
-    case 520:
-      return "weather-rain";
-      break;
-
-    case 521:
-      return "weather-rain";
-      break;
-
-    case 522:
-      return "weather-rain";
-      break;
-
-    case 600:
-      return "weather-snow";
-      break;
-
-    case 601:
-      return "weather-snow";
-      break;
-
-    case 602:
-      return "weather-snow";
-      break;
-
-    case 610:
-      return "weather-snow";
-      break;
-
-    case 611:
-      return "weather-snow";
-      break;
-
-    case 612:
-      return "weather-snow";
-      break;
-
-    case 621:
-      return "weather-snow";
-      break;
-
-    case 622:
-      return "weather-snow";
-      break;
-
-    case 623:
-      return "weather-snow";
-      break;
-
-    case 700:
-      return "weather-mist-smoke-fog-haze";
-      break;
-
-    case 711:
-      return "";
-      break;
-
-    case 721:
-      return "weather-mist-smoke-fog-haze";
-      break;
-
-    case 731:
-      return "weather-mist-smoke-fog-haze";
-      break;
-
-    case 741:
-      return "weather-mist-smoke-fog-haze";
-      break;
-
-    case 751:
-      return "weather-mist-smoke-fog-haze";
-      break;
-
-    case 800:
-      return "weather-clearsky";
-      break;
-
-    case 801:
-      return "weather-clouds";
-      break;
-
-    case 802:
-      return "weather-clouds";
-      break;
-
-    case 803:
-      return "weather-clouds";
-      break;
-
-    case 804:
-      return "weather-clouds";
-      break;
-
-    case 900:
-      return "weather-unknown-precipitation";
-      break;
-
-    default:
-      break;
-  }
+  return codes[code];
 };
 
 export default weatherBack;
