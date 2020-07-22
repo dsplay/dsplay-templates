@@ -1,30 +1,124 @@
 .app
   padding: 0 !important
+  margin: 0 !important
 
-@mixin respond($breakpoint) 
-  @if($breakpoint == 1920w)
-    @media (max-width: 1920px) { @content }
-  
-  @if($breakpoint == 1280w)
-    @media (max-width: 1280px) { @content }
-  
-  @if($breakpoint == 1080w)
-    @media (max-width: 1080px) { @content }
-  
-  @if($breakpoint == 720w)
-    @media (max-width: 720px) { @content }
+@mixin landscapeViewport
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
 
-  @if($breakpoint == 720h)
-    @media (max-height: 720px) { @content }
+@mixin portraitViewport
+    -webkit-flex-direction: column
+    -ms-flex-direction: column
+    flex-direction: column
 
-  @if($breakpoint == square-1280)
-    @media (min-height: 1280px) and (min-width: 1280px) { @content }
-  
-  @if($breakpoint == square-1920)
-    @media (min-height: 1920px) and (min-width: 1920px) { @content }
+@mixin squaredViewport
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
 
-label
-  text-transform: uppercase
+@mixin bannerVViewport
+    display: -webkit-box
+    display: -moz-box
+    display: -ms-inline-flexbox
+    display: -webkit-inline-flex
+    display: inline-flex
+    -webkit-box-direction: normal
+    -moz-box-direction: normal
+    -webkit-box-orient: vertical
+    -moz-box-orient: vertical
+    -webkit-flex-direction: column
+    -ms-flex-direction: column
+    flex-direction: column
+
+@mixin bannerHViewport
+    display: -ms-inline-flexbox
+    display: -webkit-inline-flex
+    display: inline-flex
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
+    
+.landscape
+  .flex-container
+    @include landscapeViewport
+
+.portrait
+  .flex-container
+    @include portraitViewport
+  .flex-item:nth-child(1),
+  .flex-item:nth-child(2)
+    height: 50vh
+    width: 100vw
+
+.squared
+  .flex-item:nth-child(2)
+    display: none
+  .flex-item:nth-child(1)
+    height: 100vh
+    width: 100vw
+
+.banner-h
+  .flex-item
+    @include bannerHViewport
+  .flex-item:nth-child(2)
+    display: none
+  .flex-item:nth-child(1)
+    height: 100vh
+    width: 100vw
+  .icon-weather-today img
+    width: 6vw
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 5vw
+  .weather-description
+    height: 2.5vw
+    margin: 0 1vw
+    text-transform: capitalize
+  .current-min-temperature
+      height: 3vw
+      .current-min-temperature-label
+        margin: 0 1vw 1.2vw 1vw
+  .section-row
+    margin: 1vw
+  .today
+    display: none
+  .city
+    height: 2.5vw
+
+
+.banner-v
+  .flex-container
+    @include bannerVViewport
+  .flex-item:nth-child(2)
+    display: none
+  .flex-item:nth-child(1)
+    height: 100vh
+    width: 100vw
+  .today
+    height: 2vh
+  .icon-weather-today img
+    width: 5vh
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 3vh
+    margin: 0 0 2vh 0
+  .current-min-temperature
+      height: 3vh
+      .current-min-temperature-label
+        margin: .6vh 0
+  .section-row
+    margin: 1vw 0
+  .flex-container 
+  .flex-item:nth-child(1)
+    .section-row:nth-child(2)
+      display: none
+  .city,
+  .weather-description
+    display: none
+
 
 .flex-container 
     height: 100vh
@@ -47,11 +141,6 @@ label
     -webkit-align-items: flex-start
     -ms-flex-align: start
     align-items: flex-start
-    @include respond(720w)
-    @include respond(1080w)
-      -webkit-flex-direction: column
-      -ms-flex-direction: column
-      flex-direction: column
 
 .flex-item,
 .weather-item
@@ -81,14 +170,6 @@ label
     -webkit-align-self: auto
     -ms-flex-item-align: auto
     align-self: auto
-    @include respond(square-1920)
-    @include respond(square-1280)
-        height: 100vh
-        width: 100vw
-    @include respond(720w)
-    @include respond(1080w)
-        height: 50vh
-        width: 100vw
 
 .flex-item:nth-child(2)
     height: 100%
@@ -103,14 +184,6 @@ label
     -ms-flex-item-align: auto
     align-self: auto
     background: #f0f0f0
-    @include respond(square-1920)
-    @include respond(square-1280)
-      display: none
-    @include respond(720w)
-    @include respond(1080w)
-        height: 50vh
-        width: 100vw
-
 
 .section-row
     display: -ms-flexbox
@@ -134,8 +207,8 @@ label
 
 .today,
 .city
-    height: 4rem
-    margin: 1rem
+    height: 8vh
+    margin: 1vw
     -webkit-order: 0
     -ms-flex-order: 0
     order: 0
@@ -145,53 +218,44 @@ label
     -webkit-align-self: auto
     -ms-flex-item-align: auto
     align-self: auto
+
 .city
   font-family: "Roboto 400"
 
-
 .weather-description
-  height: 4rem
+  height: 6vh
+  margin: 1vw 0
   text-transform: capitalize
 
-
 .current-temperature
-  font-family: 'Roboto 300'
+  font-family: 'Roboto 400'
   text-shadow: -5px 0px 2px #494949
-  height: 18rem
-  @include respond(720h)
-    height: 12rem
-  @include respond(720w)
-    height: 12rem
-
+  height: 30vh
 
 .current-min-temperature
-  height: 6rem
-  @include respond(720h)
-    height: 4rem
-  @include respond(720w)
-    height: 4rem 
+  height: 8vh
+
 
 .current-min-temperature-label
-  font-size: 3rem
-  margin-right: 1rem
+  margin: 0 0.8vw 1vw
 
 
 // Forecast
 .weather-item
   font-family: 'Roboto 300'
   color: #999
-  height: 25vh
-  margin: 2rem 6rem
-
+  height: 22vh
+  margin: o 6vw
+  padding: 1vw 0
 
 .forecast-list-header
-  margin: 0 2rem
+  margin: 0 2vw
   border-bottom: 1px solid rgba(211, 216, 224, 0.88)
 
 .w-day,
 .w-date
-  font-family: 'Roboto 300'
-  height: 3rem
+  font-family: 'Roboto 400'
+  height: 6vh
   -webkit-order: 0
   -ms-flex-order: 0
   order: 0
@@ -202,59 +266,66 @@ label
   -ms-flex-item-align: auto
   align-self: auto
 
-
 .w-min-temperature,
 .w-max-temperature
-  height: 3em
-  margin: 0 1rem
-  label
-    font-size: 2rem
+  height: 7vh
+  margin: 0 2vw
+  text-transform: uppercase
 
 .w-min-temperature
   color: #44848d
 
-
 .w-max-temperature
    color: #c57d7d
-   
 
 .icon-weather-today img
-  width: 8rem
+  width: 10vw
   height: auto
 
-
 .icon-weather-list img
-  width:  5rem
+  width:  4vw
 
 //Background styles
     
 .weather-thunderstorm
-  background: linear-gradient(-45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)
+  background: linear-gradient(180deg, #4065A4 0%, #CFADA7 100%)
 
 .weather-drizzle
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+  background: linear-gradient(180deg, #4065A4 0%, #CFADA7 100%)
 
 .weather-rain
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)
+  background: linear-gradient(180deg, #724e8a 0%, #6f5c8f 100%)
 
 .weather-snow
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #724e8a 0%, #445e8d 50%, #6f5c8f 100%)
+  background: linear-gradient(180deg, #7F848D 0%, #ADB7BE 100%)
 
 .weather-mist-smoke-fog-haze
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+  background: linear-gradient(180deg, #BC8DB8 0%, #5E5F91 100%)
 
 .weather-clearsky
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+  background: linear-gradient(180deg, #70d7ff 0%, #2493cf 100%)
 
-.weather-clouds
+.weather-few-clouds
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%) 
+  background: linear-gradient(180deg, #70d7ff 0%, #4987a8 100%)
+
+.weather-scattered-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #70d7ff 0%, #4987a8 100%)
+
+.weather-broken-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #57b1db 0%, #465a68 100%) 
+
+.weather-overcast-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #7d8c96 0%, #314049 100%)
 
 .weather-unknown-precipitation
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7ab1c7 0%, #7bd5d8 50%, #5ac4b2 100%)
+  background: linear-gradient(180deg, #34333A 0%, #B3957F 100%)

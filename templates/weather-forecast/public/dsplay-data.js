@@ -21,15 +21,18 @@ var dsplay_media = {
         city: "Bopo",
         country: "NG",
         current: {
-          code: 200,
-          description: "Thunderstorm with light rain",
-          icon: "t01",
+          code: 900,
+          description: "Unknown Precipitation	",
+          icon: "t04",
           humidity: 78,
           wind: 4.58,
           date: "2018-04-08",
           value: 29.08,
+          temp: 29.08,
           min: 27.08,
-          max: 27.08
+          max: 27.08,
+          sunrise: "05:27",
+          sunset: "17:59"
         },
         forecast: [
           {
