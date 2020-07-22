@@ -38,174 +38,78 @@ import Icon741Fog_a05 from "../../images/icons/Windy---LOOP.gif";
 import Icon751FreezingFog_a06 from "../../images/icons/Windy---LOOP.gif";
 
 import Icon800ClearSky_c01 from "../../images/icons/Sunny---LOOP.gif";
+import Icon800ClearSky_c01n from "../../images/icons/Night---LOOP.gif";
 
 import Icon801FewClouds_c02 from "../../images/icons/Partly-Sunny---LOOP.gif";
+import Icon801FewClouds_c02n from "../../images/icons/Cloudy-Night---LOOP.gif";
+
 import Icon802ScatteredClouds_c02 from "../../images/icons/Partly-Sunny---LOOP.gif";
+import Icon802ScatteredClouds_c02n from "../../images/icons/Cloudy-Night---LOOP.gif";
+
 import Icon803BrokenClouds_c03 from "../../images/icons/Partly-Sunny---LOOP.gif";
+import Icon803BrokenClouds_c03n from "../../images/icons/Cloudy-Night---LOOP.gif";
 
 import Icon804OvercastClouds_c04 from "../../images/icons/Cloudy---LOOP.gif";
+import Icon804OvercastClouds_c04n from "../../images/icons/Cloudy-Night---LOOP.gif";
+
 
 import Icon900UnknownPrecipitation_u00 from "../../images/icons/Cloudy---LOOP.gif";
+import Icon900UnknownPrecipitation_u00n from "../../images/icons/Night---LOOP.gif";
 
 const Icons = (props) => {
-  let { weatherCode } = props;
 
-  switch (weatherCode) {
-    case 200:
-      return <img src={Icon200ThunderstormWithLightRain_t01}></img>;
-      break;
+const {weatherCode: code} = props;
 
-    case 201:
-      return <img src={Icon201ThunderstormWithRain_t02}></img>;
-      break;
+  var codes = {
+    "200": Icon200ThunderstormWithLightRain_t01,  // Thunderstorm with light rain	
+    "201": Icon201ThunderstormWithRain_t02,  // Thunderstorm with rain
+    "202": Icon202ThunderstormWithHeavyRain_t03,  // Thunderstorm with heavy rain
+    "230": Icon230ThunderstormWithLightDrizzle_t04,  // Thunderstorm with light drizzle
+    "231": Icon231ThunderstormWithDrizzle_t04,  // Thunderstorm with drizzle	
+    "232": Icon232ThunderstormWithHeavyDrizzle_t04,  // Thunderstorm with heavy drizzle
+    "233": Icon233ThunderstormWithHail_t05,  // Thunderstorm with Hail
 
-    case 202:
-      return <img src={Icon202ThunderstormWithHeavyRain_t03}></img>;
-      break;
+    "300": Icon300LightDrizzle_d01,       // Light Drizzle
+    "301": Icon301Drizzle_d02,       // Drizzle
+    "302": Icon302HeavyDrizzle_d03,       // Heavy Drizzle
 
-    case 230:
-      return <img src={Icon230ThunderstormWithLightDrizzle_t04}></img>;
-      break;
+    "500": Icon500LightRain_r01,          // Light Rain
+    "501": Icon501ModerateRain_r02,          // Moderate Rain
+    "502": Icon502HeavyRain_r03,          // Heavy Rain
+    "511": Icon511FreezingRain_f01,          // Freezing rain
+    "520": Icon520LightShowerRain_r04,          // Light shower rain
+    "521": Icon521ShowerRain_r05,          // Shower rain
+    "522": Icon522HeavyShowerRain_r06,          // Heavy shower rain
 
-    case 231:
-      return <img src={Icon231ThunderstormWithDrizzle_t04}></img>;
-      break;
+    "600": Icon600LightSnow_s01,          // Light snow
+    "601": Icon601Snow_s02,          // Snow
+    "602": Icon602HeavySnow_s03,          // Heavy Snow
+    "610": Icon610MixSnow_rain_s04,          // Mix snow/rain	
+    "611": Icon611Sleet_s05,          // Sleet
+    "612": Icon612HeavySleet_s05,          // Heavy sleet
+    "621": Icon621SnowShower_s01,          // Snow shower
+    "622": Icon622HeavySnowShower_s02,          // Heavy snow shower
+    "623": Icon623Flurries_s06,          // Flurries
 
-    case 232:
-      return <img src={Icon232ThunderstormWithHeavyDrizzle_t04}></img>;
-      break;
+    "700": Icon700Mist_a01, // Mist
+    "711": Icon711Smoke_a02, // Smoke
+    "721": Icon721Haze_a03, // Haze
+    "731": Icon731Sand_dust_a04, // Sand/dust
+    "741": Icon741Fog_a05, // Fog
+    "751": Icon751FreezingFog_a06, // Freezing Fog
 
-    case 233:
-      return <img src={Icon233ThunderstormWithHail_t05}></img>;
-      break;
+    "800": Icon800ClearSky_c01,   // Clear sky
 
-    case 300:
-      return <img src={Icon300LightDrizzle_d01}></img>;
-      break;
+    "801": Icon801FewClouds_c02,  // Few clouds
+    "802": Icon802ScatteredClouds_c02,  // Scattered clouds
+    "803": Icon803BrokenClouds_c03,  // Broken clouds
+    "804": Icon804OvercastClouds_c04,  // Overcast clouds
 
-    case 301:
-      return <img src={Icon301Drizzle_d02}></img>;
-      break;
+    "900": Icon900UnknownPrecipitation_u00  // Unknown Precipitation
+  };
 
-    case 302:
-      return <img src={Icon302HeavyDrizzle_d03}></img>;
-      break;
+  return <img src={codes[code]}></img>;
 
-    case 500:
-      return <img src={Icon500LightRain_r01}></img>;
-      break;
-
-    case 501:
-      return <img src={Icon501ModerateRain_r02}></img>;
-      break;
-
-    case 502:
-      return <img src={Icon502HeavyRain_r03}></img>;
-      break;
-
-    case 511:
-      return <img src={Icon511FreezingRain_f01}></img>;
-      break;
-
-    case 520:
-      return <img src={Icon520LightShowerRain_r04}></img>;
-      break;
-
-    case 521:
-      return <img src={Icon521ShowerRain_r05}></img>;
-      break;
-
-    case 522:
-      return <img src={Icon522HeavyShowerRain_r06}></img>;
-      break;
-
-    case 600:
-      return <img src={Icon600LightSnow_s01}></img>;
-      break;
-
-    case 601:
-      return <img src={Icon601Snow_s02}></img>;
-      break;
-
-    case 602:
-      return <img src={Icon602HeavySnow_s03}></img>;
-      break;
-
-    case 610:
-      return <img src={Icon610MixSnow_rain_s04}></img>;
-      break;
-
-    case 611:
-      return <img src={Icon611Sleet_s05}></img>;
-      break;
-
-    case 612:
-      return <img src={Icon612HeavySleet_s05}></img>;
-      break;
-
-    case 621:
-      return <img src={Icon621SnowShower_s01}></img>;
-      break;
-
-    case 622:
-      return <img src={Icon622HeavySnowShower_s02}></img>;
-      break;
-
-    case 623:
-      return <img src={Icon623Flurries_s06}></img>;
-      break;
-
-    case 700:
-      return <img src={Icon700Mist_a01}></img>;
-      break;
-
-    case 711:
-      return <img src={Icon711Smoke_a02}></img>;
-      break;
-
-    case 721:
-      return <img src={Icon721Haze_a03}></img>;
-      break;
-
-    case 731:
-      return <img src={Icon731Sand_dust_a04}></img>;
-      break;
-
-    case 741:
-      return <img src={Icon741Fog_a05}></img>;
-      break;
-
-    case 751:
-      return <img src={Icon751FreezingFog_a06}></img>;
-      break;
-
-    case 800:
-      return <img src={Icon800ClearSky_c01}></img>;
-      break;
-
-    case 801:
-      return <img src={Icon801FewClouds_c02}></img>;
-      break;
-
-    case 802:
-      return <img src={Icon802ScatteredClouds_c02}></img>;
-      break;
-
-    case 803:
-      return <img src={Icon803BrokenClouds_c03}></img>;
-      break;
-
-    case 804:
-      return <img src={Icon804OvercastClouds_c04}></img>;
-      break;
-
-    case 900:
-      return <img src={Icon900UnknownPrecipitation_u00}></img>;
-      break;
-
-    default:
-      break;
-  }
 };
 
 export default Icons;
