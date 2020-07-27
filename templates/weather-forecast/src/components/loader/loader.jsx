@@ -1,14 +1,19 @@
 import React, { useMemo } from 'react';
 import './loader.sass';
 import spinner from '../../images/loader.gif';
-import { LANDSCAPE, PORTRAIT, SQUARED, BANNER_H, BANNER_V, useScreenInfo } from '../../util/screen';
+import {
+  LANDSCAPE,
+  PORTRAIT,
+  SQUARED,
+  BANNER_H,
+  BANNER_V,
+} from '../../util/screen';
+import { useScreenInfo } from '../../hooks/use-screen-info';
 
 // component
 
 const Loader = (props) => {
-  const {
-    w, h, screenFormat,
-  } = useScreenInfo();
+  const { w, h, screenFormat } = useScreenInfo();
 
   const spinnerDimension = useMemo(() => {
     console.log('[re]calculating spinner dimension...');
@@ -38,17 +43,17 @@ const Loader = (props) => {
   };
 
   return (
-    <div {...props} className={`loader ${props.className || ''}`} >
+    <div {...props} className={`loader ${props.className || ''}`}>
       <div>
         <img src={spinner} alt="" style={imageStyle} />
       </div>
-      <div className="hidden" >
+      <div className="hidden">
         {/* put your fonts here */}
-        <div style={{ fontFamily: 'Oswald' }} >-</div>
-        <div style={{ fontFamily: 'Roboto Condensed' }} >-</div>
+        <div style={{ fontFamily: 'Oswald' }}>-</div>
+        <div style={{ fontFamily: 'Roboto Condensed' }}>-</div>
       </div>
     </div>
   );
-}
+};
 
 export default Loader;

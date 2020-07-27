@@ -16,8 +16,11 @@
     },
     "scripts": {
         "start": "react-scripts start",
+        "prebuild": "npm run linter",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
+        "linter": "eslint --ext=js --ext=jsx src",
+        "linter:fix": "eslint --ext=js --ext=jsx src --fix",
         "eject": "react-scripts eject",
         "prezip": "npm run build",
         "zip": "rm -rf build/test-assets && ./build.sh"
@@ -28,5 +31,13 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint-config-airbnb": "^18.2.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.21.2",
+        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-react": "^7.20.3"
+    }
 }

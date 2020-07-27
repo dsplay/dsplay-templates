@@ -3,14 +3,14 @@
   margin: 0 !important
 
 @mixin landscapeViewport
-    -webkit-flex-direction: row
-    -ms-flex-direction: row
-    flex-direction: row
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
 
 @mixin portraitViewport
-    -webkit-flex-direction: column
-    -ms-flex-direction: column
-    flex-direction: column
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
 
 @mixin squaredViewport
   -webkit-flex-direction: row
@@ -18,26 +18,26 @@
   flex-direction: row
 
 @mixin bannerVViewport
-    display: -webkit-box
-    display: -moz-box
-    display: -ms-inline-flexbox
-    display: -webkit-inline-flex
-    display: inline-flex
-    -webkit-box-direction: normal
-    -moz-box-direction: normal
-    -webkit-box-orient: vertical
-    -moz-box-orient: vertical
-    -webkit-flex-direction: column
-    -ms-flex-direction: column
-    flex-direction: column
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-inline-flexbox
+  display: -webkit-inline-flex
+  display: inline-flex
+  -webkit-box-direction: normal
+  -moz-box-direction: normal
+  -webkit-box-orient: vertical
+  -moz-box-orient: vertical
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
 
 @mixin bannerHViewport
-    display: -ms-inline-flexbox
-    display: -webkit-inline-flex
-    display: inline-flex
-    -webkit-flex-direction: row
-    -ms-flex-direction: row
-    flex-direction: row
+  display: -ms-inline-flexbox
+  display: -webkit-inline-flex
+  display: inline-flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
     
 .landscape
   .flex-container
@@ -50,6 +50,36 @@
   .flex-item:nth-child(2)
     height: 50vh
     width: 100vw
+  .icon-weather-today img
+    width: 26vw
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 30vw
+  .weather-description
+    height: 6vw
+    margin: 1vh 0
+    text-transform: capitalize
+  .current-min-temperature
+    height: 10vw
+    .current-min-temperature-label
+      margin: 1vw 3vw 2vw 0vw
+  .today
+    height: 10vw
+  .city
+    height: 10vw
+  .section-row
+    margin: .8vw
+  .w-day,
+  .w-date
+    height: 4vh
+  .w-min-temperature,
+  .w-max-temperature
+    height: 3.5vh
+    margin: 0 6vw 
+  .icon-weather-list img
+    height: 10vw
+    width: auto
 
 .squared
   .flex-item:nth-child(2)
@@ -57,6 +87,24 @@
   .flex-item:nth-child(1)
     height: 100vh
     width: 100vw
+  .today
+    height: 10vw
+  .city
+    height: 10vw
+  .icon-weather-today img
+    width: 25vw
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 30vw
+  .weather-description
+    height: 6vw
+    margin: 4vh 0 0
+    text-transform: capitalize
+  .current-min-temperature
+    height: 10vw
+    .current-min-temperature-label
+      margin: 2vw 2vw 4vw 0vw
 
 .banner-h
   .flex-item
@@ -67,7 +115,7 @@
     height: 100vh
     width: 100vw
   .icon-weather-today img
-    width: 6vw
+    width: 5.5vw
     height: auto
   .current-temperature
     text-shadow: -5px 0px 2px #494949
@@ -77,15 +125,18 @@
     margin: 0 1vw
     text-transform: capitalize
   .current-min-temperature
-      height: 3vw
-      .current-min-temperature-label
-        margin: 0 1vw 1.2vw 1vw
+    height: 3vw
+    .current-min-temperature-label
+      margin: 0 1vw 1.2vw 1vw
   .section-row
     margin: 1vw
   .today
     display: none
   .city
     height: 2.5vw
+
+
+  
 
 
 .banner-v
@@ -99,16 +150,16 @@
   .today
     height: 2vh
   .icon-weather-today img
-    width: 5vh
+    width: 5.5vh
     height: auto
   .current-temperature
     text-shadow: -5px 0px 2px #494949
     height: 3vh
     margin: 0 0 2vh 0
   .current-min-temperature
-      height: 3vh
-      .current-min-temperature-label
-        margin: .6vh 0
+    height: 3vh
+    .current-min-temperature-label
+      margin: .6vh 0
   .section-row
     margin: 1vw 0
   .flex-container 
@@ -121,103 +172,103 @@
 
 
 .flex-container 
-    height: 100vh
-    width: 100vw
-    display: -ms-flexbox
-    display: -webkit-flex
-    display: flex
-    -webkit-flex-direction: row
-    -ms-flex-direction: row
-    flex-direction: row
-    -webkit-flex-wrap: wrap
-    -ms-flex-wrap: wrap
-    flex-wrap: wrap
-    -webkit-justify-content: center
-    -ms-flex-pack: center
-    justify-content: center
-    -webkit-align-content: center
-    -ms-flex-line-pack: center
-    align-content: center
-    -webkit-align-items: flex-start
-    -ms-flex-align: start
-    align-items: flex-start
+  height: 100vh
+  width: 100vw
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: wrap
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: center
+  -ms-flex-line-pack: center
+  align-content: center
+  -webkit-align-items: flex-start
+  -ms-flex-align: start
+  align-items: flex-start
 
 .flex-item,
 .weather-item
-    display: -ms-flexbox
-    display: -webkit-flex
-    display: flex
-    -webkit-flex-direction: column
-    -ms-flex-direction: column
-    flex-direction: column    
-    -webkit-justify-content: center
-    -ms-flex-pack: center
-    justify-content: center
-    -webkit-align-content: center
-    -ms-flex-line-pack: center
-    align-content: center
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: center
+  -ms-flex-line-pack: center
+  align-content: center
 
 
 .flex-item:nth-child(1)
-    height: 100%
-    width: 60vw
-    -webkit-order: 0
-    -ms-flex-order: 0
-    order: 0
-    -webkit-flex: 0 1 auto
-    -ms-flex: 0 1 auto
-    flex: 0 1 auto
-    -webkit-align-self: auto
-    -ms-flex-item-align: auto
-    align-self: auto
+  height: 100%
+  width: 60vw
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 0 1 auto
+  -ms-flex: 0 1 auto
+  flex: 0 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
 
 .flex-item:nth-child(2)
-    height: 100%
-    width: 40vw
-    -webkit-order: 0
-    -ms-flex-order: 0
-    order: 0
-    -webkit-flex: 0 1 auto
-    -ms-flex: 0 1 auto
-    flex: 0 1 auto
-    -webkit-align-self: auto
-    -ms-flex-item-align: auto
-    align-self: auto
-    background: #f0f0f0
+  height: 100%
+  width: 40vw
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 0 1 auto
+  -ms-flex: 0 1 auto
+  flex: 0 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+  background: #f0f0f0
 
 .section-row
-    display: -ms-flexbox
-    display: -webkit-flex
-    display: flex
-    -webkit-flex-direction: row
-    -ms-flex-direction: row
-    flex-direction: row
-    -webkit-flex-wrap: wrap
-    -ms-flex-wrap: wrap
-    flex-wrap: wrap
-    -webkit-justify-content: center
-    -ms-flex-pack: center
-    justify-content: center
-    -webkit-align-content: center
-    -ms-flex-line-pack: center
-    align-content: center
-    -webkit-align-items: center
-    -ms-flex-align: center
-    align-items: center
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: wrap
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: center
+  -ms-flex-line-pack: center
+  align-content: center
+  -webkit-align-items: center
+  -ms-flex-align: center
+  align-items: center
 
 .today,
 .city
-    height: 8vh
-    margin: 1vw
-    -webkit-order: 0
-    -ms-flex-order: 0
-    order: 0
-    -webkit-flex: 1 1 auto
-    -ms-flex: 1 1 auto
-    flex: 1 1 auto
-    -webkit-align-self: auto
-    -ms-flex-item-align: auto
-    align-self: auto
+  height: 8vh
+  margin: 1vw
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
 
 .city
   font-family: "Roboto 400"
@@ -268,64 +319,91 @@
 
 .w-min-temperature,
 .w-max-temperature
+  font-family: 'Roboto 400'
   height: 7vh
   margin: 0 2vw
   text-transform: uppercase
+      
 
 .w-min-temperature
   color: #44848d
 
 .w-max-temperature
-   color: #c57d7d
+  color: #c57d7d
 
 .icon-weather-today img
-  width: 10vw
+  width: 15vw
   height: auto
 
 .icon-weather-list img
-  width:  4vw
+  width: 6vw
 
 //Background styles
     
 .weather-thunderstorm
-  background: linear-gradient(180deg, #4065A4 0%, #CFADA7 100%)
+  background: linear-gradient(180deg, #2c394e 0%, #adadad 100%)
 
 .weather-drizzle
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #4065A4 0%, #CFADA7 100%)
+  background: linear-gradient(180deg, #5a6475 0%, #98b1e0 100%)
 
 .weather-rain
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #724e8a 0%, #6f5c8f 100%)
+  background: linear-gradient(180deg, #394b5a 0%, #70808f 100%)
 
 .weather-snow
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7F848D 0%, #ADB7BE 100%)
+  background: linear-gradient(180deg, #808388 0%, #bdc7ce 100%)
 
 .weather-mist-smoke-fog-haze
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #BC8DB8 0%, #5E5F91 100%)
+  background: linear-gradient(180deg, #cfa46b 0%, #867d6b 100%)
 
 .weather-clearsky
   background: rgb(0,0,0)
   background: linear-gradient(180deg, #70d7ff 0%, #2493cf 100%)
 
+.weather-clearsky-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #286075 0%, #104a69 100%)
+
 .weather-few-clouds
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #70d7ff 0%, #4987a8 100%)
+  background: linear-gradient(180deg, #70d7ff 0%, #467188 100%)
+
+.weather-few-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #333a3d 0%, #081218 100%)
 
 .weather-scattered-clouds
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #70d7ff 0%, #4987a8 100%)
+  background: linear-gradient(180deg, #81cfee 0%, #5188a5 100%)
+
+.weather-scattered-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #32505c 0%, #021a27 100%)
 
 .weather-broken-clouds
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #57b1db 0%, #465a68 100%) 
+  background: linear-gradient(180deg, #6e9cb1 0%, #465a68 100%) 
+  
+.weather-broken-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #435d69 0%, #252f36 100%) 
 
 .weather-overcast-clouds
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #7d8c96 0%, #314049 100%)
+  background: linear-gradient(180deg, #95999b 0%, #313a3f 100%)
+
+.weather-overcast-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #525557 0%, #13181b 100%)
 
 .weather-unknown-precipitation
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #34333A 0%, #B3957F 100%)
+  background: linear-gradient(180deg, #5a7686 0%, #0a2d36 100%)
+
+.weather-unknown-precipitation-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, rgba(90, 118, 134, .5) 0%, rgba(10, 45, 54, .5) 100%)
+
