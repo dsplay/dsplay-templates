@@ -1,56 +1,56 @@
-import React from "react";
+import React from 'react';
 
 import {
   // values
   media, // current media
-  config, // player configuration
-  template, // custom template values
-  // utility functions
-  tval, // custom template string value
-  tbval, // custom template boolean value
-  tival, // custom template int value
-  tfval, // custom template float value
-  isVertical, // boolean flag to indicate screen orientation
-} from "@dsplay/template-utils";
-import "./main.sass";
-import FitText from "../fit-text/fit-text";
-import Icon from "../icons/Icons";
-import weatherBackground from "../weather-back/weather-back";
-import Moment from "react-moment";
-import "moment-timezone";
+} from '@dsplay/template-utils';
+import './main.sass';
+import FitText from '../fit-text/fit-text';
+import Icon from '../icons/Icons';
+import { useBackground } from '../../hooks/use-background';
+import 'moment-timezone';
 
-const moment = require("moment");
-const { duration } = media;
+const moment = require('moment');
+
 const { result } = media;
-const { orientation, locale } = config;
-const weather = result.data.weather;
+const { weather } = result.data;
 const forecastList = weather.forecast;
+
+const {
+  result: {
+    data: {
+      weather: {
+        current: { sunset, sunrise },
+      },
+    },
+  },
+} = media;
 
 const listItems = forecastList.map((forecastList) => (
   <div className="weather-item">
     <div className="section-row forecast-list-header">
       <div className="w-day">
-        <FitText>{moment(forecastList.date).format("ddd")}</FitText>
+        <FitText>{moment(forecastList.date).format('ddd')}</FitText>
       </div>
       <div className="w-date">
-        <FitText>{moment(forecastList.date).format("DD/MM")}</FitText>
+        <FitText>{moment(forecastList.date).format('DD/MM')}</FitText>
       </div>
     </div>
     <div className="section-row">
       <div className="icon-weather icon-weather-list">
-        <Icon weatherCode={forecastList.code}></Icon>
+        <Icon weatherCode={forecastList.code} />
       </div>
       <div className="w-min-temperature">
         <FitText>
           min
         </FitText>
-        <FitText>{Math.floor(forecastList.min)+"º"}</FitText>
+        <FitText>{`${Math.floor(forecastList.min)}º`}</FitText>
       </div>
       <div className="w-max-temperature">
         <FitText>
           max
         </FitText>
-        <FitText>{Math.floor(forecastList.max)+"º"}</FitText>
+        <FitText>{`${Math.floor(forecastList.max)}º`}</FitText>
       </div>
     </div>
   </div>
@@ -60,14 +60,17 @@ function Main() {
   return (
     <div className="main">
       <div className="flex-container">
-        <div className={"flex-item " + weatherBackground(weather.current.code, weather.current.sunset, weather.current.sunrise)}>
+        <div className={`flex-item ${useBackground({ code: weather.current.code, sunset, sunrise })}`}>
           <div className="section-row">
             <div className="today">
               <FitText>Hoje</FitText>
             </div>
             <div className="city">
               <FitText>
-                {weather.city} - {weather.country}
+                {weather.city}
+                {' '}
+                -
+                {weather.country}
               </FitText>
             </div>
           </div>
@@ -78,10 +81,13 @@ function Main() {
           </div>
           <div className="section-row">
             <div className="icon-weather icon-weather-today">
-              <Icon weatherCode={weather.current.code}></Icon>
+              <Icon weatherCode={weather.current.code} />
             </div>
             <div className="current-temperature">
-              <FitText>{Math.floor(weather.current.temp)}º</FitText>
+              <FitText>
+                {Math.floor(weather.current.temp)}
+                º
+              </FitText>
             </div>
           </div>
           <div className="section-row">
@@ -91,7 +97,10 @@ function Main() {
               </FitText>
             </div>
             <div className="current-min-temperature">
-              <FitText>{Math.floor(weather.current.min)}º</FitText>
+              <FitText>
+                {Math.floor(weather.current.min)}
+                º
+              </FitText>
             </div>
           </div>
           <div className="section-row">
@@ -101,7 +110,10 @@ function Main() {
               </FitText>
             </div>
             <div className="current-min-temperature">
-              <FitText>{Math.floor(weather.current.max)}º</FitText>
+              <FitText>
+                {Math.floor(weather.current.max)}
+                º
+              </FitText>
             </div>
           </div>
         </div>
