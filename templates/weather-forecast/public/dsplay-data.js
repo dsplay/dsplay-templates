@@ -18,8 +18,8 @@ var dsplay_media = {
       //Weather media parameters
       lang: "pt",
       weather: {
-        city: "Bopo",
-        country: "NG",
+        city: "Auerbach in der Oberpfalz",
+        country: "DS",
         current: {
           code: 800,
           description: "Unknown Precipitation	",

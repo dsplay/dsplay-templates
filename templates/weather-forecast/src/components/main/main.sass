@@ -38,10 +38,45 @@
   -webkit-flex-direction: row
   -ms-flex-direction: row
   flex-direction: row
-    
+
+.city
+  font-family: "Roboto 400"
+
+.today,
+.city
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+  
 .landscape
   .flex-container
     @include landscapeViewport
+  .today,
+  .city
+    height: 8vh
+    margin: 1vw
+
+  .weather-description
+    height: 6vh
+    margin: 1vw 0
+    text-transform: capitalize
+
+  .current-temperature
+    font-family: 'Roboto 400'
+    text-shadow: -5px 0px 2px #494949
+    height: 30vh
+
+  .current-min-temperature
+    height: 10vh
+
+  .current-min-temperature-label
+    margin: 0 1vw .5vw
 
 .portrait
   .flex-container
@@ -51,23 +86,22 @@
     height: 50vh
     width: 100vw
   .icon-weather-today img
-    width: 26vw
+    width: 12vh
     height: auto
   .current-temperature
     text-shadow: -5px 0px 2px #494949
-    height: 30vw
+    height: 15vh
   .weather-description
     height: 6vw
     margin: 1vh 0
     text-transform: capitalize
   .current-min-temperature
-    height: 10vw
+    height: 6vh
     .current-min-temperature-label
       margin: 1vw 3vw 2vw 0vw
-  .today
-    height: 10vw
+  .today,
   .city
-    height: 10vw
+    height: 5vh
   .section-row
     margin: .8vw
   .w-day,
@@ -75,7 +109,7 @@
     height: 4vh
   .w-min-temperature,
   .w-max-temperature
-    height: 3.5vh
+    height: 4vh
     margin: 0 6vw 
   .icon-weather-list img
     height: 10vw
@@ -135,10 +169,6 @@
   .city
     height: 2.5vw
 
-
-  
-
-
 .banner-v
   .flex-container
     @include bannerVViewport
@@ -159,7 +189,7 @@
   .current-min-temperature
     height: 3vh
     .current-min-temperature-label
-      margin: .6vh 0
+      margin: .3vh 0
   .section-row
     margin: 1vw 0
   .flex-container 
@@ -256,40 +286,6 @@
   -ms-flex-align: center
   align-items: center
 
-.today,
-.city
-  height: 8vh
-  margin: 1vw
-  -webkit-order: 0
-  -ms-flex-order: 0
-  order: 0
-  -webkit-flex: 1 1 auto
-  -ms-flex: 1 1 auto
-  flex: 1 1 auto
-  -webkit-align-self: auto
-  -ms-flex-item-align: auto
-  align-self: auto
-
-.city
-  font-family: "Roboto 400"
-
-.weather-description
-  height: 6vh
-  margin: 1vw 0
-  text-transform: capitalize
-
-.current-temperature
-  font-family: 'Roboto 400'
-  text-shadow: -5px 0px 2px #494949
-  height: 30vh
-
-.current-min-temperature
-  height: 8vh
-
-
-.current-min-temperature-label
-  margin: 0 0.8vw 1vw
-
 
 // Forecast
 .weather-item
@@ -365,7 +361,7 @@
 
 .weather-clearsky-n
   background: rgb(0,0,0)
-  background: linear-gradient(180deg, #286075 0%, #104a69 100%)
+  background: linear-gradient(180deg, #196e8f 0%, #092838 100%)
 
 .weather-few-clouds
   background: rgb(0,0,0)
