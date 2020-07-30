@@ -22,7 +22,7 @@ var dsplay_media = {
         country: "DS",
         current: {
           code: 800,
-          description: "Unknown Precipitation	",
+          description: "Thunderstorm with heavy drizzle",
           icon: "t04",
           humidity: 78,
           wind: 4.58,
