@@ -51,6 +51,11 @@ const Loader = (props) => {
         {/* put your fonts here */}
         <div style={{ fontFamily: 'Oswald' }}>-</div>
         <div style={{ fontFamily: 'Roboto Condensed' }}>-</div>
+        <div style={{ fontFamily: 'Roboto Regular' }}>-</div>
+        <div style={{ fontFamily: 'Roboto 300' }}>-</div>
+        <div style={{ fontFamily: 'Roboto 400' }}>-</div>
+        <div style={{ fontFamily: 'Roboto 500' }}>-</div>
+        <div style={{ fontFamily: 'Roboto 700' }}>-</div>
       </div>
     </div>
   );

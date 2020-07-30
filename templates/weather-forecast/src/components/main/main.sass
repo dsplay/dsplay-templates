@@ -59,24 +59,39 @@
     @include landscapeViewport
   .today,
   .city
-    height: 8vh
+    height: 6vh
     margin: 1vw
 
   .weather-description
     height: 6vh
+    width: 55vw
     margin: 1vw 0
     text-transform: capitalize
 
   .current-temperature
     font-family: 'Roboto 400'
     text-shadow: -5px 0px 2px #494949
-    height: 30vh
+    height: 25vh
+    width: 25vw
 
-  .current-min-temperature
+  .current-min-max-temperature
     height: 10vh
+    width: 10vw
+  .w-day,
+  .w-date
+    height: 6vh
+    width: 6vw
 
-  .current-min-temperature-label
+  .current-min-max-temperature-label
+    height: 6vh
+    width: 6vw
     margin: 0 1vw .5vw
+
+  .w-min-temperature,
+  .w-max-temperature
+    height: 6vh
+    width: 6vw
+    margin: 0 2vw 
 
 .portrait
   .flex-container
@@ -90,27 +105,40 @@
     height: auto
   .current-temperature
     text-shadow: -5px 0px 2px #494949
-    height: 15vh
+    height: 12vh
+    width: 30vw
   .weather-description
-    height: 6vw
-    margin: 1vh 0
+    height: 5vw
+    width: 90vw
+    margin: 2vh 0
     text-transform: capitalize
-  .current-min-temperature
+  .current-min-max-temperature
     height: 6vh
-    .current-min-temperature-label
-      margin: 1vw 3vw 2vw 0vw
+    width: 10vw
+  .current-min-max-temperature-label
+    margin: 0 17vw 3vw 0vw
+    height: 3vh
+    width: 3vw
   .today,
   .city
-    height: 5vh
-  .section-row
-    margin: .8vw
+    height: 4vh
+    width: 95vw
+  .weather-item
+    .forecast-list-header
+      height: 5vh
+      width: auto
+    &:nth-child(2)
+      height: 10vh
+      width: auto
+      margin: .8vw
   .w-day,
   .w-date
     height: 4vh
   .w-min-temperature,
   .w-max-temperature
-    height: 4vh
-    margin: 0 6vw 
+    height: 3.5vh
+    width: 15vw
+    margin: 0 6vw
   .icon-weather-list img
     height: 10vw
     width: auto
@@ -122,23 +150,31 @@
     height: 100vh
     width: 100vw
   .today
-    height: 10vw
+    height: 6vh
+    width: 25vw
   .city
-    height: 10vw
+    height: 6vh
+    width: 75vw
   .icon-weather-today img
     width: 25vw
     height: auto
   .current-temperature
+    font-family: 'Roboto 400'
     text-shadow: -5px 0px 2px #494949
-    height: 30vw
+    height: 35vh
+    width: 35vw
   .weather-description
-    height: 6vw
+    height: 6vh
+    width: 95vw
     margin: 4vh 0 0
     text-transform: capitalize
-  .current-min-temperature
-    height: 10vw
-    .current-min-temperature-label
-      margin: 2vw 2vw 4vw 0vw
+  .current-min-max-temperature
+    height: 10vh
+    width: 13vw
+    .current-min-max-temperature-label
+      margin: 1vw 0vw 2vw 0vw
+      height: 5vh
+      width: 5vw
 
 .banner-h
   .flex-item
@@ -153,22 +189,27 @@
     height: auto
   .current-temperature
     text-shadow: -5px 0px 2px #494949
-    height: 5vw
+    height: 90vh
+    width: 7vw
   .weather-description
-    height: 2.5vw
+    height: 35vh
+    width: 20vw
     margin: 0 1vw
     text-transform: capitalize
-  .current-min-temperature
-    height: 3vw
-    .current-min-temperature-label
-      margin: 0 1vw 1.2vw 1vw
+  .current-min-max-temperature
+    height: 50vh
+    width: 5vw
+    .current-min-max-temperature-label
+      margin: 1vh 1vw
   .section-row
     margin: 1vw
   .today
     display: none
   .city
-    height: 2.5vw
-
+    height: 35vh
+    width: 30vw
+    
+  
 .banner-v
   .flex-container
     @include bannerVViewport
@@ -178,20 +219,21 @@
     height: 100vh
     width: 100vw
   .today
-    height: 2vh
+    height: 2.2vh
+    width: 95vw
   .icon-weather-today img
     width: 5.5vh
     height: auto
   .current-temperature
     text-shadow: -5px 0px 2px #494949
+    height: 3.5vh
+    width: 95vw
+    margin: 2vh 0
+  .current-min-max-temperature
     height: 3vh
-    margin: 0 0 2vh 0
-  .current-min-temperature
-    height: 3vh
-    .current-min-temperature-label
-      margin: .3vh 0
+    width: 75vw
   .section-row
-    margin: 1vw 0
+    margin: 1vh 0
   .flex-container 
   .flex-item:nth-child(1)
     .section-row:nth-child(2)
@@ -291,9 +333,10 @@
 .weather-item
   font-family: 'Roboto 300'
   color: #999
-  height: 22vh
+  height: 20vh
+  width: auto
   margin: o 6vw
-  padding: 1vw 0
+
 
 .forecast-list-header
   margin: 0 2vw

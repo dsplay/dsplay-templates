@@ -16,17 +16,24 @@ const FitText = ({
     ...style,
     fontSize,
   };
-
+  
   return (
     <div
-      ref={ref}
-      style={finalStyle}
+    ref={ref}
+    style={finalStyle}
     >
       {/* <p> */}
       {children}
       {/* </p> */}
     </div>
   );
+              return (
+                <div style={{
+                  height: '100%',
+                  width: '100%',
+                  backgroundColor: 'red',
+                }} />
+              );
 };
 
 export default FitText;
