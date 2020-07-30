@@ -5,7 +5,7 @@ import { useScreenInfo } from './hooks/use-screen-info';
 import { useLoader } from './hooks/use-loader';
 import './app.sass';
 
-const MIN_LOADING_DURATION = 3500;
+const MIN_LOADING_DURATION = 2500;
 
 function App() {
   const { screenFormat } = useScreenInfo();

@@ -26,13 +26,13 @@ var dsplay_media = {
           icon: "t04",
           humidity: 78,
           wind: 4.58,
-          date: "2018-04-08",
+          date: "2020-07-27",
           value: 23.00,
           temp: 23.00,
           min: 12.00,
           max: 27.00,
           sunrise: "05:00",
-          sunset: "17:00"
+          sunset: "18:00"
         },
         forecast: [
           {
