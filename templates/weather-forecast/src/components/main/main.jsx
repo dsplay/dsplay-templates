@@ -91,12 +91,12 @@ function Main() {
             </div>
           </div>
           <div className="section-row">
-            <div className="current-min-temperature">
+            <div className="current-min-max-temperature">
               <FitText>
-                <span className="current-min-temperature-label">MIN</span>
+                <span className="current-min-max-temperature-label">MIN</span>
               </FitText>
             </div>
-            <div className="current-min-temperature">
+            <div className="current-min-max-temperature">
               <FitText>
                 {Math.floor(weather.current.min)}
                 º
@@ -104,12 +104,12 @@ function Main() {
             </div>
           </div>
           <div className="section-row">
-            <div className="current-min-temperature">
+            <div className="current-min-max-temperature">
               <FitText>
-                <span className="current-min-temperature-label">MAX</span>
+                <span className="current-min-max-temperature-label">MAX</span>
               </FitText>
             </div>
-            <div className="current-min-temperature">
+            <div className="current-min-max-temperature">
               <FitText>
                 {Math.floor(weather.current.max)}
                 º
