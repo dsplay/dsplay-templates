@@ -136,7 +136,7 @@ const Icons = (props) => {
   const isDay = useNightInterval({ sunrise, sunset });
   const icon = codes[code][isDay ? 0 : 1];
 
-  return <img src={icon} />;
+  return <img className='fade-in-2' src={icon} />;
 };
 
 export default Icons;

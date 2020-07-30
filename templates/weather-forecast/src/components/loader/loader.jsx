@@ -17,7 +17,7 @@ const Loader = (props) => {
 
   const spinnerDimension = useMemo(() => {
     console.log('[re]calculating spinner dimension...');
-    let dimension = Math.min(w, h) / 8;
+    let dimension = Math.min(w, h) / 2;
 
     switch (screenFormat) {
       case LANDSCAPE:
