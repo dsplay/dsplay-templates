@@ -8,6 +8,15 @@ export { default as Portrait } from './components/portrait/portrait';
 export { default as Square } from './components/square/square';
 export { default as HBanner } from './components/h-banner/h-banner';
 export { default as VBanner } from './components/v-banner/v-banner';
+
 export { default as useInterval } from './hooks/use-interval';
 export { default as useScreenInfo } from './hooks/use-screen-info';
+export { default as useMedia } from './hooks/use-media';
+export { default as useConfig } from './hooks/use-config';
+export { default as useTemplate } from './hooks/use-template';
+export { useTemplateVal } from './hooks/use-template';
+export { useTemplateBooleanVal } from './hooks/use-template';
+export { useTemplateIntVal } from './hooks/use-template';
+export { useTemplateFloatVal } from './hooks/use-template';
+
 export * as screen from './utils/screen';

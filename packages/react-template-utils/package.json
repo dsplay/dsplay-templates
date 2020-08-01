@@ -32,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
     "node-sass": "^4.14.1",
+    "react": "^16.13.1",
     "react-scripts": "^3.4.1",
     "rimraf": "^2.7.1",
     "webpack-cli": "^3.3.12"
@@ -43,7 +44,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@dsplay/template-utils": "^1.1.9",
+    "@dsplay/template-utils": "^1.1.10",
     "use-fit-text": "^2.3.0"
   },
   "peerDependencies": {
