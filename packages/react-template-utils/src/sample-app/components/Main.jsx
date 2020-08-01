@@ -1,15 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { Landscape, Portrait, HBanner, VBanner, FitText, useInterval, Render } from '../../lib';
+import {
+  Landscape, Portrait, HBanner, VBanner, FitText, useInterval, Render,
+} from '../../lib';
 import { LANDSCAPE, PORTRAIT, V_BANNER } from '../../lib/utils/screen';
 
 function Main() {
-
   const boxStyle = {
     border: '1px solid black',
     width: '50%',
     minWidth: '50px',
     height: '50px',
-  }
+  };
 
   const image = '../test-assets/dsplay-logo.png';
 
@@ -22,7 +23,10 @@ function Main() {
   return (
     <div>
       <p>Main App</p>
-      <p>count: {count}</p>
+      <p>
+        count:
+        {count}
+      </p>
       <img src={image} alt="" />
       <Landscape>
         <div>

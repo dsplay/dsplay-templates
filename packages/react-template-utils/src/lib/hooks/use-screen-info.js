@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { calculateScreenInfo } from '../utils/screen';
-import { DEFAULT_SQUARE_FACTOR, DEFAULT_BANNER_FACTOR } from '../utils/screen';
+import { calculateScreenInfo, DEFAULT_SQUARE_FACTOR, DEFAULT_BANNER_FACTOR } from '../utils/screen';
 
 export default function useScreenInfo({
   squareFactor = DEFAULT_SQUARE_FACTOR,

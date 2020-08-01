@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from "react-dom";
+import { render } from 'react-dom';
 import Main from './sample-app/components/Main';
 import {
   Loader, // boolean flag to indicate screen orientation
@@ -27,4 +27,4 @@ const App = () => (
   </Loader>
 );
 
-render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById('root'));
