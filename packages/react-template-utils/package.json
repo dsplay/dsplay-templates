@@ -1,6 +1,6 @@
 {
   "name": "@dsplay/react-template-utils",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "dist/dsplay-react-template-utils.commonjs2.js",
   "module": "dist/dsplay-react-template-utils.commonjs2.js",
   "files": [
