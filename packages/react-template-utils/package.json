@@ -11,7 +11,7 @@
     "build-examples": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build": "rimraf dist && NODE_ENV=production webpack",
+    "build": "rimraf dist && NODE_ENV=production webpack --mode production",
     "prepublish": "npm run build",
     "prepare": "npm run build"
   },
@@ -21,6 +21,7 @@
     "@babel/plugin-transform-modules-umd": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
