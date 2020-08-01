@@ -22,6 +22,9 @@ const createConfig = (target) => ({
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  externals: {
+    'react': 'commonjs react' 
+  },
 });
 
 module.exports = [
