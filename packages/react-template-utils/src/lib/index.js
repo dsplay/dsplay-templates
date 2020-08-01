@@ -20,3 +20,5 @@ export { useTemplateIntVal } from './hooks/use-template';
 export { useTemplateFloatVal } from './hooks/use-template';
 
 export * as screen from './utils/screen';
+export * as color from './utils/colors';
+export * as time from './utils/time';
