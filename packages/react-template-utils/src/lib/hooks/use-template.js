@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { template, tval, tbval, tival, tfval } from '@dsplay/template-utils';
 
-export default useTemplate = () => template;
+export default () => template;
 
 export const useTemplateVal = (key, def) => useMemo(() => tval(key, def), []);
 export const useTemplateBooleanVal = (key, def) => useMemo(() => tbval(key, def), []);

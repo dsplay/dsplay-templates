@@ -1,3 +1,3 @@
 import { config } from '@dsplay/template-utils';
 
-export default useConfig = () => config;
+export default () => config;
