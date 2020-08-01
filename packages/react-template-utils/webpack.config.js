@@ -1,12 +1,12 @@
 const path = require('path');
 
-module.exports = {
+const createConfig = (target) => ({
   entry: './src/lib/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'dsplay-react-template-utils.js',
+    filename: 'dsplay-react-template-utils.' + target + '.js',
     library: 'dsplayReactTemplateUtils',
-    libraryTarget: 'umd',
+    libraryTarget: target,
   },
   module: {
     rules: [
@@ -22,4 +22,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-};
+});
+
+module.exports = [
+  createConfig('umd'),
+  createConfig('commonjs2'),
+  createConfig('var'),
+  createConfig('amd'),
+];
+
