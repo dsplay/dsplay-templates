@@ -1,0 +1,41 @@
+{
+  "name": "@dsplay/react-template-utils",
+  "version": "1.0.0",
+  "main": "dist/dsplay-react-template-utils.js",
+  "module": "dist/dsplay-react-template-utils.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build-examples": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build": "rimraf dist && NODE_ENV=production webpack",
+    "prepublish": "npm run build",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-transform-modules-umd": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "rimraf": "^2.7.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "@dsplay/template-utils": "^1.1.9",
+    "use-fit-text": "^2.3.0"
+  }
+}
