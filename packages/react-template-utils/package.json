@@ -13,6 +13,7 @@
     "linter": "eslint --ext=js --ext=jsx src",
     "linter:fix": "eslint --ext=js --ext=jsx src --fix",
     "eject": "react-scripts eject",
+    "prepbuild": "npm run linter",
     "build": "rimraf dist && NODE_ENV=production webpack --mode production",
     "prepublish": "npm run build",
     "prepare": "npm run build"
