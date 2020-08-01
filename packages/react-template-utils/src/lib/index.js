@@ -10,3 +10,4 @@ export { default as HBanner } from './components/h-banner/h-banner';
 export { default as VBanner } from './components/v-banner/v-banner';
 export { default as useInterval } from './hooks/use-interval';
 export { default as useScreenInfo } from './hooks/use-screen-info';
+export * as screen from './utils/screen';

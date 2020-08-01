@@ -44,8 +44,10 @@
   ],
   "dependencies": {
     "@dsplay/template-utils": "^1.1.9",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "use-fit-text": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.x",
+    "react-dom": "^16.x"
   }
 }
