@@ -7,6 +7,7 @@ const style = {
   position: 'absolute',
   width: '100vw',
   height: '100vh',
+  overflow: 'hidden',
   margin: 0,
   // backgroundColor: 'purple',
 };
