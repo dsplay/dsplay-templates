@@ -6,7 +6,7 @@ const FitText = ({
   style = {},
 }) => {
   const [ready, setReady] = useState(false);
-  const { fontSize, ref } = useFitText({ maxFontSize: 10000, onFinish: () => setReady(true)});
+  const { fontSize, ref } = useFitText({ maxFontSize: 10000, onFinish: () => setReady(true) });
 
   const finalStyle = {
     height: '100%',
@@ -18,25 +18,18 @@ const FitText = ({
     ...style,
     fontSize,
   };
-  
+
   return (
     <div
-    ref={ref}
-    style={finalStyle}
-    className={ready ? 'fade-in' : ''}
+      ref={ref}
+      style={finalStyle}
+      className={ready ? 'fade-in' : ''}
     >
       {/* <p> */}
       {children}
       {/* </p> */}
     </div>
   );
-              return (
-                <div style={{
-                  height: '100%',
-                  width: '100%',
-                  backgroundColor: 'red',
-                }} />
-              );
 };
 
 export default FitText;

@@ -11,7 +11,5 @@ export function useNightInterval({ sunrise, sunset, now = moment.utc() }) {
     return moment(now).isBetween(sunriseDate, sunsetDate);
   }, [sunrise, sunset, now]);
 
-  console.log(sunset, sunrise, now, isDay);
-
   return isDay;
 }

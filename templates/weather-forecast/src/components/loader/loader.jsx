@@ -16,7 +16,6 @@ const Loader = (props) => {
   const { w, h, screenFormat } = useScreenInfo();
 
   const spinnerDimension = useMemo(() => {
-    console.log('[re]calculating spinner dimension...');
     let dimension = Math.min(w, h) / 2;
 
     switch (screenFormat) {
