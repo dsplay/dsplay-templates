@@ -1,119 +1,141 @@
-import React from 'react';
-
-import {
-  // values
-  media, // current media
-} from '@dsplay/template-utils';
-import './main.sass';
-import FitText from '../fit-text/fit-text';
-import Icon from '../icons/Icons';
+import React, { useMemo } from 'react';
+import { useMedia } from '@dsplay/react-template-utils';
+import MyFitText from '../fit-text/fit-text';
+import Icon from '../icon/icon';
 import { useBackground } from '../../hooks/use-background';
-import 'moment-timezone';
+import './main.sass';
 
 const moment = require('moment');
 
-const { result } = media;
-const { weather } = result.data;
-const forecastList = weather.forecast;
+function ForecastItem({
+  date,
+  code,
+  min,
+  max,
+}) {
+  const dayText = useMemo(() => moment(date).format('ddd'), [date]);
+  const dateText = useMemo(() => moment(date).format('DD/MM'), [date]);
+  const minText = useMemo(() => `${Math.round(min)}º`, [min]);
+  const maxText = useMemo(() => `${Math.round(max)}º`, [max]);
 
-const {
-  result: {
-    data: {
-      weather: {
-        current: { sunset, sunrise },
-      },
-    },
-  },
-} = media;
-
-const listItems = forecastList.map((forecastList) => (
-  <div className="weather-item">
-    <div className="section-row forecast-list-header">
-      <div className="w-day">
-        <FitText>{moment(forecastList.date).format('ddd')}</FitText>
+  return (
+    <div className="weather-item">
+      <div className="section-row forecast-list-header">
+        <div className="w-day">
+          <MyFitText>{dayText}</MyFitText>
+        </div>
+        <div className="w-date">
+          <MyFitText>{dateText}</MyFitText>
+        </div>
       </div>
-      <div className="w-date">
-        <FitText>{moment(forecastList.date).format('DD/MM')}</FitText>
+      <div className="section-row">
+        <div className="icon-weather icon-weather-list">
+          <Icon weatherCode={code} />
+        </div>
+        <div className="w-min-temperature">
+          <MyFitText>
+            <span>min</span>
+          </MyFitText>
+          <MyFitText>{minText}</MyFitText>
+        </div>
+        <div className="w-max-temperature">
+          <MyFitText>
+            <span>max</span>
+          </MyFitText>
+          <MyFitText>{maxText}</MyFitText>
+        </div>
       </div>
     </div>
-    <div className="section-row">
-      <div className="icon-weather icon-weather-list">
-        <Icon weatherCode={forecastList.code} />
-      </div>
-      <div className="w-min-temperature">
-        <FitText>
-          min
-        </FitText>
-        <FitText>{`${Math.floor(forecastList.min)}º`}</FitText>
-      </div>
-      <div className="w-max-temperature">
-        <FitText>
-          max
-        </FitText>
-        <FitText>{`${Math.floor(forecastList.max)}º`}</FitText>
-      </div>
-    </div>
-  </div>
-));
+  );
+}
 
 function Main() {
+  const {
+    result: {
+      data: {
+        weather: {
+          city,
+          country,
+          current: {
+            code,
+            description,
+            temp,
+            sunset,
+            sunrise,
+            min,
+            max,
+          },
+          forecast,
+        },
+      },
+    },
+  } = useMedia();
+
+  const tempText = useMemo(() => `${Math.round(temp)}º`, [temp]);
+  const minText = useMemo(() => `${Math.round(min)}º`, [min]);
+  const maxText = useMemo(() => `${Math.round(max)}º`, [max]);
+
+  const listItems = useMemo(() => forecast.map((forecastItem) => (
+    <ForecastItem
+      key={forecastItem.date}
+      {...forecastItem}
+    />
+  )), [forecast]);
+
   return (
     <div className="main">
       <div className="flex-container">
-        <div className={`flex-item ${useBackground({ code: weather.current.code, sunset, sunrise })}`}>
+        <div className={`flex-item ${useBackground({ code, sunset, sunrise })}`}>
           <div className="section-row">
             <div className="today">
-              <FitText>Hoje</FitText>
+              <MyFitText>Hoje</MyFitText>
             </div>
             <div className="city">
-              <FitText>
-                {weather.city}
+              <MyFitText>
+                {city}
                 {' '}
                 -
-                {weather.country}
-              </FitText>
+                {country}
+              </MyFitText>
             </div>
           </div>
           <div className="section-row">
             <div className="weather-description">
-              <FitText>{weather.current.description}</FitText>
+              <MyFitText>{description}</MyFitText>
             </div>
           </div>
           <div className="section-row">
             <div className="icon-weather icon-weather-today">
-              <Icon weatherCode={weather.current.code} />
+              <Icon weatherCode={code} />
             </div>
             <div className="current-temperature">
-              <FitText>
-                {Math.floor(weather.current.temp)}
-                º
-              </FitText>
+              <MyFitText>
+                {tempText}
+              </MyFitText>
             </div>
           </div>
           <div className="section-row">
             <div className="current-min-max-temperature">
-              <FitText>
+              <MyFitText>
                 <span className="current-min-max-temperature-label">MIN</span>
-              </FitText>
+              </MyFitText>
             </div>
             <div className="current-min-max-temperature">
-              <FitText>
-                {Math.floor(weather.current.min)}
-                º
-              </FitText>
+              <MyFitText>
+                {minText}
+              </MyFitText>
             </div>
           </div>
           <div className="section-row">
             <div className="current-min-max-temperature">
-              <FitText>
+              <MyFitText>
                 <span className="current-min-max-temperature-label">MAX</span>
-              </FitText>
+              </MyFitText>
             </div>
             <div className="current-min-max-temperature">
-              <FitText>
-                {Math.floor(weather.current.max)}
-                º
-              </FitText>
+              <MyFitText>
+                {maxText}
+              </MyFitText>
             </div>
           </div>
         </div>
