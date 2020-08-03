@@ -15,7 +15,7 @@ export { default as useMedia } from './hooks/use-media';
 export { default as useConfig } from './hooks/use-config';
 export { default as useTemplate } from './hooks/use-template';
 export { useTemplateVal } from './hooks/use-template';
-export { useTemplateBooleanVal } from './hooks/use-template';
+export { useTemplateBoolVal } from './hooks/use-template';
 export { useTemplateIntVal } from './hooks/use-template';
 export { useTemplateFloatVal } from './hooks/use-template';
 
