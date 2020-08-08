@@ -1,3 +1,7 @@
+import * as screen from './utils/screen';
+import * as color from './utils/colors';
+import * as time from './utils/time';
+
 export { default as FontLoader } from './components/font-loader/font-loader';
 export { default as ImageLoader } from './components/image-loader/image-loader';
 export { default as Loader } from './components/loader/loader';
@@ -19,6 +23,8 @@ export { useTemplateBoolVal } from './hooks/use-template';
 export { useTemplateIntVal } from './hooks/use-template';
 export { useTemplateFloatVal } from './hooks/use-template';
 
-export * as screen from './utils/screen';
-export * as color from './utils/colors';
-export * as time from './utils/time';
+export {
+    screen,
+    color,
+    time,
+};
