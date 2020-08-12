@@ -9,8 +9,13 @@ function FontLoader({
   useEffect(() => {
     if (loading) {
       (async () => {
-        const { fonts } = document;
-        await fonts.ready;
+        try {
+          const { fonts } = document;
+          await fonts.ready;
+        } catch (e) {
+          /* eslint-disable no-console */
+          console.log(e);
+        }
 
         setLoading(false);
         // console.log('fonts loaded');
