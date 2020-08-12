@@ -15,9 +15,9 @@ const promisesToResolve = [];
 
 const App = () => (
   <Loader
-    fontFamilies={fontsToLoad}
+    fonts={fontsToLoad}
     images={imagesToLoad}
-    minLoadingTime={minLoadingTime}
+    minDuration={minLoadingTime}
     tasks={promisesToResolve}
   >
     <div>
