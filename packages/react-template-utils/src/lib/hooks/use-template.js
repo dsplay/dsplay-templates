@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
-import { template, tval, tbval, tival, tfval } from '@dsplay/template-utils';
+import {
+  template, tval, tbval, tival, tfval,
+} from '@dsplay/template-utils';
 
 export default () => template;
 

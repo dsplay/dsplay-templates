@@ -12,13 +12,15 @@ const style = {
   // backgroundColor: 'purple',
 };
 
+const defaultTasks = [];
+
 function Loader({
-  fontFamilies,
+  fonts,
   images,
   placeholder = <div>loading...</div>,
   children,
-  minLoadingTime = 0,
-  tasks = [],
+  minDuration = 0,
+  tasks = defaultTasks,
 }) {
   const [loadingMin, setLoadingMin] = useState(true);
   const [loadingFonts, setLoadingFonts] = useState(true);
@@ -36,14 +38,14 @@ function Loader({
     if (loadingMin) {
       (async () => {
         await Promise.all([
-          wait(minLoadingTime),
+          wait(minDuration),
           ...tasks,
         ]);
         setLoadingMin(false);
         // console.log('min loading time passed', loadingMin, minLoadingTime, tasks);
       })();
     }
-  }, [loadingMin, minLoadingTime, tasks]);
+  }, [loadingMin, minDuration, tasks]);
 
   if (loadingFonts || loadingImages || loadingMin) {
     // console.log('loading...');
@@ -51,7 +53,7 @@ function Loader({
       <div style={style}>
         {placeholder}
         <ImageLoader images={images} onLoad={handleImagesLoad} />
-        <FontLoader families={fontFamilies} onLoad={handleFontsLoad} />
+        <FontLoader families={fonts} onLoad={handleFontsLoad} />
       </div>
     );
   }

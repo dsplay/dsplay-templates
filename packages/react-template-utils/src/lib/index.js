@@ -24,7 +24,7 @@ export { useTemplateIntVal } from './hooks/use-template';
 export { useTemplateFloatVal } from './hooks/use-template';
 
 export {
-    screen,
-    color,
-    time,
+  screen,
+  color,
+  time,
 };

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import useFitText from 'use-fit-text';
 
+const DEFAULT_READY_CLASS = 'dsplay-fit-text-ready';
+
 const FitText = ({
   children,
   style = {},
   className = '',
-  readyClassName = '',
+  readyClassName = DEFAULT_READY_CLASS,
 }) => {
   const [ready, setReady] = useState(false);
   const { fontSize, ref } = useFitText({ maxFontSize: 10000, onFinish: () => setReady(true) });
