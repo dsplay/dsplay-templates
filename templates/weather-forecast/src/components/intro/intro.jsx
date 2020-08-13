@@ -9,17 +9,17 @@ const Intro = (props) => {
   const { w, h, screenFormat } = useScreenInfo();
 
   const spinnerDimension = useMemo(() => {
-    let dimension = Math.min(w, h) / 3;
+    let dimension = Math.min(w, h) / 2;
 
     switch (screenFormat) {
       case screen.LANDSCAPE:
         break;
       case screen.PORTRAIT:
         break;
-      case screen.SQUARED:
+      case screen.SQUARE:
         break;
-      case screen.BANNER_H:
-      case screen.BANNER_V:
+      case screen.H_BANNER:
+      case screen.V_BANNER:
         dimension = Math.min(w, h) / 2;
         break;
       default:

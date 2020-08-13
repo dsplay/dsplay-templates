@@ -41,7 +41,7 @@
   flex-direction: row
 
 .city
-  font-family: "Roboto 400"
+  font-family: "Roboto Regular"
 
 .today,
 .city
@@ -54,6 +54,9 @@
   -webkit-align-self: auto
   -ms-flex-item-align: auto
   align-self: auto
+
+.current-min-max-temperature-label
+  text-transform: uppercase
   
 .landscape
   .flex-container
@@ -70,7 +73,7 @@
     text-transform: capitalize
 
   .current-temperature
-    font-family: 'Roboto 400'
+    font-family: 'Roboto Regular'
     text-shadow: -5px 0px 2px #494949
     height: 25vh
     width: 25vw
@@ -143,7 +146,7 @@
     height: 10vw
     width: auto
 
-.squared
+.square
   .flex-item:nth-child(2)
     display: none
   .flex-item:nth-child(1)
@@ -159,7 +162,7 @@
     width: 25vw
     height: auto
   .current-temperature
-    font-family: 'Roboto 400'
+    font-family: 'Roboto Regular'
     text-shadow: -5px 0px 2px #494949
     height: 35vh
     width: 35vw
@@ -176,7 +179,7 @@
       height: 5vh
       width: 5vw
 
-.banner-h
+.h-banner
   .flex-item
     @include bannerHViewport
   .flex-item:nth-child(2)
@@ -210,7 +213,7 @@
     width: 30vw
     
   
-.banner-v
+.v-banner
   .flex-container
     @include bannerVViewport
   .flex-item:nth-child(2)
@@ -331,11 +334,11 @@
 
 // Forecast
 .weather-item
-  font-family: 'Roboto 300'
+  font-family: 'Roboto Light'
   color: #999
   height: 20vh
   width: auto
-  margin: o 6vw
+  margin: 0 6vw
 
 
 .forecast-list-header
@@ -344,7 +347,7 @@
 
 .w-day,
 .w-date
-  font-family: 'Roboto 400'
+  font-family: 'Roboto Regular'
   height: 6vh
   -webkit-order: 0
   -ms-flex-order: 0
@@ -358,7 +361,7 @@
 
 .w-min-temperature,
 .w-max-temperature
-  font-family: 'Roboto 400'
+  font-family: 'Roboto Regular'
   height: 7vh
   margin: 0 2vw
   text-transform: uppercase

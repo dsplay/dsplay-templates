@@ -91,8 +91,9 @@ const codes = {
   900: [UnknownPrecipitation, UnknownPrecipitation], // Unknown Precipitation
 };
 
-const Icon = (props) => {
-  const { weatherCode: code } = props;
+function Icon({
+  weatherCode: code,
+}) {
   const {
     result: {
       data: {
@@ -110,6 +111,6 @@ const Icon = (props) => {
   return (
     <img alt="" className="fade-in-2" src={icon} />
   );
-};
+}
 
 export default Icon;

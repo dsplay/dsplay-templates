@@ -1,55 +1,20 @@
 import React, { useMemo } from 'react';
-import { useMedia } from '@dsplay/react-template-utils';
-import MyFitText from '../fit-text/fit-text';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+import { useMedia, useConfig, FitText } from '@dsplay/react-template-utils';
 import Icon from '../icon/icon';
 import { useBackground } from '../../hooks/use-background';
+import ForecastItem from '../forecast-item/forecast-item';
 import './main.sass';
 
-const moment = require('moment');
-
-function ForecastItem({
-  date,
-  code,
-  min,
-  max,
-}) {
-  const dayText = useMemo(() => moment(date).format('ddd'), [date]);
-  const dateText = useMemo(() => moment(date).format('DD/MM'), [date]);
-  const minText = useMemo(() => `${Math.round(min)}º`, [min]);
-  const maxText = useMemo(() => `${Math.round(max)}º`, [max]);
-
-  return (
-    <div className="weather-item">
-      <div className="section-row forecast-list-header">
-        <div className="w-day">
-          <MyFitText>{dayText}</MyFitText>
-        </div>
-        <div className="w-date">
-          <MyFitText>{dateText}</MyFitText>
-        </div>
-      </div>
-      <div className="section-row">
-        <div className="icon-weather icon-weather-list">
-          <Icon weatherCode={code} />
-        </div>
-        <div className="w-min-temperature">
-          <MyFitText>
-            <span>min</span>
-          </MyFitText>
-          <MyFitText>{minText}</MyFitText>
-        </div>
-        <div className="w-max-temperature">
-          <MyFitText>
-            <span>max</span>
-          </MyFitText>
-          <MyFitText>{maxText}</MyFitText>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Main() {
+  const { t, i18n } = useTranslation();
+  const { locale = 'en_US' } = useConfig();
+  const [lng] = locale.split('_');
+  moment.locale(lng);
+
+  i18n.changeLanguage(lng);
+
   const {
     result: {
       data: {
@@ -88,20 +53,21 @@ function Main() {
         <div className={`flex-item ${useBackground({ code, sunset, sunrise })}`}>
           <div className="section-row">
             <div className="today">
-              <MyFitText>Hoje</MyFitText>
+              <FitText>{t('Today')}</FitText>
             </div>
             <div className="city">
-              <MyFitText>
+              <FitText>
                 {city}
                 {' '}
                 -
+                {' '}
                 {country}
-              </MyFitText>
+              </FitText>
             </div>
           </div>
           <div className="section-row">
             <div className="weather-description">
-              <MyFitText>{description}</MyFitText>
+              <FitText>{description}</FitText>
             </div>
           </div>
           <div className="section-row">
@@ -109,33 +75,33 @@ function Main() {
               <Icon weatherCode={code} />
             </div>
             <div className="current-temperature">
-              <MyFitText>
+              <FitText>
                 {tempText}
-              </MyFitText>
+              </FitText>
             </div>
           </div>
           <div className="section-row">
             <div className="current-min-max-temperature">
-              <MyFitText>
-                <span className="current-min-max-temperature-label">MIN</span>
-              </MyFitText>
+              <FitText>
+                <span className="current-min-max-temperature-label">{t('Min')}</span>
+              </FitText>
             </div>
             <div className="current-min-max-temperature">
-              <MyFitText>
+              <FitText>
                 {minText}
-              </MyFitText>
+              </FitText>
             </div>
           </div>
           <div className="section-row">
             <div className="current-min-max-temperature">
-              <MyFitText>
-                <span className="current-min-max-temperature-label">MAX</span>
-              </MyFitText>
+              <FitText>
+                <span className="current-min-max-temperature-label">{t('Max')}</span>
+              </FitText>
             </div>
             <div className="current-min-max-temperature">
-              <MyFitText>
+              <FitText>
                 {maxText}
-              </MyFitText>
+              </FitText>
             </div>
           </div>
         </div>

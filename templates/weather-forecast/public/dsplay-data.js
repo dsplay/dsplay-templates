@@ -1,7 +1,6 @@
 var dsplay_config = {
   // config parameters
-  locale: 'pt_br',
-  orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
+  locale: 'de',
   // Android SDK version
   osVersion: 19,
   // DSPLAY App version code
@@ -74,8 +73,5 @@ var dsplay_media = {
     }
 
   },
-
-  // custom media parameters
-  customMediaParam: "value"
 
 };
