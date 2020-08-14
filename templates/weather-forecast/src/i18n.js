@@ -21,7 +21,7 @@ i18n
         translations: {
           Today: 'Aujourd\'hui',
           Min: 'Min',
-          Max: 'Máx',
+          Max: 'Max',
         },
       },
       es: {

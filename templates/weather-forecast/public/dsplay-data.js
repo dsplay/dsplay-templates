@@ -1,6 +1,6 @@
 var dsplay_config = {
   // config parameters
-  locale: 'de',
+  locale: 'pt_BR',
   // Android SDK version
   osVersion: 19,
   // DSPLAY App version code
@@ -40,7 +40,7 @@ var dsplay_media = {
             icon: "c01",
             humidity: 56,
             wind: 3.99,
-            date: "2018-04-09",
+            date: "2020-04-09",
             value: 29.21,
             min: 29.21,
             max: 33.21
@@ -51,7 +51,7 @@ var dsplay_media = {
             icon: "c02",
             humidity: 60,
             wind: 5.77,
-            date: "2018-04-10",
+            date: "2020-04-10",
             value: 29.52,
             min: 25.52,
             max: 31.52
@@ -62,7 +62,7 @@ var dsplay_media = {
             icon: "u00",
             humidity: 63,
             wind: 5.64,
-            date: "2018-04-11",
+            date: "2020-04-11",
             value: 28.11,
             min: 23.11,
             max: 28.11

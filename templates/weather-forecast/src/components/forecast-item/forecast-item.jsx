@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import moment from 'moment';
-import { FitText } from '@dsplay/react-template-utils';
+import { useConfig, FitText } from '@dsplay/react-template-utils';
 import { useTranslation } from 'react-i18next';
 import Icon from '../icon/icon';
 
@@ -10,8 +10,14 @@ function ForecastItem({
   min,
   max,
 }) {
+  const { locale = 'en' } = useConfig();
+  const lng = useMemo(() => locale.split('_')[0], [locale]);
+
   const dayText = useMemo(() => moment(date).format('ddd'), [date]);
-  const dateText = useMemo(() => moment(date).format('DD/MM'), [date]);
+  const dateText = useMemo(() => new Date(date).toLocaleDateString(lng, {
+    month: 'numeric',
+    day: 'numeric',
+  }), [date, lng]);
   const minText = useMemo(() => `${Math.round(min)}º`, [min]);
   const maxText = useMemo(() => `${Math.round(max)}º`, [max]);
 
