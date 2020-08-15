@@ -1,16 +1,19 @@
 import React from 'react';
-import { tval } from '@dsplay/template-utils';
+import { FitText, useTemplateVal } from '@dsplay/react-template-utils';
 import './user-profile.sass';
-import FitText from '../fit-text/fit-text';
 
-const primaryColor = tval('primary_color', 'white');
-const fullNameColor = tval('user_full_name_color', primaryColor);
+
 
 function UserProfile({
   name,
   pic,
   className = '',
 }) {
+
+  const primaryColor = useTemplateVal('primary_color', 'white');
+  const fullNameColor = useTemplateVal('user_full_name_color', primaryColor);
+
+
   return (
     <div className={`user-profile ${className}`}>
       <div className="user-info">

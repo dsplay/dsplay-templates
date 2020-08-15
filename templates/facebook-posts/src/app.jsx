@@ -1,28 +1,35 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import {
-  tval, // custom template boolean value
-} from '@dsplay/template-utils';
-import Loader from './components/loader/loader';
+import React, { useMemo } from 'react';
+import { Loader, useMedia, useScreenInfo, useTemplateVal, screen } from '@dsplay/react-template-utils';
+import Intro from './components/intro/intro';
 import Main from './components/main/main';
-import { waitForFonts } from './util/fonts';
-import { useScreenInfo, PORTRAIT, BANNER_V } from './util/screen';
 import defaultBg from './images/bg.png';
 import './app.sass';
-import { wait } from './util/time';
 
-// one time template config
-const horizontalBackground = tval('bg_horizontal', defaultBg);
-const verticalBackground = tval('bg_vertical', horizontalBackground);
+const MIN_LOADING_DURATION = 2500;
+
+// fonts to preload
+// @font-face's must be defined in fonts.sass or another in-use style file
+const fonts = [
+  // 'Roboto Thin',
+  // 'Roboto Light',
+  // 'Roboto Regular',
+  // 'Roboto Medium',
+  // 'Roboto Bold',
+  'Roboto Condensed',
+  'Oswald',
+];
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const { screenFormat } = useScreenInfo();
+
+  const horizontalBackground = useTemplateVal('bg_horizontal', defaultBg);
+  const verticalBackground = useTemplateVal('bg_vertical', horizontalBackground);
 
   const backgroundImage = useMemo(() => {
     let bgImagePath;
     switch (screenFormat) {
-      case PORTRAIT:
-      case BANNER_V:
+      case screen.PORTRAIT:
+      case screen.V_BANNER:
         bgImagePath = verticalBackground;
         break;
       default:
@@ -31,41 +38,56 @@ function App() {
     }
 
     return bgImagePath;
-  }, [screenFormat]);
+  }, [screenFormat, horizontalBackground, verticalBackground]);
 
-  useEffect(() => {
-    if (loading) {
-      (async () => {
-        await Promise.all([
-          wait(2000),
-          waitForFonts(),
-        ]);
-        
-        setLoading(false);
-      })();
-    }
-  }, [loading]);
+  const {
+    result: {
+      data: {
+        user: {
+          pic: profilePicture,
+        } = {},
+        posts = [],
+      } = {},
+    } = {},
+  } = useMedia();
 
-  let content;
+  const result = posts.map(({
+    media = [],
+  }) => media.map(({ urls: { lg } }) => lg));
 
-  if (loading) {
-    content = (<Loader />);
-    return content;
-  } else {
-    content = (<Main />);
-  }
+  let allMediaImages = [];
+  result.forEach((mediaImages) => {
+    allMediaImages = allMediaImages.concat(mediaImages);
+  });
+  allMediaImages = [...new Set(allMediaImages)];
+  console.log(result);
+  console.log(allMediaImages);
+
+  // images to preload
+  const images = [
+    backgroundImage,
+    profilePicture,
+    ...allMediaImages,
+  ];
 
   const appStyle = {
     backgroundImage: `url('${backgroundImage}')`,
   };
 
   return (
-    <div
-      className={`app fade-in ${screenFormat}`}
-      style={appStyle}
+    <Loader
+      placeholder={<Intro />}
+      minDuration={MIN_LOADING_DURATION}
+      fonts={fonts}
+      images={images}
     >
-      {content}
-    </div>
+      <div
+        className={`app fade-in ${screenFormat}`}
+        style={appStyle}
+      >
+        <Main />
+      </div>
+    </Loader>
   )
 }
 

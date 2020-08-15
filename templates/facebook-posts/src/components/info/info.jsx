@@ -6,16 +6,14 @@ import 'moment/locale/pt';
 import 'moment/locale/fr';
 import 'moment/locale/es';
 import 'moment/locale/de';
-import { useScreenInfo } from '../../util/screen';
+import { FitText, useScreenInfo } from '@dsplay/react-template-utils';
 import './info.sass';
-import reactionLike from '../../images/reaction-like.gif';
-import reactionLove from '../../images/reaction-love.gif';
-import reactionHaha from '../../images/reaction-haha.gif';
-import reactionWow from '../../images/reaction-wow.gif';
-import reactionSad from '../../images/reaction-sad.gif';
-import reactionAngry from '../../images/reaction-angry.gif';
-import FitText from '../fit-text/fit-text';
-
+import reactionLike from '../../images/reaction-like-small.gif';
+import reactionLove from '../../images/reaction-love-small.gif';
+import reactionHaha from '../../images/reaction-haha-small.gif';
+import reactionWow from '../../images/reaction-wow-small.gif';
+import reactionSad from '../../images/reaction-sad-small.gif';
+import reactionAngry from '../../images/reaction-angry-small.gif';
 
 const reactionsMap = {
   like: reactionLike,

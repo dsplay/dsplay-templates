@@ -2,8 +2,8 @@ import React from 'react';
 import Info from '../info/info';
 import UserProfile from '../user-profile/user-profile';
 import MediaSlider from '../media-slider/media-slider';
-import FitText from '../fit-text/fit-text';
-import { useScreenInfo, PORTRAIT, BANNER_V, SQUARED, BANNER_H } from '../../util/screen';
+import { FitText, useScreenInfo} from '@dsplay/react-template-utils';
+import { PORTRAIT, BANNER_V, SQUARED, BANNER_H } from '../../util/screen';
 import {
   hashtagColor,
   linkColor,
@@ -49,7 +49,7 @@ function PostContent({
 }) {
 
   const style = {
-    backgroundColor: textBgColor, 
+    backgroundColor: text ? textBgColor : 'transparent', 
   }
 
   return (
