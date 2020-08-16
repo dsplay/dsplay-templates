@@ -28,7 +28,6 @@ function Reaction({
   type,
   count,
 }) {
-
   if (!count) return null;
 
   return (
@@ -69,15 +68,18 @@ function Info({
     <div className={`info-container ${className}`}>
       <div className="info-box">
         {
-          link &&
+          link
+          && (
           <div className="qrcode-container" style={{ paddingBottom: qrCodeBottomPadding }}>
             <QRCode renderAs="svg" size="100%" ssize={15 * (smallDim / 100)} value={link} />
           </div>
+          )
         }
         <div className="info">
           <span className={`created-at ${reactions ? '' : 'no-reactions'}`}>
             <FitText>
-              {moment(created).format('L')}<br/>
+              {moment(created).format('L')}
+              <br />
               {moment(created).format('HH:mm:ss')}
             </FitText>
           </span>
@@ -92,7 +94,7 @@ function Info({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Info;

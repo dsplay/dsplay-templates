@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useInterval } from '@dsplay/react-template-utils';
 import Post from '../post/post';
-import { useInterval } from '../../hooks/use-interval';
 
 function Posts({
   user,
@@ -8,8 +8,6 @@ function Posts({
   pageDuration,
 }) {
   const [index, setIndex] = useState(0);
-
-  console.log('posts:', posts.length);
 
   useInterval(() => {
     setIndex((index + 1) % posts.length);

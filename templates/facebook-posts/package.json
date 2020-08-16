@@ -3,19 +3,22 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "@dsplay/react-template-utils": "^3.0.1",
+        "@dsplay/react-template-utils": "^3.0.2",
         "moment": "^2.27.0",
         "node-sass": "^4.14.1",
         "qrcode.react": "^1.0.0",
         "react": "^16.13.1",
         "react-app-polyfill": "^1.0.6",
         "react-dom": "^16.13.1",
-        "react-scripts": "^3.4.3",
-        "use-fit-text": "^2.3.0"
+        "react-scripts": "^3.4.3"
     },
     "scripts": {
         "start": "react-scripts start",
+        "linter": "eslint --ext=js --ext=jsx src",
+        "linter:fix": "eslint --ext=js --ext=jsx src --fix",
+        "prebuild": "npm run linter",
         "build": "react-scripts build",
+        "pretest": "npm run linter",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "prezip": "npm run build",
@@ -28,5 +31,13 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint-config-airbnb": "^18.2.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-react": "^7.20.6"
+    }
 }

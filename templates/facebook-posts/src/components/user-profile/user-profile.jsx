@@ -2,17 +2,13 @@ import React from 'react';
 import { FitText, useTemplateVal } from '@dsplay/react-template-utils';
 import './user-profile.sass';
 
-
-
 function UserProfile({
   name,
   pic,
   className = '',
 }) {
-
   const primaryColor = useTemplateVal('primary_color', 'white');
   const fullNameColor = useTemplateVal('user_full_name_color', primaryColor);
-
 
   return (
     <div className={`user-profile ${className}`}>
@@ -25,7 +21,7 @@ function UserProfile({
         </span>
       </div>
     </div>
-  )
+  );
 }
 
 export default UserProfile;

@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { Loader, useMedia, useScreenInfo, useTemplateVal, screen } from '@dsplay/react-template-utils';
+import {
+  Loader, useMedia, useScreenInfo, useTemplateVal, screen,
+} from '@dsplay/react-template-utils';
 import Intro from './components/intro/intro';
 import Main from './components/main/main';
 import defaultBg from './images/bg.png';
@@ -12,7 +14,7 @@ const MIN_LOADING_DURATION = 2500;
 const fonts = [
   // 'Roboto Thin',
   // 'Roboto Light',
-  // 'Roboto Regular',
+  'Roboto Regular',
   // 'Roboto Medium',
   // 'Roboto Bold',
   'Roboto Condensed',
@@ -59,9 +61,6 @@ function App() {
   result.forEach((mediaImages) => {
     allMediaImages = allMediaImages.concat(mediaImages);
   });
-  allMediaImages = [...new Set(allMediaImages)];
-  console.log(result);
-  console.log(allMediaImages);
 
   // images to preload
   const images = [
@@ -88,7 +87,7 @@ function App() {
         <Main />
       </div>
     </Loader>
-  )
+  );
 }
 
 export default App;

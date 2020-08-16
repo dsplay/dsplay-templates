@@ -35,8 +35,10 @@ function Intro(props) {
     height: `${spinnerDimension}px`,
   };
 
+  const { className } = props;
+
   return (
-    <div {...props} className={`loader ${props.className || ''}`} >
+    <div {...props} className={`loader ${className || ''}`}>
       <div>
         <img className="boun2ce-in-fwd" src={intro} alt="" style={imageStyle} />
       </div>
