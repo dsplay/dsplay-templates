@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function ImageLoader({
   images = [],
@@ -6,7 +6,8 @@ function ImageLoader({
 }) {
   const [loadCount, setLoadCount] = useState(0);
   const [errors, setErrors] = useState([]);
-  const total = images.length;
+  const uniqueImages = useMemo(() => [...new Set(images)], [images]);
+  const total = uniqueImages.length;
 
   const onLoadImage = () => setLoadCount(loadCount + 1);
 
@@ -32,7 +33,7 @@ function ImageLoader({
 
   return (
     <div style={style}>
-      {images.map((image) => <img key={image} src={image} alt="" onLoad={onLoadImage} onError={onErrorImage} />)}
+      {uniqueImages.map((image) => <img key={image} src={image} alt="" onLoad={onLoadImage} onError={onErrorImage} />)}
     </div>
   );
 }
