@@ -6,7 +6,7 @@ function ImageLoader({
 }) {
   const [loadCount, setLoadCount] = useState(0);
   const [errors, setErrors] = useState([]);
-  const uniqueImages = useMemo(() => [...new Set(images)], [images]);
+  const uniqueImages = useMemo(() => [...new Set(images.filter(i => i))], [images]);
   const total = uniqueImages.length;
 
   const onLoadImage = () => setLoadCount(loadCount + 1);
