@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  cloneElement,
+  Children,
+} from 'react';
 import ImageLoader from '../image-loader/image-loader';
 import FontLoader from '../font-loader/font-loader';
 import { wait } from '../../utils/time';
@@ -25,6 +31,7 @@ function Loader({
   const [loadingMin, setLoadingMin] = useState(true);
   const [loadingFonts, setLoadingFonts] = useState(true);
   const [loadingImages, setLoadingImages] = useState(true);
+  const [tasksResults, setTasksResults] = useState();
 
   const handleImagesLoad = useCallback(() => {
     setLoadingImages(false);
@@ -37,10 +44,11 @@ function Loader({
   useEffect(() => {
     if (loadingMin) {
       (async () => {
-        await Promise.all([
+        const results = await Promise.all([
           wait(minDuration),
           ...tasks,
         ]);
+        setTasksResults(results.slice(1));
         setLoadingMin(false);
         // console.log('min loading time passed', loadingMin, minLoadingTime, tasks);
       })();
@@ -58,7 +66,10 @@ function Loader({
     );
   }
 
-  return children;
+  const finalChildren = Children.toArray(children)
+    .map((child) => cloneElement(child, { tasksResults }));
+
+  return finalChildren;
 }
 
 export default Loader;
