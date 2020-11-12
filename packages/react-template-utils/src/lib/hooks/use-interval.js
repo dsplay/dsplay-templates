@@ -20,4 +20,4 @@ export default (callback, delay) => {
 
     return null;
   }, [delay]);
-}
+};
