@@ -38,8 +38,10 @@ const createConfig = (target) => ({
 
 module.exports = [
   createConfig('umd'),
+  createConfig('commonjs'),
   createConfig('commonjs2'),
   createConfig('var'),
   createConfig('amd'),
+  createConfig('system'),
 ];
 
