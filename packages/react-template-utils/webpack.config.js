@@ -8,11 +8,12 @@ const createConfig = (target) => ({
     filename: 'dsplay-react-template-utils.' + target + '.js',
     library: 'dsplayReactTemplateUtils',
     libraryTarget: target,
+    umdNamedDefine: target === 'umd',
   },
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'src/lib/jsconfig.json' },
+        'src/lib/jsconfig.json',
       ],
     }),
   ],
@@ -32,8 +33,20 @@ const createConfig = (target) => ({
     extensions: ['.js', '.jsx'],
   },
   externals: {
-    'react': 'commonjs react'
-  },
+    // Don't bundle react or react-dom      
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "React",
+      root: "React"
+    },
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "ReactDOM",
+      root: "ReactDOM"
+    }
+  }
 });
 
 module.exports = [
