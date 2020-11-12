@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const createConfig = (target) => ({
   entry: './src/lib/index.js',
@@ -8,6 +9,13 @@ const createConfig = (target) => ({
     library: 'dsplayReactTemplateUtils',
     libraryTarget: target,
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/lib/jsconfig.json' },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
