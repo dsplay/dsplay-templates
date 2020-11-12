@@ -27,11 +27,12 @@ const createConfig = (target) => ({
       }
     ]
   },
+  devtool: 'source-maps',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   externals: {
-    'react': 'commonjs react' 
+    'react': 'commonjs react'
   },
 });
 
