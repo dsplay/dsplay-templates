@@ -9,6 +9,7 @@ const createConfig = (target) => ({
     library: 'dsplayReactTemplateUtils',
     libraryTarget: target,
     umdNamedDefine: target === 'umd',
+    globalObject: 'this',
   },
   plugins: [
     new CopyPlugin({

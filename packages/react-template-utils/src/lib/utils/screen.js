@@ -10,7 +10,7 @@ export const DEFAULT_SQUARE_FACTOR = 0.2;
 export function calculateScreenInfo({
   squareFactor = DEFAULT_SQUARE_FACTOR,
   bannerFactor = DEFAULT_BANNER_FACTOR,
-}) {
+} = {}) {
   if (window) {
     const {
       innerHeight,
