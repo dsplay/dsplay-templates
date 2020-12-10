@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import ImageLoader from '../image-loader/image-loader';
 import FontLoader from '../font-loader/font-loader';
+import LoaderContext from './loader-context';
 import { wait } from '../../utils/time';
 
 const style = {
@@ -66,10 +67,18 @@ function Loader({
     );
   }
 
-  const finalChildren = Children.toArray(children)
-    .map((child) => cloneElement(child, { tasksResults }));
+  const context = {
+    tasksResults,
+  };
 
-  return finalChildren;
+  const finalChildren = Children.toArray(children)
+    .map((child) => cloneElement(child, context));
+
+  return (
+    <LoaderContext.Provider value={context}>
+      {finalChildren}
+    </LoaderContext.Provider>
+  );
 }
 
 export default Loader;

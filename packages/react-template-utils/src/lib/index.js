@@ -5,6 +5,7 @@ import * as time from './utils/time';
 export { default as FontLoader } from './components/font-loader/font-loader';
 export { default as ImageLoader } from './components/image-loader/image-loader';
 export { default as Loader } from './components/loader/loader';
+export { default as LoaderContext } from './components/loader/loader-context';
 export { default as FitText } from './components/fit-text/fit-text';
 export { default as Render } from './components/render/render';
 export { default as Landscape } from './components/landscape/landscape';

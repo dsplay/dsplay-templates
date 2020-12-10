@@ -1,10 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Main from './sample-app/components/Main';
-import {
-  Loader, // boolean flag to indicate screen orientation
-
-} from './lib';
+import { Loader } from './lib';
 import './index.sass';
 import './fonts.sass';
 

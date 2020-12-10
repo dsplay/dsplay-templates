@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import {
-  Landscape, Portrait, HBanner, VBanner, FitText, useInterval, Render,
+  Landscape, Portrait, HBanner, VBanner, FitText, useInterval, Render, LoaderContext,
 } from '../../lib';
 import { LANDSCAPE, PORTRAIT, V_BANNER } from '../../lib/utils/screen';
 
@@ -14,6 +14,8 @@ function Main() {
 
   const image = '../test-assets/dsplay-logo.png';
 
+  const context = useContext(LoaderContext);
+
   const longText = useMemo(() => new Array(100).fill('Text').join(', '), []);
 
   const [count, setCount] = useState(0);
@@ -23,6 +25,7 @@ function Main() {
   return (
     <div>
       <p>Main App</p>
+      <pre>{JSON.stringify(context, null, 2)}</pre>
       <p>
         count:
         {count}
