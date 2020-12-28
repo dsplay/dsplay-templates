@@ -1,15 +1,15 @@
 import React from 'react';
 import {
-    // values
-    media, // current media
-    config, // player configuration
-    template, // custom template values
-    // utility functions
-    tval, // custom template string value
-    tbval, // custom template boolean value
-    tival, // custom template int value
-    tfval, // custom template float value
-    isVertical, // boolean flag to indicate screen orientation
+  // values
+  media, // current media
+  config, // player configuration
+  template, // custom template values
+  // utility functions
+  tval, // custom template string value
+  tbval, // custom template boolean value
+  tival, // custom template int value
+  tfval, // custom template float value
+  isVertical, // boolean flag to indicate screen orientation
 
 } from '@dsplay/template-utils';
 import MegaSena from './components/games/mega-sena/mega-sena';
@@ -23,28 +23,38 @@ import Federal from './components/games/federal/federal';
 import './App.sass';
 
 const {
-    iteration = 0,
+  iteration = 0,
 } = media;
 
-const components = [
-    MegaSena,
-    DuplaSena,
-    Quina,
-    LotoFacil,
-    LotoMania,
-    DiaDeSorte,
-    TimeMania,
-    Federal,
-]
+const gameMap = {
+  federal: Federal,
+  megasena: MegaSena,
+  duplasena: DuplaSena,
+  quina: Quina,
+  lotofacil: LotoFacil,
+  lotomania: LotoMania,
+  timemania: TimeMania,
+  diadesorte: DiaDeSorte,
+};
 
-const Component = components[iteration % components.length];
+const {
+  result: {
+    data
+  },
+} = media;
+
+const validComponents = Object.keys(gameMap)
+  .filter((key) => data[key])
+  .map((key) => gameMap[key]);
+
+const Component = validComponents[iteration % validComponents.length];
 
 function App() {
-    return (
-        <div className="App grow flex v">
-            <Component />
-        </div>
-    );
+  return (
+    <div className="App grow flex v">
+      <Component />
+    </div>
+  );
 }
 
 
