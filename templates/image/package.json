@@ -1,0 +1,40 @@
+{
+  "name": "dsplay-template-react-boilerplate",
+  "version": "2.1.0",
+  "private": true,
+  "dependencies": {
+    "@dsplay/react-template-utils": "^3.2.0",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.8.12",
+    "react-scripts": "^4.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "prebuild": "npm run linter",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "linter": "eslint --ext=js --ext=jsx src",
+    "linter:fix": "eslint --ext=js --ext=jsx src --fix",
+    "eject": "react-scripts eject",
+    "prezip": "npm run build",
+    "zip": "rm -rf build/test-assets && ./build.sh"
+  },
+  "homepage": "./",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.1"
+  }
+}
