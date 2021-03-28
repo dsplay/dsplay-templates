@@ -8,7 +8,10 @@ This is a simple responsive image template
 
 ## Parameters
 
-- `fit`: `cover` (default, `contain` or `stretch`
+- `fit`: defines how the image will fit to the container
+  - `cover` (default): image covers all available space keeping original proportion;
+  - `contain`: the image will be shown entirely keeping the original proportion. This can cause empty space;
+  - `stretch`: the image will be stretched to fill all the space without keeping the original proportion.
 
 ## Packing (release build)
 
