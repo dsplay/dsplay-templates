@@ -17,13 +17,7 @@ import './federal-squared.sass';
 import logo from '../../../images/federal-branco.png';
 import { screenFormat, BANNER_H, BANNER_V } from '../../../util.js/screen';
 
-const {
-  result: {
-    data: {
-      federal
-    },
-  },
-} = media;
+
 
 moment.locale('pt-BR');
 
@@ -61,6 +55,14 @@ function Prize({
 }
 
 function Federal() {
+
+  const {
+    result: {
+      data: {
+        federal
+      },
+    },
+  } = media;
 
   if (!federal) return null;
 

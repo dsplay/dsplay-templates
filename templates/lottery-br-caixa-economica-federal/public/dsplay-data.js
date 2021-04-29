@@ -1,6 +1,6 @@
 var media = {
   duration: 30000,
-  iteration: 8,
+  iteration: 0,
 
   // for json service based media
   result: {
@@ -21,74 +21,106 @@ var media = {
 };
 
 media.result = {
-  "validity": "2020-12-28T15:40:21.517Z",
+  "validity": "2021-04-28T13:45:08.448Z",
   "showOutdated": true,
   "data": {
-    "megasena": {
-      "next": {
-        "date": "2020-12-31T00:00:00.000Z",
-        "estimatedPrize": 300000000
-      },
-      "accumulatedNextEnding5Round": 104051609.25,
-      "validity": "2020-12-31T00:00:00.000Z",
-      "accumulatedMegaVirada": 104051609.25,
+    "federal": {
+      "validity": "2021-04-28T00:00:00.000Z",
+      "valid": true,
       "round": {
-        "date": "2020-12-19T00:00:00.000Z",
-        "number": "2329",
+        "number": "5557",
+        "date": "2021-04-24T00:00:00.000Z",
         "city": "SÃO PAULO, SP",
+        "prizes": [
+          {
+            "ticket": "092277",
+            "amount": 500000
+          },
+          {
+            "ticket": "079719",
+            "amount": 27000
+          },
+          {
+            "ticket": "091748",
+            "amount": 24000
+          },
+          {
+            "ticket": "077128",
+            "amount": 19000
+          },
+          {
+            "ticket": "030935",
+            "amount": 18329
+          }
+        ]
+      }
+    },
+    "megasena": {
+      "validity": "2021-04-28T00:00:00.000Z",
+      "valid": true,
+      "round": {
+        "number": "2365",
+        "date": "2021-04-24T00:00:00.000Z",
+        "city": "SÃO PAULO, SP",
+        "place": "ESPAÇO LOTERIAS CAIXA",
+        "accumulated": 22515609.47,
+        "totalCollection": 41637028.5,
+        "numbers": [
+          "01",
+          "17",
+          "28",
+          "37",
+          "44",
+          "50"
+        ],
         "prizes": {
           "sena": {
-            "winners": 2,
-            "amount": 26798752.27
+            "winners": 0,
+            "amount": 0
           },
           "quina": {
-            "winners": 93,
-            "amount": 43422.45
+            "winners": 40,
+            "amount": 60015.09
           },
           "quadra": {
-            "winners": 6837,
-            "amount": 843.78
+            "winners": 2940,
+            "amount": 1166.47
           }
-        },
-        "numbers": [
-          "12",
-          "14",
-          "28",
-          "42",
-          "45",
-          "55"
-        ],
-        "totalCollection": 70041685.5,
-        "place": "Espaço Caixa Loterias",
-        "accumulated": 104051609.25
+        }
       },
-      "accumulatedNextEnding0Round": 104051609.25
+      "next": {
+        "date": "2021-04-28T00:00:00.000Z",
+        "estimatedPrize": 28000000
+      },
+      "accumulatedNextEnding5Round": 0,
+      "accumulatedNextEnding0Round": 2779646.38,
+      "accumulatedMegaVirada": 21840149.09
     },
     "duplasena": {
       "next": {
-        "date": "2020-12-29T00:00:00.000Z",
-        "estimatedPrize": 3100000
+        "date": "2021-04-29T00:00:00.000Z",
+        "estimatedPrize": 700000
       },
-      "validity": "2020-12-29T00:00:00.000Z",
+      "validity": "2021-04-29T00:00:00.000Z",
       "round": {
-        "date": "2020-12-26T00:00:00.000Z",
-        "number": "2175",
+        "date": "2021-04-27T00:00:00.000Z",
+        "number": "2216",
         "prizes2": {
           "sena": {
             "winners": 0,
             "amount": 0
           },
           "terno": {
-            "winners": 10426,
-            "amount": 2.47
+            "winners": 6649,
+            "amount": 3.14
           },
           "quina": {
-            "winners": 11,
-            "amount": 3695.05
+            "winners": 9,
+            "amount": 3661.37
           },
           "quadra": {
-            "winners": 549,
-            "amount": 94.01
+            "winners": 341,
+            "amount": 122.71
           }
         },
         "prizes1": {
@@ -97,57 +129,57 @@ media.result = {
             "amount": 0
           },
           "terno": {
-            "winners": 9390,
-            "amount": 2.74
+            "winners": 6906,
+            "amount": 3.02
           },
           "quina": {
-            "winners": 9,
-            "amount": 5017.96
+            "winners": 1,
+            "amount": 36613.67
           },
           "quadra": {
-            "winners": 455,
-            "amount": 113.43
+            "winners": 299,
+            "amount": 139.94
           }
         },
         "city": "SÃO PAULO, SP",
         "numbers2": [
-          "05",
-          "10",
-          "19",
-          "23",
-          "38",
-          "40"
+          "04",
+          "25",
+          "30",
+          "37",
+          "40",
+          "42"
         ],
         "numbers1": [
-          "04",
-          "09",
-          "16",
-          "17",
-          "20",
-          "41"
+          "08",
+          "10",
+          "33",
+          "35",
+          "40",
+          "46"
         ],
-        "totalCollection": 1488272.5,
-        "place": "Espaço Caixa Loterias",
-        "accumulated": 2869319.01
+        "totalCollection": 1206580,
+        "place": "ESPAÇO LOTERIAS CAIXA",
+        "accumulated": 597318.64
       },
-      "accumulatedEasterSpecialPrize": 12688262.58
+      "accumulatedEasterSpecialPrize": 233100.11
     },
     "quina": {
-      "validity": "2020-12-28T00:00:00.000Z",
+      "validity": "2021-04-28T00:00:00.000Z",
       "valid": true,
       "round": {
-        "number": "5451",
-        "date": "2020-12-26T00:00:00.000Z",
+        "number": "5550",
+        "date": "2021-04-27T00:00:00.000Z",
         "city": "SÃO PAULO, SP",
-        "place": "Espaço Caixa Loterias",
-        "accumulated": 614062.87,
-        "totalCollection": 5781728,
+        "place": "ESPAÇO LOTERIAS CAIXA",
+        "accumulated": 4551097.35,
+        "totalCollection": 9796430,
         "numbers": [
-          "18",
-          "33",
-          "36",
-          "68",
-          "71"
+          "23",
+          "24",
+          "26",
+          "31",
+          "44"
         ],
         "prizes": {
           "quina": {
@@ -155,85 +187,85 @@ media.result = {
             "amount": 0
           },
           "quadra": {
-            "winners": 37,
-            "amount": 9009.42
+            "winners": 66,
+            "amount": 8557.85
           },
           "terno": {
-            "winners": 3282,
-            "amount": 152.73
+            "winners": 6155,
+            "amount": 137.99
           },
           "duque": {
-            "winners": 80197,
-            "amount": 3.43
+            "winners": 145651,
+            "amount": 3.2
           }
         }
       },
       "next": {
-        "date": "2020-12-28T00:00:00.000Z",
-        "estimatedPrize": 1300000
+        "date": "2021-04-28T00:00:00.000Z",
+        "estimatedPrize": 5700000
       },
-      "accumulatedSaintJohnSpecialPrize": 71469658.22
+      "accumulatedSaintJohnSpecialPrize": 120800559.23
     },
     "lotofacil": {
-      "validity": "2020-12-28T00:00:00.000Z",
+      "validity": "2021-04-28T00:00:00.000Z",
       "valid": true,
       "round": {
-        "number": "2117",
-        "date": "2020-12-26T00:00:00.000Z",
+        "number": "2216",
+        "date": "2021-04-27T00:00:00.000Z",
         "city": "SÃO PAULO, SP",
-        "place": "Espaço Caixa Loterias",
+        "place": "ESPAÇO LOTERIAS CAIXA",
         "accumulated": 0,
-        "totalCollection": 13231820,
+        "totalCollection": 16017167.5,
         "numbers": [
           "01",
           "02",
+          "03",
           "04",
-          "05",
-          "07",
+          "06",
           "09",
+          "10",
+          "13",
           "14",
           "15",
-          "16",
           "17",
           "19",
-          "20",
           "21",
           "22",
-          "24"
+          "25"
         ],
         "prizes": {
           "hits_15": {
-            "winners": 1,
-            "amount": 1140275.97
+            "winners": 2,
+            "amount": 630105.53
           },
           "hits_14": {
-            "winners": 180,
-            "amount": 1897.54
+            "winners": 238,
+            "amount": 1586.06
           },
           "hits_13": {
-            "winners": 6377,
+            "winners": 8612,
             "amount": 25
           },
           "hits_12": {
-            "winners": 80967,
+            "winners": 103218,
             "amount": 10
           },
           "hits_11": {
-            "winners": 427907,
+            "winners": 558450,
             "amount": 5
           }
         }
       },
       "next": {
-        "date": "2020-12-28T00:00:00.000Z",
+        "date": "2021-04-28T00:00:00.000Z",
         "estimatedPrize": 1500000
       },
-      "accumulatedIndependenceDaySpecialPrize": 30329494.74
+      "accumulatedIndependenceDaySpecialPrize": 65818029.51
     },
     "lotomania": {
       "round": {
-        "date": "2020-12-26T00:00:00.000Z",
-        "number": "2138",
+        "date": "2021-04-27T00:00:00.000Z",
+        "number": "2173",
         "city": "SÃO PAULO, SP",
         "prizes": {
           "hits_20": {
@@ -241,82 +273,82 @@ media.result = {
             "amount": 0
           },
           "hits_0": {
-            "winners": 1,
-            "amount": 156981.14
-          },
-          "hits_17": {
-            "winners": 717,
-            "amount": 273.67
-          },
-          "hits_16": {
-            "winners": 4746,
-            "amount": 41.34
-          },
-          "hits_19": {
             "winners": 0,
             "amount": 0
           },
+          "hits_17": {
+            "winners": 964,
+            "amount": 220.39
+          },
+          "hits_16": {
+            "winners": 5906,
+            "amount": 35.97
+          },
+          "hits_19": {
+            "winners": 10,
+            "amount": 33994.45
+          },
           "hits_18": {
-            "winners": 71,
-            "amount": 2763.75
+            "winners": 98,
+            "amount": 2168.02
           },
           "hits_15": {
-            "winners": 20377,
-            "amount": 9.62
+            "winners": 27401,
+            "amount": 7.75
           }
         },
         "numbers": [
-          "06",
-          "07",
-          "08",
-          "18",
-          "19",
-          "25",
-          "28",
-          "29",
-          "30",
-          "39",
-          "50",
-          "51",
-          "54",
-          "57",
-          "74",
-          "76",
+          "00",
+          "04",
+          "17",
+          "23",
+          "24",
+          "27",
+          "36",
+          "44",
+          "45",
+          "49",
+          "53",
+          "64",
+          "65",
+          "66",
+          "67",
+          "77",
+          "80",
           "82",
-          "92",
-          "94",
+          "97",
           "98"
         ],
-        "totalCollection": 6466515,
-        "place": "Espaço Caixa Loterias",
-        "accumulated": 6987876.07
+        "totalCollection": 7001657.5,
+        "place": "ESPAÇO LOTERIAS CAIXA",
+        "accumulated": 5481378.4
       },
       "next": {
-        "date": "2020-12-29T00:00:00.000Z",
-        "estimatedPrize": 7700000
+        "date": "2021-04-30T00:00:00.000Z",
+        "estimatedPrize": 6500000
       },
-      "validity": "2020-12-29T00:00:00.000Z"
+      "validity": "2021-04-30T00:00:00.000Z"
     },
     "timemania": {
       "round": {
-        "date": "2020-12-26T00:00:00.000Z",
-        "number": "1581",
+        "date": "2021-04-27T00:00:00.000Z",
+        "number": "1631",
         "city": "SÃO PAULO, SP",
         "prizes": {
           "hits_5": {
-            "winners": 46,
-            "amount": 1813.16
+            "winners": 38,
+            "amount": 1524.13
           },
           "hits_6": {
             "winners": 1,
-            "amount": 58383.92
+            "amount": 40542.11
           },
           "hits_3": {
-            "winners": 12595,
+            "winners": 9981,
             "amount": 3
           },
           "hits_4": {
-            "winners": 1276,
+            "winners": 986,
             "amount": 9
           },
           "hits_7": {
@@ -324,77 +356,77 @@ media.result = {
             "amount": 0
           },
           "heart_club": {
-            "club": "Atlético/MG",
-            "winners": 8845,
+            "club": "Fluminense/RJ",
+            "winners": 6770,
             "amount": 7.5
           }
         },
         "numbers": [
-          "06",
-          "07",
-          "31",
-          "42",
-          "49",
-          "53",
-          "60"
+          "05",
+          "14",
+          "20",
+          "24",
+          "35",
+          "58",
+          "59"
         ],
-        "totalCollection": 1157901,
-        "place": "Espaço Caixa Loterias",
-        "accumulated": 3666434.38
+        "totalCollection": 824301,
+        "place": "ESPAÇO LOTERIAS CAIXA",
+        "accumulated": 1669337.08
       },
       "next": {
-        "date": "2020-12-29T00:00:00.000Z",
-        "estimatedPrize": 3800000
+        "date": "2021-04-29T00:00:00.000Z",
+        "estimatedPrize": 1800000
       },
-      "validity": "2020-12-29T00:00:00.000Z"
+      "validity": "2021-04-29T00:00:00.000Z"
     },
     "diadesorte": {
       "round": {
-        "date": "2020-12-24T00:00:00.000Z",
-        "number": "399",
-        "month": "4",
+        "date": "2021-04-27T00:00:00.000Z",
+        "number": "449",
+        "month": "10",
         "city": "SÃO PAULO, SP",
         "prizes": {
           "hits_5": {
-            "winners": 3186,
+            "winners": 1493,
             "amount": 20
           },
           "luck_month": {
-            "month": "4",
-            "winners": 101761,
+            "month": "10",
+            "winners": 77702,
             "amount": 2
           },
           "hits_6": {
-            "winners": 119,
-            "amount": 1764.48
+            "winners": 34,
+            "amount": 2607.14
           },
           "hits_4": {
-            "winners": 35320,
+            "winners": 20391,
             "amount": 4
           },
           "hits_7": {
-            "winners": 0,
-            "amount": 0
+            "winners": 1,
+            "amount": 749857.67
           }
         },
         "numbers": [
-          "02",
+          "04",
+          "06",
           "07",
-          "15",
-          "19",
-          "20",
+          "16",
+          "22",
           "23",
-          "24"
+          "29"
         ],
-        "totalCollection": 2556938,
+        "totalCollection": 1589242,
         "place": "ESPAÇO LOTERIAS CAIXA",
-        "accumulated": 2523557.23
+        "accumulated": 0
       },
       "next": {
-        "date": "2020-12-29T00:00:00.000Z",
-        "estimatedPrize": 2800000
+        "date": "2021-04-29T00:00:00.000Z",
+        "estimatedPrize": 200000
       },
-      "validity": "2020-12-29T00:00:00.000Z"
+      "validity": "2021-04-29T00:00:00.000Z"
     }
   }
 };

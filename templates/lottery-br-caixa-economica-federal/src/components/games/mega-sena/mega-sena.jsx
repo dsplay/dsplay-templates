@@ -3,9 +3,9 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
 import {
-    media, // current media
-    config, // player configuration
-    template, // custom template values
+  media, // current media
+  config, // player configuration
+  template, // custom template values
 } from '@dsplay/template-utils';
 import Ball from '../../ball';
 import './mega-sena.sass';
@@ -17,146 +17,148 @@ import './mega-sena-squared.sass';
 import logo from '../../../images/mega-sena-branco.png';
 import { screenFormat, BANNER_V } from '../../../util.js/screen';
 
-const {
-    result: {
-        data: {
-            megasena: {
-                round: {
-                    number,
-                    numbers = [],
-                    prizes: {
-                        sena: {
-                            winners,
-                            amount,
-                        },
-                    },
-                    accumulated,
-                    city,
-                    place,
-                    date,
-                },
-                next: {
-                    date: nextDate,
-                    estimatedPrize,
-                },
-                accumulatedMegaVirada,
-            },
-        },
-    },
-} = media;
+
 
 const {
-    fontRatio,
-    scaledDensity,
-    xdpi,
-    ydpi,
-    width,
-    height,
+  fontRatio,
+  scaledDensity,
+  xdpi,
+  ydpi,
+  width,
+  height,
 } = config;
 
 moment.locale('pt-BR');
 
 // Create our number formatter.
 var fmt = new Intl.NumberFormat('pt-BR', {
-    maximumFractionDigits: 2,
-    minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 2,
 });
 
 function MegaSena() {
 
-    const title = screenFormat === BANNER_V ? 'MEGA SENA' : 'MEGA-SENA';
+  const title = screenFormat === BANNER_V ? 'MEGA SENA' : 'MEGA-SENA';
 
-    let lastPrize;
-    let winnersText;
-    if (winners > 0) {
-        winnersText = `${winners} ganhador${winners === 1 ? '' : 'es'}`;
-        lastPrize = amount;
-    } else {
-        winnersText = `Acumulou`;
-        lastPrize = accumulated;
-    }
+  const {
+    result: {
+      data: {
+        megasena: {
+          round: {
+            number,
+            numbers = [],
+            prizes: {
+              sena: {
+                winners,
+                amount,
+              },
+            },
+            accumulated,
+            city,
+            place,
+            date,
+          },
+          next: {
+            date: nextDate,
+            estimatedPrize,
+          },
+          accumulatedMegaVirada,
+        },
+      },
+    },
+  } = media;
 
-    const nextDateUTC = moment.utc(nextDate);
+  let lastPrize;
+  let winnersText;
+  if (winners > 0) {
+    winnersText = `${winners} ganhador${winners === 1 ? '' : 'es'}`;
+    lastPrize = amount;
+  } else {
+    winnersText = `Acumulou`;
+    lastPrize = accumulated;
+  }
 
-    return (
-        <div className={`${screenFormat} mega-sena`}>
-            <div className="header">
-                <div className="logo">
-                    <img src={logo} />
-                    <span>{title}</span>
-                </div>
-            </div>
+  const nextDateUTC = moment.utc(nextDate);
 
-            <div className="spacer1" />
+  return (
+    <div className={`${screenFormat} mega-sena`}>
+      <div className="header">
+        <div className="logo">
+          <img src={logo} />
+          <span>{title}</span>
+        </div>
+      </div>
 
-            <div className="next-round flex v">
-                <div className="text">
-                    <div className="title">Próximo Prêmio</div>
-                    <div className="date">{nextDateUTC.format('dddd')}, {nextDateUTC.format('LL')}</div>
-                </div>
-                <div className="estimated-prize flex h">
-                    <span className="currency-symbol">R$ </span>
-                    <span className="value-container">
-                        <span className="value">
-                            <CountUp
-                                start={0}
-                                duration={2}
-                                end={estimatedPrize}
-                                decimals={2}
-                                separator="."
-                                decimal=","
-                            />
-                        </span>
-                    </span>
-                </div>
-            </div>
-            <div className="spacer2" />
+      <div className="spacer1" />
 
-            <div className="last-round flex v">
-                <div className="title">Último Resultado</div>
-                <div className="numbers">
-                    <span>
-                        {numbers.slice(0, 3).map(number => <Ball key={number} value={number} />)}
-                    </span>
-                    <span>
-                        {numbers.slice(3).map(number => <Ball key={number} value={number} />)}
-                    </span>
-                </div>
-                <div className="result">
-                    <span className="winner">{winnersText}</span> (R$
+      <div className="next-round flex v">
+        <div className="text">
+          <div className="title">Próximo Prêmio</div>
+          <div className="date">{nextDateUTC.format('dddd')}, {nextDateUTC.format('LL')}</div>
+        </div>
+        <div className="estimated-prize flex h">
+          <span className="currency-symbol">R$ </span>
+          <span className="value-container">
+            <span className="value">
+              <CountUp
+                start={0}
+                duration={2}
+                end={estimatedPrize}
+                decimals={2}
+                separator="."
+                decimal=","
+              />
+            </span>
+          </span>
+        </div>
+      </div>
+      <div className="spacer2" />
+
+      <div className="last-round flex v">
+        <div className="title">Último Resultado</div>
+        <div className="numbers">
+          <span>
+            {numbers.slice(0, 3).map(number => <Ball key={number} value={number} />)}
+          </span>
+          <span>
+            {numbers.slice(3).map(number => <Ball key={number} value={number} />)}
+          </span>
+        </div>
+        <div className="result">
+          <span className="winner">{winnersText}</span> (R$
                         <CountUp
-                        duration={3}
-                        start={0}
-                        end={lastPrize}
-                        decimals={2}
-                        separator="."
-                        decimal=","
-                    />
+            duration={3}
+            start={0}
+            end={lastPrize}
+            decimals={2}
+            separator="."
+            decimal=","
+          />
                     )
                 </div>
-                <div className="info">
-                    Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {place}, {city}
-                </div>
-            </div>
-            <div className="spacer3" />
-            <div className="special-prizes">
-                Acumulado para Mega da Virada:
-                <strong>
-                    &nbsp;
-                    R$
-                    &nbsp;
-                    <CountUp
-                        duration={5}
-                        start={0}
-                        end={accumulatedMegaVirada}
-                        decimals={2}
-                        separator="."
-                        decimal=","
-                    />
-                </strong>
-            </div>
+        <div className="info">
+          Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {place}, {city}
         </div>
-    );
+      </div>
+      <div className="spacer3" />
+      <div className="special-prizes">
+        Acumulado para Mega da Virada:
+                <strong>
+          &nbsp;
+          R$
+          &nbsp;
+                    <CountUp
+            duration={5}
+            start={0}
+            end={accumulatedMegaVirada}
+            decimals={2}
+            separator="."
+            decimal=","
+          />
+        </strong>
+      </div>
+    </div>
+  );
 }
 
 export default MegaSena;
