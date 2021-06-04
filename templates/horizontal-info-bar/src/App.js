@@ -17,18 +17,56 @@ const style = {
     color,
 };
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App block" style={style} >
-                <Clock />
-                <Weather />
-                <Quotes />
-                <News />
-                <Sponsor />
-            </div>
-        );
-    }
+/*
+c - clock
+w - weather
+q - quotes 
+n - news
+n - sponsor
+*/
+
+const mapWidgets = {
+    "c": <Clock/>,
+    "w": <Weather />,
+    "q": <Quotes />,
+    "n": <News />,
+    "s": <Sponsor />,
+}
+
+const defaultSequenceWidgets = ['c','w','q','n','s'];
+const parsedUrl = new URL(window.location.href);
+const widgetsSequenceQuery = parsedUrl.searchParams.get('order');
+
+const filterWidgetsSequence = (sequence) => {
+    const widgetsSequence = [];
+
+    sequence.forEach(element => {
+        if(defaultSequenceWidgets.includes(element) && !widgetsSequence.includes(element)) {
+            widgetsSequence.push(element);
+        }
+    });
+
+    defaultSequenceWidgets.forEach(element => {
+        if(!widgetsSequence.includes(element)) {
+            widgetsSequence.push(element);
+        }
+    });
+
+    return widgetsSequence;
+}
+
+function App () {
+
+    const widgetsSequence = widgetsSequenceQuery ? filterWidgetsSequence([...widgetsSequenceQuery.toLowerCase()]) : defaultSequenceWidgets;
+    const widgets =  widgetsSequence.map(element => {
+        return mapWidgets[element];
+    });
+    
+    return (
+        <div className="App block" style={style} >
+            { widgets }
+        </div>
+    );
 }
 
 export default App;
