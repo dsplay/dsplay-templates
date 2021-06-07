@@ -36,6 +36,7 @@ This template has many configuration variables as the following table shows:
 | `target_currency`     | Currency | string  | Target currency. Possible values are: BRL,USD,EUR,GPB,CUP,AUD,CVE,CNY,INR,KRW,COP,IDR,NGN,RON,ZAR,VEF,CAD,CLP,JPY,CHF,AFN,EGP,RUB,UYU,BTC                                         |
 | `rss_url`             | RSS      | string  | RSS feed URL. Leave it empty to hide the News widget                                                                                                                              |
 | `sponsor_logo`        | Logo     | image   | Logo to be shown in the bar. Leave it empty to hide the Logo widget.                                                                                                              |
+| `widgetsSequenceQuery`            | All      | string | Put each initial character to order widgets, example: c, q, w, s, n
 | `bg_color`            | All      | color   |                                                                                                                                                                                   |
 | `bg_image`            | All      | image   |                                                                                                                                                                                   |
 | `text_color`          | All      | color   |                                                                                                                                                                                   |

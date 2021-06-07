@@ -22,7 +22,7 @@ c - clock
 w - weather
 q - quotes 
 n - news
-n - sponsor
+s - sponsor
 */
 
 const mapWidgets = {
