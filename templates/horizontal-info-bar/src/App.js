@@ -35,7 +35,7 @@ const mapWidgets = {
 
 const defaultSequenceWidgets = ['c','w','q','n','s'];
 const parsedUrl = new URL(window.location.href);
-const widgetsSequenceQuery = parsedUrl.searchParams.get('order');
+const widgetsSequenceQuery = tval('widgetsSequenceQuery');
 
 const filterWidgetsSequence = (sequence) => {
     const widgetsSequence = [];
