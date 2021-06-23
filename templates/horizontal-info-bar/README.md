@@ -44,6 +44,26 @@ This template has many configuration variables as the following table shows:
 | `currency_box_color`  | Currency | color   |                                                                                                                                                                                   |
 | `currency_text_color` | Currency | color   |                                                                                                                                                                                   |
 
+## Order widgets sequence
+
+Configuration variable widgets_sequence_query is used to order widgets sequence, is string type and use caracteres to represent widgets 
+
+
+
+
+
+
+
+| Characters | Widget            
+|-----------|:-------------:
+| _c_  | Clock      
+| _w_  | Weather      
+| _q_  | Currency      
+| _n_  | News      
+| _s_  | Logo      
+
+and use comma to separete, example: "_s, c, w, n, q_"
+
 
 ## Customizing
 
