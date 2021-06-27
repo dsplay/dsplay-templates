@@ -1,8 +1,8 @@
-var media = {
+var dsplay_media = {
     duration: 30000,
 };
 
-var template = {
+var dsplay_template = {
     // clock config
     // clock: 'false',
 
@@ -11,6 +11,7 @@ var template = {
     source_currency_2: 'BTC',
     target_currency: 'EUR',
     currency_api_key: '305dc77b8ca4ceed39e7',
+    widgets_sequence_query: 's,c#c%n',
 
     // RSS config
     rss_url: 'https://www.reddit.com/.rss',

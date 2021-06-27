@@ -36,12 +36,33 @@ This template has many configuration variables as the following table shows:
 | `target_currency`     | Currency | string  | Target currency. Possible values are: BRL,USD,EUR,GPB,CUP,AUD,CVE,CNY,INR,KRW,COP,IDR,NGN,RON,ZAR,VEF,CAD,CLP,JPY,CHF,AFN,EGP,RUB,UYU,BTC                                         |
 | `rss_url`             | RSS      | string  | RSS feed URL. Leave it empty to hide the News widget                                                                                                                              |
 | `sponsor_logo`        | Logo     | image   | Logo to be shown in the bar. Leave it empty to hide the Logo widget.                                                                                                              |
+| `widgets_sequence_query`            | All      | string | Put each initial character to order widgets, example: c, q, w, s, n
 | `bg_color`            | All      | color   |                                                                                                                                                                                   |
 | `bg_image`            | All      | image   |                                                                                                                                                                                   |
 | `text_color`          | All      | color   |                                                                                                                                                                                   |
 | `rss_logo_box_color`  | RSS      | color   |                                                                                                                                                                                   |
 | `currency_box_color`  | Currency | color   |                                                                                                                                                                                   |
 | `currency_text_color` | Currency | color   |                                                                                                                                                                                   |
+
+## Order widgets sequence
+
+Configuration variable widgets_sequence_query is used to order widgets sequence, is string type and use caracteres to represent widgets 
+
+
+
+
+
+
+
+| Characters | Widget            
+|-----------|:-------------:
+| _c_  | Clock      
+| _w_  | Weather      
+| _q_  | Currency      
+| _n_  | News      
+| _s_  | Logo      
+
+and use comma to separete, example: "_s, c, w, n, q_"
 
 
 ## Customizing
