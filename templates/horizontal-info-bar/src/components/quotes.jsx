@@ -6,7 +6,7 @@ const { locale } = window.config;
 // const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 const CORS_PROXY = 'https://api.allorigins.win/get';
 const KEY_VERSION = 'currency_version';
-const VERSION = '1.0';
+const VERSION = '1.1';
 
 const formatMoney = function (n, c, d, t) {
   var c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -72,14 +72,26 @@ function QuotesContent() {
     if (storedVersion !== VERSION || !quotes || (new Date().getTime() - quotes.timestamp > 1000 * 60 * 50)) {
       (async () => {
         try {
-          const res = await axios(CORS_PROXY, {
+          let res = await axios(CORS_PROXY, {
             params: {
               url: `https://free.currencyconverterapi.com/api/v6/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`
             },
           });
-          const value = JSON.parse(res.data.contents);
+          let value = JSON.parse(res.data.contents);
 
-          if (!value[pair1]) throw new Error(value.error);
+          if (!value[pair1]) {
+
+            res = await axios(CORS_PROXY, {
+              params: {
+                url: `https://api.currencyconverterapi.com/api/v6/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`
+              },
+            });
+            value = JSON.parse(res.data.contents);
+
+            if (!value[pair1]) {
+              throw new Error(value.error);
+            }
+          }
           setResult(value);
           localStorage.setItem(storageKey, JSON.stringify({
             timestamp: new Date().getTime(),
