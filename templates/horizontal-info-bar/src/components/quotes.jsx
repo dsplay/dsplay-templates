@@ -58,14 +58,14 @@ function QuotesContent() {
     const storedQuotes = localStorage.getItem(storageKey);
     const storedVersion = localStorage.getItem(KEY_VERSION);
 
-    console.log('Getting quotes');
+    console.log('[quotes] Getting quotes');
 
     if (storedQuotes) {
       try {
         quotes = JSON.parse(storedQuotes);
       } catch (e) {
         localStorage.removeItem(storageKey);
-        console.error('Error parsing stored value: ' + storedQuotes);
+        console.log('[quotes] Error parsing stored value: ' + storedQuotes);
       }
     }
 
@@ -79,6 +79,7 @@ function QuotesContent() {
           });
           const value = JSON.parse(res.data.contents);
 
+          if (!value[pair1]) throw new Error(value.error);
           setResult(value);
           localStorage.setItem(storageKey, JSON.stringify({
             timestamp: new Date().getTime(),
@@ -86,7 +87,7 @@ function QuotesContent() {
           }));
           localStorage.setItem(KEY_VERSION, VERSION.toString());
         } catch (e) {
-          console.error(e);
+          console.log(e);
           setError(e);
           localStorage.removeItem(storageKey);
         }
@@ -96,7 +97,8 @@ function QuotesContent() {
     }
   }, [counter]);
 
-  console.log(error, result);
+  console.log(`[quotes] error: ${error}`);
+  console.log(`[quotes] result: ${JSON.stringify(result)}`);
 
   if (error || !result[pair1]) {
     return null;
@@ -107,7 +109,7 @@ function QuotesContent() {
     color: tval('currency_text_color', 'white'),
   };
 
-  console.log("Hello");
+  console.log("[quotes] Hello");
 
   return (
     <div className="block quotes">

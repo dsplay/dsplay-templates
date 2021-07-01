@@ -26,9 +26,10 @@ body {
 
 .block {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;    
     height: 100%;
+
 }
 
 .vertical {
@@ -38,15 +39,19 @@ body {
 .clock {
     font-size: 3em;
     font-weight: 600;
-    margin: 0 .5em;
+    // margin: 0 .5em;
+    padding: 0 1rem;
     flex-shrink: 0;
+    // background-color: darkkhaki;
 }
 
 .weather {
     flex-direction: row-reverse;
     justify-content: center;
-    margin: 0 2em 0 0;
+    // margin: 0 2em 0 0;
+    padding-right: 2em;
     flex-shrink: 0;
+    // background-color: chartreuse;
     // padding-top: 1em;
     .temp {
         font-size: 2.5em;
@@ -59,12 +64,18 @@ body {
 }
 
 .quotes {
+    padding: 0 1rem;
     font-size: 1.6em;
-    margin: 0 .5em 0 0;
+    // margin: 0 .5em 0 0;
     min-width: 5em;
     // flex-basis: 8em;
     flex-shrink: 0;
     padding-bottom: .5em;
+    // background-color: brown;
+
+    .block {
+      justify-content: center;
+    }
 
     .id {
         font-size: .8em;
@@ -81,7 +92,7 @@ body {
         justify-content: center;
         align-items: center;
         padding: .1em .4em;
-        margin: 0 0 .1em .2em;
+        margin: 0 .2em .1em .2em;
         border-radius: .3em;
         font-weight: bolder;
         background-color: black;
@@ -91,30 +102,37 @@ body {
 .news {
     flex-grow: 1;
     align-items: center;
-    margin-left: 1em;
+    // margin-left: 1em;
+    padding: 0 1rem;
+    // background-color: aqua;
+
+    .channel {
+        height: 5em;
+        min-width: 6em;
+        border-radius: .5em;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        // background-color: white;
+    }
+
+    .title {
+        padding: 0 .5em;
+        text-align: justify;
+        flex-grow: 1;
+    }
 }
 
-.news .channel {
-    height: 5em;
-    min-width: 6em;
-    border-radius: .5em;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    // background-color: white;
-}
 
-.news .title {
-    padding: 0 .5em;
-    text-align: justify;
-    flex-grow: 1;
-}
+
+
 
 .sponsor {
     min-width: 12em;
-    // background-color: aliceblue;
+    // background-color: cornflowerblue;
 
     .image {
+        // background-color: darksalmon;
         height: 5em;
         min-width: 11em;
         border-radius: .5em;

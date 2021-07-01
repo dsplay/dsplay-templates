@@ -11,10 +11,12 @@ var dsplay_template = {
     source_currency_2: 'BTC',
     target_currency: 'EUR',
     currency_api_key: '305dc77b8ca4ceed39e7',
-    widgets_sequence_query: 's,c#c%n',
+    // currency_api_key: '23127abe87e0fd310043',
+    
+    // widgets_sequence_query: 's,c#c%n',
 
     // RSS config
-    rss_url: 'https://www.reddit.com/.rss',
+    // rss_url: 'https://www.reddit.com/.rss',
     // rss_url: 'http://rss.home.uol.com.br/index.xml',
     
     // sponsor config
