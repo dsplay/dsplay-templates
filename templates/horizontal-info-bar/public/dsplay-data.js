@@ -16,7 +16,7 @@ var dsplay_template = {
     // widgets_sequence_query: 's,c#c%n',
 
     // RSS config
-    // rss_url: 'https://www.reddit.com/.rss',
+    rss_url: 'https://www.reddit.com/.rss',
     // rss_url: 'http://rss.home.uol.com.br/index.xml',
     
     // sponsor config

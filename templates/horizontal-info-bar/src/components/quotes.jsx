@@ -125,11 +125,11 @@ function QuotesContent() {
 
   return (
     <div className="block quotes">
-      <div className="block vertical">
+      <div className="block vertsical">
         <div className="id">{from_1}</div>
         <div className="value" style={currencyValueBoxStyle}>{formatMoney(result[pair1], 2, separators[0], separators[1])}</div>
       </div>
-      <div className="block vertical">
+      <div className="block vertsical">
         <div className="id">{from_2}</div>
         <div className="value" style={currencyValueBoxStyle}>{formatMoney(result[pair2], 2, separators[0], separators[1])}</div>
       </div>
