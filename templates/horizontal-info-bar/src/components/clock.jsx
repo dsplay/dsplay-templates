@@ -6,10 +6,21 @@ const { locale = 'en_US' } = config || {};
 const [language] = locale.split('_');
 
 function formatTime(date) {
-  var minute = String(date.getMinutes());
-  var hour = String(date.getHours());
-  return (hour.length <= 1 ? '0' + hour : hour) + ':' + (minute.length <= 1 ? '0' + minute : minute);
+  return date.toLocaleString(language, {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
+
+function formatDate(date) {
+  return date.toLocaleString(language, {
+    day: '2-digit',
+    month: '2-digit',
+  }).replace('/', '-');
+}
+
+const date = new Date();
+date.getMonth
 
 function ClockContent() {
   const [now, setNow] = useState(new Date());
@@ -28,10 +39,7 @@ function ClockContent() {
   return (
     <div className="block clock">
       <div className="time">
-        {formatTime(now)}
-      </div>
-      <div className="date">
-        {dateText}
+      {formatDate(now)} | {formatTime(now)}
       </div>
     </div>
   );
