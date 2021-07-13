@@ -11,6 +11,16 @@ function formatTime(date) {
   return (hour.length <= 1 ? '0' + hour : hour) + ':' + (minute.length <= 1 ? '0' + minute : minute);
 }
 
+function formatDate(date) {
+  const e = date.getMonth() + 1
+  var date = String(date.getDate());
+  var month = String(e);
+  return (date.length <= 1 ? '0' + date : date) + '-' + (month.length <= 1 ? '0' + month : month);
+}
+
+const date = new Date();
+date.getMonth
+
 function ClockContent() {
   const [now, setNow] = useState(new Date());
 
@@ -28,10 +38,7 @@ function ClockContent() {
   return (
     <div className="block clock">
       <div className="time">
-        {formatTime(now)}
-      </div>
-      <div className="date">
-        {dateText}
+        {formatDate(now)} | {formatTime(now)}
       </div>
     </div>
   );
