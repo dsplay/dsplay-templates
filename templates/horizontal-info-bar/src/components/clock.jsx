@@ -8,7 +8,7 @@ const [language] = locale.split('_');
 function formatTime(date) {
   return date.toLocaleString(language, {
     hour: '2-digit',
-    minute: '2-digit',
+    minute: '2-digit'
   });
 }
 
@@ -29,12 +29,6 @@ function ClockContent() {
     const interval = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(interval);
   }, [now]);
-
-  const dateText = useMemo(() => new Date().toLocaleString(language, {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-  }), [language]);
 
   return (
     <div className="block clock">
