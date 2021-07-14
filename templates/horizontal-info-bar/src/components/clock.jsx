@@ -5,20 +5,6 @@ const showClock = tbval('clock', true);
 const { locale = 'en_US' } = config || {};
 const [language] = locale.split('_');
 
-function formatTime(date) {
-  return date.toLocaleString(language, {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-function formatDate(date) {
-  return date.toLocaleString(language, {
-    day: '2-digit',
-    month: '2-digit',
-  }).replace('/', '-');
-}
-
 const date = new Date();
 date.getMonth
 
@@ -30,10 +16,20 @@ function ClockContent() {
     return () => clearInterval(interval);
   }, [now]);
 
+  const dateText = useMemo(() => new Date().toLocaleString(language, {
+    day: '2-digit',
+    month: '2-digit',
+  }), [language]);
+
+  const timeText = useMemo(() => new Date().toLocaleString(language, {
+    hour: '2-digit',
+    minute: '2-digit',
+  }), [language]);
+
   return (
     <div className="block clock">
       <div className="time">
-      {formatDate(now)} | {formatTime(now)}
+      {dateText.replace('/', '-')} | {timeText}
       </div>
     </div>
   );
