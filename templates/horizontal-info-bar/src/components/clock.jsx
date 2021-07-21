@@ -5,9 +5,6 @@ const showClock = tbval('clock', true);
 const { locale = 'en_US' } = config || {};
 const [language] = locale.split('_');
 
-const date = new Date();
-date.getMonth
-
 function ClockContent() {
   const [now, setNow] = useState(new Date());
 
@@ -16,10 +13,10 @@ function ClockContent() {
     return () => clearInterval(interval);
   }, [now]);
 
-  const dateText = useMemo(() => new Date().toLocaleString(language, {
+  const dateText = useMemo(() => now.toLocaleString(language, {
     day: '2-digit',
     month: '2-digit',
-  }), [language]);
+  }), [language, now]);
 
   const timeText = useMemo(() => now.toLocaleString(language, {
     hour: '2-digit',
