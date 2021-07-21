@@ -21,10 +21,10 @@ function ClockContent() {
     month: '2-digit',
   }), [language]);
 
-  const timeText = useMemo(() => new Date().toLocaleString(language, {
+  const timeText = useMemo(() => now.toLocaleString(language, {
     hour: '2-digit',
     minute: '2-digit',
-  }), [language]);
+  }), [language, now]);
 
   return (
     <div className="block clock">
