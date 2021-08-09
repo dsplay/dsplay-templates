@@ -49,7 +49,6 @@ function TimeMania() {
             },
             accumulated,
             city,
-            place,
             date,
           },
           next: {
@@ -140,7 +139,7 @@ function TimeMania() {
           </div>
         </div>
         <div className="info">
-          Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {place}, {city}
+          Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {city}
         </div>
       </div>
       <div className="spacer3" />

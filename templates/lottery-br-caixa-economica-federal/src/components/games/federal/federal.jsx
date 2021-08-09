@@ -72,7 +72,6 @@ function Federal() {
       number,
       prizes,
       city,
-      place,
       date,
     },
   } = federal;
@@ -109,7 +108,7 @@ function Federal() {
       </div>
       <div className="spacer2" />
       <div className="special-prizes">
-        Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {place}, {city}
+        Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {city}
       </div>
     </div>
   );
