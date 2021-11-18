@@ -9,82 +9,89 @@ const storageKey = `tv.dsplay.info-bar.weather-(${lat},${lon})`;
 
 function WeatherContent() {
 
-    const [result, setResult] = useState();
+  const [result, setResult] = useState();
 
-    useEffect(() => {
+  useEffect(() => {
 
-        let weather = undefined;
-        const storedWeather = localStorage.getItem(storageKey);
+    let weather = undefined;
+    const storedWeather = localStorage.getItem(storageKey);
 
-        console.log('Getting weather');
+    console.log('Getting weather');
 
-        if (storedWeather) {
-            try {
-                weather = JSON.parse(storedWeather);
-                console.log('Weather loaded from localStorage');
-            } catch (e) {
-                localStorage.removeItem(storageKey);
-                console.error('Error parsing stored value: ' + storedWeather);
-            }
-        }
-
-        if (!weather || (new Date().getTime() - weather.timestamp > 1000 * 60 * 60)) {
-            (async () => {
-                try {
-                    const response = await fetch(url);
-                    const json = await response.json();
-
-                    console.log('Using weather from API');
-                    setResult(json);
-
-                    localStorage.setItem(storageKey, JSON.stringify({
-                        timestamp: new Date().getTime(),
-                        value: json,
-                    }));
-                } catch (e) {
-                    console.error(e);
-                    localStorage.removeItem(storageKey);
-                }
-            })();
-        } else {
-            console.log('Using weather from localStorage');
-            setResult(weather.value);
-        }
-
-    }, []);
-
-    console.log('result', result);
-
-    if (result) {
-
-        const {
-            data: [{
-                temp,
-                weather: {
-                    icon,
-                },
-            }],
-        } = result;
-
-        return (
-            <div className="block weather">
-                <span className="temp">{Math.round(temp)}º</span>
-                <img alt="" src={`https://www.weatherbit.io/static/img/icons/${icon}.png`} />
-            </div>
-        )
+    if (storedWeather) {
+      try {
+        weather = JSON.parse(storedWeather);
+        console.log('Weather loaded from localStorage');
+      } catch (e) {
+        localStorage.removeItem(storageKey);
+        console.error('Error parsing stored value: ' + storedWeather);
+      }
     }
 
-    return null;
+    if (!weather || (new Date().getTime() - weather.timestamp > 1000 * 60 * 60)) {
+      (async () => {
+        try {
+          const response = await fetch(url);
+          const json = await response.json();
+
+          console.log(response);
+          if (!response.ok) {
+            console.log(response.status, response.statusText, json);
+            const { error } = json || {};
+            throw new Error(`Error fetching weather data: ${response.statusText}. ${error}`);
+          }
+
+          console.log('Using weather from API');
+          setResult(json);
+
+          localStorage.setItem(storageKey, JSON.stringify({
+            timestamp: new Date().getTime(),
+            value: json,
+          }));
+        } catch (e) {
+          console.error(e);
+          localStorage.removeItem(storageKey);
+        }
+      })();
+    } else {
+      console.log('Using weather from localStorage');
+      setResult(weather.value);
+    }
+
+  }, []);
+
+  console.log('result', result);
+
+  if (result) {
+
+    const {
+      data: [{
+        temp,
+        weather: {
+          icon,
+        },
+      }],
+    } = result;
+
+    return (
+      <div className="block weather">
+        <span className="temp">{Math.round(temp)}º</span>
+        <img alt="" src={`https://www.weatherbit.io/static/img/icons/${icon}.png`} />
+      </div>
+    )
+  }
+
+  return null;
 
 }
 
 function Weather() {
 
-    if (!key || !lat || !lon) {
-        return null;
-    }
+  if (!key || !lat || !lon) {
+    return null;
+  }
 
-    return <WeatherContent />;
+  return <WeatherContent />;
 }
 
 export default Weather;
