@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import {
-  Landscape, Portrait, HBanner, VBanner, FitText, useInterval, Render, LoaderContext,
+  Landscape, Portrait, HBanner, VBanner, FitText, useInterval, Render, LoaderContext, QrCode,
 } from '../../lib';
 import { LANDSCAPE, PORTRAIT, V_BANNER } from '../../lib/utils/screen';
 
@@ -73,6 +73,12 @@ function Main() {
           </FitText>
         </div>
       </Render>
+
+      <QrCode
+        options={{
+          text: 'abcdef',
+        }}
+      />
 
     </div>
   );

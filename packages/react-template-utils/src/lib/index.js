@@ -13,6 +13,7 @@ export { default as Portrait } from './components/portrait/portrait';
 export { default as Square } from './components/square/square';
 export { default as HBanner } from './components/h-banner/h-banner';
 export { default as VBanner } from './components/v-banner/v-banner';
+export { default as QrCode } from './components/qr-code';
 
 export { default as useInterval } from './hooks/use-interval';
 export { default as useScreenInfo } from './hooks/use-screen-info';
