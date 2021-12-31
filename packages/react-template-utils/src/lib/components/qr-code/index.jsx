@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import * as QRCode from 'easyqrcodejs';
+import QRCode from 'easyqrcodejs';
 
 function QrCode({
   className = '',
