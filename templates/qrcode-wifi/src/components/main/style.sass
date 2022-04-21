@@ -1,0 +1,27 @@
+@import ../../styles/effects
+
+.dsplay-fit-text-ready
+  @include animation(fadeIn 1s ease-in)
+
+.main
+  height: 100%
+  display: flex
+  flex-direction: row
+  // background-color: red
+
+  .wifi-symbol
+    display: flex
+    // background-color: yellow
+    flex-grow: 1
+    justify-content: flex-end
+    align-items: center
+
+    img
+
+.portrait, .v-banner
+  .main
+    flex-direction: column
+
+    .wifi-symbol
+      justify-content: center
+      align-items: flex-end

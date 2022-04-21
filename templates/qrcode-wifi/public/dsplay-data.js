@@ -19,39 +19,19 @@ var dsplay_config = {
 var dsplay_media = {
   duration: 30000,
 
-  // for json service based media
-  result: {
-    validity: '2018-08-13T18:22:55.238Z',
-    showOutdated: true,
-    data: {},
-  },
-
   // custom media parameters
-  customMediaParam: 'value',
-  ssid: 'LIVE TIM_5A20_5G',
-  password: 'njc7e4ne3n',
+  ssid: 'pcc',
+  password: 'pcmnac84',
   authentication: 'WPA',
-  hidden: 'false',
+  hidden: false,
 };
 
 var dsplay_template = {
-  // template parameter
-
-  template_var: 'My Template Var',
-
-  logo: '../test-assets/dsplay-logo.png',
-
-  title: 'My Super Template',
-  expanded: 'false',
-
-  qr_code_dotScale: 1,
-  qr_code_dot_scale_timing: 0.5,
-  qr_code_logo: '../test-assets/dsplay-logo.png',
-  qr_code_logo_width: 40,
-  qr_code_logo_height: 40,
-  qr_code_logo_background_transparent: false,
-  qr_code_quiet_zone: 3,
-  qr_code_quiet_zone_color: 'white',
-  qr_code_foreground_color: '#000000',
-  qr_code_background_color: '#ffffff',
+  // qr_code_dot_scale: .3,
+  // qr_code_dot_scale_timing: 0.5,
+  // qr_code_logo: '../test-assets/dsplay-logo.png',
+  // qr_code_logo_background_transparent: false,
+  // qr_code_quiet_zone_color: 'blue',
+  // qr_code_foreground_color: 'red',
+  // qr_code_background_color: '#ffffff',
 };
