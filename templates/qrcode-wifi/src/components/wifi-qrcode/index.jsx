@@ -8,6 +8,7 @@ import {
 } from '@dsplay/react-template-utils';
 import './style.sass';
 import calculateQrCodeSize from '../../utils/calculateQrCodeSize';
+import { authTypes } from '../../utils/auth-types';
 
 function WifiQrCode() {
   const {
@@ -27,30 +28,38 @@ function WifiQrCode() {
 
   const { size, quietZone, logoSize } = calculateQrCodeSize(80);
 
-  const wifiText = `WIFI:S:${ssid};T:${authentication};P:${password};H:${hidden};;`;
+  const finalAuthentication = authTypes[authentication];
+  const finalPassword = authentication === 'nopass' ? 'nopass' : password;
+
+  const wifiText = `WIFI:S:${ssid};T:${finalAuthentication};P:${finalPassword};H:${hidden ? 'true' : ''};;`;
 
   /* eslint-disable no-console */
   console.log(wifiText);
 
   return (
-    <QrCode
-      className="qr-code-centered"
-      options={{
-        text: wifiText,
-        width: size,
-        height: size,
-        quietZone,
-        quietZoneColor: qzColor,
-        dotScale,
-        dotScaleTiming,
-        logo,
-        logoBackgroundTransparent,
-        logoWidth: logoSize,
-        logoHeight: logoSize,
-        colorDark: fgColor,
-        colorLight: bgColor,
-      }}
-    />
+    <>
+      <QrCode
+        className="qr-code-centered"
+        options={{
+          // correctLevel: 1,
+          text: wifiText,
+          width: size,
+          height: size,
+          quietZone,
+          quietZoneColor: qzColor,
+          dotScale,
+          dotScaleTiming,
+          logo,
+          logoBackgroundTransparent,
+          logoWidth: logoSize,
+          logoHeight: logoSize,
+          colorDark: fgColor,
+          colorLight: bgColor,
+        }}
+      />
+      {wifiText}
+    </>
+
   );
 }
 
