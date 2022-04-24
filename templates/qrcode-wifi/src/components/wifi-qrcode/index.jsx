@@ -8,12 +8,12 @@ import {
 } from '@dsplay/react-template-utils';
 import './style.sass';
 import calculateQrCodeSize from '../../utils/calculateQrCodeSize';
-import { authTypes } from '../../utils/auth-types';
+import { authTypes, AUTH_TYPE_NOPASS } from '../../utils/auth-types';
 
 function WifiQrCode() {
   const {
     ssid,
-    authentication,
+    auth_type: authentication,
     password,
     hidden,
   } = useMedia();
@@ -28,8 +28,8 @@ function WifiQrCode() {
 
   const { size, quietZone, logoSize } = calculateQrCodeSize(80);
 
-  const finalAuthentication = authTypes[authentication];
-  const finalPassword = authentication === 'nopass' ? 'nopass' : password;
+  const finalAuthentication = authTypes[authentication] || AUTH_TYPE_NOPASS;
+  const finalPassword = finalAuthentication === AUTH_TYPE_NOPASS ? AUTH_TYPE_NOPASS : password;
 
   const wifiText = `WIFI:S:${ssid};T:${finalAuthentication};P:${finalPassword};H:${hidden ? 'true' : ''};;`;
 

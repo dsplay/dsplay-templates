@@ -22,7 +22,7 @@ var dsplay_media = {
   // custom media parameters
   ssid: 'pcc',
   password: 'pcmnac84',
-  authentication: 'wap2',
+  auth_type: 'wpa',
   hidden: false,
 };
 
