@@ -20,18 +20,18 @@ var dsplay_media = {
   duration: 30000,
 
   // custom media parameters
-  ssid: 'pcc',
+  ssid: 'Customer Wifi',
   password: 'pcmnac84',
   auth_type: 'wpa',
   hidden: false,
 };
 
 var dsplay_template = {
-  // qr_code_dot_scale: .3,
-  // qr_code_dot_scale_timing: 0.5,
-  // qr_code_logo: '../test-assets/dsplay-logo.png',
-  // qr_code_logo_background_transparent: false,
-  // qr_code_quiet_zone_color: 'blue',
-  // qr_code_foreground_color: 'red',
-  // qr_code_background_color: '#ffffff',
+  qr_code_dot_scale: .3,
+  qr_code_dot_scale_timing: 0.5,
+  qr_code_logo: '../test-assets/dsplay-logo.png',
+  qr_code_logo_background_transparent: false,
+  qr_code_quiet_zone_color: 'blue',
+  qr_code_foreground_color: 'red',
+  qr_code_background_color: '#ffffff',
 };
