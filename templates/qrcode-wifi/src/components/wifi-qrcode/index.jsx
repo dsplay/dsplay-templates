@@ -57,7 +57,6 @@ function WifiQrCode() {
           colorLight: bgColor,
         }}
       />
-      {wifiText}
     </>
 
   );
