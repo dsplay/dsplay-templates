@@ -26,7 +26,7 @@ function WifiQrCode() {
   const logo = useTemplateVal('qr_code_logo');
   const logoBackgroundTransparent = useTemplateBoolVal('qr_code_logo_background_transparent');
 
-  const { size, quietZone, logoSize } = calculateQrCodeSize(80);
+  const { size, quietZone, logoSize } = calculateQrCodeSize(60);
 
   const finalAuthentication = authTypes[authentication] || AUTH_TYPE_NOPASS;
   const finalPassword = finalAuthentication === AUTH_TYPE_NOPASS ? AUTH_TYPE_NOPASS : password;
@@ -37,27 +37,29 @@ function WifiQrCode() {
   console.log(wifiText);
 
   return (
-    <>
-      <QrCode
-        className="qr-code-centered"
-        options={{
+    <div id="Frame">
+      <div id="Frames">
+        <QrCode
+          className="qr-code-centered"
+          options={{
           // correctLevel: 1,
-          text: wifiText,
-          width: size,
-          height: size,
-          quietZone,
-          quietZoneColor: qzColor,
-          dotScale,
-          dotScaleTiming,
-          logo,
-          logoBackgroundTransparent,
-          logoWidth: logoSize,
-          logoHeight: logoSize,
-          colorDark: fgColor,
-          colorLight: bgColor,
-        }}
-      />
-    </>
+            text: wifiText,
+            width: size,
+            height: size,
+            quietZone,
+            quietZoneColor: qzColor,
+            dotScale,
+            dotScaleTiming,
+            logo,
+            logoBackgroundTransparent,
+            logoWidth: logoSize,
+            logoHeight: logoSize,
+            colorDark: fgColor,
+            colorLight: bgColor,
+          }}
+        />
+      </div>
+    </div>
 
   );
 }
