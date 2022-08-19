@@ -1,6 +1,6 @@
 {
   "name": "@dsplay/template-utils",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "dist/dsplay-template-utils.js",
   "module": "dist/dsplay-template-utils.js",
   "files": [
