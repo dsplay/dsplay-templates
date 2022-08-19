@@ -26,6 +26,8 @@ if (!window.DSPLAY) {
   window.DSPLAY.getData = DSPLAY.getData;
 } else {
   console.log('Using getData() DSPLAY app [production mode]')
+  const nativeGetData = window.DSPLAY.getData;
+  window.DSPLAY.getData = () => JSON.parse(nativeGetData.apply(window.DSPLAY));
 }
 
 export default window.DSPLAY;
