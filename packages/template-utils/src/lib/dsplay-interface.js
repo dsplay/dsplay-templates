@@ -25,9 +25,14 @@ if (!window.DSPLAY) {
   console.log('Using getData() from old dsplay-data.js [production mode]')
   window.DSPLAY.getData = DSPLAY.getData;
 } else {
-  console.log('Using getData() DSPLAY app [production mode]')
+  console.log('Using proxied getData() from DSPLAY app [production mode]')
   const nativeGetData = window.DSPLAY.getData;
-  window.DSPLAY.getData = () => JSON.parse(nativeGetData.apply(window.DSPLAY));
+  window.DSPLAY.getData = () => {
+    console.log('nativeGetData', nativeGetData);
+    const nativeResult = nativeGetData.apply(window.DSPLAY);
+    console.log('nativeResult', nativeResult);
+    return JSON.parse(nativeResult);
+  };
 }
 
 export default window.DSPLAY;
