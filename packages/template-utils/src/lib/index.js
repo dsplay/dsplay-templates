@@ -4,6 +4,7 @@ import * as configUtil from './config';
 export { default as media } from './media';
 export { default as config } from './config';
 export { default as template } from './template';
+export { default as DSPLAY } from './dsplay-interface';
 
 // custom template vars
 

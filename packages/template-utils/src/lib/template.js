@@ -1,10 +1,12 @@
-const template = window.dsplay_template || window.template || {};
+import DSPLAY from "./dsplay-interface";
+
+const { template } = DSPLAY.getData();
 
 export const val = (key, defaultValue) => template[key] ? template[key] : defaultValue;
 
 export const bval = (key, defaultValue) => {
   let stringVal = val(key, defaultValue ? 'true' : 'false');
-  if (typeof(stringVal) === 'boolean') return stringVal;
+  if (typeof (stringVal) === 'boolean') return stringVal;
   stringVal = stringVal.toLowerCase();
   return stringVal === 'true' || stringVal === '1';
 }

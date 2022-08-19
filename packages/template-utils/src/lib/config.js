@@ -1,4 +1,6 @@
-const config = window.dsplay_config || window.config || {};
+import DSPLAY from "./dsplay-interface";
+
+const { config } = DSPLAY.getData();
 
 export const isVertical = () => config.orientation === 'portrait';
 

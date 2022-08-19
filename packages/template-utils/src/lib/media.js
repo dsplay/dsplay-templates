@@ -1,1 +1,5 @@
-export default window.dsplay_media || window.media || {};
+import DSPLAY from "./dsplay-interface";
+
+const { media } = DSPLAY.getData();
+
+export default media;
