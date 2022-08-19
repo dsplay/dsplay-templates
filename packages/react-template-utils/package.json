@@ -45,7 +45,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@dsplay/template-utils": "^1.2.2",
+    "@dsplay/template-utils": "^1.2.3",
     "easyqrcodejs": "^4.4.12",
     "use-fit-text": "^2.4.0"
   },
