@@ -8,7 +8,7 @@ import './fonts.sass';
 const minLoadingTime = 2000;
 const fontsToLoad = ['Oswald', 'Roboto Condensed'];
 const imagesToLoad = ['../test-assets/dsplay-logo.png'];
-const promisesToResolve = [];
+const promisesToResolve = [Promise.resolve(1)];
 
 const App = () => (
   <Loader
