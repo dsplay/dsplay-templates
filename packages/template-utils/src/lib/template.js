@@ -1,6 +1,6 @@
 import DSPLAY from "./dsplay-interface";
 
-const { template } = DSPLAY.getData();
+const { template } = JSON.parse(DSPLAY.getData());
 
 export const val = (key, defaultValue) => template[key] ? template[key] : defaultValue;
 

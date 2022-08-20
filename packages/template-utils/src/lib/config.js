@@ -1,6 +1,6 @@
 import DSPLAY from "./dsplay-interface";
 
-const { config } = DSPLAY.getData();
+const { config } = JSON.parse(DSPLAY.getData());
 
 export const isVertical = () => config.orientation === 'portrait';
 
