@@ -12,7 +12,7 @@ DSPLAY.complete = () => {
   console.log('media complete');
 }
 
-DSPLAY.getData = () => ({
+DSPLAY.getData = () => JSON.stringify({
   media,
   config,
   template,
