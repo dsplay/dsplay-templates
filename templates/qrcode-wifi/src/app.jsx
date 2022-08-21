@@ -5,8 +5,7 @@ import Intro from './components/intro';
 import Main from './components/main';
 import i18n from './i18n';
 import './app.sass';
-
-// console.log(U, Loader)
+import background from './images/default-bg-01.jpg';
 
 const MIN_LOADING_DURATION = 2000;
 
@@ -28,7 +27,6 @@ const tasks = [];
 function App() {
   const { screenFormat } = useScreenInfo();
   const logo = useTemplateVal('logo');
-  const back = useTemplateVal('background_image');
 
   // images to preload
   const images = useMemo(() => [logo], [logo]);
@@ -42,7 +40,7 @@ function App() {
         minDuration={MIN_LOADING_DURATION}
         tasks={tasks}
       >
-        <div className={`app fade-in ${screenFormat}`} style={{ backgroundImage: `url("${back}")` }}>
+        <div className={`app fade-in ${screenFormat}`} style={{ backgroundImage: `url("${background}")` }}>
           <Main />
         </div>
       </Loader>

@@ -27,12 +27,12 @@ var dsplay_media = {
 };
 
 var dsplay_template = {
-  qr_code_dot_scale: .8,
-  qr_code_dot_scale_timing: 0.3,
+  // qr_code_dot_scale: .8,
+  // qr_code_dot_scale_timing: 0.3,
   qr_code_logo: '../test-assets/dsplay-logo.png',
-  qr_code_logo_background_transparent: false,
-  qr_code_quiet_zone_color: 'white',
-  qr_code_foreground_color: 'black',
-  qr_code_background_color: 'white',
-  background_image: '../test-assets/clean-back-04.jpeg',
+  // qr_code_logo_background_transparent: false,
+  // qr_code_quiet_zone_color: 'white',
+  // qr_code_foreground_color: 'black',
+  // qr_code_background_color: 'white',
+  background_image: '../test-assets/clean-back-02.jpeg',
 };
