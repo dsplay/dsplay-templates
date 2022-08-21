@@ -2,8 +2,6 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  cloneElement,
-  Children,
 } from 'react';
 import ImageLoader from '../image-loader/image-loader';
 import FontLoader from '../font-loader/font-loader';
@@ -16,7 +14,6 @@ const style = {
   height: '100vh',
   overflow: 'hidden',
   margin: 0,
-  // backgroundColor: 'purple',
 };
 
 const defaultTasks = [];
@@ -71,12 +68,9 @@ function Loader({
     tasksResults,
   };
 
-  const finalChildren = Children.toArray(children)
-    .map((child) => cloneElement(child, context));
-
   return (
     <LoaderContext.Provider value={context}>
-      {finalChildren}
+      {children}
     </LoaderContext.Provider>
   );
 }
