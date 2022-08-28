@@ -1,21 +1,119 @@
-html, body, #root {
-    height: 100%;
+/* latin */
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url('./fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+html {
+  font-size: 4vh;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+}
+
+#overlay {
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#mainDiv {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+
+#wrapper {
+  position: absolute;
+  width: 80%;
+  height: 40%;
+  left: 10%;
+  top: 28%;
+}
+
+#bar {
+  position: absolute;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5em;
+  background-color: #FFFFFF;
+}
+
+#infoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#timeDiv {
+  width: 100%;
+  bottom: 5%;
+  text-align: center;
+  position: absolute;
+  font-size: 6em;
+  font-weight: bold;
+  font-family: Roboto, arial;
+  color: #000;
+}
+
+#dateDiv {
+  position: absolute;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: Roboto, arial;
+  top: 8%;
+  width: 100%;
+  color: #000;
+}
+
+@media (orientation: portrait) {
+  html {
+    font-size: 4vw;
+  }
+
+  #bar {
     width: 100%;
-    margin: 0;
-    background-color: teal;
-}
+    height: 100%;
+    border-radius: .5em;
+  }
 
-#root {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+  #wrapper {
+    height: 20%;
+    width: 92%;
+    left: 4%;
+    top: 38%;
+  }
 
-.image {
-    border-radius: 10px;
-    padding: 4px;
-    background-color: white;
-    margin-top: 4px;
+  #timeDiv {
+    margin: 0 7.5%;
+    width: 86%;
+    font-size: 4.5em;
+    overflow: hidden;
+  }
+
+  #dateDiv {
+    position: absolute;
+    font-size: 1.1em;
+    font-family: Roboto, arial;
+    top: 8%;
+    width: 100%;
+    color: #000;
+  }
 }

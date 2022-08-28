@@ -1,40 +1,79 @@
 "use strict";
 
+function updateTime() {
+  var now = new Date();
+
+  document.getElementById("time").innerHTML = formateTime(now);
+  document.getElementById("date").innerHTML = formateDate(now);
+  setTimeout(updateTime, 1000);
+}
+
+var lang = 'pt_br';
+
+var texts = {
+  'en_us': {
+    weekDays: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    getFormatted: function (date) {
+      return date.toDateString();
+    }
+  },
+  'pt_br': {
+    weekDays: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+    months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+    getFormatted: function (date) {
+      return texts[lang].weekDays[date.getDay()] + ", " + fillZeros(date.getDate()) + " de " + texts[lang].months[date.getMonth()] + " de " + date.getFullYear();
+    }
+  }
+};
+
+function formateDate(date) {
+  return texts[lang].getFormatted(date);
+}
+
+function formateTime(date) {
+  return fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
+}
+
+function fillZeros(value) {
+  return (value < 10 ? "0" : "") + value;
+}
+
 $(function () {
-    $('#root').hide();
 
-    // here we can apply use DSPLAY values to your template
-    var u = dsplayTemplateUtils;
+  var data = JSON.parse(DSPLAY.getData());
+  var config = data.config;
+  var template = data.template;
 
-    // to get the entire data object use
-    // in development mode, it will use the values from your dsplay-data.js file
-    // in production mode, it will get the values from the DSPLAY Android app
-    var data = JSON.parse(u.DSPLAY.getData());
-    console.log('data', data);
 
-    // you can algo get individual values using the built-in shortcuts
-    console.log('media', u.media);
-    console.log('template', u.template);
-    console.log('config', u.config);
+  if (config.locale && typeof (config.locale) === 'string') {
+    config.locale = config.locale.toLowerCase();
+    if (texts[config.locale]) {
+      lang = config.locale;
+    }
+  }
 
-    $('.title').html(u.template.title);
+  updateTime();
 
-    var opacity = parseFloat(u.template.text_opacity);
-    $('.text')
-        .html(u.media.name)
-        .css({ opacity });
+  if (template.barColor) {
+    $("#bar").css("background-color", template.barColor);
+  }
 
-    $('img').attr({ src: u.template.image });
+  if (template.barOpacity) {
+    $("#bar").css("opacity", template.barOpacity);
+  }
 
-    // dsplayTemplateUtils can make our lives easier
-    // use the method tval to get string values with a optional default value
-    // the methods tbval, tival, tfval are useful for non-string values (boolean, integer, float)
+  if (template.dateColor) {
+    $("#dateDiv").css("color", template.dateColor);
+  }
 
-    var fontSize = u.tval('base_font_size', '1.5em');
-    $(document.body).css({ fontSize });
+  if (template.timeColor) {
+    $("#timeDiv").css("color", template.timeColor);
+  }
 
-    var titleOpacity = u.tfval('title_opacity', 1);
-    $('.title').css({ opacity: titleOpacity });
+  if (template.background) {
+    $("#mainDiv").css("background-image", "url('" + template.background + "')");
+  }
 
-    $('#root').fadeIn();
+  $('#overlay').fadeOut(500);
 });
