@@ -1,6 +1,6 @@
 import React from 'react';
 import Info from './info';
-import { tval } from '../util/template';
+import { tval } from '@dsplay/template-utils';
 
 const hashtagColor = tval('hashtag_color', '#FFFF99');
 const linkColor = tval('link_color', '#B9D0FF');

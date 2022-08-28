@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "moment": "^2.29.1",
+    "@dsplay/template-utils": "^1.2.5",
+    "moment": "^2.29.4",
     "qrcode.react": "^1.0.1",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
