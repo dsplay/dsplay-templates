@@ -1,7 +1,6 @@
 /** 
- * The content of this file will be replaced for the real values at runtime
+ * Contents of this file will be ignored at runtime
 **/
-
 
 var dsplay_config = {
     orientation: 'landscape', // 'landscape' or 'portrait'
