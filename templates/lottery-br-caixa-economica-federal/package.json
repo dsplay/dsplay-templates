@@ -4,9 +4,9 @@
   "private": true,
   "author": "Paulo Coutinho (pc@dsplay.tv)",
   "dependencies": {
-    "@dsplay/template-utils": "^1.0.3",
-    "core-js": "^3.16.1",
-    "moment": "^2.24.0",
+    "@dsplay/template-utils": "^1.2.5",
+    "core-js": "^3.25.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-countup": "^4.4.0",

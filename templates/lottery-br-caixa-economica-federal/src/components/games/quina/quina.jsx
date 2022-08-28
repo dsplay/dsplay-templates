@@ -2,11 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import {
-  media, // current media
-  config, // player configuration
-  template, // custom template values
-} from '@dsplay/template-utils';
+import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
 import './quina.sass';
 import './quina-h.sass';
@@ -15,17 +11,9 @@ import './quina-banner-h.sass';
 import './quina-banner-v.sass';
 import './quina-squared.sass';
 import logo from '../../../images/quina-branco.png';
-import { screenFormat, BANNER_V } from '../../../util.js/screen';
-
-
+import { screenFormat } from '../../../util.js/screen';
 
 moment.locale('pt-BR');
-
-// Create our number formatter.
-var fmt = new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 2,
-  minimumFractionDigits: 2,
-});
 
 function Quina() {
 
@@ -74,7 +62,7 @@ function Quina() {
     <div className={`${screenFormat} quina`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} alt="Quina" />
           <span>{title}</span>
         </div>
       </div>
@@ -116,7 +104,7 @@ function Quina() {
         </div>
         <div className="result">
           <span className="winner">{winnersText}</span> (R$
-                        <CountUp
+          <CountUp
             duration={3}
             start={0}
             end={lastPrize}
@@ -124,8 +112,8 @@ function Quina() {
             separator="."
             decimal=","
           />
-                    )
-                </div>
+          )
+        </div>
         <div className="info">
           Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {city}
         </div>
@@ -133,11 +121,11 @@ function Quina() {
       <div className="spacer3" />
       <div className="special-prizes">
         Acumulado para Sorteio Especial de São João:
-                <strong>
+        <strong>
           &nbsp;
           R$
           &nbsp;
-                    <CountUp
+          <CountUp
             duration={5}
             start={0}
             end={nextSpecialPrizeAccumulated}

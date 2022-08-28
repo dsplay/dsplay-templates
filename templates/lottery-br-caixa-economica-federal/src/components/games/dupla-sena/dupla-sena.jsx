@@ -2,11 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import {
-  media, // current media
-  config, // player configuration
-  template, // custom template values
-} from '@dsplay/template-utils';
+import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
 import './dupla-sena.sass';
 import './dupla-sena-h.sass';
@@ -18,12 +14,6 @@ import logo from '../../../images/dupla-sena-branco.png';
 import { screenFormat, BANNER_H, BANNER_V } from '../../../util.js/screen';
 
 moment.locale('pt-BR');
-
-// Create our number formatter.
-var fmt = new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 2,
-  minimumFractionDigits: 2,
-});
 
 function DuplaSena() {
 
@@ -89,7 +79,7 @@ function DuplaSena() {
     <div className={`${screenFormat} dupla-sena`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} alt="Dupla Sena" />
           <span>{title}</span>
         </div>
       </div>
@@ -117,6 +107,7 @@ function DuplaSena() {
           </span>
         </div>
       </div>
+
       <div className="spacer2" />
 
       <div className="last-round flex v">
@@ -137,7 +128,7 @@ function DuplaSena() {
                 (winners1 > 0) &&
                 <>
                   &nbsp;(R$&nbsp;
-                                    <CountUp
+                  <CountUp
                     duration={3}
                     start={0}
                     end={lastPrize1}
@@ -145,8 +136,8 @@ function DuplaSena() {
                     separator="."
                     decimal=","
                   />
-                                    )
-                                </>
+                  )
+                </>
               }
             </div>
           </div>
@@ -167,7 +158,7 @@ function DuplaSena() {
                 (winners2 > 0) &&
                 <>
                   &nbsp;(R$&nbsp;
-                                    <CountUp
+                  <CountUp
                     duration={3}
                     start={0}
                     end={lastPrize2}
@@ -175,8 +166,8 @@ function DuplaSena() {
                     separator="."
                     decimal=","
                   />
-                                    )
-                                </>
+                  )
+                </>
               }
             </div>
           </div>
@@ -188,11 +179,11 @@ function DuplaSena() {
       <div className="spacer3" />
       <div className="special-prizes">
         Acumulado para Sorteio Especial de Páscoa:
-                <strong>
+        <strong>
           &nbsp;
           R$
           &nbsp;
-                    <CountUp
+          <CountUp
             duration={5}
             start={0}
             end={nextSpecialPrizeAccumulated}

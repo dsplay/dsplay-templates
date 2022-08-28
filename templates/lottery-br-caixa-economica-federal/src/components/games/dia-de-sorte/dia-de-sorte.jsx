@@ -2,11 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import {
-  media, // current media
-  config, // player configuration
-  template, // custom template values
-} from '@dsplay/template-utils';
+import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
 import './dia-de-sorte.sass';
 import './dia-de-sorte-h.sass';
@@ -15,15 +11,9 @@ import './dia-de-sorte-banner-h.sass';
 import './dia-de-sorte-banner-v.sass';
 import './dia-de-sorte-squared.sass';
 import logo from '../../../images/dia-de-sorte-branco.png';
-import { screenFormat, BANNER_H, BANNER_V } from '../../../util.js/screen';
+import { screenFormat } from '../../../util.js/screen';
 
 moment.locale('pt-BR');
-
-// Create our number formatter.
-var fmt = new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 2,
-  minimumFractionDigits: 2,
-});
 
 const months = [
   'Janeiro',
@@ -90,7 +80,7 @@ function DiaDeSorte() {
     <div className={`${screenFormat} dia-de-sorte`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} alt="Dia de Sorte" />
           <span>{title}</span>
         </div>
       </div>
@@ -138,8 +128,8 @@ function DiaDeSorte() {
             </div>
             <div className="result">
               <span className="winner">{winnersText}</span>
-                            &nbsp;(R$&nbsp;
-                            <CountUp
+              &nbsp;(R$&nbsp;
+              <CountUp
                 duration={3}
                 start={0}
                 end={lastPrize}
@@ -147,8 +137,8 @@ function DiaDeSorte() {
                 separator="."
                 decimal=","
               />
-                            )
-                        </div>
+              )
+            </div>
           </div>
         </div>
         <div className="info">

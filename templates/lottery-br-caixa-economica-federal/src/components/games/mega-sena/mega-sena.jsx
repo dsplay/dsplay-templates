@@ -2,11 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import {
-  media, // current media
-  config, // player configuration
-  template, // custom template values
-} from '@dsplay/template-utils';
+import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
 import './mega-sena.sass';
 import './mega-sena-h.sass';
@@ -17,24 +13,7 @@ import './mega-sena-squared.sass';
 import logo from '../../../images/mega-sena-branco.png';
 import { screenFormat, BANNER_V } from '../../../util.js/screen';
 
-
-
-const {
-  fontRatio,
-  scaledDensity,
-  xdpi,
-  ydpi,
-  width,
-  height,
-} = config;
-
 moment.locale('pt-BR');
-
-// Create our number formatter.
-var fmt = new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 2,
-  minimumFractionDigits: 2,
-});
 
 function MegaSena() {
 
@@ -83,7 +62,7 @@ function MegaSena() {
     <div className={`${screenFormat} mega-sena`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} alt="Mega Sena" />
           <span>{title}</span>
         </div>
       </div>
@@ -125,7 +104,7 @@ function MegaSena() {
         </div>
         <div className="result">
           <span className="winner">{winnersText}</span> (R$
-                        <CountUp
+          <CountUp
             duration={3}
             start={0}
             end={lastPrize}
@@ -133,8 +112,8 @@ function MegaSena() {
             separator="."
             decimal=","
           />
-                    )
-                </div>
+          )
+        </div>
         <div className="info">
           Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {city}
         </div>
@@ -142,11 +121,11 @@ function MegaSena() {
       <div className="spacer3" />
       <div className="special-prizes">
         Acumulado para Mega da Virada:
-                <strong>
+        <strong>
           &nbsp;
           R$
           &nbsp;
-                    <CountUp
+          <CountUp
             duration={5}
             start={0}
             end={accumulatedMegaVirada}

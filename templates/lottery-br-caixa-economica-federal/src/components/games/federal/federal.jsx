@@ -2,12 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import {
-  media, // current media
-  config, // player configuration
-  template, // custom template values
-} from '@dsplay/template-utils';
-import Ball from '../../ball';
+import { media } from '@dsplay/template-utils';
 import './federal.sass';
 import './federal-h.sass';
 import './federal-v.sass';
@@ -15,17 +10,9 @@ import './federal-banner-h.sass';
 import './federal-banner-v.sass';
 import './federal-squared.sass';
 import logo from '../../../images/federal-branco.png';
-import { screenFormat, BANNER_H, BANNER_V } from '../../../util.js/screen';
-
-
+import { screenFormat } from '../../../util.js/screen';
 
 moment.locale('pt-BR');
-
-// Create our number formatter.
-var fmt = new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 2,
-  minimumFractionDigits: 2,
-});
 
 function Prize({
   number,
@@ -40,7 +27,7 @@ function Prize({
       </span>
       <span className="amount">
         R$&nbsp;
-                <CountUp
+        <CountUp
           duration={3}
           start={0}
           end={amount}
@@ -80,7 +67,7 @@ function Federal() {
     <div className={`${screenFormat} federal`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} alt="Federal" />
           <span>{title}</span>
         </div>
       </div>
