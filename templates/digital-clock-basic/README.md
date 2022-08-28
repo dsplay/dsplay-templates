@@ -1,31 +1,21 @@
 ![DSPLAY - Digital Signage](https://developers.dsplay.tv/assets/images/dsplay-logo.png)
 
-# DSPLAY - jQuery Template Boilerplate
+# DSPLAY - Digital Clock
 
-This is a [jQuery](https://jquery.com/) boilerplate for building [HTML-based templates](https://developers.dsplay.tv/docs/html-templates) for [DSPLAY - Digital Signage](https://dsplay.tv/) platform.
+This template is built on top of the [DSPLAY - jQuery Template Boilerplate](https://github.com/dsplay/template-boilerplate-jquery).
 
-You can use this project as a skeleton for creating a new HTML Template with jQuery. If you prefer to use another JS library, check the [other boilerplates](https://developers.dsplay.tv/docs/html-templates/boilerplates/) available.
+## Variables
 
-## Directory Structure
+This template has some configuration variables as the following table shows:
 
-```
-|-- my-template
-|   |-- index.html  <-- must be on the root
-|   |
-|   |-- scripts
-|   |   |-- app.js
-|   |   |-- core-js.js
-|   |   |-- dsplay-data.js  <-- can be located anywhere in the template structure
-|   |   |-- dsplay-template-utils.js
-|   |   |-- jquery.js
-|   |
-|   |-- images
-|   |-- styles
-```
+| Variable              | Type    | Required | Default   | Description                                                                                                                           |
+|-----------------------|---------|----------|-----------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `background`          | image   | No       |           | The background image                                                                                                                  |
+| `barColor`            | string  | No       | `#FFF`    | Bar background color                                                                                                                  |
+| `barOpacity`          | string  | No       | `0.6`     |                                                                                                                                       |
+| `dateColor`           | string  | No       | `#000`    | Date foreground color                                                                                                                 |
+| `timeColor`           | string  | No       | `#000`    | Time foreground color                                                                                                                 |
 
-This structure is just a suggestion.
-
-> The only requirement regarding the project structure is that you must have an `index.html` in the root of your project, and a file called `dsplay-data.js` located anywhere in the project folder. The rest of the structure is up to you. ([see the docs](https://developers.dsplay.tv/docs/html-templates/#directory-structure))
 
 ## Packing
 
