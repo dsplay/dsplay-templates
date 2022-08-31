@@ -1,12 +1,7 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
 import moment from 'moment';
-import 'moment/locale/pt-br';
-import 'moment/locale/pt';
-import 'moment/locale/fr';
-import 'moment/locale/es';
-import 'moment/locale/de';
-import { FitText, useScreenInfo } from '@dsplay/react-template-utils';
+import { FitText, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
 import './info.sass';
 import reactionLike from '../../images/reaction-like-small.gif';
 import reactionLove from '../../images/reaction-love-small.gif';
@@ -52,15 +47,11 @@ function Info({
   } = {},
 }) {
   moment.locale('en');
-  const { locale, osVersion } = window.dsplay_config || window.config;
+  const { osVersion } = useConfig();
 
   const { w, h } = useScreenInfo();
   const smallDim = Math.min(w, h);
   const qrCodeBottomPadding = osVersion < 17 ? '1rem' : '0';
-
-  if (locale) {
-    moment.locale(locale);
-  }
 
   const reactions = like || love || wow || haha || sad || angry;
 

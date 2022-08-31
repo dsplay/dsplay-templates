@@ -1,11 +1,17 @@
-import React from 'react';
-import { useMedia, useTemplateBoolVal } from '@dsplay/react-template-utils';
+import React, { useMemo } from 'react';
+import moment from 'moment';
+import { useMedia, useConfig, useTemplateBoolVal } from '@dsplay/react-template-utils';
 import logo from '../../images/logo.png';
 import Posts from '../posts/posts';
 import './main.sass';
 
 function Main() {
   const showLogo = useTemplateBoolVal('show_logo', true);
+  const { locale = 'en' } = useConfig();
+  const lng = useMemo(() => locale.split('_')[0], [locale]);
+  if (lng) {
+    moment.locale(lng);
+  }
 
   const {
     result: {
@@ -17,6 +23,8 @@ function Main() {
     duration,
     postCount = Math.max(1, Math.floor(duration / 10000)),
   } = useMedia();
+
+  moment.locale('en');
 
   const selectedPosts = posts.slice(0, postCount);
   // const selectedPosts = posts.slice(8, 9);
