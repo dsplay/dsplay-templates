@@ -3,7 +3,6 @@ import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
-import registerServiceWorker from './registerServiceWorker';
 import 'moment/locale/fr';
 import 'moment/locale/es';
 import 'moment/locale/it';
@@ -15,4 +14,3 @@ import './index.sass';
 import './fonts.sass';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
