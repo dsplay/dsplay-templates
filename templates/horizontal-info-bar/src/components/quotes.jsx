@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { tval } from '@dsplay/template-utils';
+import { tval, config } from '@dsplay/template-utils';
 
-const { locale } = window.config;
+const { locale } = config;
 // const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 const CORS_PROXY = 'https://api.allorigins.win/get';
 const KEY_VERSION = 'currency_version';
@@ -74,12 +74,20 @@ function QuotesContent() {
         try {
           // try the free API
           let value;
+          let url = `https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
           try {
             let res = await axios(`https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`);
             value = res.data;
+            // let res = await axios.get(CORS_PROXY, {
+            //   params: {
+            //     url,
+            //   },
+            // })
+            // value = await parser.parseString(res.data.contents);
           } catch (e) {
             // try the paid API
-            res = await axios(`https://api.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`);
+            url = `https://api.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
+            res = await axios(url);
             value = res.data;
           }
           setResult(value);
