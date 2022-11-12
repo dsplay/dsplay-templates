@@ -6,7 +6,7 @@ const { locale } = config;
 // const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 const CORS_PROXY = 'https://api.allorigins.win/get';
 const KEY_VERSION = 'currency_version';
-const VERSION = '1.2';
+const VERSION = '1.3';
 
 const formatMoney = function (n, c, d, t) {
   var c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -33,14 +33,56 @@ function getNumberSeparator(locale) {
 
 const separators = getNumberSeparator(locale);
 
-const from_1 = tval('source_currency_1');
-const from_2 = tval('source_currency_2');
-const target_currency = tval('target_currency');
+const from1 = tval('source_currency_1');
+const from2 = tval('source_currency_2');
+const targetCurrency = tval('target_currency');
 const key = tval('currency_api_key');
 
-const pair1 = `${from_1}_${target_currency}`;
-const pair2 = `${from_2}_${target_currency}`;
+const pair1 = `${from1}_${targetCurrency}`;
+const pair2 = `${from2}_${targetCurrency}`;
 const storageKey = `quotes_${pair1}_${pair2}`;
+
+async function fetchAndConvertCurrencyConv() {
+  const key = tval('currency_api_key');
+
+  const pair1 = `${from1}_${targetCurrency}`;
+  const pair2 = `${from2}_${targetCurrency}`;
+  let value;
+  await (async () => {
+    // try the free API
+    let url = `https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
+    try {
+      let res = await axios(`https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`);
+      value = res.data;
+    } catch (e) {
+      // try the paid API
+      url = `https://api.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
+      res = await axios(url);
+      value = res.data;
+    }
+  })();
+
+  return value;
+}
+
+async function fetchAndConvertFreeCurrencyApi() {
+  // https://github.com/fawazahmed0/currency-api
+  const pair1 = `${from1}_${targetCurrency}`.toUpperCase();
+  const pair2 = `${from2}_${targetCurrency}`.toUpperCase();
+  // const
+  let value;
+  await (async () => {
+    let url = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${targetCurrency.toLowerCase()}.json`;
+    let res = await axios(url);
+    value = res.data;
+  })();
+
+  return {
+    [pair1]: 1 / value[targetCurrency.toLowerCase()][from1.toLowerCase()],
+    [pair2]: 1 / value[targetCurrency.toLowerCase()][from2.toLowerCase()],
+  };
+}
+
 
 function QuotesContent() {
   const [result, setResult] = useState({});
@@ -73,23 +115,8 @@ function QuotesContent() {
       (async () => {
         try {
           // try the free API
-          let value;
-          let url = `https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
-          try {
-            let res = await axios(`https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`);
-            value = res.data;
-            // let res = await axios.get(CORS_PROXY, {
-            //   params: {
-            //     url,
-            //   },
-            // })
-            // value = await parser.parseString(res.data.contents);
-          } catch (e) {
-            // try the paid API
-            url = `https://api.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
-            res = await axios(url);
-            value = res.data;
-          }
+          // console.log('new val', await fetchAndConvertFreeCurrencyApi());
+          let value = await fetchAndConvertFreeCurrencyApi();
           setResult(value);
           localStorage.setItem(storageKey, JSON.stringify({
             timestamp: new Date().getTime(),
@@ -124,11 +151,11 @@ function QuotesContent() {
   return (
     <div className="block quotes">
       <div className="block vertsical">
-        <div className="id">{from_1}</div>
+        <div className="id">{from1}</div>
         <div className="value" style={currencyValueBoxStyle}>{formatMoney(result[pair1], 2, separators[0], separators[1])}</div>
       </div>
       <div className="block vertsical">
-        <div className="id">{from_2}</div>
+        <div className="id">{from2}</div>
         <div className="value" style={currencyValueBoxStyle}>{formatMoney(result[pair2], 2, separators[0], separators[1])}</div>
       </div>
     </div>

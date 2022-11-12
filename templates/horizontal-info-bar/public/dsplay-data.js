@@ -7,7 +7,7 @@ var dsplay_template = {
   // clock: 'false',
 
   // currency config
-  source_currency_1: 'USD',
+  source_currency_1: 'BRL',
   source_currency_2: 'BTC',
   target_currency: 'EUR',
   currency_api_key: '305dc77b8ca4ceed39e7',
