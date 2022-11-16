@@ -3,8 +3,6 @@ import axios from 'axios';
 import { tval, config } from '@dsplay/template-utils';
 
 const { locale } = config;
-// const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-const CORS_PROXY = 'https://api.allorigins.win/get';
 const KEY_VERSION = 'currency_version';
 const VERSION = '1.3';
 

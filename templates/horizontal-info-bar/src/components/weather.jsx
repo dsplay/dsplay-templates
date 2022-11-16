@@ -4,8 +4,10 @@ import { tval } from '@dsplay/template-utils';
 const key = tval('weatherbit_api_key');
 const lat = tval('latitude');
 const lon = tval('longitude');
-const url = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${key}`;
+const url = `https://api.dsplay.tv/weather/current?lat=${lat}&lon=${lon}`;
 const storageKey = `tv.dsplay.info-bar.weather-(${lat},${lon})`;
+const KEY_VERSION = 'weather_version';
+const VERSION = '1.0';
 
 function WeatherContent() {
 
@@ -15,22 +17,24 @@ function WeatherContent() {
 
     let weather = undefined;
     const storedWeather = localStorage.getItem(storageKey);
+    const storedVersion = localStorage.getItem(KEY_VERSION);
 
-    console.log('Getting weather');
+    console.log('[weather] Getting weather');
 
     if (storedWeather) {
       try {
         weather = JSON.parse(storedWeather);
-        console.log('Weather loaded from localStorage');
+        console.log('[weather] loaded from localStorage');
       } catch (e) {
         localStorage.removeItem(storageKey);
-        console.error('Error parsing stored value: ' + storedWeather);
+        console.error('[weather] error parsing stored value: ' + storedWeather);
       }
     }
 
-    if (!weather || (new Date().getTime() - weather.timestamp > 1000 * 60 * 60)) {
+    if (storedVersion !== VERSION || !weather || (new Date().getTime() - weather.timestamp > 1000 * 60 * 60)) {
       (async () => {
         try {
+          console.log('[weather] fetching from the API');
           const response = await fetch(url);
           const json = await response.json();
 
@@ -38,39 +42,41 @@ function WeatherContent() {
           if (!response.ok) {
             console.log(response.status, response.statusText, json);
             const { error } = json || {};
-            throw new Error(`Error fetching weather data: ${response.statusText}. ${error}`);
+            throw new Error(`[weather] error fetching weather data: ${response.statusText}. ${error}`);
           }
 
-          console.log('Using weather from API');
+          console.log('[weather] fetch complete');
           setResult(json);
 
           localStorage.setItem(storageKey, JSON.stringify({
             timestamp: new Date().getTime(),
             value: json,
           }));
+          localStorage.setItem(KEY_VERSION, VERSION.toString());
         } catch (e) {
           console.error(e);
           localStorage.removeItem(storageKey);
         }
       })();
     } else {
-      console.log('Using weather from localStorage');
+      console.log('[weather] using from localStorage');
       setResult(weather.value);
     }
 
   }, []);
 
-  console.log('result', result);
+  console.log('[weather] result', result);
 
   if (result) {
-
     const {
-      data: [{
-        temp,
+      data: {
         weather: {
-          icon,
+          current: {
+            temp,
+            icon,
+          },
         },
-      }],
+      },
     } = result;
 
     return (
