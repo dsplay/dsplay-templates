@@ -1,8 +1,8 @@
 import React from 'react';
-import Calendar from '../../lib/components/calendar';
-import TodayCalendar from '../../lib/components/today-calendar';
+import Calendar from '../../components/calendar';
+import TodayCalendar from '../../components/today-calendar';
 import './styles.sass';
-import { CalendarContextProvider } from '../../lib/contexts/calendarContext';
+import { CalendarContextProvider } from '../../contexts/calendarContext';
 
 function Home() {
   return (
