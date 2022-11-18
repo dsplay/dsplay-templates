@@ -3,27 +3,9 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import './styles.sass';
 import { i18n } from '../../i18n';
-import { useCalendarContext } from '../../contexts/calendarContext';
 
-function TodayCalendar() {
-  const { LoadedToday } = useCalendarContext();
-  const dateFromNow = new Date();
-  const [clock, setClock] = useState('');
+function TodayCalendar({ clock, dateFromNow }) {
   const heightValue = window.innerHeight;
-
-  function loaded() {
-    LoadedToday(true);
-  }
-
-  function fClock() {
-    setClock(format(dateFromNow, 'hh:mm:ss b', { locale: i18n.t('locale', { returnObjects: true }) }));
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      fClock();
-    }, 1000);
-  }, [clock]);
 
   return (
     <>
@@ -47,8 +29,6 @@ function TodayCalendar() {
           </div>
         )
       }
-
-      {loaded()}
     </>
   );
 }

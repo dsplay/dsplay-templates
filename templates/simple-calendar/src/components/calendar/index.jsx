@@ -18,17 +18,11 @@ import {
 } from 'date-fns';
 import './styles.sass';
 import { i18n } from '../../i18n';
-import { useCalendarContext } from '../../contexts/calendarContext';
 
 function Calendar() {
-  const { LoadedCalendar } = useCalendarContext();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [activeDate, setActiveDate] = useState(new Date());
   const heightValue = window.innerHeight;
-
-  function loaded() {
-    LoadedCalendar(true);
-  }
 
   const getHeader = () => (
     <div className="header-calendar">
@@ -156,8 +150,6 @@ function Calendar() {
             </div>
           )
       }
-
-      {loaded()}
     </>
   );
 }
