@@ -1,4 +1,6 @@
-# Simple calendar - Template
+![Logo](docs/dsplay-logo.png)
+
+# DSPLAY - Simple Calendar
 - Template for a simple calendar.
 
 ## Supported Screen Formats/Resolutions

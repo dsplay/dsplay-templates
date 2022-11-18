@@ -1,14 +1,11 @@
 import React from 'react';
 import './app.sass';
 import './fonts.sass';
-import { BrowserRouter } from 'react-router-dom';
-import Router from './Router';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <Home />
   );
 }
 
