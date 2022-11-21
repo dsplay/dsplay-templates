@@ -1,11 +1,11 @@
 import React from 'react';
 import './app.sass';
 import './fonts.sass';
-import Home from './pages/Home';
+import Main from './components/main';
 
 function App() {
   return (
-    <Home />
+    <Main />
   );
 }
 
