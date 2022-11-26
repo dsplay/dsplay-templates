@@ -99,13 +99,16 @@ function QuotesContent() {
     const storedVersion = localStorage.getItem(KEY_VERSION);
 
     console.log('[quotes] Getting quotes');
+    console.log('[quotes] stored value: ' + storedQuotes);
+    console.log('[quotes] stored version: ' + storedVersion);
 
     if (storedQuotes) {
       try {
         quotes = JSON.parse(storedQuotes);
+        console.log('[quotes] loaded from localStorage: ', quotes);
       } catch (e) {
         localStorage.removeItem(storageKey);
-        console.log('[quotes] Error parsing stored value: ' + storedQuotes);
+        console.error('[quotes] Error parsing stored value: ', storedQuotes);
       }
     }
 
@@ -114,7 +117,10 @@ function QuotesContent() {
         try {
           // try the free API
           // console.log('new val', await fetchAndConvertFreeCurrencyApi());
+          console.log('[quotes] fetching from the API');
           let value = await fetchAndConvertFreeCurrencyApi();
+
+          console.log('[quotes] fetched successfully', value);
           setResult(value);
           localStorage.setItem(storageKey, JSON.stringify({
             timestamp: new Date().getTime(),
@@ -122,7 +128,7 @@ function QuotesContent() {
           }));
           localStorage.setItem(KEY_VERSION, VERSION.toString());
         } catch (e) {
-          console.log(e);
+          console.error('[quotes] error fetching from the API', e);
           setError(e);
           localStorage.removeItem(storageKey);
         }

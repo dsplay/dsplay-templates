@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { tval } from '@dsplay/template-utils';
 
 const key = tval('weatherbit_api_key');
@@ -35,16 +36,10 @@ function WeatherContent() {
       (async () => {
         try {
           console.log('[weather] fetching from the API');
-          const response = await fetch(url);
-          const json = await response.json();
+          const response = await axios.get(url);
+          const json = response.data;
 
-          console.log(response);
-          if (!response.ok) {
-            console.log(response.status, response.statusText, json);
-            const { error } = json || {};
-            throw new Error(`[weather] error fetching weather data: ${response.statusText}. ${error}`);
-          }
-
+          console.log('[weather] response: ', response);
           console.log('[weather] fetch complete');
           setResult(json);
 
@@ -54,7 +49,7 @@ function WeatherContent() {
           }));
           localStorage.setItem(KEY_VERSION, VERSION.toString());
         } catch (e) {
-          console.error(e);
+          console.error(`[weather] error fetching weather data: ${error.message}. ${error}`, e);
           localStorage.removeItem(storageKey);
         }
       })();
