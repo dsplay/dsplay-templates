@@ -19,9 +19,11 @@ import {
 import './styles.sass';
 import { i18n } from '../../i18n';
 
+const now = new Date();
+
 function Calendar() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [activeDate, setActiveDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(now);
+  const [activeDate, setActiveDate] = useState(now);
   const heightValue = window.innerHeight;
 
   const getHeader = () => (
@@ -42,8 +44,8 @@ function Calendar() {
         <div
           className="today-btn"
           onClick={() => {
-            setSelectedDate(new Date());
-            setActiveDate(new Date());
+            setSelectedDate(now);
+            setActiveDate(now);
           }}
         >
           {i18n.t('message.today')}
@@ -86,7 +88,7 @@ function Calendar() {
           className={`day
           ${isSameMonth(currentDate, activeDate) ? '' : 'inactiveDay'}
           ${isSameDay(currentDate, selectedDate) ? 'selectedDay' : ''}
-          ${isSameDay(currentDate, new Date()) ? 'today' : ''}
+          ${isSameDay(currentDate, now) ? 'today' : ''}
         `}
           onClick={() => {
             setSelectedDate(cloneDate);
