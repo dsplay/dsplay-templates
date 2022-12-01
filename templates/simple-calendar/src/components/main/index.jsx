@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
-import { Loader } from '@dsplay/react-template-utils';
-import Calendar from '../../components/calendar';
+import { Loader, useInterval } from '@dsplay/react-template-utils';
+import Calendar from '../calendar';
 import { i18n } from '../../i18n';
-import TodayCalendar from '../../components/today-calendar';
+import TodayCalendar from '../today-calendar';
 import './styles.sass';
-import LoaderCalendar from '../../components/loaderCalendar';
+import LoaderCalendar from '../loaderCalendar';
 
 const MIN_LOADING_DURATION = 2000;
 
@@ -13,19 +13,17 @@ const fonts = [
   'Roboto Condensed',
 ];
 
-function Home() {
+function Main() {
   const dateFromNow = new Date();
   const [clock, setClock] = useState('');
 
-  function fClock() {
-    setClock(format(dateFromNow, 'hh:mm:ss b', { locale: i18n.t('locale', { returnObjects: true }) }));
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      fClock();
-    }, 1000);
-  }, [clock]);
+  useInterval(() => setClock(
+    format(
+      dateFromNow, 'hh:mm:ss b', {
+        locale: i18n.t('locale', { returnObjects: true }),
+      },
+    ),
+  ), 1000);
 
   return (
     <div className="container-home">
@@ -45,4 +43,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Main;
