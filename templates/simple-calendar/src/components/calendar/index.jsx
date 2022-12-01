@@ -101,7 +101,7 @@ function Calendar() {
 
       currentDate = addDays(currentDate, 1);
     }
-    return <>{week}</>;
+    return week;
   };
   const getDates = () => {
     const startOfTheSelectedMonth = startOfMonth(activeDate);
