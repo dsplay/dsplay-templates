@@ -34,34 +34,10 @@ const separators = getNumberSeparator(locale);
 const from1 = tval('source_currency_1');
 const from2 = tval('source_currency_2');
 const targetCurrency = tval('target_currency');
-const key = tval('currency_api_key');
 
 const pair1 = `${from1}_${targetCurrency}`;
 const pair2 = `${from2}_${targetCurrency}`;
 const storageKey = `quotes_${pair1}_${pair2}`;
-
-async function fetchAndConvertCurrencyConv() {
-  const key = tval('currency_api_key');
-
-  const pair1 = `${from1}_${targetCurrency}`;
-  const pair2 = `${from2}_${targetCurrency}`;
-  let value;
-  await (async () => {
-    // try the free API
-    let url = `https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
-    try {
-      let res = await axios(`https://free.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`);
-      value = res.data;
-    } catch (e) {
-      // try the paid API
-      url = `https://api.currconv.com/api/v7/convert?q=${pair1},${pair2}&compact=ultra&apiKey=${key}`;
-      res = await axios(url);
-      value = res.data;
-    }
-  })();
-
-  return value;
-}
 
 async function fetchAndConvertFreeCurrencyApi() {
   // https://github.com/fawazahmed0/currency-api
@@ -168,11 +144,6 @@ function QuotesContent() {
 
 
 function Quotes() {
-
-  if (!key) {
-    return null;
-  }
-
   return <QuotesContent />;
 }
 

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { tval } from '@dsplay/template-utils';
 
-const key = tval('weatherbit_api_key');
 const lat = tval('latitude');
 const lon = tval('longitude');
-const url = `https://api.dsplay.tv/weather/current?lat=${lat}&lon=${lon}`;
+const url = `https://dev-api.dsplay.tv/weather/current?lat=${lat}&lon=${lon}`;
 const storageKey = `tv.dsplay.info-bar.weather-(${lat},${lon})`;
 const KEY_VERSION = 'weather_version';
 const VERSION = '1.0';
@@ -36,10 +35,14 @@ function WeatherContent() {
       (async () => {
         try {
           console.log('[weather] fetching from the API');
-          const response = await axios.get(url);
+          const response = await axios.get(url, {
+            headers: {
+              origin: 'https://dsplay.tv',
+            }
+          });
           const json = response.data;
 
-          console.log('[weather] response: ', response);
+          console.log('[weather] response: ', response.data);
           console.log('[weather] fetch complete');
           setResult(json);
 
@@ -88,7 +91,7 @@ function WeatherContent() {
 
 function Weather() {
 
-  if (!key || !lat || !lon) {
+  if (!lat || !lon) {
     return null;
   }
 
