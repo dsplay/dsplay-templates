@@ -92,7 +92,6 @@ function QuotesContent() {
       (async () => {
         try {
           // try the free API
-          // console.log('new val', await fetchAndConvertFreeCurrencyApi());
           console.log('[quotes] fetching from the API');
           let value = await fetchAndConvertFreeCurrencyApi();
 
