@@ -91,7 +91,7 @@ function CountDown() {
           {String(getHours(finishDate)).padStart(2, '0')}
           :
           {String(getMinutes(finishDate)).padStart(2, '0')}
-          {'h'}
+          h
         </p>
       </div>
 
