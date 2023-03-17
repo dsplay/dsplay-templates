@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import './styles.sass';
@@ -46,9 +45,6 @@ function CountUp() {
       finishCount();
     }
 
-    // eslint-disable-next-line no-console
-    console.log(isActiveTimerUp);
-
     if (isActiveTimerUp) {
       setTimeout(() => {
         const daysDiference = differenceInDays(
@@ -90,7 +86,7 @@ function CountUp() {
           {String(getHours(startDate)).padStart(2, '0')}
           :
           {String(getMinutes(startDate)).padStart(2, '0')}
-          {'h'}
+          h
         </p>
       </div>
 
