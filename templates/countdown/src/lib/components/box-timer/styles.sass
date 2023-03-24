@@ -1,0 +1,78 @@
+.timer, h1, p
+    color: #fff
+
+.text-p
+    text-transform: uppercase
+    font-weight: bold
+    font-size: 1.5rem
+    margin-top: 20px !important
+
+.box
+    display: flex
+    height: 210px
+
+    div
+        display: flex
+        align-items: center
+
+#timerAndText
+    flex-direction: column
+    height: 100%
+
+.box-semicolon
+    color: #29292E
+    font-size: 10rem
+    line-height: 8rem
+
+.box-timer
+    color: #fff
+    font-size: 10rem
+    font-weight: bold
+    line-height: 8rem
+    padding: 1.5rem 2rem
+    margin-right: 5px
+    border-radius: 8px
+    background-color: #29292E
+
+@media only screen and (min-width: 2000px)
+    .box-timer
+        font-size: 12vw
+        line-height: normal
+        margin-right: 15px
+        padding-left: 3rem
+        padding-right: 3rem
+
+    .box
+        height: 100%
+
+    .box-semicolon
+        height: 15vw
+        display: flex
+        align-items: center
+        font-size: 12vw
+
+    .text-p
+        font-size: 3.8vw !important
+
+@media only screen and (max-width: 1400px)
+    .box-timer
+        font-size: 8rem
+        padding: 1.2rem 1.6rem
+    .box-semicolon
+        font-size: 8rem
+
+@media only screen and (max-width: 1200px)
+    .box-timer
+        font-size: 7rem
+        padding: 1rem 1.4rem
+
+    .box-semicolon
+        font-size: 7rem
+
+@media only screen and (max-width: 600px)
+    .box-timer
+        font-size: 5rem
+        padding: 0.4rem 1.2rem
+
+    .box-semicolon
+        font-size: 5rem

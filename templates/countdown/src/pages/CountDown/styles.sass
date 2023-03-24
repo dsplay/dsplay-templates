@@ -1,0 +1,114 @@
+.container-countDown
+  width: 100vw
+  height: 100vh
+  position: relative
+
+  background: linear-gradient(to top, #1488cc, #2b32b2)
+
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+  h1
+    text-transform: uppercase
+    font-size: 70px
+
+  h1, p
+    margin: 0
+
+  p
+    font-size: 25px
+
+.header-countDown
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  h1
+    text-align: center
+
+.timer-countDown
+  display: flex
+  align-items: center
+  margin-top: 40px
+  > div
+    display: flex
+
+#finish-countDown
+  top: 30px
+  left: 10px
+  position: absolute
+
+  color: #fff
+  border: none
+  background: transparent
+
+  cursor: pointer
+
+  &:hover
+    opacity: 0.8
+
+@media only screen and (min-width: 1950px)
+  .header-countDown
+    h1
+      font-size: 4vw
+    p
+      font-size: 3vw
+  .timer-countDown
+    width: 100%
+    justify-content: center
+
+    > div
+      height: 100%
+
+  .boxs-days-hours-countDown
+    height: 100%
+
+@media only screen and (max-width: 1200px)
+  .header-countDown
+    h1
+      font-size: 50px
+
+    p
+      font-size: 22px
+
+@media only screen and (max-width: 1000px)
+  .timer-countDown
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+    div
+      display: flex
+
+  .boxs-days-hours-countDown
+    div:last-child
+      .box-semicolon
+        width: 0
+        opacity: 0
+
+@media only screen and (max-width: 600px)
+  .header-countDown
+    margin-top: 0
+
+    h1
+      font-size: 30px
+      text-align: center
+
+    p
+      font-size: 16px
+
+  .display-flex-countDown
+    display: flex
+    flex-direction: column
+
+  .display-flex-countDown
+    .box-days
+      .box-days-semicolon
+        width: 0
+        opacity: 0
+
+  .boxs-days-hours-countDown
+    div:last-child
+      justify-content: center
