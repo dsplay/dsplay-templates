@@ -14,7 +14,6 @@
 - Square
 
   ![Square](docs/screenshots/square.png)
-- Horizontal Banner
 
 ## Getting started
 ```
