@@ -1,4 +1,4 @@
-![Logo](docs/dsplay-logo.png)
+![DSPLAY - Digital Signage](https://developers.dsplay.tv/assets/images/dsplay-logo.png)
 
 # DSPLAY - Countdown
 - Template to display a countdown.
