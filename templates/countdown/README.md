@@ -15,6 +15,16 @@
 
   ![Square](docs/screenshots/square.png)
 
+### Configuration
+
+This template has some configuration variables as the following table shows:
+
+| Variable              | Type    | Default    | Description                                        |
+|-----------------------|---------|------------| ---------------------------------------------------|
+| `bg_color_1`          | color   | #2b32b2    | Background Color 1.                                |
+| `bg_color_2`          | color   | #1488cc    | [optional] Background Color 2. (for gradient bg)   |
+| `bg_image`            | image   | none       | Background Image                                   |
+
 ## Getting started
 ```
   git clone https://github.com/dsplay/template-countdown.git my-awesome-template
