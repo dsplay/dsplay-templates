@@ -18,7 +18,7 @@ module.exports = {
   parserOptions: {
     parser: '@babel/eslint-parser',
     requireConfigFile: false, // <== ADD THIS
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: 2022, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module' // Allows for the use of imports
   },
 
@@ -38,5 +38,7 @@ module.exports = {
     'no-unused-vars': ['error', { 'args': 'none' }],
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };

@@ -1,5 +1,4 @@
-import React from 'react';
-import './styles.sass';
+import './style.sass';
 
 function BoxTimerDays({
   days,
@@ -13,8 +12,8 @@ function BoxTimerDays({
       <div id="timerAndText-box-days">
         <div>
           {
-            arrayCharacteres.map((value, indice) => {
-              const key = `${indice}k${value}`;
+            arrayCharacteres.map((value, index) => {
+              const key = `${index}k${value}`;
               return (
                 <span
                   key={key}

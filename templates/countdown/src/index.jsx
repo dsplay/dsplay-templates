@@ -1,17 +1,15 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { CountDownContextProvider } from './lib/contexts/countDownContext';
-import Router from './Router';
+import { createRoot } from 'react-dom/client';
+import { CountDownContextProvider } from './contexts/countDownContext';
+import App from './components/app';
 import './style.sass';
 import './fonts.sass';
 
-const App = () => (
-  <BrowserRouter>
-    <CountDownContextProvider>
-      <Router />
-    </CountDownContextProvider>
-  </BrowserRouter>
+const Container = () => (
+  <CountDownContextProvider>
+    <App />
+  </CountDownContextProvider>
 );
 
-render(<App />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<Container />);

@@ -1,5 +1,4 @@
-import React from 'react';
-import './styles.sass';
+import './style.sass';
 
 function BoxTimer({
   box1 = '0',
