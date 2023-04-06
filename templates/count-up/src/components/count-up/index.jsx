@@ -1,6 +1,4 @@
-/* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
-import './styles.sass';
 import {
   differenceInDays,
   differenceInHours,
@@ -10,19 +8,24 @@ import {
   getMinutes,
   isBefore,
 } from 'date-fns';
-import BoxTimer from '../../lib/components/box-timer';
-import BoxTimerDays from '../../lib/components/box-timer-days';
-import { useCountUpContext } from '../../lib/contexts/countUpContext';
-import { dateFormatter } from '../../lib/utils/formatter';
+import { useTranslation } from 'react-i18next';
+import BoxTimer from '../box-timer';
+import BoxTimerDays from '../box-timer-days';
+import { useCountUpContext } from '../../contexts/countUpContext';
+import { dateFormatter } from '../../utils/formatter';
+import './style.sass';
 
 function CountUp() {
   const {
     isActiveTimerUp,
     backgroundColor,
+    backgroundImage,
     tittle,
     startDate,
     finishTimer,
   } = useCountUpContext();
+
+  const { t } = useTranslation();
 
   const [days, setDays] = useState('00');
   const [hours, setHours] = useState('0');
@@ -77,7 +80,7 @@ function CountUp() {
   const arrayDays = days.split('');
 
   return (
-    <div className="container" style={{ background: backgroundColor }}>
+    <div className="container" style={{ background: backgroundColor || backgroundImage }}>
       <div className="header">
         <h1>{tittle}</h1>
         <p>
@@ -97,13 +100,13 @@ function CountUp() {
               <div className="boxs-days-hours display-flex">
                 <BoxTimerDays
                   days={days}
-                  text="dias"
+                  text={t('days')}
                   IsSemicolon
                 />
                 <BoxTimer
                   box1={hours[0]}
                   box2={hours[1]}
-                  text="horas"
+                  text={t('hours')}
                   IsSemicolon
                 />
               </div>
@@ -112,13 +115,13 @@ function CountUp() {
               <div className="boxs-days-hours">
                 <BoxTimerDays
                   days={days}
-                  text="dias"
+                  text={t('days')}
                   IsSemicolon
                 />
                 <BoxTimer
                   box1={hours[0]}
                   box2={hours[1]}
-                  text="horas"
+                  text={t('hours')}
                   IsSemicolon
                 />
               </div>
@@ -129,13 +132,13 @@ function CountUp() {
           <BoxTimer
             box1={minutes[0]}
             box2={minutes[1]}
-            text="minutos"
+            text={t('minutes')}
             IsSemicolon
           />
           <BoxTimer
             box1={seconds[0]}
             box2={seconds[1]}
-            text="segundos"
+            text={t('seconds')}
           />
         </div>
       </div>

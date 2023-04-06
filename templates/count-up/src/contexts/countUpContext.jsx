@@ -5,7 +5,10 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import startValues from './startValues';
+import {
+  useMedia,
+  useTemplateVal,
+} from '@dsplay/react-template-utils';
 
 export const CountUpContext = createContext();
 
@@ -14,15 +17,34 @@ export function CountUpContextProvider({ children }) {
   const [tittle, setTittle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [backgroundColor, setBackgroundColor] = useState('');
+  const [backgroundImage, setBackgroundImage] = useState('');
+
+  const media = useMedia();
+  const bgColor1 = useTemplateVal('bg_color_1', '');
+  const bgColor2 = useTemplateVal('bg_color_2', '');
+  const bgImage = useTemplateVal('bg_image', '');
+
+  let bgColor = '';
+  if (bgColor1 && bgColor2) {
+    bgColor = `linear-gradient(to bottom, ${bgColor1}, ${bgColor2})`;
+  } else {
+    bgColor = bgColor1 || bgColor2;
+  }
+
+  let bgFinalImage = '';
+  if (bgImage) {
+    bgFinalImage = `url("${bgImage}")`;
+  }
 
   function finishTimer() {
     setIsActiveTimerUp(false);
   }
 
   function setStartValues() {
-    setTittle(startValues.tittle);
-    setStartDate(new Date(parseISO(startValues.startDate)));
-    setBackgroundColor(startValues.color);
+    setTittle(media.tittle);
+    setStartDate(new Date(parseISO(media.startDate)));
+    setBackgroundColor(bgColor);
+    setBackgroundImage(bgFinalImage);
 
     setIsActiveTimerUp(true);
   }
@@ -38,6 +60,7 @@ export function CountUpContextProvider({ children }) {
         tittle,
         startDate,
         backgroundColor,
+        backgroundImage,
         setStartValues,
         finishTimer,
       }}

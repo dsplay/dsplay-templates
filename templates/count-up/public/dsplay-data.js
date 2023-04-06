@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
+/* eslint-disable indent */
+/* eslint-disable no-var */
 var dsplay_config = {
     // config parameters
     locale: 'pt_br',
@@ -11,21 +15,13 @@ var dsplay_config = {
 var dsplay_media = {
     duration: 30000,
 
-    // for json service based media
-    result: { "validity": "2018-08-13T18:22:55.238Z", "showOutdated": true, "data": {} },
-
-    // custom media parameters
-    customMediaParam: "value",
+    tittle: 'Couting days of the year - 2023',
+    startDate: '2023-01-01T00:00',
 };
 
 var dsplay_template = {
     // template parameter
-
-    template_var: "My Template Var",
-
-    logo: '../test-assets/dsplay-logo.png',
-
-    title: "My Super Template",
-    expanded: "false",
-
+    // bg_color_1: 'transparent',
+    // bg_color_2: 'blue',
+    bg_image: '../test-assets/bg.jpg',
 };
