@@ -86,6 +86,12 @@ export function CountUpContextProvider({ children }) {
 
   function finishTimer() {
     setIsActiveTimerUp(false);
+    setOclock({
+      days: '00',
+      hours: '00',
+      minutes: '00',
+      seconds: '00',
+    });
   }
 
   function countingTime() {
