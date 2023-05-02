@@ -19,6 +19,46 @@ i18n
           seconds: 'segundos',
         },
       },
+      fr: {
+        translations: {
+          days: 'jours',
+          hours: 'heures',
+          minutes: 'minutes',
+          seconds: 'secondes',
+        },
+      },
+      de: {
+        translations: {
+          days: 'tage',
+          hours: 'std.',
+          minutes: 'protokoll',
+          seconds: 'sekunden',
+        },
+      },
+      es: {
+        translations: {
+          days: 'días',
+          hours: 'horas.',
+          minutes: 'minutos',
+          seconds: 'segundos',
+        },
+      },
+      it: {
+        translations: {
+          days: 'giorni',
+          hours: 'ore',
+          minutes: 'minuti',
+          seconds: 'secondi',
+        },
+      },
+      nl: {
+        translations: {
+          days: 'dagen',
+          hours: 'uur',
+          minutes: 'minuten',
+          seconds: 'seconden',
+        },
+      },
     },
     fallbackLng: 'en',
     debug: true,
