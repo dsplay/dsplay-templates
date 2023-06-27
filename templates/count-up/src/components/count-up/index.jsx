@@ -2,19 +2,21 @@ import React from 'react';
 import {
   getHours,
   getMinutes,
+  format,
 } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import BoxTimer from '../box-timer';
 import BoxTimerDays from '../box-timer-days';
 import { useCountUpContext } from '../../contexts/countUpContext';
-import { dateFormatter } from '../../utils/formatter';
 import './style.sass';
+import i18n from '../../i18n';
 
 function CountUp() {
   const {
     backgroundColor,
     backgroundImage,
     tittle,
+    colorFont,
     startDate,
     oclock,
   } = useCountUpContext();
@@ -26,9 +28,9 @@ function CountUp() {
   return (
     <div className="container" style={{ background: backgroundColor || backgroundImage }}>
       <div className="header">
-        <h1>{tittle}</h1>
-        <p>
-          {dateFormatter.format(startDate)}
+        <h1 style={{ color: colorFont }}>{tittle}</h1>
+        <p style={{ color: colorFont }}>
+          {format(startDate, 'P', { locale: i18n.t('locale', { returnObjects: true }) })}
           {', '}
           {String(getHours(startDate)).padStart(2, '0')}
           :

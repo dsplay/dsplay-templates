@@ -24,4 +24,5 @@ var dsplay_template = {
     // bg_color_1: 'transparent',
     // bg_color_2: 'blue',
     bg_image: '../test-assets/bg.jpg',
+    bg_font_color: '',
 };

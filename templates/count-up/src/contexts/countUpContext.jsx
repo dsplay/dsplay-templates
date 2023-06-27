@@ -58,8 +58,10 @@ export function CountUpContextProvider({ children }) {
   const bgImage = useTemplateVal('bg_image', '');
   const bgColor1 = useTemplateVal('bg_color_1', '');
   const bgColor2 = useTemplateVal('bg_color_2', '');
+  const fontColor = useTemplateVal('bg_font_color', '');
   const [backgroundColor, setBackgroundColor] = useState('');
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [colorFont, setColorFont] = useState('');
 
   const dateFromNow = new Date();
   const [isActiveTimerUp, setIsActiveTimerUp] = useState(false);
@@ -82,6 +84,11 @@ export function CountUpContextProvider({ children }) {
   let bgFinalImage = '';
   if (bgImage) {
     bgFinalImage = `url("${bgImage}")`;
+  }
+
+  let textColor = '';
+  if (fontColor) {
+    textColor = fontColor;
   }
 
   function finishTimer() {
@@ -112,6 +119,7 @@ export function CountUpContextProvider({ children }) {
     setTittle(media.tittle);
     setBackgroundColor(bgColor);
     setBackgroundImage(bgFinalImage);
+    setColorFont(textColor);
 
     setIsActiveTimerUp(true);
   }
@@ -130,6 +138,7 @@ export function CountUpContextProvider({ children }) {
         isActiveTimerUp,
         tittle,
         startDate,
+        colorFont,
         backgroundColor,
         backgroundImage,
         oclock,

@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.sass';
+import { useCountUpContext } from '../../contexts/countUpContext';
 
 function BoxTimer({
   box1 = '0',
@@ -7,6 +8,10 @@ function BoxTimer({
   text,
   IsSemicolon,
 }) {
+  const {
+    colorFont,
+  } = useCountUpContext();
+
   return (
     <div className="box">
       <div id="timerAndText">
@@ -15,7 +20,7 @@ function BoxTimer({
           <span className="box-timer">{box2}</span>
         </div>
         <div>
-          <p className="text-p">{text}</p>
+          <p className="text-p" style={{ color: colorFont }}>{text}</p>
         </div>
       </div>
       {IsSemicolon ? <span className="box-semicolon">:</span> : <span className="box-semicolon" />}
