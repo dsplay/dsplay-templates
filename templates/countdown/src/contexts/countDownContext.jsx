@@ -50,11 +50,13 @@ export const CountDownContext = createContext();
 export function CountDownContextProvider({ children }) {
   // configuration variables
   const media = useMedia();
+  const bgImage = useTemplateVal('bg_image', '');
   const bgColor1 = useTemplateVal('bg_color_1', '');
   const bgColor2 = useTemplateVal('bg_color_2', '');
-  const bgImage = useTemplateVal('bg_image', '');
+  const fontColor = useTemplateVal('bg_font_color', '');
   const [backgroundColor, setBackgroundColor] = useState('');
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [colorFont, setColorFont] = useState('');
 
   const finishDate = new Date(parseISO(media.finishDate));
   const [isActiveTimerDown, setIsActiveTimerDown] = useState(false);
@@ -77,6 +79,11 @@ export function CountDownContextProvider({ children }) {
   let bgFinalImage = '';
   if (bgImage) {
     bgFinalImage = `url("${bgImage}")`;
+  }
+
+  let textColor = '';
+  if (fontColor) {
+    textColor = fontColor;
   }
 
   function finishTimer() {
@@ -108,6 +115,7 @@ export function CountDownContextProvider({ children }) {
     setTitle(media.title);
     setBackgroundColor(bgColor);
     setBackgroundImage(bgFinalImage);
+    setColorFont(textColor);
 
     setIsActiveTimerDown(true);
   }
@@ -126,6 +134,7 @@ export function CountDownContextProvider({ children }) {
         isActiveTimerDown,
         title,
         finishDate,
+        colorFont,
         backgroundColor,
         backgroundImage,
         oclock,

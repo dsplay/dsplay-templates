@@ -1,5 +1,12 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import ptBR from 'date-fns/locale/pt-BR';
+import enUS from 'date-fns/locale/en-US';
+import fr from 'date-fns/locale/fr';
+import es from 'date-fns/locale/es';
+import de from 'date-fns/locale/de';
+import nl from 'date-fns/locale/nl';
+import it from 'date-fns/locale/it';
 
 i18n
   .use(LanguageDetector)
@@ -8,11 +15,13 @@ i18n
     resources: {
       en: {
         translations: {
+          locale: enUS,
           Title: 'Title',
         },
       },
-      pt_br: {
+      pt: {
         translations: {
+          locale: ptBR,
           days: 'dias',
           hours: 'horas',
           minutes: 'minutos',
@@ -21,6 +30,7 @@ i18n
       },
       fr: {
         translations: {
+          locale: fr,
           days: 'jours',
           hours: 'heures',
           minutes: 'minutes',
@@ -29,6 +39,7 @@ i18n
       },
       de: {
         translations: {
+          locale: de,
           days: 'tage',
           hours: 'std.',
           minutes: 'protokoll',
@@ -37,6 +48,7 @@ i18n
       },
       es: {
         translations: {
+          locale: es,
           days: 'días',
           hours: 'horas.',
           minutes: 'minutos',
@@ -45,6 +57,7 @@ i18n
       },
       it: {
         translations: {
+          locale: it,
           days: 'giorni',
           hours: 'ore',
           minutes: 'minuti',
@@ -53,6 +66,7 @@ i18n
       },
       nl: {
         translations: {
+          locale: nl,
           days: 'dagen',
           hours: 'uur',
           minutes: 'minuten',

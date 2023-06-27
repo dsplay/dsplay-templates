@@ -1,19 +1,21 @@
 import {
   getHours,
   getMinutes,
+  format,
 } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import BoxTimer from '../box-timer';
 import BoxTimerDays from '../box-timer-days';
 import { useCountDownContext } from '../../contexts/countDownContext';
-import { dateFormatter } from '../../utils/formatter';
 import './style.sass';
+import i18n from '../../i18n';
 
 function CountDown() {
   const {
     backgroundColor,
     backgroundImage,
     title,
+    colorFont,
     finishDate,
     oclock,
   } = useCountDownContext();
@@ -25,9 +27,9 @@ function CountDown() {
   return (
     <div className="container-countDown" style={{ backgroundImage: backgroundImage || backgroundColor }}>
       <div className="header-countDown">
-        <h1>{title}</h1>
-        <p>
-          {dateFormatter.format(finishDate)}
+        <h1 style={{ color: colorFont }}>{title}</h1>
+        <p style={{ color: colorFont }}>
+          {format(finishDate, 'P', { locale: i18n.t('locale', { returnObjects: true }) })}
           {', '}
           {String(getHours(finishDate)).padStart(2, '0')}
           :
