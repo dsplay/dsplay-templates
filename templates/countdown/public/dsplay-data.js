@@ -16,7 +16,7 @@ var dsplay_media = {
   duration: 30000,
 
   title: 'Countdown to the new year - 2024',
-  finishDate: '2024-01-01T00:00',
+  finishDate: '2023-08-01T00:00',
 };
 
 var dsplay_template = {
@@ -24,5 +24,5 @@ var dsplay_template = {
   // bg_color_1: 'transparent',
   // bg_color_2: 'blue',
   bg_image: '../test-assets/bg.jpg',
-  bg_font_color: '',
+  bg_font_color: 'blue',
 };
