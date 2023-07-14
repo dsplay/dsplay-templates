@@ -16,7 +16,7 @@ var dsplay_media = {
     duration: 30000,
 
     title: 'Couting days of the year - 2024',
-    startDate: '2023-07-14T00:00',
+    date: '2023-07-11T00:00',
 };
 
 var dsplay_template = {

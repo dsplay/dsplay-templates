@@ -65,7 +65,7 @@ export function CountUpContextProvider({ children }) {
 
   const dateFromNow = new Date();
   const [isActiveTimerUp, setIsActiveTimerUp] = useState(false);
-  const startDate = new Date(parseISO(media.startDate));
+  const startDate = new Date(parseISO(media.date));
 
   // display variables
   const [title, setTitle] = useState('');
