@@ -3,7 +3,10 @@
   height: 100vh
   position: relative
 
-  background: linear-gradient(to top, #1d976c, #93f9b9)
+  background-image: linear-gradient(to top, #1d976c, #93f9b9)
+  background-size: cover !important
+  background-position: center !important
+  background-repeat: no-repeat !important
 
   display: flex
   flex-direction: column
@@ -34,20 +37,6 @@
   margin-top: 40px
   > div
     display: flex
-
-#finish
-  top: 30px
-  left: 10px
-  position: absolute
-
-  color: #fff
-  border: none
-  background: transparent
-
-  cursor: pointer
-
-  &:hover
-    opacity: 0.8
 
 @media only screen and (min-width: 1950px)
   .header
