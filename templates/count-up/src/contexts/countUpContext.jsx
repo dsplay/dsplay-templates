@@ -68,7 +68,7 @@ export function CountUpContextProvider({ children }) {
   const startDate = new Date(parseISO(media.startDate));
 
   // display variables
-  const [tittle, setTittle] = useState('');
+  const [title, setTitle] = useState('');
   const [oclock, setOclock] = useState(toConvertDate({
     startDate, dateFromNow,
   }));
@@ -116,7 +116,7 @@ export function CountUpContextProvider({ children }) {
   }
 
   function setStartValues() {
-    setTittle(media.tittle);
+    setTitle(media.title);
     setBackgroundColor(bgColor);
     setBackgroundImage(bgFinalImage);
     setColorFont(textColor);
@@ -136,7 +136,7 @@ export function CountUpContextProvider({ children }) {
     <CountUpContext.Provider
       value={{
         isActiveTimerUp,
-        tittle,
+        title,
         startDate,
         colorFont,
         backgroundColor,

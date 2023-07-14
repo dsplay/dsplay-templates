@@ -15,7 +15,7 @@ var dsplay_config = {
 var dsplay_media = {
     duration: 30000,
 
-    tittle: 'Couting days of the year - 2024',
+    title: 'Couting days of the year - 2024',
     startDate: '2023-07-14T00:00',
 };
 

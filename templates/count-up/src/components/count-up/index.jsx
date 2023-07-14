@@ -15,7 +15,7 @@ function CountUp() {
   const {
     backgroundColor,
     backgroundImage,
-    tittle,
+    title,
     colorFont,
     startDate,
     oclock,
@@ -28,7 +28,7 @@ function CountUp() {
   return (
     <div className="container" style={{ background: backgroundColor || backgroundImage }}>
       <div className="header">
-        <h1 style={{ color: colorFont }}>{tittle}</h1>
+        <h1 style={{ color: colorFont }}>{title}</h1>
         <p style={{ color: colorFont }}>
           {format(startDate, 'P', { locale: i18n.t('locale', { returnObjects: true }) })}
           {', '}
