@@ -16,7 +16,7 @@ var dsplay_media = {
   duration: 30000,
 
   title: 'Countdown to the new year - 2024',
-  finishDate: '2023-08-01T00:00',
+  date: '2023-09-01T00:00',
 };
 
 var dsplay_template = {

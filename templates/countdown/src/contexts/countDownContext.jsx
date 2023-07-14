@@ -58,7 +58,7 @@ export function CountDownContextProvider({ children }) {
   const [backgroundImage, setBackgroundImage] = useState('');
   const [colorFont, setColorFont] = useState('');
 
-  const finishDate = new Date(parseISO(media.finishDate));
+  const finishDate = new Date(parseISO(media.date));
   const [isActiveTimerDown, setIsActiveTimerDown] = useState(false);
   const [dateFromNow, setDateFromNow] = useState(new Date());
 
