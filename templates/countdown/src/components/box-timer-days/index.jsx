@@ -1,3 +1,4 @@
+import { useCountDownContext } from '../../contexts/countDownContext';
 import './style.sass';
 
 function BoxTimerDays({
@@ -6,6 +7,10 @@ function BoxTimerDays({
   IsSemicolon,
 }) {
   const arrayCharacteres = days.split('');
+
+  const {
+    colorFont,
+  } = useCountDownContext();
 
   return (
     <div className="box-days">
@@ -26,7 +31,7 @@ function BoxTimerDays({
           }
         </div>
         <div>
-          <p className="box-days-text-p">{text}</p>
+          <p className="box-days-text-p" style={{ color: colorFont }}>{text}</p>
         </div>
       </div>
       {IsSemicolon ? <span className="box-days-semicolon">:</span> : <span className="box-days-semicolon" />}

@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
+/* eslint-disable indent */
+/* eslint-disable no-var */
 var dsplay_config = {
   // config parameters
   locale: 'pt_br',
@@ -20,4 +24,5 @@ var dsplay_template = {
   // bg_color_1: 'transparent',
   // bg_color_2: 'blue',
   bg_image: '../test-assets/bg.jpg',
+  bg_font_color: '',
 };

@@ -1,99 +1,35 @@
-import { useEffect, useState } from 'react';
 import {
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds,
   getHours,
   getMinutes,
-  isAfter,
+  format,
 } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import BoxTimer from '../box-timer';
 import BoxTimerDays from '../box-timer-days';
 import { useCountDownContext } from '../../contexts/countDownContext';
-import { dateFormatter } from '../../utils/formatter';
 import './style.sass';
+import i18n from '../../i18n';
 
 function CountDown() {
   const {
-    isActiveTimerDown,
     backgroundColor,
     backgroundImage,
     title,
+    colorFont,
     finishDate,
-    finishTimer,
+    oclock,
   } = useCountDownContext();
 
   const { t } = useTranslation();
 
-  const [days, setDays] = useState('00');
-  const [hours, setHours] = useState('0');
-  const [minutes, setMinutes] = useState('0');
-  const [seconds, setSeconds] = useState('0');
-  const [count, setCount] = useState(0);
-
-  function finishCount() {
-    finishTimer();
-  }
-
-  useEffect(() => {
-    const hoursInDay = 24;
-    const minutesInDay = 1440;
-    const minutesInHours = 60;
-    const secondsInMinutes = 60;
-
-    const now = new Date();
-
-    const isAfterDate = isAfter(finishDate, now);
-
-    if (!isAfterDate) {
-      finishCount();
-    }
-
-    if (isActiveTimerDown) {
-      const daysDiference = differenceInDays(
-        finishDate,
-        now,
-      );
-      const hoursDiference = differenceInHours(
-        finishDate,
-        now,
-      ) - (daysDiference * hoursInDay);
-      const minutesDiference = differenceInMinutes(
-        finishDate,
-        now,
-      ) - (daysDiference * minutesInDay) - (hoursDiference * minutesInHours);
-      const secondsDiference = differenceInSeconds(
-        finishDate,
-        now,
-      ) - (daysDiference * (minutesInDay * secondsInMinutes))
-        - (hoursDiference * (minutesInHours * secondsInMinutes))
-        - (minutesDiference * secondsInMinutes);
-
-      setDays(String(daysDiference).padStart(2, '0'));
-      setHours(String(hoursDiference).padStart(2, '0'));
-      setMinutes(String(minutesDiference).padStart(2, '0'));
-      setSeconds(String(secondsDiference).padStart(2, '0'));
-      setTimeout(() => {
-        setCount(count + 1);
-      }, 1000);
-    } else {
-      setDays('00');
-      setHours('00');
-      setMinutes('00');
-      setSeconds('00');
-    }
-  }, [days, hours, minutes, seconds, isActiveTimerDown, count]);
-
-  const arrayDays = days.split('');
+  const arrayDays = oclock.days.split('');
 
   return (
     <div className="container-countDown" style={{ backgroundImage: backgroundImage || backgroundColor }}>
       <div className="header-countDown">
-        <h1>{title}</h1>
-        <p>
-          {dateFormatter.format(finishDate)}
+        <h1 style={{ color: colorFont }}>{title}</h1>
+        <p style={{ color: colorFont }}>
+          {format(finishDate, 'P', { locale: i18n.t('locale', { returnObjects: true }) })}
           {', '}
           {String(getHours(finishDate)).padStart(2, '0')}
           :
@@ -108,13 +44,13 @@ function CountDown() {
             ? (
               <div className="boxs-days-hours-countDown display-flex-countDown">
                 <BoxTimerDays
-                  days={days}
+                  days={oclock.days}
                   text={t('days')}
                   IsSemicolon
                 />
                 <BoxTimer
-                  box1={hours[0]}
-                  box2={hours[1]}
+                  box1={oclock.hours[0]}
+                  box2={oclock.hours[1]}
                   text={t('hours')}
                   IsSemicolon
                 />
@@ -123,13 +59,13 @@ function CountDown() {
             : (
               <div className="boxs-days-hours-countDown">
                 <BoxTimerDays
-                  days={days}
+                  days={oclock.days}
                   text={t('days')}
                   IsSemicolon
                 />
                 <BoxTimer
-                  box1={hours[0]}
-                  box2={hours[1]}
+                  box1={oclock.hours[0]}
+                  box2={oclock.hours[1]}
                   text={t('hours')}
                   IsSemicolon
                 />
@@ -138,14 +74,14 @@ function CountDown() {
         }
         <div>
           <BoxTimer
-            box1={minutes[0]}
-            box2={minutes[1]}
+            box1={oclock.minutes[0]}
+            box2={oclock.minutes[1]}
             text={t('minutes')}
             IsSemicolon
           />
           <BoxTimer
-            box1={seconds[0]}
-            box2={seconds[1]}
+            box1={oclock.seconds[0]}
+            box2={oclock.seconds[1]}
             text={t('seconds')}
           />
         </div>
