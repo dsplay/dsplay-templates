@@ -15,14 +15,14 @@ var dsplay_config = {
 var dsplay_media = {
     duration: 30000,
 
-    title: 'Couting days of the year - 2024',
+    title: 'Couting days of the year - 2024 :',
     date: '2023-07-11T00:00',
 };
 
 var dsplay_template = {
     // template parameter
-    // bg_color_1: 'transparent',
-    // bg_color_2: 'blue',
-    bg_image: '../test-assets/bg.jpg',
+    bg_color_1: 'transparent',
+    bg_color_2: 'blue',
+    // bg_image: '../test-assets/bg.jpg',
     bg_font_color: '',
 };

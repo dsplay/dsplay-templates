@@ -26,7 +26,7 @@ function CountUp() {
   const arrayDays = oclock.days.split('');
 
   return (
-    <div className="container" style={{ background: backgroundColor || backgroundImage }}>
+    <div className="container" style={{ background: backgroundImage || backgroundColor }}>
       <div className="header">
         <h1 style={{ color: colorFont }}>{title}</h1>
         <p style={{ color: colorFont }}>
