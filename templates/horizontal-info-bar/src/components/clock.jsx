@@ -26,7 +26,7 @@ function ClockContent() {
   return (
     <div className="block clock">
       <div className="time">
-      {dateText.replace('/', '-')} | {timeText}
+        {dateText.replace('/', '-')} | {timeText}
       </div>
     </div>
   );

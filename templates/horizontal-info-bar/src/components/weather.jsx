@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { tval } from '@dsplay/template-utils';
 
 const lat = tval('latitude');
 const lon = tval('longitude');
-const url = `https://dev-api.dsplay.tv/weather/current?lat=${lat}&lon=${lon}`;
+const url = `https://api.dsplay.tv/weather/current?lat=${lat}&lon=${lon}`;
 const storageKey = `tv.dsplay.info-bar.weather-(${lat},${lon})`;
 const KEY_VERSION = 'weather_version';
-const VERSION = '1.0';
+const VERSION = '1.1';
 
 function WeatherContent() {
 
@@ -31,7 +32,7 @@ function WeatherContent() {
       }
     }
 
-    if (storedVersion !== VERSION || !weather || (new Date().getTime() - weather.timestamp > 1000 * 60 * 60)) {
+    if (storedVersion !== VERSION || !weather || (moment().utc().isAfter(moment.utc(weather.value?.expiresAt)))) {
       (async () => {
         try {
           console.log('[weather] fetching from the API');
@@ -47,7 +48,6 @@ function WeatherContent() {
           setResult(json);
 
           localStorage.setItem(storageKey, JSON.stringify({
-            timestamp: new Date().getTime(),
             value: json,
           }));
           localStorage.setItem(KEY_VERSION, VERSION.toString());
