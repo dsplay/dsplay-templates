@@ -1,0 +1,103 @@
+@import ../../styles/effects
+
+.dsplay-fit-text-ready
+  @include animation(fadeIn 1s ease-in)
+
+#root
+  background-color: #bbdefb
+  display: -webkit-flex
+  display: flex
+p, h1
+  color: white !important
+  margin: 0
+  font-weight: lighter
+  .time
+    font-size: 3rem    
+  .meeting-name, .city
+    font-size: 3rem
+    font-weight: bold
+  .city, .date
+    color: gray !important
+  .icon
+  .temperature
+
+.app
+  width: 100%
+  display: grid
+  align-content: stretch
+
+.landscape
+  .flex-container
+    display: grid
+    grid-template-columns: 70% 30%
+    grid-template-rows: 100%
+    align-content: stretch
+    grid-auto-flow: row
+    .meeting-name
+      height: 12rem
+
+.portrait
+  padding: 0 !important
+  .flex-container
+    display: grid
+    grid-template-columns: 100%
+    grid-template-rows: 50% 50%
+    align-content: stretch
+    grid-auto-flow: row
+  .flex-item-left
+    grid-column: 1
+    grid-row: 1
+    grid-template-rows: 50% 50%
+    .meeting-name
+      height: 14rem
+  .flex-item-right
+    grid-column: 1
+    grid-row: 2
+    grid-template-rows: auto
+    .local-brand
+      width: 40rem
+      height: 15rem
+    .local-info
+      width: 40rem
+      height: 15rem    
+    
+
+.flex-item-left
+  display: grid
+  gap: 1rem
+  grid-template-columns: 100%
+  grid-template-rows: 30% 70% 
+  grid-column: 1
+  grid-row: 1
+  padding: 4rem !important
+  .flex-item-left-bottom
+    background: white center / contain no-repeat
+    border-radius: 1rem        
+
+.flex-item-right
+  display: grid
+  grid-template-columns: 100%
+  grid-template-rows: 70% 30%
+  grid-column: 2
+  grid-row: 1
+  padding: 0 !important
+  background: blue
+  .flex-item-right-top, .flex-item-right-bottom
+    display: flex
+    align-items: center
+    justify-content: center
+    
+  .local-brand, .local-info
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    flex-wrap: wrap
+    background: white center / contain no-repeat
+    border-radius: 1rem
+  .local-brand
+    width: 30rem
+    height: 30rem
+  .local-info
+    width: 30rem
+    height: 15rem    
