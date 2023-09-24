@@ -12,12 +12,15 @@ p, h1
   margin: 0
   font-weight: lighter
   .time
-    font-size: 3rem    
+    font-size: 3rem
+    text-transform: uppercase
   .meeting-name, .city
     font-size: 3rem
     font-weight: bold
   .city, .date
     color: gray !important
+  .date
+    text-transform: capitalize
   .icon
   .temperature
 
@@ -34,7 +37,7 @@ p, h1
     align-content: stretch
     grid-auto-flow: row
     .meeting-name
-      height: 12rem
+      height: 60%
 
 .portrait
   padding: 0 !important
@@ -59,20 +62,19 @@ p, h1
       height: 15rem
     .local-info
       width: 40rem
-      height: 15rem    
-    
+      height: 15rem
 
 .flex-item-left
   display: grid
   gap: 1rem
   grid-template-columns: 100%
-  grid-template-rows: 30% 70% 
+  grid-template-rows: 30% 70%
   grid-column: 1
   grid-row: 1
   padding: 4rem !important
   .flex-item-left-bottom
     background: white center / contain no-repeat
-    border-radius: 1rem        
+    border-radius: 1rem
 
 .flex-item-right
   display: grid
@@ -86,7 +88,7 @@ p, h1
     display: flex
     align-items: center
     justify-content: center
-    
+
   .local-brand, .local-info
     display: flex
     align-items: center
@@ -100,4 +102,4 @@ p, h1
     height: 30rem
   .local-info
     width: 30rem
-    height: 15rem    
+    height: 15rem
