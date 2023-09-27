@@ -15,11 +15,11 @@ var dsplay_media = {
 
     location: "Cupertino, CA - USA",
 
-    eventDate: "Sunday, September 3",
+    eventDate: '2023-07-11T12:00:00.000Z',
 
-    startTime: "9:00 AM",
+    startDate: '2023-07-11T12:00:00.000Z',
 
-    endTime: "5:00 PM",
+    endDate: '2023-07-15T14:00',
 };
 
 var dsplay_template = {
