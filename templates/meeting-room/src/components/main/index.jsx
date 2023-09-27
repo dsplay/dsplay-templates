@@ -6,7 +6,6 @@ import {
 } from '@dsplay/react-template-utils';
 import './style.sass';
 import Color from 'color-thief-react';
-import i18n from '../../i18n';
 import useLanguage from '../../hooks/use-language';
 
 function Main() {
@@ -15,9 +14,6 @@ function Main() {
   const imgHostLogo = useTemplateVal('hostLogo');
   const {
     location,
-    eventDate,
-    startDate,
-    endDate,
   } = media;
   const language = useLanguage();
 
@@ -58,7 +54,7 @@ function Main() {
           <p className="meeting-name"><FitText>Event with a big name to test the space Event with a big name to test the space Event with a big name to test the space Event with a big name to test the space  Event with a big name to test the space Event with a big name to test the space</FitText></p>
         </div>
         <Color src={imgEventLogo} format="hex">
-          {({ data, loading, error }) => (
+          {({ data }) => (
             <div
               className="flex-item-left-bottom"
               style={{
@@ -71,7 +67,7 @@ function Main() {
       <div className="flex-item-right">
         <div className="flex-item-right-top" style={{ backgroundColor: useTemplateVal('rightColorTop') }}>
           <Color src={imgHostLogo} format="hex">
-            {({ data, loading, error }) => (
+            {({ data }) => (
               <div className="local-brand" style={{ backgroundImage: `url("${useTemplateVal('hostLogo')}")`, backgroundColor: data }} />
             )}
           </Color>
