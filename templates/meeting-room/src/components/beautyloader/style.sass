@@ -1,0 +1,43 @@
+$primary: #37cab1
+$secondary: #ce4cee
+
+#root
+  background: #0F2027 /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027) /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+.loading
+  width: 6em
+  height: 5em
+  position: absolute
+  text-align: center
+  top: 40%
+
+.point
+  width: .6em
+  height: .6em
+  border-radius: 50%
+  margin: 0 .35em .6em
+  display: inline-block
+
+@for $i from 1 through 25
+  .point:nth-child(#{$i})
+    animation: color #{($i*100) + 1000}ms infinite ease-in-out
+
+  .row:nth-child(#{$i})
+    animation: opacity #{($i*100) + 1000}ms infinite ease-in-out
+
+@keyframes opacity
+  from, to
+    opacity: 0
+  50%
+    opacity: 1
+
+@keyframes color
+  from, to
+    background: $primary
+    -webkit-filter: blur(1px)
+  50%
+    background: $secondary
+    -webkit-filter: blur(2px)

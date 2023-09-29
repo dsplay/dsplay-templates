@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import { useMemo } from 'react';
 import { useScreenInfo, screen } from '@dsplay/react-template-utils';
-import spinner from '../../assets/image/loader.gif';
+import BeautyLoader from '../beautyloader';
 import './style.sass';
 
 // component
@@ -41,8 +41,8 @@ function Intro(props) {
 
   return (
     <div {...props} className={`intro ${className || ''}`}>
-      <div>
-        <img src={spinner} alt="" style={imageStyle} />
+      <div style={imageStyle}>
+        <BeautyLoader />
       </div>
     </div>
   );
