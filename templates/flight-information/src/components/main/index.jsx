@@ -8,19 +8,8 @@ import { ThemeContext } from '../../contexts/themeContext';
 import Intro from '../intro';
 import useLanguage from '../../hooks/use-language';
 import i18n from '../../i18n';
+import hourFormat from '../../hooks/use-hour';
 
-const formattedUpdateTime = {
-  hour: '2-digit',
-  minute: '2-digit',
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: '2-digit',
-};
-const dateOptions = {
-  hour: '2-digit',
-  minute: '2-digit',
-};
 function Main({ data, airports }) {
   const { globalTheme } = useContext(ThemeContext);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -29,10 +18,22 @@ function Main({ data, airports }) {
   const [flights, setFlights] = useState([]);
   const language = useLanguage();
   const formattedLanguage = language.replace(/_/g, '-');
+  const hour12Format = hourFormat();
   const media = useMedia();
   const API_KEY = media.apiKey;
   const airportIATA = media.iataCode;
   const departureArrival = media.arrivalDeparture;
+  const formattedUpdateTime = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+  };
+  const dateOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: hour12Format,
+  };
   async function fetchFlightsData() {
     const response = await axios.get(`https://aviation-edge.com/v2/public/timetable?key=${API_KEY}&iataCode=${airportIATA}&type=${departureArrival}`);
     return response.data;
@@ -125,7 +126,7 @@ function Main({ data, airports }) {
                 </div>
                 <div>
                   <div>
-                    <h1>{currentTime.toLocaleTimeString()}</h1>
+                    <h1>{currentTime.toLocaleTimeString(undefined, dateOptions)}</h1>
                   </div>
                 </div>
               </section>
@@ -141,9 +142,9 @@ function Main({ data, airports }) {
               <section className="dateArea">
                 <span className="hour">
                   <IoAirplane size={35} />
-                  <h1>{currentTime.toLocaleTimeString()}</h1>
+                  <h1>{currentTime.toLocaleTimeString(undefined, dateOptions)}</h1>
                 </span>
-                <span className="date">{currentTime.toLocaleDateString()}</span>
+                <span className="date">{currentTime.toLocaleDateString(formattedLanguage)}</span>
               </section>
             </>
           )
@@ -184,7 +185,7 @@ function Main({ data, airports }) {
                     <td style={{ backgroundColor: viewWidth < 700 ? lineColor : '' }}>{flight.flight.number}</td>
                     <td>{flight.airline.name}</td>
                     <td style={{ backgroundColor: viewWidth < 700 ? lineColor : '' }}>
-                      {flightDate.toLocaleString(formattedLanguage, dateOptions)}
+                      {flightDate.toLocaleString(undefined, dateOptions)}
                     </td>
                     <td>{gate}</td>
                     <td>{terminal}</td>

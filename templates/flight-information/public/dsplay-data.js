@@ -5,7 +5,7 @@
 /* eslint-disable no-var */
 var dsplay_config = {
     // config parameters
-    locale: 'en_US',
+    locale: 'pt',
     orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
     // Android SDK version
     osVersion: 19,
