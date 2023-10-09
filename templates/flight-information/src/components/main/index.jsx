@@ -6,6 +6,8 @@ import { useMedia } from '@dsplay/react-template-utils';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext } from '../../contexts/themeContext';
 import Intro from '../intro';
+import useLanguage from '../../hooks/use-language';
+import i18n from '../../i18n';
 
 const formattedUpdateTime = {
   hour: '2-digit',
@@ -25,6 +27,8 @@ function Main({ data, airports }) {
   const [loading, setLoading] = useState(true);
   const [updateTime, setUpdateTime] = useState(new Date());
   const [flights, setFlights] = useState([]);
+  const language = useLanguage();
+  const formattedLanguage = language.replace(/_/g, '-');
   const media = useMedia();
   const API_KEY = media.apiKey;
   const airportIATA = media.iataCode;
@@ -33,6 +37,9 @@ function Main({ data, airports }) {
     const response = await axios.get(`https://aviation-edge.com/v2/public/timetable?key=${API_KEY}&iataCode=${airportIATA}&type=${departureArrival}`);
     return response.data;
   }
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
   useEffect(() => {
     const flightsReduced = data.filter((flight) => {
       const arrival = departureArrival === 'arrival';
@@ -177,7 +184,7 @@ function Main({ data, airports }) {
                     <td style={{ backgroundColor: viewWidth < 700 ? lineColor : '' }}>{flight.flight.number}</td>
                     <td>{flight.airline.name}</td>
                     <td style={{ backgroundColor: viewWidth < 700 ? lineColor : '' }}>
-                      {flightDate.toLocaleString('pt-BR', dateOptions)}
+                      {flightDate.toLocaleString(formattedLanguage, dateOptions)}
                     </td>
                     <td>{gate}</td>
                     <td>{terminal}</td>
@@ -190,7 +197,7 @@ function Main({ data, airports }) {
       </section>
       <footer className="updateTime" style={{ backgroundColor: globalTheme.secondaryColor }}>
         <p>{airpoirtName.nameAirport}</p>
-        <p>{updateTime.toLocaleString('pt-BR', formattedUpdateTime).replace(/,|às/g, '')}</p>
+        <p>{updateTime.toLocaleString(formattedLanguage, formattedUpdateTime).replace(/,|às/g, '')}</p>
       </footer>
     </div>
 
