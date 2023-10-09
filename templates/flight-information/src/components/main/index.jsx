@@ -20,7 +20,6 @@ function Main({ data, airports }) {
   const formattedLanguage = language.replace(/_/g, '-');
   const hour12Format = hourFormat();
   const media = useMedia();
-  const API_URL = media.apiUrl;
   const API_KEY = media.apiKey;
   const airportIATA = media.iataCode;
   const departureArrival = media.arrivalDeparture;
@@ -36,7 +35,7 @@ function Main({ data, airports }) {
     hour12: hour12Format,
   };
   async function fetchFlightsData() {
-    const response = await axios.get(`${API_URL}?key=${API_KEY}&iataCode=${airportIATA}&type=${departureArrival}`);
+    const response = await axios.get(`https://aviation-edge.com/v2/public/timetable?key=${API_KEY}&iataCode=${airportIATA}&type=${departureArrival}`);
     return response.data;
   }
   useEffect(() => {
