@@ -10,30 +10,50 @@ import useLanguage from '../../hooks/use-language';
 import i18n from '../../i18n';
 import hourFormat from '../../hooks/use-hour';
 
+const hour12Format = hourFormat();
+const formattedUpdateTime = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+};
+const dateOptions = {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: hour12Format,
+};
 function Main({ data, airports }) {
   const { globalTheme } = useContext(ThemeContext);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [loading, setLoading] = useState(true);
   const [updateTime, setUpdateTime] = useState(new Date());
   const [flights, setFlights] = useState([]);
+  const [flightsView, setFlightsView] = useState([]);
   const language = useLanguage();
   const formattedLanguage = language.replace(/_/g, '-');
-  const hour12Format = hourFormat();
+  const [currentPage, setCurrentPage] = useState(1);
   const media = useMedia();
+  const viewHeight = window.innerHeight;
+  const viewWidth = window.innerWidth;
+  const iataAirpot = media.iataCode;
+  const airpoirtName = airports.find((a) => a.codeIataAirport === iataAirpot);
+  const { t } = useTranslation();
   const API_KEY = media.apiKey;
+  const offset = media.offsetTime * 60000;
   const airportIATA = media.iataCode;
   const departureArrival = media.arrivalDeparture;
-  const formattedUpdateTime = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit',
-  };
-  const dateOptions = {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: hour12Format,
-  };
+  const timePage = media.intervalPages;
+  let itemsPerPage = 20;
+
+  if (viewHeight <= 720) {
+    itemsPerPage = 11;
+  } else if (viewHeight <= 1080) {
+    itemsPerPage = 17;
+  } else if (viewHeight <= 1280) {
+    itemsPerPage = 23;
+  } else {
+    itemsPerPage = 39;
+  }
   async function fetchFlightsData() {
     const response = await axios.get(`https://aviation-edge.com/v2/public/timetable?key=${API_KEY}&iataCode=${airportIATA}&type=${departureArrival}`);
     return response.data;
@@ -42,23 +62,41 @@ function Main({ data, airports }) {
     i18n.changeLanguage(language);
   }, [i18n, language]);
   useEffect(() => {
-    const flightsReduced = data.filter((flight) => {
-      const arrival = departureArrival === 'arrival';
-      const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
-      const flightTime = new Date(time);
-      const codesharedIsNotNull = flight.codeshared === null;
-      return flightTime >= currentTime && codesharedIsNotNull;
-    });
-    flightsReduced.sort((a, b) => {
-      const arrival = departureArrival === 'arrival';
-      const timeA = arrival ? a.arrival.scheduledTime : a.departure.scheduledTime;
-      const timeB = arrival ? b.arrival.scheduledTime : b.departure.scheduledTime;
-      const scheduledTimeA = new Date(timeA);
-      const scheduledTimeB = new Date(timeB);
-      return scheduledTimeA - scheduledTimeB;
-    });
-    setFlights(flightsReduced);
-  }, [data]);
+    let currentFlights;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    if (flights.length === 0) {
+      const flightsReduced = data.filter((flight) => {
+        const arrival = departureArrival === 'arrival';
+        const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
+        const flightTime = new Date(time);
+        const codesharedIsNotNull = flight.codeshared === null;
+        const timeLimit = new Date(currentTime.getTime() - (offset)); // Tempo atual - 40 minutos
+        return flightTime >= timeLimit && codesharedIsNotNull;
+      });
+      flightsReduced.sort((a, b) => {
+        const arrival = departureArrival === 'arrival';
+        const timeA = arrival ? a.arrival.scheduledTime : a.departure.scheduledTime;
+        const timeB = arrival ? b.arrival.scheduledTime : b.departure.scheduledTime;
+        const scheduledTimeA = new Date(timeA);
+        const scheduledTimeB = new Date(timeB);
+        return scheduledTimeA - scheduledTimeB;
+      });
+      setFlights(flightsReduced);
+      currentFlights = flightsReduced.slice(startIndex, endIndex);
+    } else {
+      currentFlights = flights.slice(startIndex, endIndex);
+    }
+    setFlightsView(currentFlights);
+    const timer = setTimeout(() => {
+      if (endIndex < flights.length) {
+        setCurrentPage(currentPage + 1);
+      } else {
+        setCurrentPage(1);
+      }
+    }, timePage);
+    return () => clearTimeout(timer);
+  }, [data, currentPage]);
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
@@ -66,6 +104,7 @@ function Main({ data, airports }) {
 
     return () => clearInterval(intervalId);
   }, []);
+
   useEffect(() => {
     const updateCurrentTime = async () => {
       setUpdateTime(new Date());
@@ -75,7 +114,8 @@ function Main({ data, airports }) {
         const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
         const flightTime = new Date(time);
         const codesharedIsNotNull = flight.codeshared === null;
-        return flightTime >= currentTime && codesharedIsNotNull;
+        const timeLimit = new Date(currentTime.getTime() - (offset)); // Tempo atual - 40 minutos
+        return flightTime >= timeLimit && codesharedIsNotNull;
       });
       flightsUpdated.sort((a, b) => {
         const arrival = departureArrival === 'arrival';
@@ -94,16 +134,11 @@ function Main({ data, airports }) {
       clearInterval(updateInterval);
     };
   }, []);
-
   useEffect(() => {
     if (data) {
       setLoading(false);
     }
   }, []);
-  const viewWidth = window.innerWidth;
-  const iataAirpot = media.iataCode;
-  const airpoirtName = airports.find((a) => a.codeIataAirport === iataAirpot);
-  const { t } = useTranslation();
   let planePicture = 'up';
   if (departureArrival === 'arrival') {
     planePicture = 'down';
@@ -164,7 +199,7 @@ function Main({ data, airports }) {
           </thead>
           <tbody>
             {
-              flights.map((flight, index) => {
+              flightsView.map((flight, index) => {
                 const lineColor = (viewWidth < 700 || index % 2 !== 0) ? globalTheme.lineColor : '';
                 const arrival = departureArrival === 'arrival';
                 const arrivalTime = flight.arrival.scheduledTime;
