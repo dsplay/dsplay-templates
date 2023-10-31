@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useScreenInfo, screen } from '@dsplay/react-template-utils';
-import spinner from '../../assets/image/loader.gif';
+import spinner from '../../assets/image/loader-icon.png';
 import './style.sass';
 
 // component
@@ -39,9 +39,9 @@ function Intro(props) {
   const { className } = props;
 
   return (
-    <div {...props} className={`intro ${className || ''}`}>
+    <div {...props} className={`loader ${className || ''}`}>
       <div>
-        <img src={spinner} alt="" style={imageStyle} />
+        <img src={spinner} alt="" style={imageStyle} className="logo bounce" />
       </div>
     </div>
   );

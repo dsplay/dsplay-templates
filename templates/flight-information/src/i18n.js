@@ -32,11 +32,11 @@ i18n
       pt: {
         translations: {
           locale: ptBR,
-          destination: 'Destinos',
-          origin: 'Origens',
+          destination: 'Destino',
+          origin: 'Origem',
           departures: 'Saídas',
           terminal: 'Terminal',
-          flight: 'Voos',
+          flight: 'Voo',
           airline: 'Companhia aérea',
           arrivals: 'Chegadas',
           time: 'Hora',
@@ -49,7 +49,7 @@ i18n
         translations: {
           locale: fr,
           destination: 'Destination',
-          flight: 'Vols',
+          flight: 'Vol',
           terminal: 'Terminal',
           departures: 'Départs',
           arrivals: 'Arrivées',
@@ -78,8 +78,8 @@ i18n
       es: {
         translations: {
           locale: es,
-          destination: 'Destinos',
-          flight: 'Vuelos',
+          destination: 'Destino',
+          flight: 'Vuelo',
           departures: 'Salidas',
           terminal: 'Terminal',
           arrivals: 'Llegadas',
