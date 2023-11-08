@@ -60,7 +60,6 @@ function Main({ startTime }) {
   } else {
     itemsPerPage = 33;
   }
-  console.log(itemsPerPage);
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [i18n, language]);
