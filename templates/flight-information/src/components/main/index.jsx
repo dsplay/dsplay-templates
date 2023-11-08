@@ -50,13 +50,17 @@ function Main({ startTime }) {
   if (viewHeight <= 720) {
     itemsPerPage = 11;
   } else if (viewHeight <= 1080) {
-    itemsPerPage = 17;
-  } else if (viewHeight <= 1280) {
-    itemsPerPage = 23;
-  } else {
+    itemsPerPage = 14;
+  } else if (viewHeight <= 1280 && viewWidth <= 720) {
+    itemsPerPage = 30;
+  } else if (viewHeight <= 1280 && viewWidth > 720) {
+    itemsPerPage = 21;
+  } else if (viewHeight <= 1920 && viewWidth <= 1080) {
     itemsPerPage = 39;
+  } else {
+    itemsPerPage = 33;
   }
-
+  console.log(itemsPerPage);
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [i18n, language]);
@@ -165,7 +169,7 @@ function Main({ startTime }) {
                 const terminal = arrival ? flight.arrival.terminal : flight.departure.terminal;
                 return (
                   <tr
-                    key={flight.flight.number}
+                    key={flight.flight.number + flight.flight.iataNumber}
                     style={{ backgroundColor: viewWidth > 700 ? lineColor : '' }}
                     className="flightData"
                   >
