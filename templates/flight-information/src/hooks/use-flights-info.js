@@ -10,7 +10,7 @@ export function useFlightsInfoPromise(currentTime) {
   const API_KEY = media.apiKey;
   const airportIATA = media.iataCode;
   const departureArrival = media.arrivalDeparture;
-  const offset = media.offsetTimeMinutes * 60000;
+  const offset = (media.offsetTimeMinutes || 0) * 60000;
 
   // console.log('requesting promise', currentTime);
 
