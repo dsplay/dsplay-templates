@@ -82,8 +82,9 @@ function Main({ startTime }) {
 
   useEffect(() => {
     if (!fetchingAllFligts) {
+      const maxPageDuration = (media.maxPageDurationSeconds || 60) * 1000;
       setPageCount(Math.ceil(allFlights.length / itemsPerPage));
-      setPageTime(Math.min(media.duration / pageCount, media.maxPageDurationSeconds * 1000));
+      setPageTime(Math.min(media.duration / pageCount, maxPageDuration));
     }
   }, [fetchingAllFligts, allFlights]);
 
