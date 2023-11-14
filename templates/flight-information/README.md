@@ -21,16 +21,11 @@ This template has some configuration variables as the following table shows:
 
 | Variable              | Type    | Default    | Description                                        |
 |-----------------------|---------|------------| ---------------------------------------------------|
-| `theme`            | object   | { primaryColor, secondaryColor, lineColor }       | template colors                                  |
-| `logoPicture` | text   | "https://www.urlExample.com" | logo picture |
-| `aiirlineInformation`          | object   | { airportName, lastUpdate, departureOrArrivals, planePicture, logoPicure, flights }    | arline information and flight list    |
-
-Theme {...}
-| Variable              | Type    | Default    | Description                                        |
-|-----------------------|---------|------------| ---------------------------------------------------|
-| `primaryColor`        | text   | ""    | primary color    |
-| `secondaryColor`        | text   | ""    | secondary color    |
-| `lineColor`        | text   | ""    | line color    |
+| `offsetTimeMinutes`            | Int   | {20,30,40 }       | Time to offset render flight data                                  |
+| `maxPageDurationSeconds` | Int   | {20,30,40 } | Time to display each page of flights data |
+| `apiKey`          | String   | xxxxxx-xxxxx   | API-KEY to request de flithts data    |
+| `arrivalDeparture`          | String   | {arrival, departure}   | The option to show arrivals or departures of a airpoit    |
+| `iataCode`          | String   |{GRU, JFK}    | IATA Code of Airpot to be render   |
 
 
 Airline information [...]
@@ -52,7 +47,6 @@ Flights [...]
 | `airline`          | text   | "https://www.urlExample.com"    | image link    |
 | `departureTime`          | text   | "2023-06-05T10:16"    | datetime, iso format    |
 | `gate`          | text   | "Term B - 52"    | gate description    |
-| `status`          | text   | "on time"    | flight status    |
 
 
 ## Getting started
