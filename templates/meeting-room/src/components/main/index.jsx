@@ -51,7 +51,7 @@ function Main() {
 
             </h1>
           </p>
-          <p className="meeting-name"><FitText>Event with a big name to test the space Event with a big name to test the space Event with a big name to test the space Event with a big name to test the space  Event with a big name to test the space Event with a big name to test the space</FitText></p>
+          <p className="meeting-name"><FitText>{media.eventName}</FitText></p>
         </div>
         <Color src={imgEventLogo} format="hex">
           {({ data }) => (
