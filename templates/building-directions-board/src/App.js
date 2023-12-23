@@ -5,6 +5,7 @@ import SecondaryContainer from './components/secondary/secondaryContainer';
 import { useMedia, Loader, useScreenInfo } from '@dsplay/react-template-utils';
 import Seta from './components/images/seta.png';
 import Intro from './components/intro';
+import defaultLogo from './assets/image/dsplay-logo.png'
 
 const MIN_LOADING_DURATION = 2800;
 
@@ -15,7 +16,7 @@ const fonts = [
 ];
 function App() {
   let media = useMedia();
-  let mainLogo = media.logo;
+  let mainLogo = media.logo || defaultLogo ;
   let maxPageTimeMilliseconds = (media.maxPageDurationSeconds ?? 60) * 1000;
   const { screenFormat } = useScreenInfo();
 

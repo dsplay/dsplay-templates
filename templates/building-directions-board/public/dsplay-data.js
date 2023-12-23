@@ -9,7 +9,7 @@ var dsplay_config = {
 };
 
 var dsplay_media = {
-    logo: '../test-assets/mainLogo.png',
+    logo: '',
     // maxPageDurationSeconds: 10,
     duration: 30000,
     targets: [{
