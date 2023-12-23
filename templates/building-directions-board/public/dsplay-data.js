@@ -9,10 +9,10 @@ var dsplay_config = {
 };
 
 var dsplay_media = {
-    mainLogo: '../test-assets/mainLogo.png',
-    maxPageTimeSeconds: 10000000,
-    duration: 100000,
-    events: [{
+    logo: '../test-assets/mainLogo.png',
+    // maxPageDurationSeconds: 10,
+    duration: 30000,
+    targets: [{
         name: "Gilberto Fdasasreyre",
         place: "Piso C1",
         floor: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.  ",

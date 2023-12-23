@@ -15,8 +15,8 @@ const fonts = [
 ];
 function App() {
   let media = useMedia();
-  let mainLogo = media.mainLogo;
-  let maxPageTimeSeconds = media.maxPageTimeSeconds;
+  let mainLogo = media.logo;
+  let maxPageTimeMilliseconds = (media.maxPageDurationSeconds ?? 60) * 1000;
   const { screenFormat } = useScreenInfo();
 
   //Paginação
@@ -32,24 +32,24 @@ function App() {
   } else {
     itemsPerPage = 9;
   }
-  let numberOfPage = media.events.length;
-  let duration = (media.duration - 1000) / numberOfPage;
-  let timePage = duration > maxPageTimeSeconds ? maxPageTimeSeconds : duration;
+  let numberOfPages = Math.ceil(media.targets.length / itemsPerPage);
+  let pageDuration = (media.duration - 1000) / numberOfPages;
+  let timePage = pageDuration > maxPageTimeMilliseconds ? maxPageTimeMilliseconds : pageDuration;
 
   let timeoutInterval = timePage;
   let [currentPage, setCurrentPage] = useState(1);
-  let [visibleEvents, setVisibleEvents] = useState([]);
+  let [visibleTargets, setVisibleTargets] = useState([]);
 
   useEffect(() => {
-    const events = media.events;
+    const targets = media.targets;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentEvents = events.slice(startIndex, endIndex);
+    const currentTargets = targets.slice(startIndex, endIndex);
 
-    setVisibleEvents(currentEvents);
+    setVisibleTargets(currentTargets);
 
     const timer = setTimeout(() => {
-      if (endIndex < events.length) {
+      if (endIndex < targets.length) {
         setCurrentPage(currentPage + 1);
       } else {
         // Reinicia
@@ -58,7 +58,7 @@ function App() {
     }, timeoutInterval);
 
     return () => clearTimeout(timer);
-  }, [media.events, currentPage]);
+  }, [media.targets, currentPage, itemsPerPage, timeoutInterval]);
 
   return (
     <Loader
@@ -68,7 +68,7 @@ function App() {
     >
       <div className={`app-container fade-in ${screenFormat}`}>
         <MainContainer mainLogo={mainLogo}></MainContainer>
-        {visibleEvents.map((data, index) => (
+        {visibleTargets.map((data, index) => (
           <SecondaryContainer
             key={index}
             logo={data.logo}

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.scss';
 
 function SecondaryContainer(props) {
-  
+
   const directionMap = {
     left: 0,
     down_right: 45,
@@ -13,14 +13,13 @@ function SecondaryContainer(props) {
     up: 270,
     up_right: 315,
   };
-  
+
   let direction = directionMap[props.direction] || 0;
-  const [rotation, setRotation] = useState(direction); // Valor inicial da rotação em graus
 
   return (
     <div className="secondary-container">
       <div className="left-content">
-        <img src={props.logo} alt="Direção"/>
+        <img src={props.logo} alt="Direção" />
       </div>
       <div className="center-content">
         <p> {props.name} </p>
@@ -32,9 +31,9 @@ function SecondaryContainer(props) {
           src={props.seta}
           alt="Direção"
           style={{
-            transform: `rotate(${rotation}deg)`
+            transform: `rotate(${direction}deg)`
           }}
-          />
+        />
       </div>
     </div>
   );
