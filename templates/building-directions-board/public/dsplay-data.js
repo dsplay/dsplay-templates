@@ -17,7 +17,7 @@ var dsplay_media = {
         place: "Piso C1",
         floor: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.  ",
         direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/logo_esquerda.png"
+        logo: ""
     },
     {
         name: "Restaurante Mdsairange",

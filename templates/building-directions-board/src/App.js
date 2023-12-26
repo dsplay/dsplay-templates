@@ -6,7 +6,7 @@ import { useMedia, Loader, useScreenInfo } from '@dsplay/react-template-utils';
 import Seta from './components/images/seta.png';
 import Intro from './components/intro';
 import defaultLogo from './assets/image/dsplay-logo.png'
-
+import noneBackground from './assets/image/noneBackground.png'
 const MIN_LOADING_DURATION = 2800;
 
 // fonts to preload
@@ -72,7 +72,7 @@ function App() {
         {visibleTargets.map((data, index) => (
           <SecondaryContainer
             key={index}
-            logo={data.logo}
+            logo={data.logo || noneBackground}
             direction={data.direction}
             name={data.name}
             place={data.place}
