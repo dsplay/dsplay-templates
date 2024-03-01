@@ -4,7 +4,7 @@ import { tval, config } from '@dsplay/template-utils';
 
 const { locale } = config;
 const KEY_VERSION = 'currency_version';
-const VERSION = '1.3';
+const VERSION = '1.4';
 
 const formatMoney = function (n, c, d, t) {
   var c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -46,7 +46,7 @@ async function fetchAndConvertFreeCurrencyApi() {
   // const
   let value;
   await (async () => {
-    let url = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${targetCurrency.toLowerCase()}.json`;
+    let url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${targetCurrency.toLowerCase()}.json`;
     let res = await axios(url);
     value = res.data;
   })();
