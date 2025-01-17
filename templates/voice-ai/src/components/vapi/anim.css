@@ -1,0 +1,46 @@
+/* :root {
+  --spinner-animation-speed: 10s;
+  --spinner-color: #ffffff;
+  --spinner-color2: #e874ff;
+  --spinner-color3: #ff7474;
+  --amp-spinner-color: #ff7474;
+} */
+
+:root {
+  --spinner-animation-speed: 10s;
+  --spinner-color: #ffffff;
+  --spinner-color2: #b7ff74;
+  --spinner-color3: #74ffae;
+  --amp-spinner-color: #03a064;
+}
+
+.spinner {
+  animation: spin var(--spinner-animation-speed) linear infinite;
+}
+
+.spinner .spinner-gradient-stop {
+  stop-color: var(--spinner-color);
+}
+
+.spinner .spinner-gradient-stop2{
+  stop-color: var(--spinner-color2);
+}
+
+.spinner .spinner-gradient-stop3{
+  stop-color: var(--spinner-color3);
+}
+
+.spinner .amp-spinner-gradient-stop {
+  stop-color: var(--amp-spinner-color);
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+    transform: scale(100%);
+  }
+  to {
+    transform: rotate(0deg);
+    transform: scale(200%);
+
+  }
+}
