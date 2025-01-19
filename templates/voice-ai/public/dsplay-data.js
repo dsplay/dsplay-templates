@@ -20,11 +20,7 @@ var dsplay_media = {
 
 var dsplay_template = {
     // template parameter
-    // assistant_id: "6ddd1731-ef61-4717-aac5-a4bd16ecbc11",
-    assistant_id: "f1401978-6b3f-45d9-b00a-0bd08cf22b82",
-    api_key: "f4a7d23c-3420-4841-b1d4-95c04191088a",
-    gradiente_color_1: "#000",
-    gradiente_color_2: "#121e31",
+    assistant_id: "",
+    api_key: "",
     background_media: "../test-assets/hud-default.jpeg",
-
 };
