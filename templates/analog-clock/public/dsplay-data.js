@@ -1,6 +1,6 @@
 var dsplay_config = {
   // config parameters
-  locale: 'de_DE',
+  // locale: 'de_DE',
   orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
   // Android SDK version
   osVersion: 19,
