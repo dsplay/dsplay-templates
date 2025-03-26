@@ -11,6 +11,8 @@ function VapiAssistant() {
   const apiKey = useTemplateVal('api_key');
   const [amplitudes, setAmplitudes] = useState(new Array(100).fill(0));
   const backgroundMedia = useTemplateVal('background_media');
+  const gradienteColor1 = useTemplateVal('gradiente_color_1');
+  const gradienteColor2 = useTemplateVal('gradiente_color_2');
 
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
@@ -48,8 +50,8 @@ function VapiAssistant() {
     const targetElement = amplitudeBackRef.current;
     KUTE.fromTo(
       targetElement,
-      { fill: '#94C58C' },
-      { fill: '#0A6921' },
+      { fill: gradienteColor1 },
+      { fill: gradienteColor2 },
       {
         duration: 10000,
         repeat: 999,
@@ -133,25 +135,25 @@ function VapiAssistant() {
       >
         <defs>
           <linearGradient id="gradientFade" x1="20%" x2="50%" y1="60%" y2="100%">
-            <stop offset="0%" className="spinner-gradient-stop" />
-            <stop offset="25%" stopOpacity="75%" className="spinner-gradient-stop" />
-            <stop offset="50%" stopOpacity="50%" className="spinner-gradient-stop" />
-            <stop offset="75%" stopOpacity="25%" className="spinner-gradient-stop" />
-            <stop offset="100%" stopOpacity="5%" className="spinner-gradient-stop" />
+            <stop offset="0%" stopColor={gradienteColor1} />
+            <stop offset="25%" stopColor={gradienteColor1} stopOpacity="75%" />
+            <stop offset="50%" stopColor={gradienteColor1} stopOpacity="50%" />
+            <stop offset="75%" stopColor={gradienteColor1} stopOpacity="25%" />
+            <stop offset="100%" stopColor={gradienteColor1} stopOpacity="5%" />
           </linearGradient>
           <linearGradient id="gradientFade2" x1="20%" x2="50%" y1="60%" y2="100%">
-            <stop offset="0%" className="spinner-gradient-stop2" />
-            <stop offset="25%" stopOpacity="75%" className="spinner-gradient-stop2" />
-            <stop offset="50%" stopOpacity="50%" className="spinner-gradient-stop2" />
-            <stop offset="75%" stopOpacity="25%" className="spinner-gradient-stop2" />
-            <stop offset="100%" stopOpacity="5%" className="spinner-gradient-stop2" />
+            <stop offset="0%" stopColor={gradienteColor2} />
+            <stop offset="25%" stopColor={gradienteColor2} stopOpacity="75%" />
+            <stop offset="50%" stopColor={gradienteColor2} stopOpacity="50%" />
+            <stop offset="75%" stopColor={gradienteColor2} stopOpacity="25%" />
+            <stop offset="100%" stopColor={gradienteColor2} stopOpacity="5%" />
           </linearGradient>
           <linearGradient id="gradientFade3" x1="20%" x2="50%" y1="60%" y2="100%">
-            <stop offset="0%" className="spinner-gradient-stop3" />
-            <stop offset="25%" stopOpacity="75%" className="spinner-gradient-stop3" />
-            <stop offset="50%" stopOpacity="50%" className="spinner-gradient-stop3" />
-            <stop offset="75%" stopOpacity="25%" className="spinner-gradient-stop3" />
-            <stop offset="100%" stopOpacity="5%" className="spinner-gradient-stop3" />
+            <stop offset="0%" stopColor={gradienteColor1} />
+            <stop offset="25%" stopColor={gradienteColor1} stopOpacity="75%" />
+            <stop offset="50%" stopColor={gradienteColor1} stopOpacity="50%" />
+            <stop offset="75%" stopColor={gradienteColor1} stopOpacity="25%" />
+            <stop offset="100%" stopColor={gradienteColor1} stopOpacity="5%" />
           </linearGradient>
           <linearGradient id="ampGradientFade" x1="20%" x2="50%" y1="60%" y2="100%">
             <stop offset="0%" className="amp-spinner-gradient-stop" />

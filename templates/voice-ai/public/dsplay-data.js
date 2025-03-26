@@ -20,7 +20,10 @@ var dsplay_media = {
 
 var dsplay_template = {
     // template parameter
-    assistant_id: "",
-    api_key: "",
-    background_media: "../test-assets/hud-default.jpeg",
+    assistant_id: "f1401978-6b3f-45d9-b00a-0bd08cf22b82",
+    api_key: "f4a7d23c-3420-4841-b1d4-95c04191088a",
+    gradiente_color_1: "#FD28DA",
+    gradiente_color_2: "#EE8997",
+    background_media: "../test-assets/blur.jpg",
+
 };

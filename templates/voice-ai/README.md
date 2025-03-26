@@ -1,152 +1,112 @@
 ![DSPLAY - Digital Signage](https://developers.dsplay.tv/assets/images/dsplay-logo.png)
 
-# DSPLAY - React Template Boilerplate
+# DSPLAY - VAPI Agents Integration
 
-This is a [React](https://reactjs.org/) boilerplate for building [HTML-based templates](https://developers.dsplay.tv/docs/html-templates) for [DSPLAY - Digital Signage](https://dsplay.tv/) platform.
+Este é um template React para integração com agentes VAPI na plataforma DSPLAY - Digital Signage. O template permite a criação de experiências interativas com assistentes virtuais, incluindo visualização de áudio em tempo real e efeitos visuais dinâmicos.
 
-You can use this project as a skeleton for creating a new HTML Template with React. If you prefer to use another JS library, check the [other boilerplates](https://developers.dsplay.tv/docs/html-templates/boilerplates/) available.
+## Características
 
-> This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+- Integração com VAPI AI para assistentes virtuais
+- Visualização de áudio em tempo real
+- Efeitos visuais dinâmicos com SVG
+- Suporte a múltiplos idiomas (i18n)
+- Interface responsiva
+- Animações suaves com KUTE.js
 
-## Getting started
+## Configuração do Template
 
+O template utiliza as seguintes variáveis no arquivo `dsplay-data.js`:
+
+```javascript
+var dsplay_template = {
+    // ID do assistente VAPI
+    assistant_id: "f1401978-6b3f-45d9-b00a-0bd08cf22b82",
+    
+    // Chave de API do VAPI
+    api_key: "f4a7d23c-3420-4841-b1d4-95c04191088a",
+    
+    // Cores do gradiente para efeitos visuais
+    gradiente_color_1: "#FD28DA", // Cor principal do gradiente
+    gradiente_color_2: "#EE8997", // Cor secundária do gradiente
+    
+    // Imagem de fundo do template
+    background_media: "../test-assets/blur.jpg"
+};
 ```
-git clone https://github.com/dsplay/template-boilerplate-react.git my-awesome-template
-cd my-awesome-template
-rm -rf .git
-npm i
+
+### Descrição das Variáveis
+
+- `assistant_id`: Identificador único do assistente VAPI configurado
+- `api_key`: Chave de API necessária para autenticação com o serviço VAPI
+- `gradiente_color_1`: Cor principal utilizada nos efeitos visuais e gradientes
+- `gradiente_color_2`: Cor secundária utilizada para criar contraste nos efeitos visuais
+- `background_media`: Caminho para a imagem de fundo do template
+
+## Iniciando o Projeto
+
+```bash
+# Clone o repositório
+git clone https://github.com/dsplay/template-vapi.git
+
+# Entre no diretório
+cd template-vapi
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
 npm start
 ```
 
+## Desenvolvimento
 
-## `dsplay-data.js`
+Durante o desenvolvimento, você pode usar o arquivo `dsplay-data.js` localizado na pasta `public` para testar diferentes configurações.
 
-In this boilerplate project, `dsplay-data.js` is located at `public` folder.
+> O arquivo `dsplay-data.js` é um mock com dados de teste durante o desenvolvimento. O DSPLAY Player App substituirá automaticamente este arquivo com conteúdo real em tempo de execução.
 
-> During template development, `dsplay-data.js` will be just a mock with your test data. The DSPLAY Player App will automatically replace this file with real content at runtime.
+### Usando Variáveis do Template
 
-### Using `dsplay-data.js` vars in template
-
-The easiest way to access `dsplay-data.js` values in your project is by using the support library `@dsplay/react-template-utils` (already included in this boilerplate). 
-
-Here is a small snippet showing how to get values inside a React component:
+Para acessar as variáveis do template em seus componentes React, utilize o hook `useTemplateVal`:
 
 ```jsx
-// App.jsx
-import React from 'react';
-import {
-  FitText,
-  useMedia,
-  useConfig,
-  useTemplate,
-  useTemplateVal,
-  useTemplateBoolVal,
-  useTemplateIntVal,
-  useTemplateFloatVal,
-  useScreenInfo,
-} from '@dsplay/react-template-utils';
-import './App.css';
+import { useTemplateVal } from '@dsplay/react-template-utils';
 
-const { duration } = media;
-const { orientation, locale } = config;
-
-function App() {
-  const config = useConfig();
-  const media = useMedia();
-  const template = useTemplate();
-  const { screenFormat } = useScreenInfo();
-
-  const { locale } = config;
-  const { duration } = media;
-  return (
-    <div className="App">
-      <h1>DSPLAY Template</h1>
-      <h2>Raw Values</h2>
-      <div>
-        <p>Config:</p>
-        <pre>{JSON.stringify(config, null, 4)}</pre>
-
-        <p>Media:</p>
-        <pre>{JSON.stringify(media, null, 4)}</pre>
-
-        <p>Template:</p>
-        <pre>{JSON.stringify(template, null, 4)}</pre>
-      </div>
-      <h2>Configuration Values Examples</h2>
-      <div>
-        <p>
-          Locale:
-          <span class="val">{locale}</span>
-        </p>
-      </div>
-      <h2>Media Values Examples</h2>
-      <div>
-        <p>
-            Duration:
-          <span class="val">{duration}</span>
-        </p>
-      </div>
-      <h2>Custom Template Var Examples</h2>
-      <div>
-        <p>
-          String:
-          <span className="val">{useTemplateVal('title', 'Default Value')}</span>
-        </p>
-        <p>
-          Boolean:
-          <span className="val">{useTemplateBoolVal('expanded', true) ? 'Yes' : 'No'}</span>
-        </p>
-        <p>
-          Int:
-          <span className="val">{useTemplateIntVal('page_size', 10)}</span>
-        </p>
-        <p>
-          Double:
-          <span className="val">{useTemplateFloatVal('rate', 0.75)}</span>
-        </p>
-        <p>
-          Image:
-          <img className="val" alt="" src={useTemplateVal('logo')} />
-        </p>
-        <p>
-          ScreenFormat:
-          <span className="val">{screenFormat}</span>
-        </p>
-      </div>
-    </div>
-  );
-}
-
-
-export default App;
-```
-
-## Test assets
-
-To use test assets (images, videos, etc) during development time you can put them in the `public/test-assets` folder and then reference them in `dsplay-data.js` using their relative path.
-```js
-// dsplay-data.js
-
-// ... other objects
-
-var dsplay_template {
-    //... other fields
-    my_image: '../test-assets/my-image.png',
+function SeuComponente() {
+  const assistantId = useTemplateVal('assistant_id');
+  const apiKey = useTemplateVal('api_key');
+  const gradienteColor1 = useTemplateVal('gradiente_color_1');
+  const gradienteColor2 = useTemplateVal('gradiente_color_2');
+  const backgroundMedia = useTemplateVal('background_media');
+  
+  // ... resto do código
 }
 ```
 
-> The `public/test-assets` folder is automatically excluded from the release build.
+## Assets de Teste
 
-## Packing (release build)
+Para usar assets de teste (imagens, vídeos, etc) durante o desenvolvimento:
 
-To create a release build of the template, ready to be uploaded to DSPLAY, just run:
+1. Coloque os arquivos na pasta `public/test-assets`
+2. Referencie-os no `dsplay-data.js` usando o caminho relativo:
 
+```javascript
+var dsplay_template = {
+    background_media: '../test-assets/sua-imagem.jpg'
+};
 ```
+
+> A pasta `public/test-assets` é automaticamente excluída do build de produção.
+
+## Build de Produção
+
+Para criar um build de produção do template, pronto para ser enviado ao DSPLAY:
+
+```bash
 npm run zip
 ```
 
-It will generate a `template.zip` file ready to be deployed to [DSPLAY Web Manager](https://manager.dsplay.tv/template/create)
+Isso irá gerar um arquivo `template.zip` pronto para ser implantado no [DSPLAY Web Manager](https://manager.dsplay.tv/template/create).
 
-## More
+## Mais Informações
 
-The see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
+Para mais informações sobre templates HTML do DSPLAY, visite: https://developers.dsplay.tv/docs/html-templates
