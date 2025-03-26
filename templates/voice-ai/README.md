@@ -20,10 +20,9 @@ O template utiliza as seguintes variáveis no arquivo `dsplay-data.js`:
 ```javascript
 var dsplay_template = {
     // ID do assistente VAPI
-    assistant_id: "f1401978-6b3f-45d9-b00a-0bd08cf22b82",
-    
+    assistant_id: "your-agent-id",
     // Chave de API do VAPI
-    api_key: "f4a7d23c-3420-4841-b1d4-95c04191088a",
+    api_key: "your-vapi-api-key",
     
     // Cores do gradiente para efeitos visuais
     gradiente_color_1: "#FD28DA", // Cor principal do gradiente
