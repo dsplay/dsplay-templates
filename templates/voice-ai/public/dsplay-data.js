@@ -25,5 +25,6 @@ var dsplay_template = {
     gradiente_color_1: "#FD28DA",
     gradiente_color_2: "#EE8997",
     background_media: "../test-assets/blur.jpg",
+    background_image_url: "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/85fbb8b3-ffb8-4cec-8c4d-c6df5ce1520e/4dc9ed29-1f14-4df1-9cde-d81bbf102916.png",
 
 };

@@ -10,7 +10,7 @@ function VapiAssistant() {
   const assistant = useTemplateVal('assistant_id');
   const apiKey = useTemplateVal('api_key');
   const [amplitudes, setAmplitudes] = useState(new Array(100).fill(0));
-  const backgroundMedia = useTemplateVal('background_media');
+  const backgroundMedia = useTemplateVal('background_media', useTemplateVal('background_image_url'));
   const gradienteColor1 = useTemplateVal('gradiente_color_1');
   const gradienteColor2 = useTemplateVal('gradiente_color_2');
 
