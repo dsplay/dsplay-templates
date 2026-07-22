@@ -3,12 +3,12 @@ import useFitText from 'use-fit-text';
 
 const DEFAULT_READY_CLASS = 'dsplay-fit-text-ready';
 
-const FitText = ({
+function FitText({
   children,
   style = {},
   className = '',
   readyClassName = DEFAULT_READY_CLASS,
-}) => {
+}) {
   const [ready, setReady] = useState(false);
   const { fontSize, ref } = useFitText({ maxFontSize: 10000, onFinish: () => setReady(true) });
 
@@ -33,6 +33,6 @@ const FitText = ({
       {children}
     </div>
   );
-};
+}
 
 export default FitText;

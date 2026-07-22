@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useMemo,
 } from 'react';
 import ImageLoader from '../image-loader/image-loader';
 import FontLoader from '../font-loader/font-loader';
@@ -53,6 +54,10 @@ function Loader({
     }
   }, [loadingMin, minDuration, tasks]);
 
+  const context = useMemo(() => ({
+    tasksResults,
+  }), [tasksResults]);
+
   if (loadingFonts || loadingImages || loadingMin) {
     // console.log('loading...');
     return (
@@ -63,10 +68,6 @@ function Loader({
       </div>
     );
   }
-
-  const context = {
-    tasksResults,
-  };
 
   return (
     <LoaderContext.Provider value={context}>
