@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import {
   // DSPLAY interface
   DSPLAY,
@@ -55,4 +55,4 @@ const App = () => (
   </div>
 );
 
-render(<App />, document.getElementById("root"));
+createRoot(document.getElementById("root")).render(<App />);
