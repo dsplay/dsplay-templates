@@ -1,5 +1,4 @@
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
 
 const createConfig = (target) => ({
   entry: './src/lib/index.js',
@@ -11,13 +10,6 @@ const createConfig = (target) => ({
     umdNamedDefine: target === 'umd',
     globalObject: 'this',
   },
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        'src/lib/jsconfig.json',
-      ],
-    }),
-  ],
   module: {
     rules: [
       {

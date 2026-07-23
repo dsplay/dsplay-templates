@@ -1,3 +1,15 @@
+/**
+ * @typedef {object} RgbColor
+ * @property {number} r
+ * @property {number} g
+ * @property {number} b
+ */
+
+/**
+ * Parses a 3- or 6-digit hex color into its RGB components.
+ * @param {string} hexColor - e.g. `#fff` or `#ffffff`
+ * @returns {RgbColor | undefined} `undefined` when `hexColor` isn't a valid hex color
+ */
 export function hexToRgbObject(hexColor) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
   if (result) {
@@ -20,6 +32,11 @@ export function hexToRgbObject(hexColor) {
   return undefined;
 }
 
+/**
+ * Converts a hex color into a CSS `rgb(...)` string.
+ * @param {string} hexColor - e.g. `#fff` or `#ffffff`
+ * @returns {string} A `rgb(r, g, b)` string, or `'transparent'` when `hexColor` isn't valid
+ */
 export function hexToRgb(hexColor) {
   const { r, g, b } = hexToRgbObject(hexColor) || {};
 
@@ -28,6 +45,12 @@ export function hexToRgb(hexColor) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+/**
+ * Converts a hex color into a CSS `rgba(...)` string.
+ * @param {string} hexColor - e.g. `#fff` or `#ffffff`
+ * @param {number} alpha - Alpha value between 0 and 1
+ * @returns {string} A `rgba(r, g, b, alpha)` string, or `'transparent'` when `hexColor` isn't valid
+ */
 export function hexToRgba(hexColor, alpha) {
   const { r, g, b } = hexToRgbObject(hexColor) || {};
 

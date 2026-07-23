@@ -1,6 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import QRCode from 'easyqrcodejs';
 
+/**
+ * Renders a QR code, powered by `easyqrcodejs`.
+ * @param {object} props
+ * @param {string} [props.className] - Extra class applied to the wrapper
+ * @param {React.CSSProperties} [props.style] - Extra styles applied to the wrapper
+ * @param {object} props.options - `easyqrcodejs` options (e.g. `text`, `width`, `height`, `colorDark`), see https://github.com/ushelp/EasyQRCodeJS
+ * @returns {React.ReactElement}
+ */
 function QrCode({
   className = '',
   style = {},

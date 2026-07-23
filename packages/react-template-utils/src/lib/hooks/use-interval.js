@@ -1,5 +1,11 @@
 import { useEffect, useRef } from 'react';
 
+/**
+ * Repeatedly calls `callback` every `delay` milliseconds, always using the latest callback.
+ * @param {() => void} callback
+ * @param {number | null} delay - Interval in ms; passing `null` pauses the interval
+ * @returns {void}
+ */
 export default (callback, delay) => {
   const savedCallback = useRef();
 

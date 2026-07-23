@@ -19,6 +19,19 @@ const style = {
 
 const defaultTasks = [];
 
+/**
+ * Shows a placeholder while fonts and images preload (and any extra `tasks` resolve), then
+ * renders its children wrapped in a `LoaderContext.Provider` exposing the tasks' results.
+ * @param {object} props
+ * @param {string[]} [props.fonts] - Font family names to preload, see `FontLoader`
+ * @param {string[]} [props.images] - Image URLs to preload, see `ImageLoader`
+ * @param {React.ReactNode} [props.placeholder] - Shown while loading
+ * @param {React.ReactNode} props.children - Rendered once loading finishes
+ * @param {number} [props.minDuration] - Minimum time (ms) the placeholder stays visible
+ * @param {Promise<unknown>[]} [props.tasks] - Extra promises to await before loading finishes; their
+ * resolved values are exposed via `LoaderContext` as `tasksResults`
+ * @returns {React.ReactElement}
+ */
 function Loader({
   fonts,
   images,

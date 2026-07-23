@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
+/**
+ * Renders hidden probe elements for the given font families and calls back once the browser
+ * has finished loading fonts.
+ * @param {object} props
+ * @param {string[]} [props.families] - Font family names to preload
+ * @param {() => void} props.onLoad - Called once `document.fonts.ready` resolves
+ * @returns {React.ReactElement}
+ */
 function FontLoader({
   families = [],
   onLoad,

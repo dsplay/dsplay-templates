@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
+/**
+ * Renders hidden probe `<img>` elements and calls back once every unique image has either
+ * loaded or errored.
+ * @param {object} props
+ * @param {string[]} [props.images] - Image URLs to preload
+ * @param {() => void} props.onLoad - Called once all images have settled (loaded or errored)
+ * @returns {React.ReactElement}
+ */
 function ImageLoader({
   images = [],
   onLoad,
