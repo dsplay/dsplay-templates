@@ -7,6 +7,12 @@ var dsplay_config = {
   appVersion: 99,
 };
 
+var dsplay_template = {
+  // temperature unit shown in the template: 'celsius' or 'fahrenheit'
+  // (media values are always in celsius; the template converts when needed)
+  unit: 'celsius',
+};
+
 var dsplay_media = {
   duration: 30000,
 

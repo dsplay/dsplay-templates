@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMedia } from '@dsplay/react-template-utils';
 import { useNightInterval } from '../../hooks/night-interval';
 

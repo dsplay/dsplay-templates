@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import moment from 'moment';
 import { useConfig, FitText } from '@dsplay/react-template-utils';
 import { useTranslation } from 'react-i18next';
 import Icon from '../icon/icon';
+import { useTemperature } from '../../hooks/use-temperature';
 
 function ForecastItem({
   date,
@@ -13,13 +14,16 @@ function ForecastItem({
   const { locale = 'en' } = useConfig();
   const lng = useMemo(() => locale.split('_')[0], [locale]);
 
+  const minTemperature = useTemperature(min);
+  const maxTemperature = useTemperature(max);
+
   const dayText = useMemo(() => moment(date).format('ddd'), [date]);
   const dateText = useMemo(() => new Date(date).toLocaleDateString(lng, {
     month: 'numeric',
     day: 'numeric',
   }), [date, lng]);
-  const minText = useMemo(() => `${Math.round(min)}º`, [min]);
-  const maxText = useMemo(() => `${Math.round(max)}º`, [max]);
+  const minText = useMemo(() => `${Math.round(minTemperature)}º`, [minTemperature]);
+  const maxText = useMemo(() => `${Math.round(maxTemperature)}º`, [maxTemperature]);
 
   const { t } = useTranslation();
 

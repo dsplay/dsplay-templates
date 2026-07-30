@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { useMedia, useConfig, FitText } from '@dsplay/react-template-utils';
 import Icon from '../icon/icon';
 import { useBackground } from '../../hooks/use-background';
+import { useTemperature } from '../../hooks/use-temperature';
 import ForecastItem from '../forecast-item/forecast-item';
 import './main.sass';
 
@@ -11,9 +12,11 @@ function Main() {
   const { t, i18n } = useTranslation();
   const { locale = 'en_US' } = useConfig();
   const [lng] = locale.split('_');
-  moment.locale(lng);
 
-  i18n.changeLanguage(lng);
+  useEffect(() => {
+    moment.locale(lng);
+    i18n.changeLanguage(lng);
+  }, [lng, i18n]);
 
   const {
     result: {
@@ -36,9 +39,13 @@ function Main() {
     },
   } = useMedia();
 
-  const tempText = useMemo(() => `${Math.round(temp)}º`, [temp]);
-  const minText = useMemo(() => `${Math.round(min)}º`, [min]);
-  const maxText = useMemo(() => `${Math.round(max)}º`, [max]);
+  const temperature = useTemperature(temp);
+  const minTemperature = useTemperature(min);
+  const maxTemperature = useTemperature(max);
+
+  const tempText = useMemo(() => `${Math.round(temperature)}º`, [temperature]);
+  const minText = useMemo(() => `${Math.round(minTemperature)}º`, [minTemperature]);
+  const maxText = useMemo(() => `${Math.round(maxTemperature)}º`, [maxTemperature]);
 
   const listItems = useMemo(() => forecast.map((forecastItem) => (
     <ForecastItem
