@@ -75,9 +75,9 @@ function Loader({
     // console.log('loading...');
     return (
       <div style={style}>
-        {placeholder}
-        <ImageLoader images={images} onLoad={handleImagesLoad} />
-        <FontLoader families={fonts} onLoad={handleFontsLoad} />
+        <React.Fragment key="placeholder">{placeholder}</React.Fragment>
+        <ImageLoader key="image-loader" images={images} onLoad={handleImagesLoad} />
+        <FontLoader key="font-loader" families={fonts} onLoad={handleFontsLoad} />
       </div>
     );
   }
