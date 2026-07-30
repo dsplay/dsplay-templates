@@ -1,6 +1,6 @@
 {
   "name": "@dsplay/react-template-utils",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "main": "dist/dsplay-react-template-utils.umd.js",
   "module": "src/lib/index.js",
   "types": "dist/types/index.d.ts",

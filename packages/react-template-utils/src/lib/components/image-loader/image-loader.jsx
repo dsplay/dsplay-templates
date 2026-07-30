@@ -17,11 +17,11 @@ function ImageLoader({
   const uniqueImages = useMemo(() => [...new Set(images.filter((i) => i))], [images]);
   const total = uniqueImages.length;
 
-  const onLoadImage = () => setLoadCount(loadCount + 1);
+  const onLoadImage = () => setLoadCount((count) => count + 1);
 
   const onErrorImage = ({ target: { src } }) => {
-    setLoadCount(loadCount + 1);
-    setErrors([...errors, src]);
+    setLoadCount((count) => count + 1);
+    setErrors((prev) => [...prev, src]);
   };
 
   useEffect(() => {
