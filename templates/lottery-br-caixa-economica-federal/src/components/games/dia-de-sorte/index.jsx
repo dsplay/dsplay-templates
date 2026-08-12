@@ -1,35 +1,52 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
 import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
-import './loto-mania.sass';
-import './loto-mania-h.sass';
-import './loto-mania-v.sass';
-import './loto-mania-banner-h.sass';
-import './loto-mania-banner-v.sass';
-import './loto-mania-squared.sass';
-import logo from '../../../images/loto-mania-branco.png';
-import { screenFormat } from '../../../util.js/screen';
+import './dia-de-sorte.sass';
+import './dia-de-sorte-h.sass';
+import './dia-de-sorte-v.sass';
+import './dia-de-sorte-banner-h.sass';
+import './dia-de-sorte-banner-v.sass';
+import './dia-de-sorte-squared.sass';
+import logo from '../../../images/dia-de-sorte-branco.png';
+import { screenFormat } from '../../../utils/screen';
 
 moment.locale('pt-BR');
 
-function LotoMania() {
+const months = [
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
+];
 
-  const title = 'LOTO MANIA';
+function DiaDeSorte() {
+
+  const title = 'DIA DE SORTE';
 
   const {
     result: {
       data: {
-        lotomania: {
+        diadesorte: {
           round: {
             number,
             numbers = [],
             prizes: {
-              hits_20: {
+              hits_7: {
                 winners,
                 amount,
+              },
+              luck_month: {
+                month,
               },
             },
             accumulated,
@@ -52,17 +69,17 @@ function LotoMania() {
     winnersText = `${winners} ganhador${winners === 1 ? '' : 'es'}`;
     lastPrize = amount;
   } else {
-    winnersText = `Não houve ganhadores`;
+    winnersText = `ACUMULOU`;
     lastPrize = accumulated;
   }
 
   const nextDateUTC = moment.utc(nextDate);
 
   return (
-    <div className={`${screenFormat} loto-mania`}>
+    <div className={`${screenFormat} dia-de-sorte`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} alt="Lotomania" />
+          <img src={logo} alt="Dia de Sorte" />
           <span>{title}</span>
         </div>
       </div>
@@ -95,41 +112,33 @@ function LotoMania() {
       <div className="last-round flex v">
         <div className="title">Último Resultado</div>
         <div className="results">
+          <div className="numbers">
+            <span>
+              {numbers.slice(0, 4).map(number => <Ball key={number} value={number} />)}
+            </span>
+            <span>
+              {numbers.slice(4).map(number => <Ball key={number} value={number} />)}
+            </span>
+          </div>
           <div>
-            <div className="numbers">
-              <span>
-                {numbers.slice(0, 5).map(number => <Ball key={number} value={number} />)}
-              </span>
-              <span>
-                {numbers.slice(5, 10).map(number => <Ball key={number} value={number} />)}
-              </span>
-              <span>
-                {numbers.slice(10, 15).map(number => <Ball key={number} value={number} />)}
-              </span>
-              <span>
-                {numbers.slice(15).map(number => <Ball key={number} value={number} />)}
-              </span>
+            <div className="extra-result">
+              <span className="label">Mês da Sorte:</span>
+              <span className="value">{months[month - 1]}</span>
             </div>
             <div className="result">
               <span className="winner">{winnersText}</span>
-              {
-                (winners > 0) &&
-                <>
-                  &nbsp;(R$&nbsp;
-                  <CountUp
-                    duration={3}
-                    start={0}
-                    end={lastPrize}
-                    decimals={2}
-                    separator="."
-                    decimal=","
-                  />
-                  )
-                </>
-              }
+              &nbsp;(R$&nbsp;
+              <CountUp
+                duration={3}
+                start={0}
+                end={lastPrize}
+                decimals={2}
+                separator="."
+                decimal=","
+              />
+              )
             </div>
           </div>
-
         </div>
         <div className="info">
           Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {city}
@@ -142,4 +151,4 @@ function LotoMania() {
   );
 }
 
-export default LotoMania;
+export default DiaDeSorte;

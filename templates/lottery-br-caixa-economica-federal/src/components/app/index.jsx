@@ -1,14 +1,13 @@
-import React from 'react';
 import { media } from '@dsplay/template-utils';
-import MegaSena from './components/games/mega-sena/mega-sena';
-import DuplaSena from './components/games/dupla-sena/dupla-sena';
-import Quina from './components/games/quina/quina';
-import LotoFacil from './components/games/loto-facil/loto-facil';
-import LotoMania from './components/games/loto-mania/loto-mania';
-import DiaDeSorte from './components/games/dia-de-sorte/dia-de-sorte';
-import TimeMania from './components/games/time-mania/time-mania';
-import Federal from './components/games/federal/federal';
-import './App.sass';
+import MegaSena from '../games/mega-sena';
+import DuplaSena from '../games/dupla-sena';
+import Quina from '../games/quina';
+import LotoFacil from '../games/loto-facil';
+import LotoMania from '../games/loto-mania';
+import DiaDeSorte from '../games/dia-de-sorte';
+import TimeMania from '../games/time-mania';
+import Federal from '../games/federal';
+import './style.sass';
 
 const {
   iteration = 0,
@@ -27,7 +26,7 @@ const gameMap = {
 
 const {
   result: {
-    data
+    data,
   },
 } = media;
 
@@ -44,6 +43,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

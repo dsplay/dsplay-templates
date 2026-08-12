@@ -1,33 +1,32 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
 import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
-import './loto-facil.sass';
-import './loto-facil-h.sass';
-import './loto-facil-v.sass';
-import './loto-facil-banner-h.sass';
-import './loto-facil-banner-v.sass';
-import './loto-facil-squared.sass';
-import logo from '../../../images/loto-facil-branco.png';
-import { screenFormat } from '../../../util.js/screen';
+import './loto-mania.sass';
+import './loto-mania-h.sass';
+import './loto-mania-v.sass';
+import './loto-mania-banner-h.sass';
+import './loto-mania-banner-v.sass';
+import './loto-mania-squared.sass';
+import logo from '../../../images/loto-mania-branco.png';
+import { screenFormat } from '../../../utils/screen';
 
 moment.locale('pt-BR');
 
-function LotoFacil() {
+function LotoMania() {
 
-  const title = 'LOTO FÁCIL';
+  const title = 'LOTO MANIA';
 
   const {
     result: {
       data: {
-        lotofacil: {
+        lotomania: {
           round: {
             number,
             numbers = [],
             prizes: {
-              hits_15: {
+              hits_20: {
                 winners,
                 amount,
               },
@@ -40,7 +39,6 @@ function LotoFacil() {
             date: nextDate,
             estimatedPrize,
           },
-          accumulatedIndependenceDaySpecialPrize: nextSpecialPrizeAccumulated,
         },
       },
     },
@@ -60,10 +58,10 @@ function LotoFacil() {
   const nextDateUTC = moment.utc(nextDate);
 
   return (
-    <div className={`${screenFormat} loto-facil`}>
+    <div className={`${screenFormat} loto-mania`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} alt="Loto Fácil" />
+          <img src={logo} alt="Lotomania" />
           <span>{title}</span>
         </div>
       </div>
@@ -105,7 +103,10 @@ function LotoFacil() {
                 {numbers.slice(5, 10).map(number => <Ball key={number} value={number} />)}
               </span>
               <span>
-                {numbers.slice(10).map(number => <Ball key={number} value={number} />)}
+                {numbers.slice(10, 15).map(number => <Ball key={number} value={number} />)}
+              </span>
+              <span>
+                {numbers.slice(15).map(number => <Ball key={number} value={number} />)}
               </span>
             </div>
             <div className="result">
@@ -135,23 +136,9 @@ function LotoFacil() {
       </div>
       <div className="spacer3" />
       <div className="special-prizes">
-        Acumulado para Sorteio Especial da Independência:
-        <strong>
-          &nbsp;
-          R$
-          &nbsp;
-          <CountUp
-            duration={5}
-            start={0}
-            end={nextSpecialPrizeAccumulated}
-            decimals={2}
-            separator="."
-            decimal=","
-          />
-        </strong>
       </div>
     </div>
   );
 }
 
-export default LotoFacil;
+export default LotoMania;

@@ -1,4 +1,4 @@
-var media = {
+var dsplay_media = {
   duration: 30000,
   iteration: 0,
 
@@ -10,21 +10,10 @@ var media = {
 };
 
 
-var template = {
-  // template parameter
+// this template has no dsplay_template variables at all - everything is media-driven
+var dsplay_template = {};
 
-  template_var: "My Template Var",
-
-  // bg_horizontal: '../test-data/bg-instagram.jpg',
-  // bg_vertical: '../test-data/bg-instagram.jpg',
-
-
-  title: "My Super Template",
-  expanded: "false",
-
-};
-
-var config = {
+var dsplay_config = {
   // config parameters
   locale: 'pt_br',
   orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',

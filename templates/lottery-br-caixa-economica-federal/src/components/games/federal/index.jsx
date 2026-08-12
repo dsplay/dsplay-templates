@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
@@ -10,7 +9,7 @@ import './federal-banner-h.sass';
 import './federal-banner-v.sass';
 import './federal-squared.sass';
 import logo from '../../../images/federal-branco.png';
-import { screenFormat } from '../../../util.js/screen';
+import { screenFormat } from '../../../utils/screen';
 
 moment.locale('pt-BR');
 

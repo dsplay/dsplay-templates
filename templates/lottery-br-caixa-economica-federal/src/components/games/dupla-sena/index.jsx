@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
@@ -11,7 +10,7 @@ import './dupla-sena-banner-h.sass';
 import './dupla-sena-banner-v.sass';
 import './dupla-sena-squared.sass';
 import logo from '../../../images/dupla-sena-branco.png';
-import { screenFormat, BANNER_H, BANNER_V } from '../../../util.js/screen';
+import { screenFormat, BANNER_H, BANNER_V } from '../../../utils/screen';
 
 moment.locale('pt-BR');
 

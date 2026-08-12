@@ -1,38 +1,34 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
 import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
-import './time-mania.sass';
-import './time-mania-h.sass';
-import './time-mania-v.sass';
-import './time-mania-banner-h.sass';
-import './time-mania-banner-v.sass';
-import './time-mania-squared.sass';
-import logo from '../../../images/time-mania-branco.png';
-import { screenFormat } from '../../../util.js/screen';
+import './loto-facil.sass';
+import './loto-facil-h.sass';
+import './loto-facil-v.sass';
+import './loto-facil-banner-h.sass';
+import './loto-facil-banner-v.sass';
+import './loto-facil-squared.sass';
+import logo from '../../../images/loto-facil-branco.png';
+import { screenFormat } from '../../../utils/screen';
 
 moment.locale('pt-BR');
 
-function TimeMania() {
+function LotoFacil() {
 
-  const title = 'TIME MANIA';
+  const title = 'LOTO FÁCIL';
 
   const {
     result: {
       data: {
-        timemania: {
+        lotofacil: {
           round: {
             number,
             numbers = [],
             prizes: {
-              hits_7: {
+              hits_15: {
                 winners,
                 amount,
-              },
-              heart_club: {
-                club,
               },
             },
             accumulated,
@@ -43,6 +39,7 @@ function TimeMania() {
             date: nextDate,
             estimatedPrize,
           },
+          accumulatedIndependenceDaySpecialPrize: nextSpecialPrizeAccumulated,
         },
       },
     },
@@ -55,17 +52,17 @@ function TimeMania() {
     winnersText = `${winners} ganhador${winners === 1 ? '' : 'es'}`;
     lastPrize = amount;
   } else {
-    winnersText = `ACUMULOU`;
+    winnersText = `Não houve ganhadores`;
     lastPrize = accumulated;
   }
 
   const nextDateUTC = moment.utc(nextDate);
 
   return (
-    <div className={`${screenFormat} time-mania`}>
+    <div className={`${screenFormat} loto-facil`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} alt="Timemania" />
+          <img src={logo} alt="Loto Fácil" />
           <span>{title}</span>
         </div>
       </div>
@@ -98,33 +95,38 @@ function TimeMania() {
       <div className="last-round flex v">
         <div className="title">Último Resultado</div>
         <div className="results">
-          <div className="numbers">
-            <span>
-              {numbers.slice(0, 4).map(number => <Ball key={number} value={number} />)}
-            </span>
-            <span>
-              {numbers.slice(4).map(number => <Ball key={number} value={number} />)}
-            </span>
-          </div>
           <div>
-            <div className="extra-result">
-              <span className="label">Time do Coração: ♥</span>
-              <span className="value">{club}</span>
+            <div className="numbers">
+              <span>
+                {numbers.slice(0, 5).map(number => <Ball key={number} value={number} />)}
+              </span>
+              <span>
+                {numbers.slice(5, 10).map(number => <Ball key={number} value={number} />)}
+              </span>
+              <span>
+                {numbers.slice(10).map(number => <Ball key={number} value={number} />)}
+              </span>
             </div>
             <div className="result">
               <span className="winner">{winnersText}</span>
-              &nbsp;(R$&nbsp;
-              <CountUp
-                duration={3}
-                start={0}
-                end={lastPrize}
-                decimals={2}
-                separator="."
-                decimal=","
-              />
-              )
+              {
+                (winners > 0) &&
+                <>
+                  &nbsp;(R$&nbsp;
+                  <CountUp
+                    duration={3}
+                    start={0}
+                    end={lastPrize}
+                    decimals={2}
+                    separator="."
+                    decimal=","
+                  />
+                  )
+                </>
+              }
             </div>
           </div>
+
         </div>
         <div className="info">
           Concurso nº <strong>{number}</strong>, realizado em {moment(date).format('L')}. Local: {city}
@@ -132,9 +134,23 @@ function TimeMania() {
       </div>
       <div className="spacer3" />
       <div className="special-prizes">
+        Acumulado para Sorteio Especial da Independência:
+        <strong>
+          &nbsp;
+          R$
+          &nbsp;
+          <CountUp
+            duration={5}
+            start={0}
+            end={nextSpecialPrizeAccumulated}
+            decimals={2}
+            separator="."
+            decimal=","
+          />
+        </strong>
       </div>
     </div>
   );
 }
 
-export default TimeMania;
+export default LotoFacil;

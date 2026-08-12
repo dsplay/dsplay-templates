@@ -1,43 +1,27 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
 import { media } from '@dsplay/template-utils';
 import Ball from '../../ball';
-import './dia-de-sorte.sass';
-import './dia-de-sorte-h.sass';
-import './dia-de-sorte-v.sass';
-import './dia-de-sorte-banner-h.sass';
-import './dia-de-sorte-banner-v.sass';
-import './dia-de-sorte-squared.sass';
-import logo from '../../../images/dia-de-sorte-branco.png';
-import { screenFormat } from '../../../util.js/screen';
+import './time-mania.sass';
+import './time-mania-h.sass';
+import './time-mania-v.sass';
+import './time-mania-banner-h.sass';
+import './time-mania-banner-v.sass';
+import './time-mania-squared.sass';
+import logo from '../../../images/time-mania-branco.png';
+import { screenFormat } from '../../../utils/screen';
 
 moment.locale('pt-BR');
 
-const months = [
-  'Janeiro',
-  'Fevereiro',
-  'Março',
-  'Abril',
-  'Maio',
-  'Junho',
-  'Julho',
-  'Agosto',
-  'Setembro',
-  'Outubro',
-  'Novembro',
-  'Dezembro',
-];
+function TimeMania() {
 
-function DiaDeSorte() {
-
-  const title = 'DIA DE SORTE';
+  const title = 'TIME MANIA';
 
   const {
     result: {
       data: {
-        diadesorte: {
+        timemania: {
           round: {
             number,
             numbers = [],
@@ -46,8 +30,8 @@ function DiaDeSorte() {
                 winners,
                 amount,
               },
-              luck_month: {
-                month,
+              heart_club: {
+                club,
               },
             },
             accumulated,
@@ -77,10 +61,10 @@ function DiaDeSorte() {
   const nextDateUTC = moment.utc(nextDate);
 
   return (
-    <div className={`${screenFormat} dia-de-sorte`}>
+    <div className={`${screenFormat} time-mania`}>
       <div className="header">
         <div className="logo">
-          <img src={logo} alt="Dia de Sorte" />
+          <img src={logo} alt="Timemania" />
           <span>{title}</span>
         </div>
       </div>
@@ -123,8 +107,8 @@ function DiaDeSorte() {
           </div>
           <div>
             <div className="extra-result">
-              <span className="label">Mês da Sorte:</span>
-              <span className="value">{months[month - 1]}</span>
+              <span className="label">Time do Coração: ♥</span>
+              <span className="value">{club}</span>
             </div>
             <div className="result">
               <span className="winner">{winnersText}</span>
@@ -152,4 +136,4 @@ function DiaDeSorte() {
   );
 }
 
-export default DiaDeSorte;
+export default TimeMania;
