@@ -3,9 +3,15 @@
 ## About the project
 
 jQuery boilerplate for building [HTML Templates](https://developers.dsplay.tv/docs/html-templates) for the
-[DSPLAY - Digital Signage](https://dsplay.tv/) platform. This is a **static project, with no build step, no
-`package.json`, and no package manager** — JS dependencies are vendored files (downloaded pre-built and committed)
-inside `scripts/`.
+[DSPLAY - Digital Signage](https://dsplay.tv/) platform. This is a **static project, with no build step** — JS
+dependencies are vendored files (downloaded pre-built and committed) inside `scripts/`. There *is* a minimal
+`package.json`, but only for packaging-time tooling (see "Commands" below) — it plays no part in how the template
+itself runs.
+
+Most people who touch this repo are building their **own** template by cloning it, customizing `scripts/app.js`,
+and never pushing back here — they diverge immediately (README.md tells them to `rm -rf .git && git init` right
+after cloning). The "Dependencies" section below and the README's "Maintaining this boilerplate" section are only
+relevant to the DSPLAY team keeping *this* repo current for the next person who clones it.
 
 ## Structure
 
@@ -19,7 +25,10 @@ scripts/
   core-js-x.y.z.js                  <- vendored, from core-js-bundle (unpkg)
 styles/main.css
 assets/                             <- audio, font, image, video
-pack.sh                             <- builds template.zip for upload to DSPLAY Web Manager
+pack.sh                             <- generates the manifest and builds template.zip for upload to DSPLAY Web Manager
+update-deps.sh                      <- updates vendored dependencies (boilerplate maintainers only, see below)
+package.json                        <- packaging-time devDependency only (@dsplay/template-manifest), not a build step
+scripts/.vendored-versions.json     <- tracks the currently-vendored version of each dep for update-deps.sh
 ```
 
 - The only structural requirement is `index.html` at the root plus a `dsplay-data.js` file anywhere in the project.
@@ -27,29 +36,36 @@ pack.sh                             <- builds template.zip for upload to DSPLAY 
 - `dsplay-data.js` is only used in development mode (outside the DSPLAY Android app); in production, data comes
   from the native app via `window.DSPLAY.getData()`.
 
-## Dependencies (no npm)
+## Dependencies (boilerplate maintainers only)
 
-There is no `package.json`. The files in `scripts/` are downloaded manually and committed as-is:
+The *template's own* runtime code has no npm dependency on jQuery/core-js/template-utils — those files in `scripts/`
+are downloaded pre-built and committed as-is, not installed via npm. `npm install` in this repo only installs
+`@dsplay/template-manifest`, the packaging-time devDependency used by `pack.sh` — see "Commands" below.
 
-- **jQuery**: download the `.min.js` from `https://code.jquery.com/jquery-<version>.min.js`.
-- **core-js**: download the minified bundle from `https://unpkg.com/core-js-bundle@<version>/minified.js`.
-- **@dsplay/template-utils**: download from
-  `https://unpkg.com/@dsplay/template-utils@<version>/dist/dsplay-template-utils.js`.
+Run `./update-deps.sh` to update the three vendored bundles (jQuery, core-js, `@dsplay/template-utils`). For each
+it: fetches the latest published version from the npm registry, compares it against
+`scripts/.vendored-versions.json` (the only record of the currently-vendored version, since
+`dsplay-template-utils.js` keeps a constant filename with no version in it), and:
+- if it's a **major** version bump, skips it and prints a warning — this needs a human to review the changelog
+  first, since it may contain breaking changes and this boilerplate is consumed by other templates. Never bypass
+  this guard as an agent; surface the warning to the user instead.
+- otherwise, downloads the new bundle (renaming the versioned filename to match, or overwriting the constant
+  `dsplay-template-utils.js`), updates the `<script src="...">` reference in `index.html` when the filename
+  changed, and updates `scripts/.vendored-versions.json`.
 
-When updating a dependency:
-
-1. Download the new file with a version-qualified name (e.g. `jquery-4.0.0.min.js`), removing the old version's
-   file.
-2. Update the corresponding `<script src="...">` in `index.html`.
-3. Verify `scripts/app.js` still works (no removed/changed APIs are used) — test by loading the page in a browser
-   (or with jsdom) and checking the console for errors.
-4. When bumping a **major** version of a library (breaking changes), ask the user before applying it, since this is
-   a public boilerplate consumed by other templates.
+After running it, sanity check by serving the project locally (e.g. `python3 -m http.server`) and confirming the
+page loads with no console errors and the mock data from `dsplay-data.js` renders, then commit.
 
 ## Commands
 
-- `./pack.sh` — builds `template.zip` (with `index.html` at the root of the zip) ready for the
+- `npm install` — installs the `@dsplay/template-manifest` devDependency (once).
+- `./pack.sh` — runs `dsplay-scan-template` (scans `scripts/app.js` for `dsplayTemplateUtils.tval`/`tbval`/`tival`/
+  `tfval` calls and direct `template.*` reads, captures `dsplay-data.js` as example data, writes
+  `template-variables.json` + `template-example-data.json` to the project root — the DSPLAY CMS reads these to
+  auto-detect this template's variables), then builds `template.zip` (with `index.html` at the root of the zip,
+  including those two generated files) ready for the
   [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). There are no automated tests or lint configured.
+  `node_modules/` and the two generated JSON files are gitignored — `pack.sh` regenerates them every run.
 
 ## Documentation language
 
