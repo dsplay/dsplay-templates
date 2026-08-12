@@ -1,43 +1,54 @@
 {
-    "name": "dsplay-template-facebook-post",
-    "version": "1.0.0",
-    "private": true,
-    "dependencies": {
-        "@dsplay/react-template-utils": "^4.0.0",
-        "moment": "^2.29.4",
-        "node-sass": "^4.14.1",
-        "qrcode.react": "^1.0.1",
-        "react": "^16.14.0",
-        "react-app-polyfill": "^1.0.6",
-        "react-dom": "^16.14.0",
-        "react-scripts": "^3.4.4"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "linter": "eslint --ext=js --ext=jsx src",
-        "linter:fix": "eslint --ext=js --ext=jsx src --fix",
-        "prebuild": "npm run linter",
-        "build": "react-scripts build",
-        "pretest": "npm run linter",
-        "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject",
-        "prezip": "npm run build",
-        "zip": "rm -rf build/test-assets && ./build.sh",
-        "serve": "npm run build && serve -s -p 3000 build"
-    },
-    "homepage": "./",
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not ie <= 11",
-        "not op_mini all"
-    ],
-    "devDependencies": {
-        "babel-eslint": "^10.1.0",
-        "eslint-config-airbnb": "^18.2.1",
-        "eslint-config-airbnb-base": "^14.2.1",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-jsx-a11y": "^6.6.1",
-        "eslint-plugin-react": "^7.31.1"
-    }
+  "name": "dsplay-template-facebook-posts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "dependencies": {
+    "@dsplay/react-template-utils": "^5.2.0",
+    "moment": "^2.29.4",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "scripts": {
+    "start": "vite",
+    "prebuild": "npm run linter",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "linter": "eslint src",
+    "linter:fix": "eslint src --fix",
+    "prezip": "npm run build",
+    "zip": "rm -rf build/test-assets && ./build.sh"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@dsplay/template-manifest": "^1.0.2",
+    "@eslint/js": "^9.39.5",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "@vitejs/plugin-legacy": "^8.2.1",
+    "@vitejs/plugin-react": "^6.0.4",
+    "eslint": "^9.39.5",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-unicorn": "^65.0.1",
+    "globals": "^17.7.0",
+    "jsdom": "^30.0.1",
+    "sass": "^1.101.3",
+    "terser": "^5.49.0",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
+  }
 }

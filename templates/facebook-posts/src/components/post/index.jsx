@@ -1,11 +1,11 @@
 import React from 'react';
 import { Render, FitText, screen } from '@dsplay/react-template-utils';
-import Info from '../info/info';
-import UserProfile from '../user-profile/user-profile';
-import MediaSlider from '../media-slider/media-slider';
+import Info from '../info';
+import UserProfile from '../user-profile';
+import MediaSlider from '../media-slider';
 import useStyle from '../../hooks/use-style';
 import useHighlight from '../../hooks/use-highlight';
-import './post.sass';
+import './style.sass';
 
 function PostContent({
   text,

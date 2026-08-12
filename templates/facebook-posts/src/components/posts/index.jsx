@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useInterval } from '@dsplay/react-template-utils';
-import Post from '../post/post';
+import Post from '../post';
 
 function Posts({
   user,

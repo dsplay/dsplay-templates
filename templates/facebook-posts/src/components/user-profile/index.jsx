@@ -1,6 +1,6 @@
 import React from 'react';
 import { FitText, useTemplateVal } from '@dsplay/react-template-utils';
-import './user-profile.sass';
+import './style.sass';
 
 function UserProfile({
   name,

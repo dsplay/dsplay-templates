@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useScreenInfo, screen } from '@dsplay/react-template-utils';
 
-import './intro.sass';
+import './style.sass';
 import intro from '../../images/intro-small.gif';
 
 // component

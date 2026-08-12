@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useInterval } from '@dsplay/react-template-utils';
 import { DEFAULT_IMAGE_FIT } from '../../util/defaults';
 import useStyle from '../../hooks/use-style';
-import './media-slider.sass';
+import './style.sass';
 
 const overlayStyle = {
   'top-right': {

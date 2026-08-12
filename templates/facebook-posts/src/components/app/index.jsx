@@ -2,22 +2,17 @@ import React, { useMemo } from 'react';
 import {
   Loader, useMedia, useScreenInfo, useTemplateVal, screen,
 } from '@dsplay/react-template-utils';
-import Intro from './components/intro/intro';
-import Main from './components/main/main';
-import defaultBg from './images/bg.png';
-import './app.sass';
+import Intro from '../intro';
+import Main from '../main';
+import defaultBg from '../../images/bg.png';
+import './style.sass';
 
 const MIN_LOADING_DURATION = 2500;
 
 // fonts to preload
 // @font-face's must be defined in fonts.sass or another in-use style file
 const fonts = [
-  // 'Roboto Thin',
-  // 'Roboto Light',
   'Roboto Regular',
-  // 'Roboto Medium',
-  // 'Roboto Bold',
-  'Roboto Condensed',
   'Oswald',
 ];
 

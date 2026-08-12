@@ -1,8 +1,8 @@
 import React from 'react';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 import moment from 'moment';
 import { FitText, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
-import './info.sass';
+import './style.sass';
 import reactionLike from '../../images/reaction-like-small.gif';
 import reactionLove from '../../images/reaction-love-small.gif';
 import reactionHaha from '../../images/reaction-haha-small.gif';
@@ -62,7 +62,7 @@ function Info({
           link
           && (
           <div className="qrcode-container" style={{ paddingBottom: qrCodeBottomPadding }}>
-            <QRCode renderAs="svg" size="100%" ssize={15 * (smallDim / 100)} value={link} />
+            <QRCodeSVG size={15 * (smallDim / 100)} style={{ width: '100%', height: '100%' }} value={link} />
           </div>
           )
         }

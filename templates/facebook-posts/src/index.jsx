@@ -1,8 +1,5 @@
-import 'react-app-polyfill/ie9';
-import 'react-app-polyfill/stable';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './app';
+import { createRoot } from 'react-dom/client';
+import App from './components/app';
 import 'moment/locale/fr';
 import 'moment/locale/es';
 import 'moment/locale/it';
@@ -13,4 +10,6 @@ import 'moment/locale/pt-br';
 import './index.sass';
 import './fonts.sass';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
