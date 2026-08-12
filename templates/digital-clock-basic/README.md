@@ -2,34 +2,47 @@
 
 # DSPLAY - Digital Clock
 
-This template is built on top of the [DSPLAY - jQuery Template Boilerplate](https://github.com/dsplay/template-boilerplate-jquery).
+A Vanilla JavaScript + jQuery [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — a full-screen digital clock with a colored bar and an optional background image.
 
-## Variables
+## Template variables
 
-This template has some configuration variables as the following table shows:
+| Key           | Type   | Description                                    |
+|---------------|--------|--------------------------------------------------|
+| `background`  | image  | The background image.                             |
+| `barColor`    | color  | Color of the clock's bar. Defaults to `#FFF`.     |
+| `barOpacity`  | string | Opacity of the clock's bar (`0`..`1`). Defaults to `0.6`. |
+| `dateColor`   | color  | Color of the date text. Defaults to `#000`.       |
+| `timeColor`   | color  | Color of the time text. Defaults to `#000`.       |
 
-| Variable              | Type    | Required | Default   | Description                                                                                                                           |
-|-----------------------|---------|----------|-----------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `background`          | image   | No       |           | The background image                                                                                                                  |
-| `barColor`            | string  | No       | `#FFF`    | Bar background color                                                                                                                  |
-| `barOpacity`          | string  | No       | `0.6`     |                                                                                                                                       |
-| `dateColor`           | string  | No       | `#000`    | Date foreground color                                                                                                                 |
-| `timeColor`           | string  | No       | `#000`    | Time foreground color                                                                                                                 |
+> Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
 
+## Local development
 
-## Packing
+```sh
+npm install
+python3 -m http.server
+```
 
-To pack your template, just zip all the files of the project (except the `.git` folder).
+then visit `http://localhost:8000`.
 
-> **IMPORTANT**: When zipping your template, the `index.html` file must be located in the root of the `.zip` file, not inside any folder.
+`scripts/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only when the template isn't running inside the actual DSPLAY app. Edit it to try out different variable values — the DSPLAY Player App replaces it with real content at runtime.
 
-For linux users, just run:
+## Generating the template package
+
 ```sh
 ./pack.sh
 ```
 
-It will generate a `template.zip` file ready to be deployed to [DSPLAY Web Manager](https://manager.dsplay.tv/template/create)
+This first runs [`dsplay-scan-template`](https://www.npmjs.com/package/@dsplay/template-manifest) (from `@dsplay/template-manifest`), which statically scans `scripts/app.js` and captures `dsplay-data.js` as example data — writing `template-variables.json` + `template-example-data.json` to the project root. It then zips `index.html`, `assets/`, `scripts/`, `styles/`, and the two generated JSON files into `template.zip`.
+
+## Deploying
+
+Upload the resulting `template.zip` to the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create).
+
+## Updating vendored dependencies
+
+See [AGENTS.md](AGENTS.md).
 
 ## More
 
-The see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
+To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
