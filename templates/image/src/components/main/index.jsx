@@ -1,9 +1,8 @@
-import React from 'react';
 import {
   useMedia,
   useTemplateVal,
 } from '@dsplay/react-template-utils';
-import './main.sass';
+import './style.sass';
 
 const bgSizeMap = {
   cover: 'cover',

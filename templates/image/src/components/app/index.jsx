@@ -1,10 +1,7 @@
-import React from 'react';
 import { Loader, useScreenInfo, useMedia } from '@dsplay/react-template-utils';
-import Intro from './components/intro/intro';
-import Main from './components/main/main';
-import './app.sass';
-
-// console.log(U, Loader)
+import Intro from '../intro';
+import Main from '../main';
+import './style.sass';
 
 const MIN_LOADING_DURATION = 0;
 const showLoader = false;
