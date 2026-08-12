@@ -32,6 +32,18 @@ build.sh                    <-- zips the Vite build output into template.zip
 - **Always import a component by its folder, never by reaching into `index`** — `import Main from '../main'`, never `.../main/index`.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
 
+## README structure
+
+Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+
+1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
+2. *(optional, only if the template has more than one visual arrangement)* **Features**.
+3. *(optional, only if appearance changes meaningfully by screen format)* **Supported screen formats**.
+4. **Template variables** — a `Key | Type | Default | Description` table, ending with the "register as Template Vars in the DSPLAY CMS" reminder.
+5. **Local development**, 6. *(optional)* **For developers**, 7. **Test assets** / **Packing (release build)** / **Maintaining dependencies** (-> AGENTS.md) / **More**.
+
+Skip a numbered section entirely rather than including it empty.
+
 ## Internationalization (i18n)
 
 - **Every static, developer-authored piece of UI text must go through `react-i18next`'s `t()`** — never a hardcoded string in JSX. Doesn't apply to the actual `alert_message`/`icon` variable content typed in by a CMS user — only to text this template's own code puts on screen (e.g. the "icon not found" fallback in `src/components/icon/index.jsx`).

@@ -14,6 +14,8 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 | `icon`          | string | Alert icon name — see `src/components/icon/index.jsx` for the full map (`alkaline`, `biological`, `chemical`, `co2`, `cross`, `death`, `electrical`, `explosion`, `fire`, `frost`, `heat`, `magnetism`, `radiation`, `radio`, `warning`). Falls back to "Icon not found" if the name doesn't match. |
 | `alert_message` | string | The alert text shown next to the icon.                                   |
 
+> Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
+
 ## Local development
 
 ```sh
