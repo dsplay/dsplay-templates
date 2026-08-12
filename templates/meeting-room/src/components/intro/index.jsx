@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { useMemo } from 'react';
 import { useScreenInfo, screen } from '@dsplay/react-template-utils';
 import BeautyLoader from '../beautyloader';
