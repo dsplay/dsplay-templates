@@ -36,6 +36,12 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
 - `dsplay-data.js` is only used in development mode (outside the DSPLAY Android app); in production, data comes
   from the native app via `window.DSPLAY.getData()`.
 
+## Package identity
+
+Rename `package.json`'s `"name"` away from `dsplay-template-boilerplate-jquery` immediately when starting a new
+template from this boilerplate — even though `package.json` here is packaging-time-only, it should still identify
+the template itself, not the boilerplate it was cloned from. Convention: `dsplay-` + the new repo's own GitHub name.
+
 ## README structure
 
 Every DSPLAY template's `README.md` follows the same skeleton (this repo's is the reference copy — most sections
