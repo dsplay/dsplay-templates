@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   getHours,
   getMinutes,
@@ -7,7 +6,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import BoxTimer from '../box-timer';
 import BoxTimerDays from '../box-timer-days';
-import { useCountUpContext } from '../../contexts/countUpContext';
+import { useCountUpContext } from '../../contexts/count-up-context';
 import './style.sass';
 import i18n from '../../i18n';
 

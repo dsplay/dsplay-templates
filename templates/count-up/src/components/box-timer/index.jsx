@@ -1,6 +1,5 @@
-import React from 'react';
-import './styles.sass';
-import { useCountUpContext } from '../../contexts/countUpContext';
+import './style.sass';
+import { useCountUpContext } from '../../contexts/count-up-context';
 
 function BoxTimer({
   box1 = '0',

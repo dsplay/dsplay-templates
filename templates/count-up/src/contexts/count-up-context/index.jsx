@@ -6,7 +6,7 @@ import {
   differenceInSeconds,
   isBefore,
 } from 'date-fns';
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
