@@ -16,12 +16,13 @@ public/
   test-assets/              <-- dev-only assets, excluded from the release build
 src/
   index.jsx                 <-- React entry point
-  app.jsx                   <-- top-level component
+  setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   hooks/
     use-temperature.js       <-- reads the `unit` template var, converts celsius -> fahrenheit
     use-background.js        <-- maps weather condition code -> background CSS class
     night-interval.js        <-- day/night detection from sunrise/sunset
   components/
+    app/                      <-- top-level component (loader, fonts, i18n)
     main/                     <-- destructures media.result into city/current/forecast
     forecast-item/            <-- one row per forecast day
     icon/                     <-- weather condition code -> icon/animation
@@ -29,11 +30,18 @@ src/
 build.sh                    <-- zips the Vite build output into template.zip
 ```
 
+## File and folder naming
+
+- **kebab-case everywhere** in `src/` (and anywhere else in this repo we author ourselves) — folders, JS/JSX files, Sass files, test files. Doesn't apply to files whose name is a fixed convention from tooling (`package.json`, `vite.config.js`, etc.) or to vendored/third-party assets we don't control the naming of (e.g. `src/images/icons/*.gif`, downloaded as-is from an icon pack — ESLint never lints these anyway, it only processes JS/JSX).
+- **Every component gets its own folder with an `index.jsx`.** For a simple component, `index.jsx` *is* the component. For one that grows into several files, `index.jsx` becomes a barrel re-exporting the folder's public API.
+- **Always import a component by its folder, never by reaching into `index`** — `import Main from '../main'`, never `.../main/index`.
+- Enforced automatically by ESLint's `unicorn/filename-case` rule (see below) for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
+
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs. `dsplay_media.result` here is the JSON-service payload for this media type (see README.md for its shape) — keep it in sync with reality, since it also feeds `template-example-data.json` (see below).
 - `@dsplay/react-template-utils` exposes `useTemplateVal` (used for the `unit` variable) and `useMedia()`/`useConfig()` for the raw objects.
-- `src/components/main/main.jsx` is the entry point for reading `media.result` — any change to the expected weather data shape starts there.
+- `src/components/main/index.jsx` is the entry point for reading `media.result` — any change to the expected weather data shape starts there.
 
 ## Template variable manifest
 
@@ -53,7 +61,7 @@ Regular npm dependencies, not vendored files — `npm outdated` / `npm update` f
 
 ### Known pending bump: ESLint 9 -> 10
 
-`eslint`/`@eslint/js` are pinned to `^9.39.5` (latest is `10.x`). Bumping them currently fails on peer dependency conflicts: `eslint-plugin-import` (`^9` max), `eslint-plugin-jsx-a11y` (`^9` max), and `eslint-plugin-react` (`^9.7` max) haven't declared ESLint 10 support yet as of 2026-08-12 — they're still the actively-maintained canonical packages, not abandoned or superseded, just lagging behind the major. `eslint-plugin-react-hooks` already supports it (`^10.0.0`). Don't force this with `--legacy-peer-deps` — re-check `npm view eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react peerDependencies` periodically and only bump once all three declare `^10` support.
+`eslint`/`@eslint/js` are pinned to `^9.39.5` (latest is `10.x`). Bumping them currently fails on peer dependency conflicts: `eslint-plugin-import` (`^9` max), `eslint-plugin-jsx-a11y` (`^9` max), and `eslint-plugin-react` (`^9.7` max) haven't declared ESLint 10 support yet as of 2026-08-12 — they're still the actively-maintained canonical packages, not abandoned or superseded, just lagging behind the major. `eslint-plugin-react-hooks` already supports it (`^10.0.0`). `eslint-plugin-unicorn` is pinned to `65.0.1` for the same reason (`66.0.0+` requires ESLint `>=10.4`). Don't force this with `--legacy-peer-deps` — re-check peer ranges periodically and bump all of them together once the laggards catch up.
 
 ## Commit messages
 

@@ -2,11 +2,11 @@ import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { useMedia, useConfig, FitText } from '@dsplay/react-template-utils';
-import Icon from '../icon/icon';
+import Icon from '../icon';
 import { useBackground } from '../../hooks/use-background';
 import { useTemperature } from '../../hooks/use-temperature';
-import ForecastItem from '../forecast-item/forecast-item';
-import './main.sass';
+import ForecastItem from '../forecast-item';
+import './style.sass';
 
 function Main() {
   const { t, i18n } = useTranslation();

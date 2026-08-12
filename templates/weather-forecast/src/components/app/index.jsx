@@ -1,10 +1,10 @@
 import { I18nextProvider } from 'react-i18next';
 import { Loader, useScreenInfo } from '@dsplay/react-template-utils';
-import Intro from './components/intro/intro';
-import Main from './components/main/main';
-import i18n from './i18n';
-import { iconImages } from './components/icon/icon';
-import './app.sass';
+import Intro from '../intro';
+import Main from '../main';
+import i18n from '../../i18n';
+import { iconImages } from '../icon';
+import './style.sass';
 
 const MIN_LOADING_DURATION = 2500;
 

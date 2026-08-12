@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import moment from 'moment';
 import { useConfig, FitText } from '@dsplay/react-template-utils';
 import { useTranslation } from 'react-i18next';
-import Icon from '../icon/icon';
+import Icon from '../icon';
 import { useTemperature } from '../../hooks/use-temperature';
 
 function ForecastItem({

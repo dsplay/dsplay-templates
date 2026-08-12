@@ -2,7 +2,7 @@ import {
   describe, it, afterEach,
 } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
-import App from './app';
+import App from '.';
 
 afterEach(cleanup);
 
