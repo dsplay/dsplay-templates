@@ -1,8 +1,5 @@
-import { useMemo } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import {
-  Loader, useScreenInfo, useTemplateVal, useConfig,
-} from '@dsplay/react-template-utils';
+import { Loader, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
 import Intro from '../intro';
 import Main from '../main';
 import i18n from '../../i18n';
@@ -25,11 +22,7 @@ const tasks = [
 
 function App() {
   const { screenFormat } = useScreenInfo();
-  const logo = useTemplateVal('logo');
   const { locale } = useConfig();
-
-  // images to preload
-  const images = useMemo(() => [logo], [logo]);
 
   const [lng] = (locale || 'en').split('_');
   i18n.changeLanguage(lng);
@@ -39,7 +32,6 @@ function App() {
       <Loader
         placeholder={<Intro />}
         fonts={fonts}
-        images={images}
         minDuration={MIN_LOADING_DURATION}
         tasks={tasks}
       >

@@ -10,7 +10,6 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 | Key             | Type   | Description                                                              |
 |-----------------|--------|---------------------------------------------------------------------------|
-| `logo`          | string | Logo image, preloaded before the intro dismisses.                        |
 | `icon`          | string | Alert icon name — see `src/components/icon/index.jsx` for the full map (`alkaline`, `biological`, `chemical`, `co2`, `cross`, `death`, `electrical`, `explosion`, `fire`, `frost`, `heat`, `magnetism`, `radiation`, `radio`, `warning`). Falls back to "Icon not found" if the name doesn't match. |
 | `alert_message` | string | The alert text shown next to the icon.                                   |
 
