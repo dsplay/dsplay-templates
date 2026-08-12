@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class MediaSlider extends Component {
-
   state = {
     sliding: false,
     img1: 0,
     img2: 1,
-  }
+  };
 
   componentDidMount() {
     const { media = [], duration } = this.props;
@@ -24,7 +23,7 @@ class MediaSlider extends Component {
     this.setState({
       sliding: true,
     }, () => setTimeout(() => {
-      this.setState(prev => ({
+      this.setState((prev) => ({
         sliding: false,
         img1: (prev.img1 + 1) % size,
         img2: (prev.img2 + 1) % size,
@@ -34,7 +33,7 @@ class MediaSlider extends Component {
     if (img2 < media.length - 1) {
       setTimeout(this.slide, duration);
     }
-  }
+  };
 
   render() {
     const { media = [] } = this.props;
@@ -43,24 +42,15 @@ class MediaSlider extends Component {
     return (
       <div className="media">
         <div className={`media-slider ${sliding ? 'slide' : ''}`}>
-          <div className="media-item" style={{ backgroundImage: `url("${media[img1].urls.md}")` }} >
-            {/* s: {sliding.toString()}<br/>
-                        img1: {img1}<br/>
-                        img2: {img2} */}
-          </div>
+          <div className="media-item" style={{ backgroundImage: `url("${media[img1].urls.md}")` }} />
           {
-            media.length > 1 &&
-            <div className="media-item" style={{ backgroundImage: `url("${media[img2].urls.md}")` }} >
-              {/* s: {sliding.toString()}<br/>
-                            img1: {img1}<br/>
-                            img2: {img2} */}
-            </div>
+            media.length > 1
+            && <div className="media-item" style={{ backgroundImage: `url("${media[img2].urls.md}")` }} />
           }
         </div>
       </div>
     );
   }
-
 }
 
 export default MediaSlider;

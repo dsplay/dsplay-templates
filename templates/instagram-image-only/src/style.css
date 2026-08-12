@@ -141,10 +141,6 @@ body {
     background-repeat: no-repeat
 }
 
-.mediaThumb .overlay {
-    position: relative;
-}
-
 .media .playWrapper {
     /* opacity: .7; */
     position: absolute;

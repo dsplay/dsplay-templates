@@ -1,0 +1,91 @@
+# AGENTS.md
+
+Guidance for AI agents (and humans) working in this repository.
+
+## What this project is
+
+The DSPLAY **Instagram Image Only** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/), showing a full-screen slideshow of a connected Instagram account's post media (no caption text, unlike `template-instagram-basic`). Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
+
+This template predates `@dsplay/react-template-utils` — it reads variables via `@dsplay/template-utils`'s plain `tval`/`tbval` functions at module scope, and its components are React class components, not hooks. Keep this pattern; it's a legitimate, supported way to consume `@dsplay/template-utils` and doesn't need a hooks rewrite as part of routine maintenance.
+
+## Directory structure
+
+```
+index.html                 <-- Vite entry point
+vite.config.js             <-- includes @dsplay/template-manifest's Vite plugin (see below)
+public/
+  dsplay-data.js            <-- mock DSPLAY data for local development
+src/
+  index.jsx                 <-- React entry point
+  setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
+  style.css                  <-- global stylesheet (all components share one; not split per-component)
+  font/google/                <-- vendored Roboto/Oswald @font-face + woff/ttf/svg files
+  images/                    <-- ig-logo.png, play-button.png, bg1.jpg
+  components/
+    app/                      <-- top-level component: reads bg_horizontal/bg_vertical/primary_color/show_instagram_icon, renders Posts
+    posts/                    <-- cycles through the selected posts on a timer
+    post/                     <-- one post: media (single image/video or MediaSlider) + UserProfile
+    media-slider/              <-- crossfades between a post's images when it has more than one
+    user-profile/              <-- avatar + name + @handle overlay
+build.sh                    <-- zips the Vite build output into template.zip
+```
+
+## File and folder naming
+
+- **kebab-case everywhere** in `src/` (and anywhere else in this repo we author ourselves) — folders, JS/JSX files, test files. Doesn't apply to files whose name is a fixed convention from tooling (`package.json`, `vite.config.js`, etc.) or to vendored/third-party assets we don't control the naming of.
+- **Every component gets its own folder with an `index.jsx`.** For a simple component, `index.jsx` *is* the component.
+- **Always import a component by its folder, never by reaching into `index`** — `import Post from '../post'`, never `.../post/index`.
+- Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
+
+## Package identity
+
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-instagram-image-only`.
+
+## README structure
+
+Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+
+1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
+2. *(optional, only if the template has more than one visual arrangement)* **Features**.
+3. *(optional, only if appearance changes meaningfully by screen format)* **Supported screen formats**.
+4. **Template variables** — a `Key | Type | Default | Description` table, ending with the "register as Template Vars in the DSPLAY CMS" reminder.
+5. **Local development**, 6. *(optional)* **For developers**, 7. **Test assets** / **Packing (release build)** / **Maintaining dependencies** (-> AGENTS.md) / **More**.
+
+Skip a numbered section entirely rather than including it empty.
+
+## Internationalization (i18n)
+
+Not applicable — this template renders zero developer-authored static text; every visible string comes from the connected Instagram account's actual post/profile data.
+
+## Runtime model
+
+- `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
+- `media.result.data` supplies `user` (`id`/`name`/`username`/`pic`) and `posts` (each with `text`/`created`/`media[]`); `media.duration` and `media.postCount` (default: `duration / 10000`) control how many posts cycle through and for how long. This is a JSON-service-backed media type, not a generic custom template — `dsplay_media`'s shape here is what the connected Instagram integration provides, not something a CMS user hand-authors.
+- **CMS registration note (2026-08-12)**: cross-checked this template's 8 code-level variables (`bg_horizontal`, `bg_vertical`, `primary_color`, `secondary_color`, `show_instagram_icon`, `show_user_info`, `user_full_name_color`, `user_screen_name_color`) against the DSPLAY CMS's actual registered Template Vars (`tbl_template_var` where `template_id = 703`, the canonical "Instagram" / "Image Only" row) — **none of them are currently registered there**. The code and defaults are correct and this isn't a bug in the repo, but it means none of these variables are actually configurable through the CMS today; worth registering them if this template is meant to be customizable in production.
+
+## Template variable manifest
+
+`vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`tbval`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `build.sh`, which zips the whole build output). The DSPLAY CMS reads these two files to auto-detect a template's variables and seed default preview values, instead of requiring manual registration. See [@dsplay/template-manifest](https://www.npmjs.com/package/@dsplay/template-manifest) for exactly what it detects.
+
+## Commands
+
+- `npm start` — dev server (Vite).
+- `npm run build` — production build (runs the linter first via the `prebuild` script).
+- `npm test` / `npm run test:watch` — Vitest.
+- `npm run linter` / `npm run linter:fix` — ESLint on `src`.
+- `npm run zip` — builds, then runs `build.sh` to produce `template.zip` ready for the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `build/` and `template.zip` are gitignored.
+
+## Dependency management
+
+Regular npm dependencies, not vendored files — `npm outdated` / `npm update` for in-range bumps. For an out-of-range (typically major) bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
+
+### Known pending bump: ESLint 9 -> 10
+
+`eslint`/`@eslint/js` are pinned to `^9.39.5` (latest is `10.x`). Bumping them currently fails on peer dependency conflicts: `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` haven't declared ESLint 10 support yet as of 2026-08-12 — they're still the actively-maintained canonical packages, not abandoned or superseded, just lagging behind the major. `eslint-plugin-react-hooks` already supports it. `eslint-plugin-unicorn` is pinned to `65.0.1` for the same reason (`66.0.0+` requires ESLint `>=10.4`). Don't force this with `--legacy-peer-deps` — re-check peer ranges periodically and bump all of them together once the laggards catch up.
+
+## Commit messages
+
+Every commit title must start with an emoji, followed by a short, imperative summary — e.g. `⬆️ upgrading deps`.
+
+- The human maintainer uses [gitmoji-cli](https://github.com/carloscuesta/gitmoji-cli) for manual commits, so gitmoji conventions (`✨` feature, `🐛` fix, `⬆️` upgrade deps, `♻️` refactor, `🔥` remove code, `📝` docs) are a good default.
+- Agents are not required to stick to the official gitmoji list — pick whichever emoji best represents the actual change in that commit, as long as it's placed at the start of the title.

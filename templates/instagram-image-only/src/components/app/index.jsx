@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { config, media, isVertical, tval, tbval } from '@dsplay/template-utils';
-import './App.css';
-import Posts from './components/posts';
+import Posts from '../posts';
 
 const {
   orientation,
@@ -24,7 +23,6 @@ if (horizontalBackground) {
 
 if (bgImage) {
   document.body.style.backgroundImage = bgImage;
-  console.log(`insta_bg: ${document.body.style.backgroundImage} - url('${horizontalBackground}')`);
 }
 
 const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -46,30 +44,26 @@ class App extends Component {
   }
 
   render() {
-
     const {
       result: {
         data: {
           user,
           posts,
-        }
+        },
       },
       duration,
       postCount = Math.max(1, Math.floor(duration / 10000)),
     } = media;
 
-    // console.log(postCount);
-
     const selectedPosts = posts.slice(0, postCount);
-    // const selectedPosts = posts.slice(4, 5);
-
-    // console.log(selectedPosts);
     const pageDuration = Math.floor((duration - 500) / Math.max(1, selectedPosts.length));
-    // console.log(pageDuration);
 
     return (
       <div className="App">
-        <div className="debug">{orientation}({width}x{height})</div>
+        <div className="debug">
+          {orientation}
+          {`(${width}x${height})`}
+        </div>
         <Posts user={user} posts={selectedPosts} pageDuration={pageDuration} />
       </div>
     );
