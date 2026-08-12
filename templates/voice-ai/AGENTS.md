@@ -37,6 +37,10 @@ build.sh                    <-- zips the Vite build output into template.zip
 - Non-component helpers (e.g. `src/utils/logger.js`) live outside `components/` and don't need the folder+`index.jsx` treatment — plain kebab-case files are fine.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
 
+## Package identity
+
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-voice-ai`.
+
 ## README structure
 
 Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
