@@ -1,5 +1,4 @@
 import { Carousel } from 'flowbite-react';
-import './style.sass';
 
 import {
   useTemplateVal,

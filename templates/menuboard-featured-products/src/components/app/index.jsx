@@ -1,26 +1,19 @@
 import { useMemo } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { Loader, useScreenInfo, useTemplateVal } from '@dsplay/react-template-utils';
+import {
+  Loader, useScreenInfo, useTemplateVal, useConfig,
+} from '@dsplay/react-template-utils';
 import Intro from '../intro';
 import Main from '../main';
 import i18n from '../../i18n';
 import './style.sass';
 import woodBackground from '../../assets/image/josephine-bredehoft-unsplash.gif';
 
-// console.log(U, Loader)
-
 const MIN_LOADING_DURATION = 3000;
 
 // fonts to preload
 // @font-face's must be defined in fonts.sass or another in-use style file
 const fonts = [
-  'Roboto Thin',
-  'Roboto Light',
-  'Roboto Regular',
-  'Roboto Medium',
-  'Roboto Bold',
-  'Roboto Condensed',
-  'Oswald',
   'Chalkboard',
   'Vtkschalk',
 ];
@@ -32,17 +25,21 @@ const tasks = [
 
 function App() {
   const { screenFormat } = useScreenInfo();
+  const { locale } = useConfig();
   const logo = useTemplateVal('logo');
   const logoBanner = useTemplateVal('logo_banner');
-  const backgroundBlackboard = useTemplateVal('background_blackboard');
   const promoImage01 = useTemplateVal('promo_img_01');
   const promoImage02 = useTemplateVal('promo_img_02');
   const promoImage03 = useTemplateVal('promo_img_03');
 
   // images to preload
-  const images = useMemo(() => [logo],
-    [woodBackground], [backgroundBlackboard], [logoBanner], [promoImage01],
-    [promoImage02], [promoImage03]);
+  const images = useMemo(
+    () => [woodBackground, logo, logoBanner, promoImage01, promoImage02, promoImage03],
+    [logo, logoBanner, promoImage01, promoImage02, promoImage03],
+  );
+
+  const [lng] = (locale || 'en').split('_');
+  i18n.changeLanguage(lng);
 
   return (
     <I18nextProvider i18n={i18n}>

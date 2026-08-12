@@ -2,6 +2,7 @@ import {
   FitText,
   useTemplateVal,
 } from '@dsplay/react-template-utils';
+import { useTranslation } from 'react-i18next';
 import './style.sass';
 import MenuCarousel from '../menucarousel';
 import MenuBoardItens from '../menuitens';
@@ -9,6 +10,8 @@ import MenuBoardItens from '../menuitens';
 import backgroundBlackBoard from '../../assets/image/blackboard.gif';
 
 function Main() {
+  const { t } = useTranslation();
+
   return (
     <div className="main">
       <div className="flex flex-row h-screen p-6">
@@ -22,7 +25,7 @@ function Main() {
             <img className="inline-block h-24 w-24 rounded-full ring-4 ring-black" src={useTemplateVal('logo')} alt="" />
           </div>
           <div className="h-32 p-4 promo-title">
-            <FitText>{useTemplateVal('promo_title', 'Untitled')}</FitText>
+            <FitText>{useTemplateVal('promo_title', t('Untitled'))}</FitText>
           </div>
           <div className="grow h-full">
             <MenuCarousel />
