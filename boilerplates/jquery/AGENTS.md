@@ -36,6 +36,28 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
 - `dsplay-data.js` is only used in development mode (outside the DSPLAY Android app); in production, data comes
   from the native app via `window.DSPLAY.getData()`.
 
+## README structure
+
+Every DSPLAY template's `README.md` follows the same skeleton (this repo's is the reference copy — most sections
+below aren't applicable to a generic boilerplate, only to an actual template):
+
+1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
+2. *(optional, only if the template has more than one visual arrangement)* **Features** — named widgets/modes,
+   and any special in-text commands.
+3. *(optional, only if appearance changes meaningfully by screen format)* **Supported screen formats** — a table
+   with a screenshot per format (landscape/portrait/square/horizontal banner).
+4. **Template variables** — a `Key | Type | Default | Description` table; this is the one section every real
+   template has. Add a `### <variable> syntax` sub-section when a single variable's value is itself a small
+   grammar worth explaining rather than cramming it into the table cell. End with: "Remember to also register
+   these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS."
+5. **Local development** — `npm install`, serve `index.html`, plus the `dsplay-data.js` explanation.
+6. *(optional, only if some customization requires editing code rather than a variable)* **For developers** — a
+   short list of `customization -> file path` pointers.
+7. **Generating the template package**, **Deploying**, **Updating vendored dependencies** (-> AGENTS.md), **More**
+   — same wording as this repo's README.md.
+
+Skip a numbered section entirely rather than including it empty.
+
 ## Dependencies (boilerplate maintainers only)
 
 The *template's own* runtime code has no npm dependency on jQuery/core-js/template-utils — those files in `scripts/`
