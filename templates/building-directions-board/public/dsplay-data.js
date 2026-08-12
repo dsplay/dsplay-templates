@@ -1,6 +1,6 @@
 var dsplay_config = {
     // config parameters
-    locale: 'pt_br',
+    locale: 'en',
     orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
     // Android SDK version
     osVersion: 19,
@@ -10,64 +10,31 @@ var dsplay_config = {
 
 var dsplay_media = {
     logo: '',
-    // maxPageDurationSeconds: 10,
     duration: 30000,
+    // maxPageDurationSeconds: 10,
     targets: [{
-        name: "Gilberto Fdasasreyre",
-        place: "Piso C1",
-        floor: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.  ",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: ""
-    },
-    {
-        name: "Restaurante Mdsairange",
-        place: "Piso C2",
-        floor: "Tramontina",
-        direction: "left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
+        name: 'Reception',
+        place: 'Floor 1',
+        floor: 'Ground floor',
+        direction: 'down_left', // up, up_right, right, down_right, down, down_left, left, up_left
+        logo: '',
     }, {
-        name: "Gilberto Freydasdasre",
-        place: "Piso J2",
-        floor: "Cc",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
+        name: 'Restaurant',
+        place: 'Floor 2',
+        floor: '2nd floor',
+        direction: 'left',
+        logo: '../test-assets/tramontina.png',
     }, {
-        name: "Gilberto Freydasdasre",
-        place: "Piso J2",
-        floor: "Cc",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
+        name: 'Conference Room A',
+        place: 'Floor 3',
+        floor: '3rd floor',
+        direction: 'right',
+        logo: '../test-assets/logo_esquerda.png',
     }, {
-        name: "Gilberto Freydasdasre",
-        place: "Piso J2",
-        floor: "Cc",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
-    }, {
-        name: "Gilberto Freydasdasre",
-        place: "Piso J2",
-        floor: "Cc",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
-    }, {
-        name: "Gilberto Freydasdasre",
-        place: "Piso J2",
-        floor: "Cc",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
-    }, {
-        name: "Gilberto Freydasdasre",
-        place: "Piso J2",
-        floor: "Cc",
-        direction: "down_left", // up, up-right, right, down-right, down, down-left, left, up-left
-        logo: "../test-assets/tramontina.png"
-    }]
-};
-
-var dsplay_template = {
-    // template parameter
-    template_var: "My Template Var",
-    logo: '../test-assets/dsplay-logo.png',
-    title: "My Super Template",
-    expanded: "false",
+        name: 'Gym',
+        place: 'Floor 1',
+        floor: 'Ground floor',
+        direction: 'up',
+        logo: '',
+    }];
 };
