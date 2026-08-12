@@ -34,5 +34,4 @@ var dsplay_template = {
   // qr_code_quiet_zone_color: 'white',
   // qr_code_foreground_color: 'black',
   // qr_code_background_color: 'white',
-  background_image: '../test-assets/clean-back-02.jpeg',
 };

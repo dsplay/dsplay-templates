@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-var */
-
 const LOGO_RATE = 0.25;
 const QZ_RATE = 0.05;
 

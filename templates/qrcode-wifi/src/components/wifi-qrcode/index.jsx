@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   QrCode,
   useMedia,
@@ -7,7 +6,7 @@ import {
   useTemplateBoolVal,
 } from '@dsplay/react-template-utils';
 import './style.sass';
-import calculateQrCodeSize from '../../utils/calculateQrCodeSize';
+import calculateQrCodeSize from '../../utils/calculate-qr-code-size';
 import { authTypes, AUTH_TYPE_NOPASS } from '../../utils/auth-types';
 
 function WifiQrCode() {
@@ -32,9 +31,6 @@ function WifiQrCode() {
   const finalPassword = finalAuthentication === AUTH_TYPE_NOPASS ? AUTH_TYPE_NOPASS : password;
 
   const wifiText = `WIFI:S:${ssid};T:${finalAuthentication};P:${finalPassword};H:${hidden ? 'true' : ''};;`;
-
-  /* eslint-disable no-console */
-  console.log(wifiText);
 
   return (
     <div id="Frame">
