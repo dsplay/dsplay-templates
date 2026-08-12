@@ -14,13 +14,8 @@ const images = iconImages;
 // fonts to preload
 // @font-face's must be defined in fonts.sass or another in-use style file
 const fonts = [
-  'Roboto Thin',
   'Roboto Light',
   'Roboto Regular',
-  'Roboto Medium',
-  'Roboto Bold',
-  'Roboto Condensed',
-  'Oswald',
 ];
 
 function App() {
