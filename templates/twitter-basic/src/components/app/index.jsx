@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { config, media, isVertical, tval, tbval } from '@dsplay/template-utils';
-import './App.css';
-import UserProfile from './components/user-profile';
-import Posts from './components/posts';
+import './style.css';
+import UserProfile from '../user-profile';
+import Posts from '../posts';
 
 const { orientation } = config;
 

@@ -1,11 +1,12 @@
-import React from 'react';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import 'moment/locale/pt';
 import 'moment/locale/fr';
 import 'moment/locale/es';
 import 'moment/locale/de';
+import 'moment/locale/it';
+import 'moment/locale/nl';
 import { config } from '@dsplay/template-utils';
 
 function Info({
@@ -32,7 +33,7 @@ function Info({
             <div className="info-box">
                 { 
                     link && 
-                    <div className="qrcode-container" style={{ paddingBottom: qrCodeBottomPadding }}><QRCode size={17 * (smallDim / 100)} value={link} /></div>
+                    <div className="qrcode-container" style={{ paddingBottom: qrCodeBottomPadding }}><QRCodeSVG size={17 * (smallDim / 100)} value={link} /></div>
                 }
                 <div className="info">
                     <span className="created-at">{moment(created).format('L')}</span><br/>

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Post from './post';
+import { Component } from 'react';
+import Post from '../post';
 
 class Posts extends Component {
     state = {

@@ -1,5 +1,5 @@
-import React from 'react';
-import Info from './info';
+import { Fragment } from 'react';
+import Info from '../info';
 import { tval } from '@dsplay/template-utils';
 
 const hashtagColor = tval('hashtag_color', '#FFFF99');
@@ -35,14 +35,14 @@ function PostContent({
     ratio,
 }) {
     return (
-        <React.Fragment>
+        <Fragment>
             <div className="text-wrapper" key={id}>
                 <div className="text-ratio" style={{ fontSize: `${ratio}em` }}>
                     <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text) }} />
                 </div>
             </div> 
             <Info {...info} />
-        </React.Fragment>
+        </Fragment>
     );
 }
 
