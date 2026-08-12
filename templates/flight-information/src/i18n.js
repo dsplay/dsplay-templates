@@ -1,13 +1,9 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import ptBR from 'date-fns/locale/pt-BR';
-import enUS from 'date-fns/locale/en-US';
-import fr from 'date-fns/locale/fr';
-import es from 'date-fns/locale/es';
-import de from 'date-fns/locale/de';
-import nl from 'date-fns/locale/nl';
-import it from 'date-fns/locale/it';
 
+// i18next's default export is the same instance whose methods (use/init/...) are
+// individually re-exported by name, so this is a known false positive.
+// eslint-disable-next-line import/no-named-as-default-member
 i18n
   .use(LanguageDetector)
   .init({
@@ -15,9 +11,8 @@ i18n
     resources: {
       en: {
         translations: {
-          locale: enUS,
-          Title: 'Title',
           destination: 'Destination',
+          origin: 'Origin',
           arrivals: 'Arrivals',
           departures: 'Departures',
           terminal: 'Terminal',
@@ -25,13 +20,10 @@ i18n
           airline: 'Airline',
           time: 'Time',
           gate: 'Gate',
-          status: 'Status',
-          update: 'Update',
         },
       },
       pt: {
         translations: {
-          locale: ptBR,
           destination: 'Destino',
           origin: 'Origem',
           departures: 'Saídas',
@@ -41,14 +33,12 @@ i18n
           arrivals: 'Chegadas',
           time: 'Hora',
           gate: 'Portão',
-          status: 'Situação',
-          update: 'Atualizado',
         },
       },
       fr: {
         translations: {
-          locale: fr,
           destination: 'Destination',
+          origin: 'Origine',
           flight: 'Vol',
           terminal: 'Terminal',
           departures: 'Départs',
@@ -56,14 +46,12 @@ i18n
           airline: 'Compagnie aérienne',
           time: 'Heure de départ',
           gate: 'Portail',
-          status: 'Statut',
-          update: 'Mise à jour',
         },
       },
       de: {
         translations: {
-          locale: de,
           destination: 'Reiseziele',
+          origin: 'Herkunft',
           flight: 'Flüge',
           terminal: 'Terminal',
           departures: 'Abflüge',
@@ -71,14 +59,12 @@ i18n
           airline: 'Stunde',
           time: 'Abfahrtszeit',
           gate: 'Tor',
-          status: 'Status',
-          update: 'Aktualisieren',
         },
       },
       es: {
         translations: {
-          locale: es,
           destination: 'Destino',
+          origin: 'Origen',
           flight: 'Vuelo',
           departures: 'Salidas',
           terminal: 'Terminal',
@@ -86,14 +72,12 @@ i18n
           airline: 'Aerolínea',
           time: 'Hora',
           gate: 'Puerta',
-          status: 'Esttado',
-          update: 'Actualizar',
         },
       },
       it: {
         translations: {
-          locale: it,
           destination: 'Destinazioni',
+          origin: 'Origine',
           flight: 'Voli',
           departures: 'Partenze',
           terminal: 'Terminal',
@@ -101,14 +85,12 @@ i18n
           airline: 'Compagnia aerea',
           time: 'orario',
           gate: 'Cancello',
-          status: 'Stato',
-          update: 'Aggiornamento',
         },
       },
       nl: {
         translations: {
-          locale: nl,
           destination: 'Bestemmingen',
+          origin: 'Herkomst',
           flight: 'Vluchten',
           departures: 'Vertrek',
           arrivals: 'Aankomsten',
@@ -116,8 +98,6 @@ i18n
           airline: 'Luchtvaartmaatschappij',
           time: 'tijd',
           gate: 'Hek',
-          status: 'toestand',
-          update: 'Bijgewerkt',
         },
       },
     },

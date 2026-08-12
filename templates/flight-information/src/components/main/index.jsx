@@ -2,31 +2,28 @@ import { useContext, useEffect, useState } from 'react';
 import { IoAirplane } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
 import { useMedia, useInterval, LoaderContext } from '@dsplay/react-template-utils';
-import { ThemeContext } from '../../contexts/themeContext';
+import { ThemeContext } from '../../contexts/theme-context';
 import useLanguage from '../../hooks/use-language';
-import i18n from '../../i18n';
-import hourFormat from '../../hooks/use-hour';
+import useHourFormat from '../../hooks/use-hour';
 import airports from '../../util/airports.json';
 import { useFlightsInfoFromPromise } from '../../hooks/use-flights-info';
 import './style.sass';
 
-const hour12Format = hourFormat();
 const formattedUpdateTime = {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
   day: '2-digit',
-  // hour: '2-digit',
-  // minute: '2-digit',
-  // second: '2-digit',
 };
-const dateOptions = {
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: hour12Format,
-};
+
 function Main({ startTime }) {
   const loaderContext = useContext(LoaderContext);
+  const hour12Format = useHourFormat();
+  const dateOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: hour12Format,
+  };
 
   const { globalTheme } = useContext(ThemeContext);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -60,10 +57,6 @@ function Main({ startTime }) {
   } else {
     itemsPerPage = 33;
   }
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [i18n, language]);
-
   useInterval(() => {
     setCurrentTime(new Date());
   }, 1000);

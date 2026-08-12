@@ -1,9 +1,6 @@
 import { useConfig } from '@dsplay/react-template-utils';
 
-export default function hourFormat() {
+export default function useHourFormat() {
   const { locale } = useConfig();
-  if (locale === 'en') {
-    return true;
-  }
-  return false;
+  return locale === 'en';
 }

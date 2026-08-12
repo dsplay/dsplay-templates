@@ -1,10 +1,10 @@
 import { I18nextProvider } from 'react-i18next';
-import { Loader, useScreenInfo } from '@dsplay/react-template-utils';
+import { Loader, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
 import Main from '../main';
 import Intro from '../intro';
 import i18n from '../../i18n';
 import './style.sass';
-import ThemeContextParent from '../../contexts/themeContext';
+import ThemeContextParent from '../../contexts/theme-context';
 import { useFlightsInfoPromise } from '../../hooks/use-flights-info';
 
 const MIN_LOADING_DURATION = 2800;
@@ -17,8 +17,12 @@ const fonts = [
 
 function App() {
   const { screenFormat } = useScreenInfo();
+  const { locale } = useConfig();
   const now = new Date();
   const firstLoad = useFlightsInfoPromise(now);
+
+  const [lng] = (locale || 'en').split('_');
+  i18n.changeLanguage(lng);
 
   return (
     <I18nextProvider i18n={i18n}>
