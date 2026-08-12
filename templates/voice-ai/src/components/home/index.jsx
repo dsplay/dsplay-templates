@@ -1,40 +1,40 @@
-/* eslint-disable import/extensions */
 import { useState, useEffect, useRef } from 'react';
-import VoiceFX from '../voicefx/voicefx';
+import { useTranslation } from 'react-i18next';
+import VoiceFX from '../voicefx';
 import './style.sass';
-import logger from '../logger';
+import logger from '../../utils/logger';
 
 function Home() {
+  const { t } = useTranslation();
   logger.log('>>> Home component rendered');
   const [microphoneActive, setMicrophoneActive] = useState(false);
-  const [permissionError, setPermissionError] = useState(null);
+  const [permissionDenied, setPermissionDenied] = useState(false);
   const streamRef = useRef(null);
 
   useEffect(() => {
-    // Solicitar permissão para usar o microfone
+    // request microphone permission as soon as the component mounts
     async function activateMicrophone() {
       try {
-        // Solicitar permissão ao microfone
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         streamRef.current = stream;
         setMicrophoneActive(true);
         logger.log('Microphone activated');
       } catch (error) {
-        setPermissionError('Alert: Microphone permission is required.');
+        setPermissionDenied(true);
         logger.error('Error accessing the microphone');
       }
     }
-    activateMicrophone(); // Ativar o microfone assim que o componente for montado
+    activateMicrophone();
   }, []);
 
   return (
     <div className="home">
-      {permissionError ? <h2>{permissionError}</h2> : null}
+      {permissionDenied ? <h2>{t('Alert: Microphone permission is required.')}</h2> : null}
 
       {microphoneActive
         ? <VoiceFX />
         : (
-          <p>Waiting for microphone activation...</p>
+          <p>{t('Waiting for microphone activation...')}</p>
         )}
     </div>
 

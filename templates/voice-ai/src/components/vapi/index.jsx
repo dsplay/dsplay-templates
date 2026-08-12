@@ -1,10 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState, useRef } from 'react';
 import { useTemplateVal } from '@dsplay/react-template-utils';
-import './anim.css';
 import KUTE from 'kute.js';
-import logger from '../logger';
+import './anim.css';
+import logger from '../../utils/logger';
 
 function VapiAssistant() {
   const assistant = useTemplateVal('assistant_id');
