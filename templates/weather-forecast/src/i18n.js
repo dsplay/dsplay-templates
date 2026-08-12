@@ -11,6 +11,9 @@ i18n
     resources: {
       en: {
         translations: {
+          Today: 'Today',
+          Min: 'Min',
+          Max: 'Max',
         },
       },
       pt: {

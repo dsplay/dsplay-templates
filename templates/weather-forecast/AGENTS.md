@@ -37,6 +37,25 @@ build.sh                    <-- zips the Vite build output into template.zip
 - **Always import a component by its folder, never by reaching into `index`** — `import Main from '../main'`, never `.../main/index`.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule (see below) for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
 
+## README structure
+
+Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+
+1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
+2. *(optional, only if the template has more than one visual arrangement)* **Features**.
+3. *(optional, only if appearance changes meaningfully by screen format)* **Supported screen formats**.
+4. **Template variables** — a `Key | Type | Default | Description` table, ending with the "register as Template Vars in the DSPLAY CMS" reminder. This template also documents its `media.result` shape here, since it's a JSON-service-backed media type.
+5. **Local development**, 6. *(optional)* **For developers**, 7. **Test assets** / **Packing (release build)** / **Maintaining dependencies** (-> AGENTS.md) / **More**.
+
+Skip a numbered section entirely rather than including it empty.
+
+## Internationalization (i18n)
+
+- **Every static, developer-authored piece of UI text must go through `react-i18next`'s `t()`** — never a hardcoded string in JSX. Doesn't apply to actual `media.result`/`dsplay_template` content (e.g. the city name) — only to text this template's own code puts on screen (labels like "Today"/"Min"/"Max", fallback/error text, etc.).
+- **The i18n key is the English text itself** (`keySeparator: false`), and **the `en` resource entry must explicitly map every key to itself** — never leave it sparse/empty relying on i18next's implicit key-as-fallback behavior.
+- **Every template must provide translations for at least: `en`, `pt`, `es`, `it`, `de`, `nl`** (bare ISO codes, not region variants). This template already supports `fr` too — extra languages are fine, fewer than the six required is not. `dsplay_config.locale` comes in region-qualified (e.g. `pt_br`) — `src/components/main/index.jsx` already splits it correctly (`const [lng] = locale.split('_')`) before calling `changeLanguage`.
+- **Audit `t()` call sites against `src/i18n.js`'s resources whenever either changes** — same principle as the CSS/font audit above: a key used but missing a required language is a bug (silent fallback); a key defined but never referenced by any `t()` call is dead and should be removed.
+
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs. `dsplay_media.result` here is the JSON-service payload for this media type (see README.md for its shape) — keep it in sync with reality, since it also feeds `template-example-data.json` (see below).

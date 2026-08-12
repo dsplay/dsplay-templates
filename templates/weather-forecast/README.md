@@ -12,9 +12,11 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 |--------|--------|-----------|----------------------------------------------------------------------|
 | `unit` | string | `celsius` | Temperature unit to display: `celsius` or `fahrenheit`. Media values from the weather service are always in Celsius; `src/hooks/use-temperature.js` converts when `unit` is `fahrenheit`. |
 
+> Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
+
 ## Expected media data (`media.result`)
 
-Unlike a generic custom template, this is a JSON-service-backed media type — `media.result` (see `src/components/main/main.jsx`) is populated by DSPLAY from an external weather service, with this shape:
+Unlike a generic custom template, this is a JSON-service-backed media type — `media.result` (see `src/components/main/index.jsx`) is populated by DSPLAY from an external weather service, with this shape:
 
 ```jsonc
 {
@@ -25,7 +27,7 @@ Unlike a generic custom template, this is a JSON-service-backed media type — `
       "city": "Auerbach in der Oberpfalz",
       "country": "DS",
       "current": {
-        "code": 800,          // weather condition code, drives background + icon (see src/hooks/use-background.js, src/components/icon/icon.jsx)
+        "code": 800,          // weather condition code, drives background + icon (see src/hooks/use-background.js, src/components/icon/index.jsx)
         "description": "Thunderstorm with heavy drizzle",
         "temp": 23.0,          // celsius
         "min": 12.0,
@@ -38,7 +40,7 @@ Unlike a generic custom template, this is a JSON-service-backed media type — `
       },
       "forecast": [
         { "code": 300, "description": "clear sky", "date": "2020-04-09", "min": 29.21, "max": 33.21 }
-        // ... one entry per forecast day, rendered via src/components/forecast-item/forecast-item.jsx
+        // ... one entry per forecast day, rendered via src/components/forecast-item/index.jsx
       ]
     }
   }
