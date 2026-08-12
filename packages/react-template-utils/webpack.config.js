@@ -18,6 +18,10 @@ const createConfig = (target) => ({
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.sass$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },
