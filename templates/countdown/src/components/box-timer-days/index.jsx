@@ -1,4 +1,4 @@
-import { useCountDownContext } from '../../contexts/countDownContext';
+import { useCountDownContext } from '../../contexts/count-down-context';
 import './style.sass';
 
 function BoxTimerDays({

@@ -1,13 +1,12 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import ptBR from 'date-fns/locale/pt-BR';
-import enUS from 'date-fns/locale/en-US';
-import fr from 'date-fns/locale/fr';
-import es from 'date-fns/locale/es';
-import de from 'date-fns/locale/de';
-import nl from 'date-fns/locale/nl';
-import it from 'date-fns/locale/it';
+import {
+  enUS, ptBR, fr, de, es, it, nl,
+} from 'date-fns/locale';
 
+// i18next's default export is the same instance whose methods (use/init/...) are
+// individually re-exported by name, so this is a known false positive.
+// eslint-disable-next-line import/no-named-as-default-member
 i18n
   .use(LanguageDetector)
   .init({
@@ -16,7 +15,10 @@ i18n
       en: {
         translations: {
           locale: enUS,
-          Title: 'Title',
+          days: 'days',
+          hours: 'hours',
+          minutes: 'minutes',
+          seconds: 'seconds',
         },
       },
       pt: {

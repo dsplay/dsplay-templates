@@ -1,5 +1,5 @@
 import './style.sass';
-import { useCountDownContext } from '../../contexts/countDownContext';
+import { useCountDownContext } from '../../contexts/count-down-context';
 
 function BoxTimer({
   box1 = '0',
