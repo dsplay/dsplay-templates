@@ -25,7 +25,6 @@ $(document).ready(function () {
   var delay = (u.media.duration - 1000) / imagesToShow.length;
 
   $.each(imagesToShow, function (i, image) {
-    console.log(image);
     $('#root ul').append(`<li><a href="${image}"><img src="${image}"></a></li>`);
   })
 

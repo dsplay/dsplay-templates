@@ -48,5 +48,5 @@ var dsplay_media = {
 
 // these variables must be registered during the template creation in the Web Manager
 var dsplay_template = {
-  // animation: 'ddd',
+  animation: 'fade',
 };
