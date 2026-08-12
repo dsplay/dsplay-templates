@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import iconAlkaline from '../../assets/image/alkaline.svg';
 import iconBiological from '../../assets/image/biological.svg';
 import iconChemical from '../../assets/image/chemical.svg';
@@ -35,6 +36,8 @@ const icons = {
 };
 
 export default function Icon({ name }) {
+  const { t } = useTranslation();
+
   // Verifica se o ícone existe no mapa
   const iconSrc = icons[name];
 
@@ -44,5 +47,5 @@ export default function Icon({ name }) {
   }
 
   // Se o ícone não for encontrado, renderiza um aviso
-  return <span>Icon not found</span>;
+  return <span>{t('Icon not found')}</span>;
 }

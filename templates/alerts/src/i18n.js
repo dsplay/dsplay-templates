@@ -11,19 +11,38 @@ i18n
     resources: {
       en: {
         translations: {
-          Title: 'Title',
+          'Icon not found': 'Icon not found',
         },
       },
-      pt_br: {
+      pt: {
         translations: {
-          Title: 'Título',
-          Config: 'Configurações',
-          Media: 'Mídia',
-          Orientation: 'Orientação',
+          'Icon not found': 'Ícone não encontrado',
+        },
+      },
+      es: {
+        translations: {
+          'Icon not found': 'Icono no encontrado',
+        },
+      },
+      it: {
+        translations: {
+          'Icon not found': 'Icona non trovata',
+        },
+      },
+      de: {
+        translations: {
+          'Icon not found': 'Symbol nicht gefunden',
+        },
+      },
+      nl: {
+        translations: {
+          'Icon not found': 'Pictogram niet gevonden',
         },
       },
     },
-    fallbackLng: 'en',
+    fallbackLng: {
+      default: ['en'],
+    },
     debug: true,
 
     // have a common namespace used around the full app

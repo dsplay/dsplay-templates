@@ -2,7 +2,6 @@ import {
   FitText,
   useTemplateVal,
 } from '@dsplay/react-template-utils';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import './style.sass';
 import Icon from '../icon';
 
