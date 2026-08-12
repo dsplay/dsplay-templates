@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { CaretLeft, CaretRight } from 'phosphor-react';
+import { useState } from 'react';
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { useTranslation } from 'react-i18next';
 import {
   addDays,
   endOfWeek,
@@ -17,11 +17,12 @@ import {
   addMonths,
 } from 'date-fns';
 import './styles.sass';
-import { i18n } from '../../i18n';
+import i18n from '../../i18n';
 
 const now = new Date();
 
 function Calendar() {
+  const { t } = useTranslation();
   const [selectedDate, setSelectedDate] = useState(now);
   const [activeDate, setActiveDate] = useState(now);
   const heightValue = window.innerHeight;
@@ -48,7 +49,7 @@ function Calendar() {
             setActiveDate(now);
           }}
         >
-          {i18n.t('message.today')}
+          {t('Today')}
         </div>
       </div>
 

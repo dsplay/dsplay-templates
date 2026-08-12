@@ -1,8 +1,6 @@
 import { format } from 'date-fns';
-// eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from 'react';
 import './styles.sass';
-import { i18n } from '../../i18n';
+import i18n from '../../i18n';
 
 function TodayCalendar({ clock, dateFromNow }) {
   const heightValue = window.innerHeight;

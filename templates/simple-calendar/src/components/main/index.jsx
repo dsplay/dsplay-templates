@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useInterval } from '@dsplay/react-template-utils';
 import Calendar from '../calendar';
-import { i18n } from '../../i18n';
+import i18n from '../../i18n';
 import TodayCalendar from '../today-calendar';
 import './styles.sass';
 
