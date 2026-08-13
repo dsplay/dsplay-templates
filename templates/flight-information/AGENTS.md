@@ -67,6 +67,7 @@ Skip a numbered section entirely rather than including it empty.
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
 - `@dsplay/react-template-utils` exposes `useMedia`/`useConfig`/`useInterval`/`LoaderContext`/`useScreenInfo` (used throughout `src/components/main`).
+- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - `src/hooks/use-flights-info.js` calls the aviation-edge.com API directly with `media.apiKey` — the initial fetch happens once as a `Loader` task (see `app/index.jsx`), then `main/index.jsx` re-fetches on a 15-minute interval and re-paginates the results client-side based on `media.duration`/`media.maxPageDurationSeconds`.
 
 ## Template variable manifest
