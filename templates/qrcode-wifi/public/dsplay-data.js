@@ -21,7 +21,7 @@ var dsplay_media = {
 
   // custom media parameters
   ssid: 'Customer Wifi',
-  password: 'pcmnac84',
+  password: 'wifi-password-123',
   auth_type: 'wpa',
   hidden: false,
 };
