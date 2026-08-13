@@ -12,7 +12,9 @@ var dsplay_media = {
   duration: 30000,
 
   // for json service based media
-  imagePath: '../test-assets/image.jpg',
+  // Wikimedia Commons, freely licensed, permanent hotlink (real customer media
+  // is uploaded by the DSPLAY player - this is only shown in dev/CMS preview)
+  imagePath: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Gullfoss%2C_Su%C3%B0urland%2C_Islandia%2C_2014-08-16%2C_DD_119.JPG/1280px-Gullfoss%2C_Su%C3%B0urland%2C_Islandia%2C_2014-08-16%2C_DD_119.JPG',
 
   // custom media parameters
   customMediaParam: "value",
