@@ -23,13 +23,13 @@ var dsplay_media = {
         place: 'Floor 2',
         floor: '2nd floor',
         direction: 'left',
-        logo: '../test-assets/tramontina.png',
+        logo: 'https://ui-avatars.com/api/?name=Restaurant&size=256&background=ea580c&color=fff&bold=true&format=png',
     }, {
         name: 'Conference Room A',
         place: 'Floor 3',
         floor: '3rd floor',
         direction: 'right',
-        logo: '../test-assets/logo_esquerda.png',
+        logo: 'https://ui-avatars.com/api/?name=Conference+Room+A&size=256&background=0d9488&color=fff&bold=true&format=png',
     }, {
         name: 'Gym',
         place: 'Floor 1',
