@@ -1,6 +1,6 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import CountUp from 'react-countup';
+import ReactCountUp from 'react-countup';
 import { useMedia } from '@dsplay/react-template-utils';
 import './federal.sass';
 import './federal-h.sass';
@@ -10,6 +10,8 @@ import './federal-banner-v.sass';
 import './federal-squared.sass';
 import logo from '../../../images/federal-branco.png';
 import { screenFormat } from '../../../utils/screen';
+
+const CountUp = ReactCountUp.default || ReactCountUp;
 
 moment.locale('pt-BR');
 

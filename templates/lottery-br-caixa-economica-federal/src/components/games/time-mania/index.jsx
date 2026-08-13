@@ -1,6 +1,6 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import CountUp from 'react-countup';
+import ReactCountUp from 'react-countup';
 import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './time-mania.sass';
@@ -11,6 +11,8 @@ import './time-mania-banner-v.sass';
 import './time-mania-squared.sass';
 import logo from '../../../images/time-mania-branco.png';
 import { screenFormat } from '../../../utils/screen';
+
+const CountUp = ReactCountUp.default || ReactCountUp;
 
 moment.locale('pt-BR');
 

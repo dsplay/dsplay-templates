@@ -1,6 +1,6 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import CountUp from 'react-countup';
+import ReactCountUp from 'react-countup';
 import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './mega-sena.sass';
@@ -11,6 +11,8 @@ import './mega-sena-banner-v.sass';
 import './mega-sena-squared.sass';
 import logo from '../../../images/mega-sena-branco.png';
 import { screenFormat, BANNER_V } from '../../../utils/screen';
+
+const CountUp = ReactCountUp.default || ReactCountUp;
 
 moment.locale('pt-BR');
 

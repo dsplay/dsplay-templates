@@ -1,6 +1,6 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import CountUp from 'react-countup';
+import ReactCountUp from 'react-countup';
 import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './quina.sass';
@@ -11,6 +11,8 @@ import './quina-banner-v.sass';
 import './quina-squared.sass';
 import logo from '../../../images/quina-branco.png';
 import { screenFormat } from '../../../utils/screen';
+
+const CountUp = ReactCountUp.default || ReactCountUp;
 
 moment.locale('pt-BR');
 

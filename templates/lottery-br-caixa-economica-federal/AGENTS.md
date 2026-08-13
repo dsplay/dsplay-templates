@@ -65,6 +65,21 @@ Skip a numbered section entirely rather than including it empty. This template h
 - `src/components/app/index.jsx` picks a game to render via `media.iteration % <count of games with data present>` — so only games whose `media.result.data` key actually has a value are ever shown, cycling by iteration.
 - Each game component destructures its own slice of `media.result.data.<game>.round`/`.next` — see `public/dsplay-data.js` for the full expected shape per game.
 
+### Fixed: `react-countup`'s default import resolved to the wrong thing, crashing every game
+
+`react-countup` ships a UMD build; Vite/esbuild's CJS-interop can't statically see its `Object.defineProperty(exports, '__esModule', ...)` marker (it's nested inside the UMD factory function, not at the top level), so it falls back to treating the *entire* `module.exports` object (`{ default: <component>, useCountUp: <hook> }`) as the default export. Every game component did `import CountUp from 'react-countup'`, so `CountUp` was that whole object, not the component — React threw "Element type is invalid... got: object" the instant any game with a `<CountUp>` tried to render (every game has at least one). Confirmed via `git stash` that this predates the entire 2026 migration (it's present back to the original `react-countup@^4.4.0` → `^6.5.3` bump), not something introduced by any recent change here.
+
+Worse, the correct fix differs by environment: the browser dev/prod bundle needs `ReactCountUp.default`, but Vitest's SSR transform interops it correctly already, so there `ReactCountUp.default` is `undefined` and `ReactCountUp` itself is the real component. Every game component now does:
+```js
+import ReactCountUp from 'react-countup';
+const CountUp = ReactCountUp.default || ReactCountUp;
+```
+right after its imports. Don't simplify this to a plain default import or to `{ default: CountUp }` named-import syntax — both are semantically identical to the plain default import and reintroduce the crash in the browser.
+
+### Fixed: `loto-facil`'s mock data was missing `accumulatedIndependenceDaySpecialPrize`
+
+Once the import bug above was fixed, `loto-facil` (specifically) still crashed — with a *different* error, thrown from inside `countup.js`'s own constructor (`Cannot read properties of null (reading 'innerHTML')`). Its "Sorteio Especial da Independência" `<CountUp end={nextSpecialPrizeAccumulated} />` had `end={undefined}` because `public/dsplay-data.js`'s `lotofacil` entry never had an `accumulatedIndependenceDaySpecialPrize` field (unlike `dupla-sena`'s `accumulatedEasterSpecialPrize` and `quina`'s `accumulatedSaintJohnSpecialPrize`, which do have real mock values and rendered fine). `countup.js`'s constructor only touches `this.el.innerHTML` when `end` is `null`/`undefined` (to infer a start value from existing DOM text) — combined with `el` legitimately being `null` on `CountUp`'s very first synchronous render (before its ref attaches; this is normal library behavior and self-corrects once the mount effect re-creates the instance with a real `el`), a missing `end` value is fatal. Fixed by adding a mock `accumulatedIndependenceDaySpecialPrize` value to `lotofacil` in `public/dsplay-data.js`. If a similar crash ever recurs on another game, check for a `<CountUp end={...} />` whose value can be `undefined` given the current mock/real data shape.
+
 ## Template variable manifest
 
 `vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`useTemplateVal`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `build.sh`, which zips the whole build output). For this template, `template-variables.json` is legitimately an empty list — see "Runtime model" above.
