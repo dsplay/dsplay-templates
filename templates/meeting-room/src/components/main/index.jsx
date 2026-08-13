@@ -4,8 +4,10 @@ import {
   useTemplateVal,
 } from '@dsplay/react-template-utils';
 import './style.sass';
-import Color from 'color-thief-react';
+import ColorThief from 'color-thief-react';
 import useLanguage from '../../hooks/use-language';
+
+const Color = ColorThief.default || ColorThief;
 
 function Main() {
   const media = useMedia();
