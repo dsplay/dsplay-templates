@@ -22,9 +22,9 @@ var dsplay_media = {
 
 var dsplay_template = {
   // template parameter
-  eventLogo: '../test-assets/thinger.png',
+  eventLogo: 'https://ui-avatars.com/api/?name=Event&size=256&background=0A57FE&color=fff&bold=true&format=png',
 
-  hostLogo: '../test-assets/incident.png',
+  hostLogo: 'https://ui-avatars.com/api/?name=Venue&size=256&background=025EFD&color=fff&bold=true&format=png',
 
   mainColor: '#0A57FE',
 

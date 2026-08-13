@@ -52,7 +52,7 @@ function Main() {
           </p>
           <p className="meeting-name"><FitText>{media.eventName}</FitText></p>
         </div>
-        <Color src={imgEventLogo} format="hex">
+        <Color src={imgEventLogo} format="hex" crossOrigin="anonymous">
           {({ data }) => (
             <div
               className="flex-item-left-bottom"
@@ -65,7 +65,7 @@ function Main() {
       </div>
       <div className="flex-item-right">
         <div className="flex-item-right-top" style={{ backgroundColor: useTemplateVal('rightColorTop') }}>
-          <Color src={imgHostLogo} format="hex">
+          <Color src={imgHostLogo} format="hex" crossOrigin="anonymous">
             {({ data }) => (
               <div className="local-brand" style={{ backgroundImage: `url("${useTemplateVal('hostLogo')}")`, backgroundColor: data }} />
             )}
