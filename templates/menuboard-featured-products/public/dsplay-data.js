@@ -23,15 +23,15 @@ var dsplay_template = {
 
     template_var: "My Template Var",
 //Menuboard logo
-    logo: '../test-assets/pizzaria-logo.jpg',
-    logo_banner: '../test-assets/pizza-forno.jpg',
+    logo: 'https://ui-avatars.com/api/?name=Pizzaria&size=256&background=c0392b&color=fff&bold=true&format=png',
+    logo_banner: 'https://ui-avatars.com/api/?name=Pizza&size=256&background=e67e22&color=fff&bold=true&format=png',
 //Titles
     promo_title: "Promoção",
     menu_title: "Cardápio de Pizzas",
 //Promo images
-    promo_img_01: '../test-assets/carousel-01.png',
-    promo_img_02: '../test-assets/carousel-02.png',
-    promo_img_03: '../test-assets/carousel-03.png',
+    promo_img_01: 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+    promo_img_02: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Pizza_14.jpg',
+    promo_img_03: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Tomato_onion_pizza.jpg',
 //Menu board itens
     prod_name01: "Pizza de Calabresa",
     prod_price01: "R$ 25,00",
