@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest';
 
-// @dsplay/template-utils reads these globals at module-load time, so they
-// must exist before any test file imports a component that uses it.
+// @dsplay/react-template-utils's hooks read these globals lazily at render time,
+// but they must still exist before a component mounts in a test.
 window.dsplay_media = {
   duration: 30000,
   postCount: 1,

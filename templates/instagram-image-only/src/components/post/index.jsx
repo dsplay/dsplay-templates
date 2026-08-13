@@ -1,8 +1,6 @@
-import { tbval } from '@dsplay/template-utils';
+import { useTemplateBoolVal } from '@dsplay/react-template-utils';
 import UserProfile from '../user-profile';
 import MediaSlider from '../media-slider';
-
-const showUserInfo = tbval('show_user_info', true);
 
 function PostMedia({
   type,
@@ -23,6 +21,7 @@ function Post({
   user,
   duration,
 }) {
+  const showUserInfo = useTemplateBoolVal('show_user_info', true);
   const withMedia = media && media.length > 0;
   const maxMediaToShow = Math.min(media.length, Math.max(1, Math.floor(duration / 1000)));
 

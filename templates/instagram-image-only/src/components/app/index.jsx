@@ -1,73 +1,77 @@
-import { Component } from 'react';
-import { config, media, isVertical, tval, tbval } from '@dsplay/template-utils';
+import { useLayoutEffect } from 'react';
+import {
+  useConfig, useMedia, useTemplateVal, useTemplateBoolVal,
+} from '@dsplay/react-template-utils';
 import Posts from '../posts';
 
-const {
-  orientation,
-  width,
-  height,
-} = config;
+function App() {
+  const {
+    orientation,
+    width,
+    height,
+  } = useConfig();
+  const media = useMedia();
+  const horizontalBackground = useTemplateVal('bg_horizontal');
+  const verticalBackground = useTemplateVal('bg_vertical');
+  const primaryColor = useTemplateVal('primary_color', 'white');
+  const showInstagramIcon = useTemplateBoolVal('show_instagram_icon', true);
+  const isVertical = orientation === 'portrait';
 
-// one time template config
-const horizontalBackground = tval('bg_horizontal');
-const verticalBackground = tval('bg_vertical');
-let bgImage = null;
-if (horizontalBackground) {
-  bgImage = `url('${horizontalBackground}')`;
-  if (verticalBackground && isVertical) {
-    bgImage = `url('${verticalBackground}')`;
-  }
-} else if (verticalBackground) {
-  bgImage = `url('${verticalBackground}')`;
-}
+  useLayoutEffect(() => {
+    let bgImage = null;
+    if (horizontalBackground) {
+      bgImage = `url('${horizontalBackground}')`;
+      if (verticalBackground && isVertical) {
+        bgImage = `url('${verticalBackground}')`;
+      }
+    } else if (verticalBackground) {
+      bgImage = `url('${verticalBackground}')`;
+    }
 
-if (bgImage) {
-  document.body.style.backgroundImage = bgImage;
-}
+    if (bgImage) {
+      document.body.style.backgroundImage = bgImage;
+    }
+  }, [horizontalBackground, verticalBackground, isVertical]);
 
-const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-const smallDim = Math.min(w, h);
-
-class App extends Component {
-  componentDidMount() {
+  useLayoutEffect(() => {
     document.querySelector('.App').classList.add('fadeIn');
     document.querySelector('.App').style.opacity = 1;
 
-    const primaryColor = tval('primary_color', 'white');
+    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const smallDim = Math.min(w, h);
+
     document.body.style.color = primaryColor;
     document.body.style.fontSize = `${Math.max(1, Math.floor(smallDim / 50))}px`;
 
-    if (!tbval('show_instagram_icon', true)) {
+    if (!showInstagramIcon) {
       document.querySelector('#logo').style.display = 'none';
     }
-  }
+  }, [primaryColor, showInstagramIcon]);
 
-  render() {
-    const {
-      result: {
-        data: {
-          user,
-          posts,
-        },
+  const {
+    result: {
+      data: {
+        user,
+        posts,
       },
-      duration,
-      postCount = Math.max(1, Math.floor(duration / 10000)),
-    } = media;
+    },
+    duration,
+    postCount = Math.max(1, Math.floor(duration / 10000)),
+  } = media;
 
-    const selectedPosts = posts.slice(0, postCount);
-    const pageDuration = Math.floor((duration - 500) / Math.max(1, selectedPosts.length));
+  const selectedPosts = posts.slice(0, postCount);
+  const pageDuration = Math.floor((duration - 500) / Math.max(1, selectedPosts.length));
 
-    return (
-      <div className="App">
-        <div className="debug">
-          {orientation}
-          {`(${width}x${height})`}
-        </div>
-        <Posts user={user} posts={selectedPosts} pageDuration={pageDuration} />
+  return (
+    <div className="App">
+      <div className="debug">
+        {orientation}
+        {`(${width}x${height})`}
       </div>
-    );
-  }
+      <Posts user={user} posts={selectedPosts} pageDuration={pageDuration} />
+    </div>
+  );
 }
 
 export default App;

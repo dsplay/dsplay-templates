@@ -1,11 +1,5 @@
-import { tval } from '@dsplay/template-utils';
+import { useTemplateVal } from '@dsplay/react-template-utils';
 import logo from '../../images/ig-logo.png';
-
-const primaryColor = tval('primary_color', 'white');
-const fullNameColor = tval('user_full_name_color', primaryColor);
-
-const secondaryColor = tval('secondary_color', '#FFFF99');
-const screenNameColor = tval('user_screen_name_color', secondaryColor);
 
 function UserProfile({
   name,
@@ -13,6 +7,11 @@ function UserProfile({
   pic,
   className,
 }) {
+  const primaryColor = useTemplateVal('primary_color', 'white');
+  const fullNameColor = useTemplateVal('user_full_name_color', primaryColor);
+  const secondaryColor = useTemplateVal('secondary_color', '#FFFF99');
+  const screenNameColor = useTemplateVal('user_screen_name_color', secondaryColor);
+
   return (
     <div className={`user-profile ${className}`}>
       <div className="user-picture" style={{ backgroundImage: `url("${pic}")` }} />
