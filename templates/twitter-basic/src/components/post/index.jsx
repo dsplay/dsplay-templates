@@ -1,14 +1,8 @@
 import { Fragment } from 'react';
 import Info from '../info';
-import { tval } from '@dsplay/template-utils';
+import { useTemplateVal } from '@dsplay/react-template-utils';
 
-const hashtagColor = tval('hashtag_color', '#FFFF99');
-const linkColor = tval('link_color', '#B9D0FF');
-const mentionColor = tval('mention_color', '#FFFF99');
-const primaryColor = tval('primary_color', 'white');
-const textColor = tval('text_color', primaryColor);
-
-function highlight(text = '') {
+function highlight(text = '', { hashtagColor, linkColor, mentionColor }) {
 
     const hashtagRegex = /(#[^\s]+)/g;
     text = text.replace(hashtagRegex, function(url) {
@@ -34,11 +28,17 @@ function PostContent({
     info,
     ratio,
 }) {
+    const hashtagColor = useTemplateVal('hashtag_color', '#FFFF99');
+    const linkColor = useTemplateVal('link_color', '#B9D0FF');
+    const mentionColor = useTemplateVal('mention_color', '#FFFF99');
+    const primaryColor = useTemplateVal('primary_color', 'white');
+    const textColor = useTemplateVal('text_color', primaryColor);
+
     return (
         <Fragment>
             <div className="text-wrapper" key={id}>
                 <div className="text-ratio" style={{ fontSize: `${ratio}em` }}>
-                    <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text) }} />
+                    <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text, { hashtagColor, linkColor, mentionColor }) }} />
                 </div>
             </div> 
             <Info {...info} />
