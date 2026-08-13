@@ -22,8 +22,10 @@ var dsplay_template = {
     // template parameter
     template_var: "My Template Var",
 //Menuboard logo
-    logo: '../test-assets/butcher.jpg',
-    background_image: '../test-assets/space-raw-meat-baking-pan.jpg',
+    logo: 'https://ui-avatars.com/api/?name=Butcher&size=256&background=7c2d12&color=fff&bold=true&format=png',
+    // background_image left unset on purpose - src/components/app/index.jsx falls back to a
+    // bundled image (src/assets/image/raw-meat-with-herbs-and-spices-space.png) when this is
+    // falsy, which ships in the production build - the old '../test-assets/...' path here did not.
 //Titles
     menu_title: "Menu de Carnes (KG)",
 //Menu board itens
