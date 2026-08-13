@@ -63,6 +63,7 @@ Skip a numbered section entirely rather than including it empty.
 - The Wi-Fi network's `ssid`/`auth_type`/`password`/`hidden` come from `dsplay_media` (set by DSPLAY when scheduling this template's content), not from Template Vars — `src/components/wifi-qrcode/index.jsx` reads them via `useMedia()` and builds the standard `WIFI:S:<ssid>;T:<auth>;P:<password>;H:<hidden>;;` connection string that most phone cameras recognize.
 - `src/utils/auth-types.js` maps `dsplay_media.auth_type` (`none`/`wpa`/`wep`) to the QR string's expected token (`nopass`/`WPA`/`WEP`).
 - `@dsplay/react-template-utils`'s `QrCode` component (wraps `easyqrcodejs`) renders the code itself; the `qr_code_*` Template Vars only control its appearance (colors, logo, dot styling), not its content.
+- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 
 ## Template variable manifest
 
