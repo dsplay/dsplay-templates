@@ -63,6 +63,7 @@ Skip a numbered section entirely rather than including it empty.
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
 - `@dsplay/react-template-utils` exposes `useMedia`/`useTemplateVal`/`useConfig` (used for `dsplay_media.date`/`.title` and `bg_image`/`bg_color_1`/`bg_color_2`/`bg_font_color`).
+- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - `src/contexts/count-down-context/index.jsx` is the countdown's ticking clock: it computes `days`/`hours`/`minutes`/`seconds` from `dsplay_media.date` once per second and exposes it (plus the background/font styling) via `useCountDownContext()`.
 
 ## Template variable manifest
