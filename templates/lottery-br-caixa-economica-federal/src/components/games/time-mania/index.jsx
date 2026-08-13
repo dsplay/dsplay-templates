@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import { media } from '@dsplay/template-utils';
+import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './time-mania.sass';
 import './time-mania-h.sass';
@@ -17,6 +17,8 @@ moment.locale('pt-BR');
 function TimeMania() {
 
   const title = 'TIME MANIA';
+
+  const media = useMedia();
 
   const {
     result: {

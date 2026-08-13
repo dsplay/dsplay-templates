@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import { media } from '@dsplay/template-utils';
+import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './dupla-sena.sass';
 import './dupla-sena-h.sass';
@@ -17,6 +17,8 @@ moment.locale('pt-BR');
 function DuplaSena() {
 
   const title = 'DUPLA SENA';
+
+  const media = useMedia();
 
   const {
     result: {

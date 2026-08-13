@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import { media } from '@dsplay/template-utils';
+import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './mega-sena.sass';
 import './mega-sena-h.sass';
@@ -17,6 +17,8 @@ moment.locale('pt-BR');
 function MegaSena() {
 
   const title = screenFormat === BANNER_V ? 'MEGA SENA' : 'MEGA-SENA';
+
+  const media = useMedia();
 
   const {
     result: {

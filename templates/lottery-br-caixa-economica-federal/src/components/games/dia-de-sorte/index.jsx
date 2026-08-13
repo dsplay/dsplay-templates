@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import { media } from '@dsplay/template-utils';
+import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './dia-de-sorte.sass';
 import './dia-de-sorte-h.sass';
@@ -32,6 +32,8 @@ const months = [
 function DiaDeSorte() {
 
   const title = 'DIA DE SORTE';
+
+  const media = useMedia();
 
   const {
     result: {

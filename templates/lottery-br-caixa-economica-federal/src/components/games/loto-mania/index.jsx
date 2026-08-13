@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import CountUp from 'react-countup';
-import { media } from '@dsplay/template-utils';
+import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
 import './loto-mania.sass';
 import './loto-mania-h.sass';
@@ -17,6 +17,8 @@ moment.locale('pt-BR');
 function LotoMania() {
 
   const title = 'LOTO MANIA';
+
+  const media = useMedia();
 
   const {
     result: {
