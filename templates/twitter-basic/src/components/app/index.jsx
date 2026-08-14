@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTemplateVal, useTemplateBoolVal, useConfig, useMedia } from '@dsplay/react-template-utils';
-import './style.css';
+import './style.sass';
 import UserProfile from '../user-profile';
 import Posts from '../posts';
 

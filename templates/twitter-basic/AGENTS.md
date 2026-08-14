@@ -71,6 +71,8 @@ This template has **no static, developer-authored UI text** — every visible st
 
 Fixed by restoring `index.css`'s full content (from the commit immediately before the migration) into `src/components/app/style.css`, with the two `url(...)` background-image paths (`twitter-basic-background.jpg`, `play-button.png`) adjusted from `images/...` to `../../images/...` to account for the file's new location (`src/components/app/` vs. the old `src/`). The actual `@font-face` declarations (`flaticon.css`, `google/fonts.css`) were already correctly imported in `src/index.jsx` and untouched by this bug — only the *layout/color* stylesheet was missing.
 
+That restored file was subsequently converted `style.css` → `style.sass` (mechanical rewrite to indented syntax, verified with `sass` to compile to identical CSS) to comply with the sass-only rule above. This repo previously had zero real `.sass` files, so `sass` wasn't a devDependency yet — added it (`^1.101.3`, matching every other template).
+
 ## Template variable manifest
 
 `vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`tbval`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `build.sh`, which zips the whole build output). The DSPLAY CMS reads these two files to auto-detect a template's variables and seed default preview values, instead of requiring manual registration. See [@dsplay/template-manifest](https://www.npmjs.com/package/@dsplay/template-manifest) for exactly what it detects.
