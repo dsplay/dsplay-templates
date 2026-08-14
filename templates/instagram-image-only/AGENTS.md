@@ -18,7 +18,7 @@ public/
 src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
-  style.css                  <-- global stylesheet (all components share one; not split per-component)
+  style.sass                 <-- global stylesheet (all components share one; not split per-component)
   font/google/                <-- vendored Roboto/Oswald @font-face + woff/ttf/svg files
   images/                    <-- ig-logo.png, play-button.png, bg1.jpg
   components/
@@ -37,6 +37,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 - **Every component gets its own folder with an `index.jsx`.** For a simple component, `index.jsx` *is* the component.
 - **Always import a component by its folder, never by reaching into `index`** — `import Post from '../post'`, never `.../post/index`.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
+- `src/style.sass` was converted from `style.css` (mechanical CSS→indented-syntax rewrite, verified with `sass` to compile to identical CSS before switching) to comply with the sass-only rule above. This repo previously had zero real `.sass` files, so `sass` wasn't a devDependency yet — added it (`^1.101.3`, matching every other template) since the build needs it to process indented-syntax files.
 
 ## Package identity
 
