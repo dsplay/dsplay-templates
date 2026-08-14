@@ -37,6 +37,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 - **Always import a component by its folder, never by reaching into `index`** — `import Main from '../main'`, never `.../main/index`.
 - Non-component helpers (e.g. `src/utils/logger.js`) live outside `components/` and don't need the folder+`index.jsx` treatment — plain kebab-case files are fine.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
+- `src/components/vapi/anim.sass` was converted from `anim.css` (mechanical CSS→indented-syntax rewrite, verified with `sass` to compile to identical CSS) to comply with the sass-only rule above.
 
 ## Package identity
 

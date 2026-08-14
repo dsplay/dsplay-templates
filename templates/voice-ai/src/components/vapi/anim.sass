@@ -1,0 +1,18 @@
+:root
+  --spinner-animation-speed: 10s
+  --amp-spinner-color: #03a064
+
+.spinner
+  animation: spin var(--spinner-animation-speed) linear infinite
+
+.spinner .amp-spinner-gradient-stop
+  stop-color: var(--amp-spinner-color)
+@keyframes spin
+  from
+    transform: rotate(0deg)
+    transform: scale(100%)
+  to
+    transform: rotate(0deg)
+    transform: scale(200%)
+
+

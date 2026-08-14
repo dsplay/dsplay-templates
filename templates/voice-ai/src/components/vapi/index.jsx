@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useTemplateVal } from '@dsplay/react-template-utils';
 import KUTE from 'kute.js';
-import './anim.css';
+import './anim.sass';
 import logger from '../../utils/logger';
 
 function VapiAssistant() {
