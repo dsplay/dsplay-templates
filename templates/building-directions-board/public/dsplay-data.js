@@ -11,7 +11,7 @@ var dsplay_config = {
 var dsplay_media = {
     logo: '',
     duration: 30000,
-    // maxPageDurationSeconds: 10,
+    maxPageDurationSeconds: 10,
     targets: [{
         name: 'Reception',
         place: 'Floor 1',
