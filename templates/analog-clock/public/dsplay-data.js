@@ -14,7 +14,7 @@ var dsplay_media = {
 
 var dsplay_template = {
   // template parameter
-  //background_theme: 'dark',
-  //clock_theme: 'light',
+  background_theme: 'light',
+  clock_theme: 'dark',
   background: 'https://upload.wikimedia.org/wikipedia/commons/1/1f/White_stone_brick_wall.jpg',
 };
