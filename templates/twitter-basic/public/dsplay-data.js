@@ -144,15 +144,15 @@ var dsplay_media = {
 var dsplay_template = {
     bg_horizontal: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Abstract_Blue_Background.png',
     bg_vertical: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Abstract_Blue_Background.png',
-    // show_twitter_icon: 'false',
-    // primary_color: '#EA0',
-    // secondary_color: '#AB0',
-    // hashtag_color: 'red',
-    // mention_color: 'blue',
-    // twitter_icon_color: 'green',
-    // user_full_name_color: 'pink',
-    // user_screen_name_color: 'yellow',
-    // text_color: 'gray',
+    show_twitter_icon: 'true',
+    primary_color: 'white',
+    secondary_color: '#B9D0FF',
+    hashtag_color: '#FFFF99',
+    mention_color: '#FFFF99',
+    twitter_icon_color: '#B9D0FF',
+    user_full_name_color: 'white',
+    user_screen_name_color: '#B9D0FF',
+    text_color: 'white',
 };
 
 var dsplay_config = {
