@@ -29,7 +29,7 @@ var dsplay_media = {
 var dsplay_template = {
   // template parameter
   // template_var: "My Template Var",
-  // logo: "../test-assets/dsplay-logo.png",
+  logo: "https://developers.dsplay.tv/assets/images/dsplay-logo.png",
   // title: "My Super Template",
   // expanded: "false",
 };
