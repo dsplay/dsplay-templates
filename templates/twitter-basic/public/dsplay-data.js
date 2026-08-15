@@ -142,8 +142,8 @@ var dsplay_media = {
 };
 
 var dsplay_template = {
-    // bg_horizontal: '../test-assets/bg-instagram.jpg',
-    // bg_vertical: '../test-assets/bg-instagram.jpg',
+    bg_horizontal: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Abstract_Blue_Background.png',
+    bg_vertical: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Abstract_Blue_Background.png',
     // show_twitter_icon: 'false',
     // primary_color: '#EA0',
     // secondary_color: '#AB0',
