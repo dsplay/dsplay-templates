@@ -42,21 +42,21 @@ const Clock = ({
             <div
               id="hours-indicator"
               className={
-                `indicator hours-indicator ${date.hours === 0 ? '' : 'transition-effect'}`
+                `indicator hours-indicator ${date.hour() === 0 ? '' : 'transition-effect'}`
               }
               style={divStyleHours}
             />
             <div
               id="minutes-indicator"
               className={
-                `indicator minutes-indicator ${date.minutes === 0 ? '' : 'transition-effect'}`
+                `indicator minutes-indicator ${date.minute() === 0 ? '' : 'transition-effect'}`
               }
               style={divStyleMinutes}
             />
             <div
               id="seconds-indicator"
               className={
-                `indicator seconds-indicator ${date.seconds === 0 ? '' : 'transition-effect'}`
+                `indicator seconds-indicator ${date.second() === 0 ? '' : 'transition-effect'}`
               }
               style={divStyleSeconds}
             />

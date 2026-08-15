@@ -89,6 +89,30 @@ Regular npm dependencies, not vendored files — `npm outdated` / `npm update` f
 
 `eslint`/`@eslint/js` are pinned to `^9.39.5` (latest is `10.x`). Bumping them currently fails on peer dependency conflicts: `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` haven't declared ESLint 10 support yet as of 2026-08-12 — they're still the actively-maintained canonical packages, not abandoned or superseded, just lagging behind the major. `eslint-plugin-react-hooks` already supports it. `eslint-plugin-unicorn` is pinned to `65.0.1` for the same reason (`66.0.0+` requires ESLint `>=10.4`). Don't force this with `--legacy-peer-deps` — re-check peer ranges periodically and bump all of them together once the laggards catch up.
 
+## Styling
+
+### Fixed: build-time Sass warnings from broken multi-selector rules, and dead `.city`/`.brand`/`.brand-box` CSS
+
+`npm run build` used to print a dozen `WARNING: This selector doesn't have any properties and won't be rendered.` warnings from `main/style.sass` and `clock/style.sass`. Root cause: Sass's **indented syntax** doesn't support SCSS-style multi-line comma-free selector lists — `.city\n.date\n.brand\n  color: red` does NOT apply `color: red` to all three; only the *last* bare selector in the chain gets the indented block below it, and every selector before it is silently empty. This file had several of these, apparently intended to share properties across `.city`/`.date`/`.brand`/`.clock-container`.
+
+Investigating which of those classes are actually real turned up a second, bigger fact: `.city`, `.brand`, and `.brand-box` are **not rendered by this template at all** — `src/components/city/index.jsx` only ever renders `.ds-grid-item`/`.clock-box`/`.date` (confirmed unchanged since before the Vite migration, and confirmed via `grep -rn "\bcity\b\|\bbrand\b\|brand-box" src --include=*.jsx"` finding zero matching elements). This template is a single-city derivative of `template-world-clocks-analog` (which *does* render `.city`... actually renders a `.brand-box`/`.brand` grid item and multiple `.city`-classed `<City>` grid items) — the shared multi-city-grid CSS was carried over wholesale but never trimmed for the single-city case.
+
+Fixed by removing all `.city`/`.brand`/`.brand-box` rules (base + every viewport/theme variant) and fixing the remaining broken merges to target only the classes that are actually real (`.date`, `.clock-container`) with proper comma-separated selectors.
+
+Separately, `clock/style.sass`'s three `&.transition-effect` blocks (meant to smooth the hour/minute/second hands' `rotateZ` sweep, toggled by `clock/index.jsx`) were also completely empty — same warning, different cause: the property was simply never filled in. Added `+transition(transform 0.3s ease-out)` (using the existing `_mixins.sass` mixin) to each. This exposed a **second, related bug**: the JS toggled the class via `date.hours === 0` / `date.minutes === 0` / `date.seconds === 0` — `date` is a `moment()` instance, which has `.hour()`/`.minute()`/`.second()` *methods*, not `.hours`/`.minutes`/`.seconds` properties, so these comparisons were always `undefined === 0` (always false), meaning `transition-effect` was *always* applied, including across the wrap-around moment (e.g. 59s → 0s) it was meant to skip. Fixing only the CSS half without this would have introduced a visible sweep-back glitch that didn't exist before (since the empty CSS made the class a no-op either way). Fixed to `date.hour() === 0` etc. in `clock/index.jsx`.
+
+### Known bug (not yet fixed): `.clock-container` renders wildly oversized and off-screen
+
+While visually verifying the fix above, found `.clock-container` rendering at ~2781×2809px against a 1854×927 viewport (`rect.left` around -463px, `rect.top` around -929px) — the clock face is enormous and mostly off-screen. Confirmed via `git stash` that this pre-dates every fix in this session (identical in the last-committed state before any of today's edits).
+
+Root cause traced to `_mixins.sass`'s `=dsGridItem` mixin: `flex: 1 1 25` — the flex-basis `25` has **no unit** (should almost certainly be `25%`, matching the 4-per-row grid `template-world-clocks-analog` uses this same mixin for). With only one grid item in this single-city template, `flex-grow: 1` stretches `.ds-grid-item` to the full container width regardless of this bug, so fixing the missing `%` alone won't change anything here — the real problem is downstream: `.clock-box { width: 150% }` is an intentional overflow-crop trick tuned for `.ds-grid-item` being a *quarter*-width cell (as in the multi-city template), and now computes 150% of the *full* viewport width instead, blowing the clock face up ~4x past where it should be.
+
+Not fixed yet — the right fix depends on what `.clock-box`'s sizing should actually be for a single, full-screen clock (this template's actual use case), which is a design call, not a mechanical one. Re-check `template-world-clocks-analog` (the sibling multi-city template these mixins are shared with) before touching `_mixins.sass` directly, since that one may depend on the current values working correctly for its 4-per-row grid.
+
+### Example data uses a real web-hosted background image, not a local file
+
+`public/dsplay-data.js`'s `background` example used to point at a commented-out `../test-assets/back-black.jpg` — a local file that only exists in this dev checkout and gets stripped from the release build (see "Test assets" in README.md). Replaced with a real, public-domain, web-hosted image (`https://upload.wikimedia.org/wikipedia/commons/1/1f/White_stone_brick_wall.jpg`) set as the active (uncommented) default, matching every other already-migrated template's convention, and deleted the now-unused local files (`back.jpg`, `back-black.jpg`, `dsplay-logo.png` — the last one wasn't referenced anywhere at all, `logo-01.png` — also unreferenced, a leftover from the shared `template-world-clocks-analog` codebase this template was derived from).
+
 ## Commit messages
 
 Every commit title must start with an emoji, followed by a short, imperative summary — e.g. `⬆️ upgrading deps`.

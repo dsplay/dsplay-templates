@@ -94,17 +94,9 @@
 
 
 //DEFAULT TEMPLATE STYLES
-.brand-box
-  box-sizing: border-box
-
 .clock-box
     width: 150%
     //background-color: #f801ae //-----------> debug
-.city
-    font-family: 'Oswald'
-    width: 100%
-    height: 10%
-    //background-color: #01f83f //-----------> debug
 .date
     width: 100%
     height: 7%
@@ -112,14 +104,6 @@
     //background-color: #f8cb01 //-----------> debug
     font-family: 'Roboto Condensed'
     color: #888
-.brand
-    height: 100%
-    width: 100%
-    background: no-repeat center center local
-    -webkit-background-size: contain
-    -moz-background-size: contain
-    -o-background-size: contain
-    background-size: contain
 .time
     text-transform: uppercase
 .local-timezone #clock
@@ -130,32 +114,18 @@
 .landscape
     .clock-box
         margin-top: 5vh
-    .city
-        margin-top: 2vh
     .date
         margin-top: 5vh
-    .brand-box
-        width: 25vw
-        height: 40vh
-        padding: 5vh
-    .brand
-        width: 100%
-        height: 100%
-        // margin: 2vh 4vw
 
 .portrait
     .ds-grid-item
         height: 20vh
         width: 50vw
         margin-top: 1.5vh
-    .brand-box
-        @include portraitBrand
     .clock-box
         margin-bottom: 1vh
         width: 150%
-    .city
     .date
-    .brand
         height: 100%
         width: 100%
         -webkit-flex: 1 1 auto
@@ -164,8 +134,6 @@
         -webkit-align-self: center
         -ms-flex-item-align: center
         align-self: center
-    .city
-        height: 13%      
     .date
         height: 10%
         margin-top: 3vh
@@ -181,14 +149,8 @@
     .clock-box
         padding-top: 0vh
         width: 150%
-    .city
     .date
         margin-top: 5vh
-    .brand-box
-        width: 50vw
-        height: 50vw
-        padding: 5vh
-    .brand
     .hidden-square
         @include hidden
 
@@ -199,36 +161,24 @@
         height: 80vh
         width: 80vh
         // margin-top: 2vh auto
-    .brand-box
-        // display: none
     .clock-box
       width: 80%
-    .city
-        height: 25%
     .date
         display: none
-    .brand
     .hidden-h-banner
         @include hidden
 
 .v-banner
-    .ds-container 
+    .ds-container
         flex-direction: column
         justify-content: space-evenly
     .ds-grid-item
         height: 10vh
         width: 95vw
-    .brand-box
-        // display: none
     .clock-box
       width: 80%
-    .city
-        margin: 1vh 1vw
-        width: 95vw
-        height: 25vw
     .date
         display: none
-    .brand
 
 
 //CLOCK THEMES
@@ -237,9 +187,7 @@
 
 .light
     background-color:  #E9E8E2
-    .clock-container
-    .city,
-    .date
+    .clock-container, .date
         color: #151618
     .local-timezone #clock
         background-color: #8d8d8d
@@ -248,9 +196,7 @@
 
 .sky
     background-color:  #489fc2
-    .clock-container
-    .city,
-    .date
+    .clock-container, .date
         color: #ffffff
     .local-timezone #clock
         background-color: #ffae00
