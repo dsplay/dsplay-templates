@@ -23,6 +23,6 @@ var dsplay_template = {
     // template parameter
     bg_color_1: 'transparent',
     bg_color_2: 'blue',
-    // bg_image: '../test-assets/bg.jpg',
+    bg_image: 'https://upload.wikimedia.org/wikipedia/commons/8/8f/Classic_alarm_clock_20180513.jpg',
     bg_font_color: '',
 };
