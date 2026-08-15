@@ -41,9 +41,9 @@ function fillZeros(value) {
 
 $(function () {
 
-  var data = JSON.parse(DSPLAY.getData());
-  var config = data.config;
-  var template = data.template;
+  var u = dsplayTemplateUtils;
+  var config = u.config;
+  var template = u.template;
 
 
   if (config.locale && typeof (config.locale) === 'string') {
