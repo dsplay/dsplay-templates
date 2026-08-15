@@ -25,9 +25,10 @@ scripts/
   core-js-x.y.z.js                  <- vendored, from core-js-bundle (unpkg)
 styles/main.css
 assets/                             <- audio, font, image, video
+test/basic.test.js                  <- smoke tests (see "Testing" below)
 pack.sh                             <- generates the manifest and builds template.zip for upload to DSPLAY Web Manager
 update-deps.sh                      <- updates vendored dependencies (boilerplate maintainers only, see below)
-package.json                        <- packaging-time devDependency only (@dsplay/template-manifest), not a build step
+package.json                        <- packaging-time devDependencies only (@dsplay/template-manifest, node:test via "test"), not a build step
 scripts/.vendored-versions.json     <- tracks the currently-vendored version of each dep for update-deps.sh
 ```
 
@@ -35,6 +36,10 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
   Everything else is up to you.
 - `dsplay-data.js` is only used in development mode (outside the DSPLAY Android app); in production, data comes
   from the native app via `window.DSPLAY.getData()`.
+
+## Testing
+
+`npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See `template-boilerplate-javascript`'s AGENTS.md for what each test checks and why — this file is copied verbatim from there.
 
 ## Package identity
 
