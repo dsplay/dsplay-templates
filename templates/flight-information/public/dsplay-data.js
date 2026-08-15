@@ -26,10 +26,7 @@ var dsplay_media = {
   duration: 30000,
 };
 
-var dsplay_template = {
-  // template parameter
-  // template_var: "My Template Var",
-  logo: "https://developers.dsplay.tv/assets/images/dsplay-logo.png",
-  // title: "My Super Template",
-  // expanded: "false",
-};
+// This template has no dsplay_template variables at all - it's configured
+// entirely through custom dsplay_media parameters instead (see README.md).
+// template_var/title/expanded/logo below were dead leftovers from whatever
+// boilerplate this was cloned from - src/ never reads any of them.
