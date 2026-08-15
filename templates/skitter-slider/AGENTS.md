@@ -5,8 +5,8 @@
 The DSPLAY **Skitter Slider** template — a jQuery-based full-screen image slideshow powered by the
 [Skitter](http://www.gustavowb.com/skitter/) jQuery plugin, offering many transition/animation styles. This is a
 **static project, with no build step** — JS dependencies are vendored files (downloaded pre-built and committed)
-inside `scripts/`. There *is* a minimal `package.json`, but only for packaging-time tooling (see "Commands" below)
-— it plays no part in how the template itself runs.
+inside `scripts/`. `package.json` exists only for tooling around the template (packaging, a local dev server,
+tests — see "Commands" below), not for the template itself.
 
 ## Structure
 
@@ -25,9 +25,9 @@ styles/
   main.css                          <- this template's own styling (full-bleed black background)
   skitter.css                       <- vendored Skitter theme CSS
 test/basic.test.js                  <- smoke tests (see "Testing" below)
-pack.sh                             <- generates the manifest and builds template.zip for upload to DSPLAY Web Manager
-update-deps.sh                      <- updates vendored dependencies (boilerplate maintainers only, see below)
-package.json                        <- packaging-time devDependencies only (@dsplay/template-manifest, node:test via "test"), not a build step
+pack.sh                             <- generates the manifest and builds template.zip for upload to DSPLAY Web Manager (wrapped by `npm run zip`)
+update-deps.sh                      <- updates vendored dependencies (boilerplate maintainers only, see below; wrapped by `npm run update-deps`)
+package.json                        <- devDependencies only (@dsplay/template-manifest for "zip", servor for "start", node:test for "test"), not a build step
 scripts/.vendored-versions.json     <- tracks the currently-vendored version of each dep for update-deps.sh
 ```
 
@@ -38,6 +38,10 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
   URLs) and `media.result.data.posts[].media[]` (an Instagram-post-shaped structure, using `cached_media_url` when
   present, falling back to `urls.lg`) - this template can be fed by either a plain image-list media type or a
   social-post-shaped one.
+
+## Local development
+
+`npm start` runs [`servor`](https://www.npmjs.com/package/servor) (`. index.html 3000 --reload --browse`) — a zero-dependency static file server with live reload, picked specifically because it doesn't pull in a bundler (Vite et al.), matching this template's whole "no build step" premise. Visit `http://localhost:3000` (the **root** URL) — `servor` only injects its live-reload script into extension-less "route" requests, so `http://localhost:3000/index.html` (with the explicit filename) silently serves the page without reload wired up. The page auto-reloads whenever any file changes and you save.
 
 ## Testing
 
@@ -61,16 +65,18 @@ boilerplate it was originally cloned from.
 ## Vendored dependencies (boilerplate maintainers only)
 
 The *template's own* runtime code has no npm dependency on jQuery/core-js/template-utils - those files in
-`scripts/` are downloaded pre-built and committed as-is, not installed via npm. `npm install` in this repo only
-installs `@dsplay/template-manifest`, the packaging-time devDependency used by `pack.sh`.
+`scripts/` are downloaded pre-built and committed as-is, not installed via npm. `npm install` in this repo installs
+devDependencies for tooling around the template (`@dsplay/template-manifest` for `npm run zip`, `servor` for
+`npm start`).
 
 `jquery.easing.min.js` and `jquery.skitter.min.js` are **not** handled by `update-deps.sh` - they're old,
 unmaintained third-party plugins not published to npm under a stable/maintained package name, so they're frozen
 vendored files. If a security issue or real incompatibility ever surfaces, they'd need to be manually
 re-sourced/patched, not auto-updated.
 
-Run `./update-deps.sh` to update jQuery, core-js, and `@dsplay/template-utils`. For each it fetches the latest
-published version from the npm registry, compares it against `scripts/.vendored-versions.json`, and:
+Run `npm run update-deps` (wraps `./update-deps.sh`) to update jQuery, core-js, and `@dsplay/template-utils`. For
+each it fetches the latest published version from the npm registry, compares it against
+`scripts/.vendored-versions.json`, and:
 - if it's a **major** version bump, skips it and prints a warning - this needs a human to review the changelog
   first. Never bypass this guard as an agent; surface the warning to the user instead. As of this writing, jQuery
   has a major bump pending (3.6.1 -> 4.x) that was deliberately left unapplied for this reason - 4.x removes
@@ -79,15 +85,17 @@ published version from the npm registry, compares it against `scripts/.vendored-
 - otherwise, downloads the new bundle and updates `scripts/.vendored-versions.json` (and the `<script src="...">`
   reference in `index.html` for versioned filenames).
 
-After running it, sanity check by serving the project locally (e.g. `python3 -m http.server`) and confirming the
-page loads with no console errors and the mock slideshow renders, then commit.
+After running it, sanity check with `npm start` and confirming the page loads with no console errors and the mock
+slideshow renders, then commit.
 
 ## Commands
 
-- `npm install` - installs the `@dsplay/template-manifest` devDependency (once).
-- `./pack.sh` - runs `dsplay-scan-template`, then builds `template.zip` ready for the
-  [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). There are no automated tests or lint configured.
-  `node_modules/` and the two generated JSON files are gitignored - `pack.sh` regenerates them every run.
+- `npm install` - installs the devDependencies (once).
+- `npm start` - see "Local development" above.
+- `npm run zip` (wraps `./pack.sh`) - runs `dsplay-scan-template`, then builds `template.zip` ready for the
+  [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `node_modules/` and the two generated JSON
+  files are gitignored - `npm run zip` regenerates them every run.
+- `npm test` - see "Testing" above. There is no lint configured.
 
 ## Documentation language
 

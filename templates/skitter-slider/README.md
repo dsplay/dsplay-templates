@@ -26,11 +26,11 @@ This README has two audiences:
    ```sh
    npm install
    ```
-4. Open `index.html` directly in a browser, or serve it with any static file server, e.g.:
+4. Serve it with live reload:
    ```sh
-   python3 -m http.server
+   npm start
    ```
-   and visit `http://localhost:8000`.
+   and visit `http://localhost:3000` (visit the root URL, not `http://localhost:3000/index.html` directly — the reload script is only injected on that path). The page auto-reloads whenever you edit and save a file.
 
 ### Template variables
 
@@ -51,7 +51,7 @@ the template isn't running inside the actual DSPLAY app. Edit it to try out diff
 ### Generating the template package
 
 ```sh
-./pack.sh
+npm run zip
 ```
 
 This first runs [`dsplay-scan-template`](https://www.npmjs.com/package/@dsplay/template-manifest), which
@@ -66,7 +66,7 @@ It then zips `index.html`, `images/`, `scripts/`, `styles/`, and the two generat
 > already takes care of this.
 
 `template.zip`, `node_modules/`, and the two generated JSON files are gitignored and should never be committed;
-`pack.sh` regenerates them every run.
+`npm run zip` regenerates them every run.
 
 ### Deploying
 
@@ -84,7 +84,7 @@ jQuery, `core-js`, and `dsplay-template-utils.js` are pre-built bundles download
 (not installed via npm). Run:
 
 ```sh
-./update-deps.sh
+npm run update-deps
 ```
 
 It checks the latest published version of each dependency and updates the vendored file + the `<script src="...">`
