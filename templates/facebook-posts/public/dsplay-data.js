@@ -129,14 +129,14 @@ var dsplay_media = {
 
 var dsplay_template = {
   // template parameter
-  // bg_horizontal: '../test-assets/bg-facebook2.png',
-  // bg_vertical: '../test-assets/bg-facebook.png',
-  // overlay: '../test-assets/dsplay-logo.png',
+  bg_horizontal: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Abstract_Blue_Background.png',
+  bg_vertical: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Abstract_Blue_Background.png',
+  overlay: 'https://developers.dsplay.tv/assets/images/dsplay-logo.png',
   // overlay_position: 'top-right',
   // image_fit: 'stretch',
   // image_fit: 'cover',
   // image_fit: 'contain',
-  // logo: '../test-assets/dsplay-logo.png',
+  logo: 'https://developers.dsplay.tv/assets/images/dsplay-logo.png',
   // link_color: 'purple',
   // color_1: '#000',
   // color_2: '#51a8b1',
