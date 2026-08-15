@@ -27,11 +27,11 @@ var dsplay_media = {
 };
 
 var dsplay_template = {
-  // qr_code_dot_scale: .8,
-  // qr_code_dot_scale_timing: 0.3,
+  qr_code_dot_scale: .8,
+  qr_code_dot_scale_timing: 1,
   qr_code_logo: 'https://ui-avatars.com/api/?name=WiFi&size=256&background=0d9488&color=fff&bold=true&format=png',
-  // qr_code_logo_background_transparent: false,
-  // qr_code_quiet_zone_color: 'white',
-  // qr_code_foreground_color: 'black',
-  // qr_code_background_color: 'white',
+  qr_code_logo_background_transparent: true,
+  qr_code_quiet_zone_color: 'white',
+  qr_code_foreground_color: '#0f172a',
+  qr_code_background_color: 'white',
 };
