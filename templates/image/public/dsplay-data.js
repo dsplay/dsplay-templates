@@ -21,5 +21,5 @@ var dsplay_media = {
 };
 
 var dsplay_template = {
-  // fit: 'contain',
+  fit: 'cover',
 };
