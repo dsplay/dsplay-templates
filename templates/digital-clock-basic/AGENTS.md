@@ -22,9 +22,10 @@ assets/
   font/                             <-- Roboto (the only face actually applied by main.css)
   image/                            <-- favicon + a sample background image
   audio/ video/                     <-- currently empty
+test/basic.test.js                  <-- smoke tests (see "Testing" below)
 pack.sh                             <-- generates the manifest and zips the template for upload to DSPLAY Web Manager
 update-deps.sh                      <-- updates vendored dependencies (boilerplate maintainers only, see below)
-package.json                        <-- packaging-time devDependency only (@dsplay/template-manifest), not a build step
+package.json                        <-- packaging-time devDependencies only (@dsplay/template-manifest, node:test via "test"), not a build step
 scripts/.vendored-versions.json     <-- tracks the currently-vendored version of each dep for update-deps.sh
 ```
 
@@ -32,11 +33,15 @@ scripts/.vendored-versions.json     <-- tracks the currently-vendored version of
 
 - `scripts/dsplay-data.js` defines `dsplay_config`, `dsplay_media`, and `dsplay_template` globals used only in **development**. Its contents are ignored at runtime on the actual DSPLAY device/app.
 - `scripts/dsplay-template-utils.js` (the `@dsplay/template-utils` UMD bundle) exposes `window.dsplayTemplateUtils`, aliased in `app.js` as `var u = dsplayTemplateUtils;` — `config`/`template` are read via `u.config`/`u.template`, matching `template-boilerplate-jquery`'s convention. This used to instead call `JSON.parse(DSPLAY.getData())` directly, bypassing the vendored bundle entirely — fixed (see next point).
-- **Fixed: `@dsplay/template-manifest`'s scanner couldn't see this template's variables.** The old `var template = JSON.parse(DSPLAY.getData()).template;` pattern was invisible to the scanner (it only recognized `dsplayTemplateUtils.tval`-style calls or a `template.<key>` read bound to the global alias/`useTemplate()`, not an arbitrary locally-destructured object). Two things changed: this template was migrated to `u.template.<key>` (a pattern the scanner already recognized), **and** `@dsplay/template-manifest` itself was fixed (1.0.4) to also recognize the old `JSON.parse(<...>.getData()).template` pattern generically, for any other template still using it. Either fix alone would have been enough here; both were done. `./pack.sh` now reports "found 5 template variable(s)" instead of 0 — bump the `@dsplay/template-manifest` devDependency to `^1.0.4` once it's published to confirm this with the real installed package, not just local testing.
+- **Fixed: `@dsplay/template-manifest`'s scanner couldn't see this template's variables.** The old `var template = JSON.parse(DSPLAY.getData()).template;` pattern was invisible to the scanner (it only recognized `dsplayTemplateUtils.tval`-style calls or a `template.<key>` read bound to the global alias/`useTemplate()`, not an arbitrary locally-destructured object). Two things changed: this template was migrated to `u.template.<key>` (a pattern the scanner already recognized), **and** `@dsplay/template-manifest` itself was fixed (1.0.4, now published and the pinned devDependency version) to also recognize the old `JSON.parse(<...>.getData()).template` pattern generically, for any other template still using it. Either fix alone would have been enough here; both were done. `./pack.sh` now reports "found 5 template variable(s)" instead of 0.
 - `scripts/app.js` also implements its own tiny ad-hoc locale system (`en_us`/`pt_br` date formatting, keyed off `dsplay_config.locale`) — this predates and is unrelated to the `react-i18next` convention used in the React templates; it's a vanilla template with no such dependency available, so this is the reasonable equivalent.
 - `scripts/core-js-<version>.js` is a vendored polyfill bundle for older WebViews used by DSPLAY devices.
 
 Script load order in `index.html` matters: `core-js` → `dsplay-data.js` → `dsplay-template-utils.js` → `jquery` → `app.js`.
+
+## Testing
+
+`npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See `template-boilerplate-javascript`'s AGENTS.md for what each test checks and why — this file is copied verbatim from there.
 
 ## Package identity
 
