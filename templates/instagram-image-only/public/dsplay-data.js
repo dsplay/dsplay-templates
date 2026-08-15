@@ -112,11 +112,11 @@ var dsplay_media = {
 };
 
 var dsplay_template = {
-    // bg_horizontal: '../test-data/bg-instagram.jpg',
-    // bg_vertical: '../test-data/bg-instagram.jpg',
-    // show_user_info: 'false',
-    // user_full_name_color: 'red',
-    // user_screen_name_color: 'yellow',
+    bg_horizontal: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Roasted_Coffee_Beans_Texture.jpg',
+    bg_vertical: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Roasted_Coffee_Beans_Texture.jpg',
+    show_user_info: 'true',
+    user_full_name_color: 'white',
+    user_screen_name_color: '#7FD4CE',
 };
 
 var dsplay_config = {
