@@ -21,8 +21,10 @@ var dsplay_media = {
 
 var dsplay_template = {
   // template parameter
-  // bg_color_1: 'transparent',
-  // bg_color_2: 'blue',
+  // bg_image always wins over this gradient when both are set (see count-down-context) -
+  // kept as a sensible fallback for when no image is configured.
+  bg_color_1: '#0a1128',
+  bg_color_2: '#000000',
   bg_image: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Celebration_fireworks.jpg',
-  bg_font_color: 'blue',
+  bg_font_color: '#ffffff',
 };
