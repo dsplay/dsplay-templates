@@ -61,14 +61,23 @@ function Main({ startTime }) {
     setCurrentTime(new Date());
   }, 1000);
 
-  const { tasksResults: [initialFlights] } = loaderContext;
+  const { tasksResults: [initialFlights], tasksErrors: [initialFlightsError] } = loaderContext;
   const [fetchingAllFligts, allFlights = initialFlights] = useFlightsInfoFromPromise(updateTime);
-  const hasFlightsError = !fetchingAllFligts && !!allFlights?.error;
+  // undefined here means neither the initial load (Loader's tasksErrors) nor any refresh since
+  // ever produced flights - genuinely nothing to show, as opposed to a refresh failing while
+  // still-valid earlier data is available, which just keeps showing that stale data instead
+  const hasFlightsError = !fetchingAllFligts && allFlights === undefined;
+
+  useEffect(() => {
+    if (initialFlightsError) {
+      console.error(initialFlightsError);
+    }
+  }, [initialFlightsError]);
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    if (allFlights && !allFlights.error) {
+    if (allFlights) {
       const currentFlights = allFlights.slice(startIndex, endIndex);
       setFlightsView(currentFlights);
     }

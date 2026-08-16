@@ -16,42 +16,39 @@ export function useFlightsInfoPromise(currentTime) {
 
   const result = useMemo(() => {
     async function fetch() {
-      try {
-        const response = await axios.get(SERVICE_API_URL, {
-          params: {
-            key: API_KEY,
-            iataCode: airportIATA,
-            type: departureArrival,
-          },
-        });
+      const response = await axios.get(SERVICE_API_URL, {
+        params: {
+          key: API_KEY,
+          iataCode: airportIATA,
+          type: departureArrival,
+        },
+      });
 
-        if (!Array.isArray(response.data)) {
-          return { error: true };
-        }
-
-        const flightsUpdated = response.data.filter((flight) => {
-          const arrival = departureArrival === 'arrival';
-          const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
-          const flightTime = new Date(time);
-          const codesharedIsNotNull = flight.codeshared === null;
-          const timeLimit = new Date(currentTime.getTime() - (offset));
-          return flightTime >= timeLimit && codesharedIsNotNull;
-        });
-        flightsUpdated.sort((a, b) => {
-          const arrival = departureArrival === 'arrival';
-          const timeA = arrival ? a.arrival.scheduledTime : a.departure.scheduledTime;
-          const timeB = arrival ? b.arrival.scheduledTime : b.departure.scheduledTime;
-          const scheduledTimeA = new Date(timeA);
-          const scheduledTimeB = new Date(timeB);
-          return scheduledTimeA - scheduledTimeB;
-        });
-
-        return flightsUpdated;
-      } catch {
-        // network/HTTP failure - surfaced as the same { error: true } sentinel as an
-        // invalid response body, so callers only need to check one shape
-        return { error: true };
+      if (!Array.isArray(response.data)) {
+        // e.g. aviation-edge.com replies 200 with { error, success: false } for a bad/rate-limited
+        // key - reject so callers (Loader's tasksErrors, useFlightsInfoFromPromise below) see it
+        // as a real failure instead of silently treating it as an empty flights array
+        throw new Error(`Unexpected aviation-edge.com response: ${JSON.stringify(response.data)}`);
       }
+
+      const flightsUpdated = response.data.filter((flight) => {
+        const arrival = departureArrival === 'arrival';
+        const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
+        const flightTime = new Date(time);
+        const codesharedIsNotNull = flight.codeshared === null;
+        const timeLimit = new Date(currentTime.getTime() - (offset));
+        return flightTime >= timeLimit && codesharedIsNotNull;
+      });
+      flightsUpdated.sort((a, b) => {
+        const arrival = departureArrival === 'arrival';
+        const timeA = arrival ? a.arrival.scheduledTime : a.departure.scheduledTime;
+        const timeB = arrival ? b.arrival.scheduledTime : b.departure.scheduledTime;
+        const scheduledTimeA = new Date(timeA);
+        const scheduledTimeB = new Date(timeB);
+        return scheduledTimeA - scheduledTimeB;
+      });
+
+      return flightsUpdated;
     }
 
     // console.log('fetching', currentTime);
@@ -63,6 +60,7 @@ export function useFlightsInfoPromise(currentTime) {
 
 export function useFlightsInfoFromPromise(currentTime) {
   const [result, setResult] = useState();
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
   const promise = useFlightsInfoPromise(currentTime);
 
@@ -76,8 +74,10 @@ export function useFlightsInfoFromPromise(currentTime) {
         const response = await promise;
         // console.log(json);
         setResult(response);
-      } catch (error) {
-        console.error(error);
+        setError(undefined);
+      } catch (fetchError) {
+        console.error(fetchError);
+        setError(fetchError);
       } finally {
         setLoading(false);
       }
@@ -86,5 +86,5 @@ export function useFlightsInfoFromPromise(currentTime) {
     fetch();
   }, [currentTime]);
 
-  return [loading, result];
+  return [loading, result, error];
 }
