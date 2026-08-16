@@ -36,5 +36,5 @@ var dsplay_media = {
         floor: 'Ground floor',
         direction: 'up',
         logo: '',
-    }];
+    }],
 };
