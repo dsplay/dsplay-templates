@@ -8,9 +8,11 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 ## Supported screen formats
 
-| Landscape | Portrait | Square |
-|-----------|----------|--------|
-| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) | ![Square](docs/screenshots/square.png) |
+| Landscape |
+|-----------|
+| ![Landscape](docs/screenshots/landscape.png) |
+
+> Portrait, square, and banner formats aren't supported yet — the flip-clock/title layout is fixed-width and overflows at other aspect ratios.
 
 ## Template variables
 
