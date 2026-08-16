@@ -43,7 +43,7 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
 
 ## Testing
 
-`npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See `template-boilerplate-javascript`'s AGENTS.md for what each test checks and why — this file is copied verbatim from there.
+`npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See [`template-boilerplate-javascript`](https://github.com/dsplay/template-boilerplate-javascript)'s AGENTS.md for what each test checks and why — this file is copied verbatim from there.
 
 ## Package identity
 
@@ -77,11 +77,11 @@ Skip a numbered section entirely rather than including it empty.
 
 The *template's own* runtime code has no npm dependency on jQuery/core-js/template-utils — those files in `scripts/`
 are downloaded pre-built and committed as-is, not installed via npm. `npm install` in this repo installs
-devDependencies for tooling around the template (`@dsplay/template-manifest` for `npm run zip`, `servor` for
+devDependencies for tooling around the template ([`@dsplay/template-manifest`](https://github.com/dsplay/template-manifest) for `npm run zip`, `servor` for
 `npm start`) — see "Commands" below.
 
 Run `npm run update-deps` (wraps `./update-deps.sh`) to update the three vendored bundles (jQuery, core-js,
-`@dsplay/template-utils`). For each it: fetches the latest published version from the npm registry, compares it
+[`@dsplay/template-utils`](https://github.com/dsplay/template-utils)). For each it: fetches the latest published version from the npm registry, compares it
 against `scripts/.vendored-versions.json` (the only record of the currently-vendored version, since
 `dsplay-template-utils.js` keeps a constant filename with no version in it), and:
 - if it's a **major** version bump, skips it and prints a warning — this needs a human to review the changelog
