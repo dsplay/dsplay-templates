@@ -40,7 +40,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-lottery-br-caixa-economica-federal` (already correct, no fix needed here).
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-lottery-br-caixa-economica-federal` (already correct, no fix needed here).
 
 ## README structure
 
@@ -61,7 +61,7 @@ Skip a numbered section entirely rather than including it empty. This template h
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development** (renamed from legacy unprefixed `media`/`config`/`template` globals during the 2026 migration — `@dsplay/template-utils` supports both, but the prefixed names match every other template). `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
-- This template reads `@dsplay/react-template-utils`'s `useMedia()` hook, called inside each component that needs it (`app`, and each of the 8 game components). It used to read `@dsplay/template-utils`'s `media` export directly instead — that predated the hooks library and was originally left as-is, then migrated later at the maintainer's request (same as `template-horizontal-info-bar`). `@dsplay/template-utils` is no longer a direct dependency (still pulled in transitively via `@dsplay/react-template-utils`).
+- This template reads `@dsplay/react-template-utils`'s `useMedia()` hook, called inside each component that needs it (`app`, and each of the 8 game components). It used to read `@dsplay/template-utils`'s `media` export directly instead — that predated the hooks library and was originally left as-is, then migrated later at the maintainer's request (same as [`template-horizontal-info-bar`](https://github.com/dsplay/template-horizontal-info-bar)). `@dsplay/template-utils` is no longer a direct dependency (still pulled in transitively via `@dsplay/react-template-utils`).
 - **Always read template data through these hooks, called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant.**
 - `src/components/app/index.jsx` picks a game to render via `media.iteration % <count of games with data present>` — so only games whose `media.result.data` key actually has a value are ever shown, cycling by iteration.
 - Each game component destructures its own slice of `media.result.data.<game>.round`/`.next` — see `public/dsplay-data.js` for the full expected shape per game.
