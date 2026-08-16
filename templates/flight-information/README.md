@@ -8,15 +8,13 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 ## Supported screen formats
 
-- Landscape
+| Landscape | Square |
+|-----------|--------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Square](docs/screenshots/square.png) |
 
-  ![Landscape](docs/screenshots/landscape.png)
-- Portrait
-
-  ![Portrait](docs/screenshots/portrait.png)
-- Square
-
-  ![Square](docs/screenshots/square.png)
+| Horizontal banner | Vertical banner |
+|--------------------|-------------------|
+| ![Horizontal Banner](docs/screenshots/h-banner.png) | ![Vertical Banner](docs/screenshots/v-banner.png) |
 
 ## Template variables
 
