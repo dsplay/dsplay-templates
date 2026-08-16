@@ -53,4 +53,4 @@ function Main() {
 }
 ```
 
-See `template-boilerplate-react` for a small runnable example (a task that deliberately fails, and the corresponding `tasksErrors` check), and `template-flight-information` for a complete production example — a translated error message shown only when there's truly no data left to fall back on, not on every single failed request.
+See [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react) for a small runnable example (a task that deliberately fails, and the corresponding `tasksErrors` check), and [`template-flight-information`](https://github.com/dsplay/template-flight-information) for a complete production example — a translated error message shown only when there's truly no data left to fall back on, not on every single failed request.
