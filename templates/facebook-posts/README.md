@@ -10,6 +10,14 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 Layout adapts to landscape, portrait, square, and horizontal-banner screen formats — the user profile, media, and QR code/reactions panel rearrange accordingly.
 
+| Landscape | Portrait | Square |
+|-----------|----------|--------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) | ![Square](docs/screenshots/square.png) |
+
+| Horizontal banner |
+|--------------------|
+| ![Horizontal Banner](docs/screenshots/h-banner.png) |
+
 ## Template variables
 
 | Key                    | Type    | Default             | Description                                                                                  |
