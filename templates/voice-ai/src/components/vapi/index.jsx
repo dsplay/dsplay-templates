@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useTemplateVal } from '@dsplay/react-template-utils';
+import { useTranslation } from 'react-i18next';
 import KUTE from 'kute.js';
 import './anim.sass';
 import logger from '../../utils/logger';
@@ -7,7 +8,9 @@ import logger from '../../utils/logger';
 function VapiAssistant() {
   const assistant = useTemplateVal('assistant_id');
   const apiKey = useTemplateVal('api_key');
+  const { t } = useTranslation();
   const [amplitudes, setAmplitudes] = useState(new Array(100).fill(0));
+  const [callError, setCallError] = useState(false);
   const backgroundMedia = useTemplateVal('background_media', useTemplateVal('background_image_url'));
   const gradienteColor1 = useTemplateVal('gradiente_color_1');
   const gradienteColor2 = useTemplateVal('gradiente_color_2');
@@ -31,6 +34,12 @@ function VapiAssistant() {
       script.onload = () => {
         if (window.vapiSDK) {
           vapiInstance = window.vapiSDK.run({ apiKey, assistant, config: buttonConfig });
+          // an invalid/misconfigured assistant_id or api_key only surfaces once a call is
+          // actually attempted (the widget itself renders fine regardless) - these are the
+          // Vapi SDK's own error events, not a Loader task, so this can't be caught proactively
+          // during the intro the way template-flight-information handles its API key
+          vapiInstance?.on?.('error', () => setCallError(true));
+          vapiInstance?.on?.('call-start-failed', () => setCallError(true));
         }
       };
 
@@ -248,6 +257,24 @@ function VapiAssistant() {
           />
         </g>
       </svg>
+      {callError && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            color: '#fff',
+            padding: '0.75em 1.5em',
+            borderRadius: '0.5em',
+            fontSize: '1.5rem',
+            textAlign: 'center',
+          }}
+        >
+          {t('Call failed. Please check the assistant configuration.')}
+        </div>
+      )}
     </div>
   );
 }
