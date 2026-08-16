@@ -39,7 +39,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-analog-clock`.
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-analog-clock`.
 
 ## README structure
 
@@ -63,8 +63,8 @@ Skip a numbered section entirely rather than including it empty.
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
-- `@dsplay/react-template-utils` exposes `useTemplateVal` (`background`/`background_theme`/`clock_theme`) and `useInterval` (ticks the clock once per second).
-- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
+- [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils) exposes `useTemplateVal` (`background`/`background_theme`/`clock_theme`) and `useInterval` (ticks the clock once per second).
+- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - Component flow: `app` -> `main` (reads template variables, owns the 1-second tick) -> `city` (formats the date/time, also accepts an optional `utcOffset` prop unused by this template but kept for reuse) -> `clock` (the animated SVG face).
 
 ## Template variable manifest
@@ -95,7 +95,7 @@ Regular npm dependencies, not vendored files — `npm outdated` / `npm update` f
 
 `npm run build` used to print a dozen `WARNING: This selector doesn't have any properties and won't be rendered.` warnings from `main/style.sass` and `clock/style.sass`. Root cause: Sass's **indented syntax** doesn't support SCSS-style multi-line comma-free selector lists — `.city\n.date\n.brand\n  color: red` does NOT apply `color: red` to all three; only the *last* bare selector in the chain gets the indented block below it, and every selector before it is silently empty. This file had several of these, apparently intended to share properties across `.city`/`.date`/`.brand`/`.clock-container`.
 
-Investigating which of those classes are actually real turned up a second, bigger fact: `.city`, `.brand`, and `.brand-box` are **not rendered by this template at all** — `src/components/city/index.jsx` only ever renders `.ds-grid-item`/`.clock-box`/`.date` (confirmed unchanged since before the Vite migration, and confirmed via `grep -rn "\bcity\b\|\bbrand\b\|brand-box" src --include=*.jsx"` finding zero matching elements). This template is a single-city derivative of `template-world-clocks-analog` (which *does* render `.city`... actually renders a `.brand-box`/`.brand` grid item and multiple `.city`-classed `<City>` grid items) — the shared multi-city-grid CSS was carried over wholesale but never trimmed for the single-city case.
+Investigating which of those classes are actually real turned up a second, bigger fact: `.city`, `.brand`, and `.brand-box` are **not rendered by this template at all** — `src/components/city/index.jsx` only ever renders `.ds-grid-item`/`.clock-box`/`.date` (confirmed unchanged since before the Vite migration, and confirmed via `grep -rn "\bcity\b\|\bbrand\b\|brand-box" src --include=*.jsx"` finding zero matching elements). This template is a single-city derivative of [`template-world-clocks-analog`](https://github.com/dsplay/template-world-clocks-analog) (which *does* render `.city`... actually renders a `.brand-box`/`.brand` grid item and multiple `.city`-classed `<City>` grid items) — the shared multi-city-grid CSS was carried over wholesale but never trimmed for the single-city case.
 
 Fixed by removing all `.city`/`.brand`/`.brand-box` rules (base + every viewport/theme variant) and fixing the remaining broken merges to target only the classes that are actually real (`.date`, `.clock-container`) with proper comma-separated selectors.
 
