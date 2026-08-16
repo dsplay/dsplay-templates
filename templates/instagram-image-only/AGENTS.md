@@ -4,7 +4,7 @@ Guidance for AI agents (and humans) working in this repository.
 
 ## What this project is
 
-The DSPLAY **Instagram Image Only** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/), showing a full-screen slideshow of a connected Instagram account's post media (no caption text, unlike `template-instagram-basic`). Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
+The DSPLAY **Instagram Image Only** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/), showing a full-screen slideshow of a connected Instagram account's post media (no caption text, unlike [`template-instagram-basic`](https://github.com/dsplay/template-instagram-basic)). Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
 
 This template predates `@dsplay/react-template-utils` — it reads variables via `@dsplay/template-utils`'s plain `tval`/`tbval` functions at module scope, and its components are React class components, not hooks. Keep this pattern; it's a legitimate, supported way to consume `@dsplay/template-utils` and doesn't need a hooks rewrite as part of routine maintenance.
 
@@ -41,7 +41,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-instagram-image-only`.
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-instagram-image-only`.
 
 ## README structure
 
