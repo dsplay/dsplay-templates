@@ -16,32 +16,42 @@ export function useFlightsInfoPromise(currentTime) {
 
   const result = useMemo(() => {
     async function fetch() {
-      const response = await axios.get(SERVICE_API_URL, {
-        params: {
-          key: API_KEY,
-          iataCode: airportIATA,
-          type: departureArrival,
-        },
-      });
+      try {
+        const response = await axios.get(SERVICE_API_URL, {
+          params: {
+            key: API_KEY,
+            iataCode: airportIATA,
+            type: departureArrival,
+          },
+        });
 
-      const flightsUpdated = response.data.filter((flight) => {
-        const arrival = departureArrival === 'arrival';
-        const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
-        const flightTime = new Date(time);
-        const codesharedIsNotNull = flight.codeshared === null;
-        const timeLimit = new Date(currentTime.getTime() - (offset));
-        return flightTime >= timeLimit && codesharedIsNotNull;
-      });
-      flightsUpdated.sort((a, b) => {
-        const arrival = departureArrival === 'arrival';
-        const timeA = arrival ? a.arrival.scheduledTime : a.departure.scheduledTime;
-        const timeB = arrival ? b.arrival.scheduledTime : b.departure.scheduledTime;
-        const scheduledTimeA = new Date(timeA);
-        const scheduledTimeB = new Date(timeB);
-        return scheduledTimeA - scheduledTimeB;
-      });
+        if (!Array.isArray(response.data)) {
+          return { error: true };
+        }
 
-      return flightsUpdated;
+        const flightsUpdated = response.data.filter((flight) => {
+          const arrival = departureArrival === 'arrival';
+          const time = arrival ? flight.arrival.scheduledTime : flight.departure.scheduledTime;
+          const flightTime = new Date(time);
+          const codesharedIsNotNull = flight.codeshared === null;
+          const timeLimit = new Date(currentTime.getTime() - (offset));
+          return flightTime >= timeLimit && codesharedIsNotNull;
+        });
+        flightsUpdated.sort((a, b) => {
+          const arrival = departureArrival === 'arrival';
+          const timeA = arrival ? a.arrival.scheduledTime : a.departure.scheduledTime;
+          const timeB = arrival ? b.arrival.scheduledTime : b.departure.scheduledTime;
+          const scheduledTimeA = new Date(timeA);
+          const scheduledTimeB = new Date(timeB);
+          return scheduledTimeA - scheduledTimeB;
+        });
+
+        return flightsUpdated;
+      } catch {
+        // network/HTTP failure - surfaced as the same { error: true } sentinel as an
+        // invalid response body, so callers only need to check one shape
+        return { error: true };
+      }
     }
 
     // console.log('fetching', currentTime);

@@ -20,6 +20,7 @@ i18n
           airline: 'Airline',
           time: 'Time',
           gate: 'Gate',
+          flightsError: 'Unable to load flight data. Please check the API key configuration.',
         },
       },
       pt: {
@@ -33,6 +34,7 @@ i18n
           arrivals: 'Chegadas',
           time: 'Hora',
           gate: 'Portão',
+          flightsError: 'Não foi possível carregar os dados de voo. Verifique a configuração da chave da API.',
         },
       },
       fr: {
@@ -46,6 +48,7 @@ i18n
           airline: 'Compagnie aérienne',
           time: 'Heure de départ',
           gate: 'Portail',
+          flightsError: 'Impossible de charger les données de vol. Vérifiez la configuration de la clé API.',
         },
       },
       de: {
@@ -59,6 +62,7 @@ i18n
           airline: 'Stunde',
           time: 'Abfahrtszeit',
           gate: 'Tor',
+          flightsError: 'Flugdaten konnten nicht geladen werden. Bitte überprüfen Sie die API-Schlüsselkonfiguration.',
         },
       },
       es: {
@@ -72,6 +76,7 @@ i18n
           airline: 'Aerolínea',
           time: 'Hora',
           gate: 'Puerta',
+          flightsError: 'No se pudieron cargar los datos de vuelo. Verifique la configuración de la clave de API.',
         },
       },
       it: {
@@ -85,6 +90,7 @@ i18n
           airline: 'Compagnia aerea',
           time: 'orario',
           gate: 'Cancello',
+          flightsError: 'Impossibile caricare i dati di volo. Verificare la configurazione della chiave API.',
         },
       },
       nl: {
@@ -98,6 +104,7 @@ i18n
           airline: 'Luchtvaartmaatschappij',
           time: 'tijd',
           gate: 'Hek',
+          flightsError: 'Vluchtgegevens konden niet worden geladen. Controleer de configuratie van de API-sleutel.',
         },
       },
     },

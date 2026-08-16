@@ -63,23 +63,24 @@ function Main({ startTime }) {
 
   const { tasksResults: [initialFlights] } = loaderContext;
   const [fetchingAllFligts, allFlights = initialFlights] = useFlightsInfoFromPromise(updateTime);
+  const hasFlightsError = !fetchingAllFligts && !!allFlights?.error;
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    if (allFlights) {
+    if (allFlights && !allFlights.error) {
       const currentFlights = allFlights.slice(startIndex, endIndex);
       setFlightsView(currentFlights);
     }
   }, [currentPage, allFlights]);
 
   useEffect(() => {
-    if (!fetchingAllFligts) {
+    if (!fetchingAllFligts && !hasFlightsError) {
       const maxPageDuration = (media.maxPageDurationSeconds || 60) * 1000;
       setPageCount(Math.ceil(allFlights.length / itemsPerPage));
       setPageTime(Math.min(media.duration / pageCount, maxPageDuration));
     }
-  }, [fetchingAllFligts, allFlights]);
+  }, [fetchingAllFligts, allFlights, hasFlightsError]);
 
   useInterval(() => {
     setCurrentPage(((currentPage) % pageCount) + 1);
@@ -136,6 +137,11 @@ function Main({ startTime }) {
         }
       </header>
       <section className="table">
+        {hasFlightsError ? (
+          <div className="centered-div flightsError">
+            <p>{t('flightsError')}</p>
+          </div>
+        ) : (
         <table>
           <thead>
             <tr style={{ backgroundColor: globalTheme.secondaryColor }}>
@@ -180,6 +186,7 @@ function Main({ startTime }) {
             }
           </tbody>
         </table>
+        )}
       </section>
       <footer className="updateTime" style={{ backgroundColor: globalTheme.secondaryColor }}>
         <p>{airpoirtName.nameAirport}</p>
