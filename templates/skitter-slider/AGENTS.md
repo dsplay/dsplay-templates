@@ -45,7 +45,7 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
 
 ## Testing
 
-`npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See `template-boilerplate-javascript`'s AGENTS.md for what each test checks and why — this file is copied verbatim from there.
+`npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See [`template-boilerplate-javascript`](https://github.com/dsplay/template-boilerplate-javascript)'s AGENTS.md for what each test checks and why — this file is copied verbatim from there.
 
 ## Package identity
 
@@ -59,7 +59,7 @@ boilerplate it was originally cloned from.
   DSPLAY CMS's actual registration for this template (verified via the CMS database directly, not just guessed
   from code) rather than Skitter's own docs, since only a subset of Skitter's built-in animations are registered
   as valid choices here.
-- The manifest scanner (`@dsplay/template-manifest`) only detects the `animation` variable, since it's the only
+- The manifest scanner ([`@dsplay/template-manifest`](https://github.com/dsplay/template-manifest)) only detects the `animation` variable, since it's the only
   one read via `dsplayTemplateUtils.tval(...)` - `images`/`posts` come from `media`, not `dsplay_template`.
 
 ## Vendored dependencies (boilerplate maintainers only)
@@ -74,7 +74,7 @@ unmaintained third-party plugins not published to npm under a stable/maintained 
 vendored files. If a security issue or real incompatibility ever surfaces, they'd need to be manually
 re-sourced/patched, not auto-updated.
 
-Run `npm run update-deps` (wraps `./update-deps.sh`) to update jQuery, core-js, and `@dsplay/template-utils`. For
+Run `npm run update-deps` (wraps `./update-deps.sh`) to update jQuery, core-js, and [`@dsplay/template-utils`](https://github.com/dsplay/template-utils). For
 each it fetches the latest published version from the npm registry, compares it against
 `scripts/.vendored-versions.json`, and:
 - if it's a **major** version bump, skips it and prints a warning - this needs a human to review the changelog
