@@ -75,7 +75,7 @@ npm outdated   # see what has newer versions available
 npm update     # bump within the ranges already declared in package.json
 ```
 
-For a version outside the declared range (typically a major bump, e.g. a new `@dsplay/react-template-utils` or `moment` major), bump it deliberately in `package.json` and verify `npm start`, `npm run build`, and `npm test` still work before committing.
+For a version outside the declared range (typically a major bump, e.g. a new [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils) or `moment` major), bump it deliberately in `package.json` and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
 ### Commit conventions
 
