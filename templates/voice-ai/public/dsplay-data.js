@@ -20,8 +20,8 @@ var dsplay_media = {
 
 var dsplay_template = {
     // template parameter
-    assistant_id: "f1401978-6b3f-45d9-b00a-0bd08cf22b82",
-    api_key: "f4a7d23c-3420-4841-b1d4-95c04191088a",
+    assistant_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    api_key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     gradiente_color_1: "#FD28DA",
     gradiente_color_2: "#EE8997",
     background_media: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Colorful_bokeh_from_outdoor_lighting.jpg/1280px-Colorful_bokeh_from_outdoor_lighting.jpg",
