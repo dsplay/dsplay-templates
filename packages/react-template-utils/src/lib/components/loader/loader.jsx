@@ -28,8 +28,10 @@ const defaultTasks = [];
  * @param {React.ReactNode} [props.placeholder] - Shown while loading
  * @param {React.ReactNode} props.children - Rendered once loading finishes
  * @param {number} [props.minDuration] - Minimum time (ms) the placeholder stays visible
- * @param {Promise<unknown>[]} [props.tasks] - Extra promises to await before loading finishes; their
- * resolved values are exposed via `LoaderContext` as `tasksResults`
+ * @param {Promise<unknown>[]} [props.tasks] - Extra promises to await before loading finishes. A
+ * rejected task no longer keeps the placeholder stuck forever: it settles as `undefined` in
+ * `tasksResults` at that same index, with the rejection reason exposed in parallel via
+ * `tasksErrors`, both on `LoaderContext`
  * @returns {React.ReactElement}
  */
 function Loader({
@@ -44,6 +46,7 @@ function Loader({
   const [loadingFonts, setLoadingFonts] = useState(true);
   const [loadingImages, setLoadingImages] = useState(true);
   const [tasksResults, setTasksResults] = useState();
+  const [tasksErrors, setTasksErrors] = useState();
 
   const handleImagesLoad = useCallback(() => {
     setLoadingImages(false);
@@ -56,11 +59,16 @@ function Loader({
   useEffect(() => {
     if (loadingMin) {
       (async () => {
-        const results = await Promise.all([
+        const [, ...settledTasks] = await Promise.allSettled([
           wait(minDuration),
           ...tasks,
         ]);
-        setTasksResults(results.slice(1));
+        setTasksResults(settledTasks.map(
+          (task) => (task.status === 'fulfilled' ? task.value : undefined),
+        ));
+        setTasksErrors(settledTasks.map(
+          (task) => (task.status === 'rejected' ? task.reason : undefined),
+        ));
         setLoadingMin(false);
         // console.log('min loading time passed', loadingMin, minLoadingTime, tasks);
       })();
@@ -69,7 +77,8 @@ function Loader({
 
   const context = useMemo(() => ({
     tasksResults,
-  }), [tasksResults]);
+    tasksErrors,
+  }), [tasksResults, tasksErrors]);
 
   if (loadingFonts || loadingImages || loadingMin) {
     // console.log('loading...');
