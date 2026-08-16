@@ -20,7 +20,7 @@ var dsplay_media = {
   // customMediaParam: "value",
   offsetTimeMinutes: -240, // tempo em minutos
   maxPageDurationSeconds: 10,
-  apiKey: 'xxxxxx-xxxxxx',
+  apiKey: '08b5aa-fd83fa',
   arrivalDeparture: 'arrival',
   iataCode: 'LIS',
   duration: 30000,
