@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) working in this repository.
 
 The DSPLAY **Twitter Basic** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/) that cycles through a Twitter/X user's recent posts. Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
 
-Unlike the more recently authored templates in this ecosystem, this one predates `@dsplay/react-template-utils`'s hooks-based API — it reads `dsplay_template`/`dsplay_config`/`dsplay_media` directly via `@dsplay/template-utils`'s `tval`/`tbval`/`config`/`media` exports, and uses class components. This was kept as-is during the Vite/React 19 migration rather than rewritten to hooks — same precedent as `template-horizontal-info-bar` and `template-instagram-basic`.
+Unlike the more recently authored templates in this ecosystem, this one predates [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils)'s hooks-based API — it reads `dsplay_template`/`dsplay_config`/`dsplay_media` directly via [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s `tval`/`tbval`/`config`/`media` exports, and uses class components. This was kept as-is during the Vite/React 19 migration rather than rewritten to hooks — same precedent as [`template-horizontal-info-bar`](https://github.com/dsplay/template-horizontal-info-bar) and [`template-instagram-basic`](https://github.com/dsplay/template-instagram-basic).
 
 ## Directory structure
 
@@ -39,7 +39,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-twitter-basic`.
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-twitter-basic`.
 
 ## README structure
 
