@@ -4,6 +4,16 @@
 
 A Vanilla JavaScript + jQuery [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — a full-screen digital clock with a colored bar and an optional background image.
 
+## Supported screen formats
+
+| Landscape | Portrait |
+|-----------|----------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) |
+
+| Horizontal banner | Vertical banner |
+|--------------------|-------------------|
+| ![Horizontal Banner](docs/screenshots/h-banner.png) | ![Vertical Banner](docs/screenshots/v-banner.png) |
+
 ## Template variables
 
 | Key           | Type   | Description                                    |
