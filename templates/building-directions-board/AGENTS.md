@@ -35,7 +35,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see `template-boilerplate-react`'s AGENTS.md for the full convention. This template's is `dsplay-template-building-directions-board` (it was previously `template-elevator`, a leftover from an earlier working name).
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-building-directions-board` (it was previously `template-elevator`, a leftover from an earlier working name).
 
 ## README structure
 
@@ -60,8 +60,8 @@ Skip a numbered section entirely rather than including it empty.
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media` mock globals used only in **development** (no `dsplay_template` — this template reads everything from `media`, not Template Vars). `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
-- `@dsplay/react-template-utils` exposes `useMedia`/`useScreenInfo`/`useConfig`/`Loader`.
-- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
+- [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils) exposes `useMedia`/`useScreenInfo`/`useConfig`/`Loader`.
+- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - `src/components/app/index.jsx` paginates `media.targets` based on the screen's height, cycling through pages on a timer derived from `media.duration` (capped by `media.maxPageDurationSeconds`).
 
 ## Template variable manifest
