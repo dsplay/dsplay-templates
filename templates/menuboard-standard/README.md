@@ -6,6 +6,14 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 > Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`).
 
+## Supported screen formats
+
+| Landscape |
+|-----------|
+| ![Landscape](docs/screenshots/landscape.png) |
+
+> This template's fixed side-by-side layout (logo column + menu column) only renders correctly in landscape. Portrait, square, and banner (horizontal/vertical) formats currently produce a broken layout — content is pushed off-screen or overlaps illegibly — so screenshots for those formats are omitted here until the layout is made responsive.
+
 ## Template variables
 
 | Key                 | Type   | Description                                                                 |
