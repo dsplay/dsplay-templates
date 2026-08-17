@@ -12,9 +12,7 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 |-----------|----------|--------|
 | ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) | ![Square](docs/screenshots/square.png) |
 
-| Horizontal banner |
-|--------------------|
-| ![Horizontal Banner](docs/screenshots/horizontalBanner.png) |
+> This template's fixed side-by-side layout (today panel + full month grid) doesn't adapt to extreme aspect ratios: the horizontal banner format clips roughly half the calendar grid vertically, and the vertical banner format squeezes the weekday header and navigation arrows off-screen with illegibly tiny date numbers. Screenshots for those formats are omitted here until the layout is made responsive to short/narrow viewports.
 
 ## Template variables
 
