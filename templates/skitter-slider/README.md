@@ -6,6 +6,18 @@ A jQuery [HTML-based template](https://developers.dsplay.tv/docs/html-templates)
 [DSPLAY - Digital Signage](https://dsplay.tv/) platform — a full-screen image slideshow with many transition
 styles, powered by the [Skitter](http://www.gustavowb.com/skitter/) jQuery plugin.
 
+## Supported screen formats
+
+| Landscape | Portrait | Square |
+|-----------|----------|--------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) | ![Square](docs/screenshots/square.png) |
+
+| Horizontal banner |
+|--------------------|
+| ![Horizontal Banner](docs/screenshots/h-banner.png) |
+
+> Vertical banner is omitted: Skitter's built-in responsive breakpoints (`small` below 768px width) rewrite the image URL to insert a `-small` filename suffix for narrower screens, expecting a matching pre-generated variant to exist. The demo images used here (and any extensionless/query-string image URL) have no such variant, so at the 200px-wide vertical banner format the rewritten URL 404s and no image loads at all — confirmed via the page showing Skitter's own "Error loading images" message with zero `<img>` elements rendered. This is an inherent limitation of the plugin's responsive-image feature at extreme aspect ratios, not something fixable by CSS alone.
+
 This README has two audiences:
 - **[Building your own template](#building-your-own-template)** — if you cloned this repo to create a new DSPLAY template.
 - **[Maintaining this boilerplate](#maintaining-this-boilerplate)** — for the DSPLAY team, keeping this repo itself up to date.
