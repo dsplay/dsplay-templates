@@ -4,6 +4,20 @@
 
 A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — cycles through a Twitter/X user's recent posts, one at a time, with a QR code linking back to each post.
 
+> Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`).
+
+## Supported screen formats
+
+| Landscape | Portrait |
+|-----------|----------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) |
+
+| Horizontal banner | Vertical banner |
+|--------------------|-------------------|
+| ![Horizontal Banner](docs/screenshots/h-banner.png) | ![Vertical Banner](docs/screenshots/v-banner.png) |
+
+> Square is omitted: at a 1:1 aspect ratio the browser's `orientation: portrait` media query engages (matching whenever height >= width), but the info/QR footer box keeps its `rem`-based fixed height while the post text area above it is sized as a percentage of the (now much taller) content box — the two overlap by over 150px, confirmed via `getBoundingClientRect()` (text-wrapper bottom at y≈1660 vs. info-box top at y≈1504 in a 1920×1920 frame).
+
 ## Template variables
 
 | Key                       | Type   | Default     | Description                                                              |
