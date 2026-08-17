@@ -6,6 +6,14 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 > Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`).
 
+## Supported screen formats
+
+| Landscape | Portrait | Square |
+|-----------|----------|--------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) | ![Square](docs/screenshots/square.png) |
+
+> Horizontal and vertical banner formats are omitted: the decorative ring (`.spinner`) rotates a full 360° every 10s via a CSS animation, and its SVG box is sized to 80% of the container's width/height — for a 1920×200 or 200×1920 canvas that box is a 1536×160 (or 160×1536) rectangle. Rotated, its axis-aligned bounding box swings far outside the short dimension for all but a sliver of each cycle (confirmed via `getBoundingClientRect()`: at one sampled angle the ring's box spanned x≈-635 to x≈835 inside a 200px-wide viewport, over 3x the visible width); trigonometrically only the ~3% of the rotation nearest 0°/90°/180°/270° stays contained. Landscape/portrait/square keep the same rotation but their SVG box is closer to square (or exactly square, for square), so the worst-case overflow stays modest and mostly off-canvas-background rather than clipping the visualizer itself.
+
 ## Features
 
 - Requests microphone permission, runs a short audio-level test, then loads the [Vapi](https://vapi.ai/) widget and starts the assistant.
