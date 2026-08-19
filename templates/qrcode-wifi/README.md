@@ -32,6 +32,8 @@ The Wi-Fi network itself (`ssid`, `auth_type`, `password`, `hidden`) comes from 
 
 > Remember to also register the variables above as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
 
+> New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
+
 ## Local development
 
 ```sh
