@@ -67,6 +67,21 @@ Skip a numbered section entirely rather than including it empty.
 
 `vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`useTemplateVal`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `build.sh`, which zips the whole build output). The DSPLAY CMS reads these two files to auto-detect a template's variables and seed default preview values, instead of requiring manual registration. See [@dsplay/template-manifest](https://www.npmjs.com/package/@dsplay/template-manifest) for exactly what it detects.
 
+## Browser/WebView compatibility (Android SDK 23 minimum)
+
+DSPLAY's Android app supports devices back to Android 6.0 (API 23). On locked-down signage hardware that never receives WebView updates via Play Store, the actual JS engine can be stuck around the Chrome ~40-51 era that shipped with that OS generation — not a modern evergreen browser. `@vitejs/plugin-legacy` exists specifically to cover this: it builds a modern ES-module bundle plus a transpiled+polyfilled "legacy" nomodule bundle for anything the `browserslist` target in `package.json` doesn't natively support.
+
+Two things must never regress, or the legacy bundle silently stops protecting old devices while still *looking* correctly configured:
+
+- **`package.json`'s `browserslist` must keep `Chrome >= 45` and `Android >= 4.4`** (alongside the generic `>0.2%`/`not dead`/etc. entries) — dropping these two narrows the resolved target list to whatever's "current" (verify with `npx browserslist`), which silently stops emitting transpiled code for anything old, even though `@vitejs/plugin-legacy` stays nominally wired up.
+- **`vite.config.js`'s `build.minify` must stay `'terser'`, not the default `oxc`** — `oxc`'s minifier has a known bug where it reintroduces `?.`/`??` into the legacy chunk after Babel already expanded them away, silently breaking the one guarantee the legacy build exists to provide.
+
+After touching either of these, verify by actually running `npm run build` and grepping the emitted `build/assets/index-legacy-*.js` for untranspiled arrow functions (`=>`) or real `?.`/`??` usage — a config that looks right can still emit a broken legacy bundle if a dependency version bump reintroduces one of these, so don't assume correctness from the config file alone.
+
+### Fixed: `browserslist` had drifted too narrow, silently defeating the legacy build's old-Android coverage
+
+This repo's `browserslist` was `[">0.2%", "not dead", "not ie <= 11", "not op_mini all"]` — missing the `Chrome >= 45`/`Android >= 4.4` entries present in the reference boilerplate, with no other entry in the array providing an equivalent old-Android/old-Chrome floor. `@vitejs/plugin-legacy` was still correctly wired to `pkg.browserslist` in `vite.config.js`, so the config looked fine at a glance. `vite.config.js`'s `build.minify: 'terser'` override (and its explanatory comment) was already present here, so no change was needed there. Found during a full fleet audit and fixed by restoring the two missing browserslist entries; `npx browserslist` after the fix confirmed `android 4.4`/`4.4.3-4.4.4` and `chrome` down to `45` are now included in the resolved target list. Post-fix, the legacy chunk was verified clean: `grep -c '=>' build/assets/index-legacy-*.js` returned 0, and no `?.`/`??` were found.
+
 ## Commands
 
 - `npm start` — dev server (Vite).
