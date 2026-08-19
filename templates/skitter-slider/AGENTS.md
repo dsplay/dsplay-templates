@@ -61,6 +61,7 @@ boilerplate it was originally cloned from.
   as valid choices here.
 - The manifest scanner ([`@dsplay/template-manifest`](https://github.com/dsplay/template-manifest)) only detects the `animation` variable, since it's the only
   one read via `dsplayTemplateUtils.tval(...)` - `images`/`posts` come from `media`, not `dsplay_template`.
+- **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) - the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This only applies to variables added from now on - never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
 
 ## Vendored dependencies (boilerplate maintainers only)
 

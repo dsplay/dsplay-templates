@@ -52,6 +52,8 @@ This README has two audiences:
 
 > Remember to also register this as a Template Var (same name and type) when configuring this template in the DSPLAY CMS.
 
+> New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
+
 Slide images themselves come from the media, not from a Template Var — see `scripts/app.js`: either a plain
 `media.images` URL list, or an Instagram-post-shaped `media.result.data.posts[].media[]` structure.
 
