@@ -29,6 +29,7 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 | `prod_price01`..`prod_price10`      | string | Product price for row 1-10. Defaults to "Price 01".."Price 10".  |
 
 > Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
+> New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
 
 ## Local development
 
