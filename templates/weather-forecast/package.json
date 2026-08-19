@@ -29,8 +29,12 @@
     "zip": "rm -rf build/test-assets && ./build.sh"
   },
   "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all",
     "Chrome >= 45",
-    "not dead"
+    "Android >= 4.4"
   ],
   "devDependencies": {
     "@dsplay/template-manifest": "^1.0.4",

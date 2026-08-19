@@ -24,6 +24,8 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
+    // oxc's minifier ignores the legacy chunk's target and reintroduces ?./?? after Babel expands them; terser doesn't.
+    minify: 'terser',
   },
   server: {
     port: 3000,
