@@ -27,6 +27,7 @@ Square, horizontal banner, and vertical banner aren't supported — the layout o
 The event's name, location, and start/end dates come from the media's own data (`dsplay_media.eventName`/`location`/`startDate`/`endDate`), not from a Template Var — see `public/dsplay-data.js` for the local mock.
 
 > Remember to also register the Template Vars above (same name and type) when configuring this template in the DSPLAY CMS.
+> New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
 
 ## Local development
 
