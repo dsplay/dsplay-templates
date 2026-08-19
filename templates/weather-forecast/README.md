@@ -26,6 +26,8 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 > Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
 
+> New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
+
 ## Expected media data (`media.result`)
 
 Unlike a generic custom template, this is a JSON-service-backed media type — `media.result` (see `src/components/main/index.jsx`) is populated by DSPLAY from an external weather service, with this shape:
