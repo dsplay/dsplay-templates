@@ -19,6 +19,7 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 | `fit` | string | `cover` | How the image fits its container: `cover` (fills all space, keeping proportions, cropping if needed), `contain` (shown entirely, keeping proportions), or `stretch` (fills all space, ignoring proportions). |
 
 > Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
+> New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
 
 ## Local development
 
