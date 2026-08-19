@@ -62,7 +62,9 @@ below aren't applicable to a generic boilerplate, only to an actual template):
 3. *(optional, only if appearance changes meaningfully by screen format)* **Supported screen formats** — a table
    with a screenshot per format (landscape/portrait/square/horizontal banner).
 4. **Template variables** — a `Key | Type | Default | Description` table; this is the one section every real
-   template has. Add a `### <variable> syntax` sub-section when a single variable's value is itself a small
+   template has. Prefer `snake_case` key names for new variables (e.g. `background_color`, not `backgroundColor`)
+   — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more
+   naturally there. Add a `### <variable> syntax` sub-section when a single variable's value is itself a small
    grammar worth explaining rather than cramming it into the table cell. End with: "Remember to also register
    these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS."
 5. **Local development** — `npm install`, `npm start`, plus the `dsplay-data.js` explanation.
