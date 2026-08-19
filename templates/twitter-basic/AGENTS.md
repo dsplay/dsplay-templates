@@ -80,6 +80,21 @@ That restored file was subsequently converted `style.css` → `style.sass` (mech
 
 Cross-checked against the CMS's actual registered variables for this template (local `tbl_template_var` dump, `template_id` 695, "Twitter Basic") — **none of this template's 12 variables are currently registered there**. The code and README are correct regardless (the DB reflects what's been manually registered in the CMS admin at some past snapshot, not what the code supports) — worth registering them in the CMS at some point.
 
+## Browser/WebView compatibility (Android SDK 23 minimum)
+
+DSPLAY's Android app supports devices back to Android 6.0 (API 23). On locked-down signage hardware that never receives WebView updates via Play Store, the actual JS engine can be stuck around the Chrome ~40-51 era that shipped with that OS generation — not a modern evergreen browser. `@vitejs/plugin-legacy` exists specifically to cover this: it builds a modern ES-module bundle plus a transpiled+polyfilled "legacy" nomodule bundle for anything the `browserslist` target in `package.json` doesn't natively support.
+
+Two things must never regress, or the legacy bundle silently stops protecting old devices while still *looking* correctly configured:
+
+- **`package.json`'s `browserslist` must keep `Chrome >= 45` and `Android >= 4.4`** (alongside the generic `>0.2%`/`not dead`/etc. entries) — dropping these two narrows the resolved target list to whatever's "current" (verify with `npx browserslist`), which silently stops emitting transpiled code for anything old, even though `@vitejs/plugin-legacy` stays nominally wired up.
+- **`vite.config.js`'s `build.minify` must stay `'terser'`, not the default `oxc`** — `oxc`'s minifier has a known bug where it reintroduces `?.`/`??` into the legacy chunk after Babel already expanded them away, silently breaking the one guarantee the legacy build exists to provide.
+
+After touching either of these, verify by actually running `npm run build` and grepping the emitted `build/assets/index-legacy-*.js` for untranspiled arrow functions (`=>`) or real `?.`/`??` usage — a config that looks right can still emit a broken legacy bundle if a dependency version bump reintroduces one of these, so don't assume correctness from the config file alone.
+
+### Fixed: `browserslist` had drifted too narrow, silently defeating the legacy build's old-Android coverage
+
+This repo's `browserslist` was `[">0.2%", "not dead", "not op_mini all"]` — missing both the `Chrome >= 45`/`Android >= 4.4` entries present in the reference boilerplate *and* the `not ie <= 11` entry every other template in this ecosystem carries. `npx browserslist` showed this resolved without any old Android/WebView-era entries. `vite.config.js` was already correctly wired (`legacy({ targets: pkg.browserslist })`, `build.minify: 'terser'` with its explanatory comment already present) — so the config looked fine at a glance, but the actual `browserslist` array it read from was too narrow. Found during a full fleet audit and fixed by restoring the missing `Chrome >= 45`, `Android >= 4.4`, and `not ie <= 11` entries to match the reference boilerplate exactly. Rebuilt and confirmed the legacy chunk (`build/assets/index-legacy-*.js`) has zero untranspiled arrow functions; the only `?.` matches found are inside an unrelated regex character class (`/[-\/\\^$*+?.()|[\]{}]/`), not real optional chaining.
+
 ## Commands
 
 - `npm start` — dev server (Vite).
