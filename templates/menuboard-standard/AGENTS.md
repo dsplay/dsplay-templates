@@ -68,6 +68,17 @@ Skip a numbered section entirely rather than including it empty.
 - `background_image` falls back to a bundled default image (`src/assets/image/raw-meat-with-herbs-and-spices-space.png`) when unset — this is intentional, pre-existing behavior, not a placeholder to remove.
 - `src/components/menuitens/index.jsx` imports `chalk-banner.svg` as an *asset* (a URL used in a CSS `background-image`), not as a component — there is also an unrelated, unused `SvgBanner` React component that used to live in `src/components/svgbanner/` with the exact same name; it was dead code (never imported by anything) and has been removed. Don't recreate it under that name without checking it's actually wired up.
 
+## Browser/WebView compatibility (Android SDK 23 minimum)
+
+DSPLAY's Android app supports devices back to Android 6.0 (API 23). On locked-down signage hardware that never receives WebView updates via Play Store, the actual JS engine can be stuck around the Chrome ~40-51 era that shipped with that OS generation — not a modern evergreen browser. `@vitejs/plugin-legacy` exists specifically to cover this: it builds a modern ES-module bundle plus a transpiled+polyfilled "legacy" nomodule bundle for anything the `browserslist` target in `package.json` doesn't natively support.
+
+Two things must never regress, or the legacy bundle silently stops protecting old devices while still *looking* correctly configured:
+
+- **`package.json`'s `browserslist` must keep `Chrome >= 45` and `Android >= 4.4`** (alongside the generic `>0.2%`/`not dead`/etc. entries) — dropping these two narrows the resolved target list to whatever's "current" (verify with `npx browserslist`), which silently stops emitting transpiled code for anything old, even though `@vitejs/plugin-legacy` stays nominally wired up.
+- **`vite.config.js`'s `build.minify` must stay `'terser'`, not the default `oxc`** — `oxc`'s minifier has a known bug where it reintroduces `?.`/`??` into the legacy chunk after Babel already expanded them away, silently breaking the one guarantee the legacy build exists to provide.
+
+After touching either of these, verify by actually running `npm run build` and grepping the emitted `build/assets/index-legacy-*.js` for untranspiled arrow functions (`=>`) or real `?.`/`??` usage — a config that looks right can still emit a broken legacy bundle if a dependency version bump reintroduces one of these, so don't assume correctness from the config file alone.
+
 ## Template variable manifest
 
 `vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`useTemplateVal`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `build.sh`, which zips the whole build output). The DSPLAY CMS reads these two files to auto-detect a template's variables and seed default preview values, instead of requiring manual registration. See [@dsplay/template-manifest](https://www.npmjs.com/package/@dsplay/template-manifest) for exactly what it detects.
