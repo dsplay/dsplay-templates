@@ -75,3 +75,60 @@ body {
   font-weight: bold;
   margin-top: 0.5vh;
 }
+
+/* Vertical banner (very narrow, very tall) - vw-based sizing above collapses
+   to unreadably small text at ~200px width, so switch to vh-based sizing
+   here instead, and stack the icon above the rates within each box. */
+@media (max-width: 400px) {
+  #root {
+    padding: 2vh 3vw;
+  }
+
+  .logo img {
+    max-width: 90%;
+    max-height: 10vh;
+  }
+
+  .exchanges {
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+  }
+
+  .exchange {
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+    padding: 1.5vh 2vw;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .exchange .icon {
+    width: 50%;
+    max-width: 100px;
+    min-width: 0;
+  }
+
+  .rates {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+    width: 100%;
+  }
+
+  .rate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rate .label {
+    font-size: 1.6vh;
+  }
+
+  .rate .value {
+    font-size: 2.2vh;
+    margin-top: 0;
+  }
+}

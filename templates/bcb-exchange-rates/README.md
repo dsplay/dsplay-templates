@@ -4,6 +4,16 @@
 
 A jQuery [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — displays EUR and USD buy/sell exchange rates sourced from the Central Bank of Brazil (BCB, "Banco Central do Brasil").
 
+## Supported screen formats
+
+| Landscape | Portrait | Square |
+|-----------|----------|--------|
+| ![Landscape](docs/screenshots/landscape.png) | ![Portrait](docs/screenshots/portrait.png) | ![Square](docs/screenshots/square.png) |
+
+| Horizontal banner | Vertical banner |
+|--------------------|-------------------|
+| ![Horizontal Banner](docs/screenshots/h-banner.png) | ![Vertical Banner](docs/screenshots/v-banner.png) |
+
 ## Template variables
 
 This template has no configurable Template Vars — the displayed rates come entirely from `dsplay_media.result.exchanges` (a JSON-service payload keyed by currency code), and the logo/background/currency icons are fixed template assets, not CMS-configurable images.
