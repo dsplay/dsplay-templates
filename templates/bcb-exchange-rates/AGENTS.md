@@ -20,10 +20,7 @@ This template was migrated from a bare, unversioned static HTML page (no `packag
 - **Replaced `Number.prototype.formatMoney`** (a monkey-patch of a built-in prototype) with a plain `formatRate()` helper function in `app.js`.
 - **Dropped the old 4-file CSS "grid framework"** (`css/estilo.css` — a generic html5reset boilerplate — plus `css/col.css`/`2cols.css`/`3cols.css`, a float-based column grid with inconsistent responsive breakpoints between files) in favor of a single `styles/main.css` using plain flexbox, matching this repo family's convention of one small stylesheet with no grid framework.
 - **Normalized markup**: the original used bare `<p1>`/`<p2>` tags styled as if they were classes (not valid HTML elements — they only "worked" because browsers render unrecognized tags as generic inline elements) instead of actual classes on `<div>`/`<span>`. Replaced with semantic `.label`/`.value` classes.
-
-### Unused legacy image assets
-
-`assets/image/` carries over all 10 images from the original template folder, but only 4 are actually referenced by the current markup/CSS: `titulo.png` (header logo), `fundo.jpg` (page background), `eur2.png`/`usd2.png` (the two currency badge icons shown next to their rates). The other 6 — `cny.png`, `eur.png`, `gbp.png`, `jpy.png`, `rub.png`, `usd.png` — are a different, plainer "flag" icon style (169×81px) with no matching "…2.png" badge counterpart for CNY/GBP/JPY/RUB, and are not referenced anywhere in the current template. They were **kept rather than deleted** (they still ship inside `template.zip`, since `pack.sh` zips the whole `assets/` folder unconditionally) since they may represent an earlier, more complete multi-currency design and could be useful if this template is later extended to show more than EUR/USD — but they add unused weight to the package as-is. Confirm with whoever owns this template whether to extend `dsplay_media.result.exchanges` handling to more currencies (reusing these icons) or remove the dead assets.
+- **Removed unused legacy image assets**: the original template folder had 10 images in `arquivos/`, but only 4 were ever referenced by the markup/CSS: `titulo.png` (header logo), `fundo.jpg` (page background), `eur2.png`/`usd2.png` (the two currency badge icons shown next to their rates). The other 6 — `cny.png`, `eur.png`, `gbp.png`, `jpy.png`, `rub.png`, `usd.png` — were a different, plainer "flag" icon style (169×81px) with no matching "…2.png" badge counterpart for CNY/GBP/JPY/RUB, dead weight from an earlier, more complete multi-currency design that never shipped. Deleted rather than carried forward. If this template is ever extended to show more than EUR/USD, matching badge-style icons would need to be sourced/designed for the additional currencies rather than reusing these.
 
 ## Directory structure
 
@@ -38,7 +35,7 @@ scripts/
 styles/
   main.css
 assets/
-  image/                            <-- logo, background, currency icons (see "Unused legacy image assets" above), favicon
+  image/                            <-- logo, background, EUR/USD currency icons, favicon
   audio/, font/, video/             <-- currently empty (kept for structural parity with the boilerplate)
 test/basic.test.js                  <-- smoke tests (see "Testing" below)
 pack.sh                             <-- generates the manifest and zips the template for upload to DSPLAY Web Manager (wrapped by `npm run zip`)
