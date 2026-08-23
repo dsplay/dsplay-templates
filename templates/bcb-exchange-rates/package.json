@@ -1,0 +1,16 @@
+{
+  "name": "dsplay-template-bcb-exchange-rates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tooling around the template only (dev server, packaging, tests) - the template itself has no build step, see AGENTS.md",
+  "scripts": {
+    "start": "servor . index.html 3000 --reload --browse",
+    "zip": "./pack.sh",
+    "update-deps": "./update-deps.sh",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@dsplay/template-manifest": "^1.0.4",
+    "servor": "^4.0.2"
+  }
+}

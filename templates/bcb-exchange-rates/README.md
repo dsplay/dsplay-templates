@@ -1,0 +1,40 @@
+![DSPLAY - Digital Signage](https://developers.dsplay.tv/assets/images/dsplay-logo.png)
+
+# DSPLAY - BCB Exchange Rates
+
+A jQuery [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — displays EUR and USD buy/sell exchange rates sourced from the Central Bank of Brazil (BCB, "Banco Central do Brasil").
+
+## Template variables
+
+This template has no configurable Template Vars — the displayed rates come entirely from `dsplay_media.result.exchanges` (a JSON-service payload keyed by currency code), and the logo/background/currency icons are fixed template assets, not CMS-configurable images.
+
+## Local development
+
+```sh
+npm install
+npm start
+```
+
+then visit `http://localhost:3000` (visit the root URL, not `http://localhost:3000/index.html` directly — the reload script is only injected on that path). The page auto-reloads whenever you edit and save a file.
+
+`scripts/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only when the template isn't running inside the actual DSPLAY app. Edit `dsplay_media.result.exchanges` to try out different rates — the DSPLAY Player App replaces it with the real payload at runtime.
+
+## Generating the template package
+
+```sh
+npm run zip
+```
+
+This first runs [`dsplay-scan-template`](https://www.npmjs.com/package/@dsplay/template-manifest) (from `@dsplay/template-manifest`), which statically scans `scripts/app.js` and captures `dsplay-data.js` as example data — writing `template-variables.json` + `template-example-data.json` to the project root (both are near-empty here, see above). It then zips `index.html`, `assets/`, `scripts/`, `styles/`, and the two generated JSON files into `template.zip`.
+
+## Deploying
+
+Upload the resulting `template.zip` to the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create).
+
+## Updating vendored dependencies
+
+See [AGENTS.md](AGENTS.md).
+
+## More
+
+To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates

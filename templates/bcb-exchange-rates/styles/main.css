@@ -1,0 +1,77 @@
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url("../assets/image/fundo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  box-sizing: border-box;
+}
+
+.logo {
+  margin-bottom: 4vh;
+}
+
+.logo img {
+  max-width: 60vw;
+  max-height: 20vh;
+}
+
+.exchanges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4vw;
+  width: 100%;
+}
+
+.exchange {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+  background-color: #20222e;
+  padding: 3vh 4vw;
+  border-radius: 1vh;
+}
+
+.exchange .icon {
+  width: 12vw;
+  max-width: 160px;
+  min-width: 60px;
+}
+
+.rates {
+  display: flex;
+  gap: 4vw;
+}
+
+.rate {
+  text-align: center;
+  color: #fff;
+}
+
+.rate .label {
+  font-size: 1.6vw;
+  letter-spacing: 0.05em;
+}
+
+.rate .value {
+  font-size: 3.2vw;
+  font-weight: bold;
+  margin-top: 0.5vh;
+}
