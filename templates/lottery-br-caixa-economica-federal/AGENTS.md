@@ -17,13 +17,16 @@ src/
   index.jsx                  <-- React entry point
   setup-tests.js               <-- Vitest setup (referenced by vite.config.js), mocks window.dsplay_media
   utils/screen.js               <-- computes the current screen format (landscape/portrait/square/banner)
+  utils/moment.js                <-- moment configured for pt-br; always import moment from here, never from 'moment' directly
   images/                        <-- per-game logo images + shared background
   fonts/_fonts.scss                <-- @font-face declarations (remote Google Fonts URLs)
   components/
     app/                            <-- top-level component, picks which game to show from media.iteration
     ball/                           <-- renders one lottery number
+    logo/                           <-- SVG clover logo, recolored per game (used by super-sete and loteca; the older games use PNG logos in images/)
+    match/                          <-- one Loteca match row (teams, score, winning column 1/X/2)
     games/
-      mega-sena/ dupla-sena/ quina/ loto-facil/ loto-mania/ time-mania/ dia-de-sorte/ federal/
+      mega-sena/ dupla-sena/ quina/ loto-facil/ loto-mania/ time-mania/ dia-de-sorte/ federal/ super-sete/ loteca/
                                      <-- one component per game, each with its own index.jsx + per-screen-format .sass files
 build.sh                    <-- zips the Vite build output into template.zip
 ```
@@ -32,7 +35,7 @@ build.sh                    <-- zips the Vite build output into template.zip
 
 - **kebab-case everywhere** in `src/` (and anywhere else in this repo we author ourselves) — folders, JS/JSX files, Sass files, test files. Doesn't apply to files whose name is a fixed convention from tooling (`package.json`, `vite.config.js`, etc.) or to vendored/third-party assets we don't control the naming of.
 - **Author styles as `.sass` (indented syntax), never `.css`** — this applies to our own hand-authored stylesheets specifically; it does not apply to vendored or tool-generated CSS we don't hand-edit (a self-hosted Google Fonts `@font-face` file, a Flaticon/IcoMoon icon-font export, a vendored library like Bootstrap) — those stay `.css` since they'd be regenerated/replaced wholesale, not edited by hand. `.sass`'s indented syntax has no braces or semicolons — converting a `.css` file means rewriting it to the indented syntax, not just renaming it.
-- **Every component gets its own folder with an `index.jsx`.** Each game folder is a partial exception: `index.jsx` is the component, but it's accompanied by up to 6 per-screen-format `.sass` files (base + `-h`/`-v`/`-banner-h`/`-banner-v`/`-squared`) rather than a single `style.sass` — that split predates this migration and wasn't worth the risk of merging by hand across 8 games, so it was left as-is. New games should follow the same pattern for consistency.
+- **Every component gets its own folder with an `index.jsx`.** Each game folder is a partial exception: `index.jsx` is the component, but it's accompanied by up to 6 per-screen-format `.sass` files (base + `-h`/`-v`/`-banner-h`/`-banner-v`/`-squared`) rather than a single `style.sass` — that split predates this migration and wasn't worth the risk of merging by hand across the games, so it was left as-is. New games should follow the same pattern for consistency.
 - **Always import a component by its folder, never by reaching into `index`** — `import Federal from '../games/federal'`, never `.../federal/index`.
 - Non-component helpers (`src/utils/screen.js`) live outside `components/` and don't need the folder+`index.jsx` treatment.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
@@ -81,6 +84,10 @@ right after its imports. Don't simplify this to a plain default import or to `{ 
 ### Fixed: `loto-facil`'s mock data was missing `accumulatedIndependenceDaySpecialPrize`
 
 Once the import bug above was fixed, `loto-facil` (specifically) still crashed — with a *different* error, thrown from inside `countup.js`'s own constructor (`Cannot read properties of null (reading 'innerHTML')`). Its "Sorteio Especial da Independência" `<CountUp end={nextSpecialPrizeAccumulated} />` had `end={undefined}` because `public/dsplay-data.js`'s `lotofacil` entry never had an `accumulatedIndependenceDaySpecialPrize` field (unlike `dupla-sena`'s `accumulatedEasterSpecialPrize` and `quina`'s `accumulatedSaintJohnSpecialPrize`, which do have real mock values and rendered fine). `countup.js`'s constructor only touches `this.el.innerHTML` when `end` is `null`/`undefined` (to infer a start value from existing DOM text) — combined with `el` legitimately being `null` on `CountUp`'s very first synchronous render (before its ref attaches; this is normal library behavior and self-corrects once the mount effect re-creates the instance with a real `el`), a missing `end` value is fatal. Fixed by adding a mock `accumulatedIndependenceDaySpecialPrize` value to `lotofacil` in `public/dsplay-data.js`. If a similar crash ever recurs on another game, check for a `<CountUp end={...} />` whose value can be `undefined` given the current mock/real data shape.
+
+## Game screenshots
+
+`docs/screenshots/games/<game>/<format>.png` (10 games x landscape/portrait/square/banner-h/banner-v) are shown in README.md's "Supported games" section. Regenerate them whenever a game's layout or the mock payload changes: run `npm start`, and for each game set `iteration` in `public/dsplay-data.js` to its index in `gameMap` (`src/components/app/index.jsx`), then capture at 1920x1080 (landscape), 1080x1920 (portrait), 1080x1080 (square), 1920x360 (banner-h) and 360x1920 (banner-v) with a device scale factor of 0.5 (keeps the images small). Wait ~6s before capturing: the prize values animate with `react-countup` and screenshots taken earlier show half-counted numbers. Do not use headless Chrome's `--window-size` for the narrow banner: it enforces a minimum window width, so the page renders in the wrong format.
 
 ## Template variable manifest
 

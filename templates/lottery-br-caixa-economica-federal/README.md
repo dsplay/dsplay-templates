@@ -2,7 +2,7 @@
 
 # DSPLAY - Loterias Caixa Template
 
-A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — displays the latest results and next estimated prize for Brazil's federal lottery games (Caixa Econômica Federal): Mega-Sena, Dupla-Sena, Quina, Lotofácil, Lotomania, Timemania, Dia de Sorte, and Federal.
+A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — displays the latest results and next estimated prize for Brazil's federal lottery games (Caixa Econômica Federal): Federal, Mega-Sena, Dupla-Sena, Quina, Lotofácil, Lotomania, Timemania, Dia de Sorte, Super Sete, and Loteca.
 
 > Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`).
 
@@ -18,13 +18,37 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 ## Features
 
-Cycles through whichever of the 8 supported games have result data present in the media (`media.iteration` picks which one shows), each with its own layout for landscape/portrait/square/horizontal-banner/vertical-banner screen formats.
+Cycles through whichever of the 10 supported games have result data present in the media (`media.iteration` picks which one shows), each with its own layout for landscape/portrait/square/horizontal-banner/vertical-banner screen formats.
 
 All on-screen text is in Brazilian Portuguese by design — this template's entire purpose is displaying official Brazilian federal lottery results to a Brazilian audience, so the game names and labels are not translated to other languages.
 
+## Supported games
+
+Each game has its own layout for every screen format. Below is each one in landscape; the other formats (portrait, square, horizontal banner, vertical banner) are in [docs/screenshots/games/](docs/screenshots/games/). To preview a game locally, set `iteration` in `public/dsplay-data.js` to its position in the cycle (0 = Federal, 1 = Mega-Sena, ... 9 = Loteca).
+
+| Federal | Mega-Sena |
+|---|---|
+| ![Federal](docs/screenshots/games/federal/landscape.png) | ![Mega-Sena](docs/screenshots/games/megasena/landscape.png) |
+
+| Dupla-Sena | Quina |
+|---|---|
+| ![Dupla-Sena](docs/screenshots/games/duplasena/landscape.png) | ![Quina](docs/screenshots/games/quina/landscape.png) |
+
+| Lotofácil | Lotomania |
+|---|---|
+| ![Lotofácil](docs/screenshots/games/lotofacil/landscape.png) | ![Lotomania](docs/screenshots/games/lotomania/landscape.png) |
+
+| Timemania | Dia de Sorte |
+|---|---|
+| ![Timemania](docs/screenshots/games/timemania/landscape.png) | ![Dia de Sorte](docs/screenshots/games/diadesorte/landscape.png) |
+
+| Super Sete | Loteca |
+|---|---|
+| ![Super Sete](docs/screenshots/games/supersete/landscape.png) | ![Loteca](docs/screenshots/games/loteca/landscape.png) |
+
 ## Template variables
 
-This template has no `dsplay_template` variables — everything shown comes from `media.result.data`, a JSON-service payload keyed by game (`federal`, `megasena`, `duplasena`, `quina`, `lotofacil`, `lotomania`, `timemania`, `diadesorte`). See `public/dsplay-data.js` for a full example payload and `src/components/app/index.jsx` for how a game is picked.
+This template has no `dsplay_template` variables — everything shown comes from `media.result.data`, a JSON-service payload keyed by game (`federal`, `megasena`, `duplasena`, `quina`, `lotofacil`, `lotomania`, `timemania`, `diadesorte`, `supersete`, `loteca`). See `public/dsplay-data.js` for a full example payload and `src/components/app/index.jsx` for how a game is picked.
 
 ## Local development
 
