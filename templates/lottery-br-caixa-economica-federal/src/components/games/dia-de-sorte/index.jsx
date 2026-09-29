@@ -1,5 +1,4 @@
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import moment from '../../../utils/moment';
 import ReactCountUp from 'react-countup';
 import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
@@ -13,8 +12,6 @@ import logo from '../../../images/dia-de-sorte-branco.png';
 import { screenFormat } from '../../../utils/screen';
 
 const CountUp = ReactCountUp.default || ReactCountUp;
-
-moment.locale('pt-BR');
 
 const months = [
   'Janeiro',
@@ -125,10 +122,12 @@ function DiaDeSorte() {
             </span>
           </div>
           <div>
-            <div className="extra-result">
-              <span className="label">Mês da Sorte:</span>
-              <span className="value">{months[month - 1]}</span>
-            </div>
+            {months[month - 1] && (
+              <div className="extra-result">
+                <span className="label">Mês da Sorte:</span>
+                <span className="value">{months[month - 1]}</span>
+              </div>
+            )}
             <div className="result">
               <span className="winner">{winnersText}</span>
               &nbsp;(R$&nbsp;

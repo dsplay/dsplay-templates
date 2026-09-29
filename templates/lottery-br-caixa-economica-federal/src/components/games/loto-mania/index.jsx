@@ -1,5 +1,4 @@
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import moment from '../../../utils/moment';
 import ReactCountUp from 'react-countup';
 import { useMedia } from '@dsplay/react-template-utils';
 import Ball from '../../ball';
@@ -13,8 +12,6 @@ import logo from '../../../images/loto-mania-branco.png';
 import { screenFormat } from '../../../utils/screen';
 
 const CountUp = ReactCountUp.default || ReactCountUp;
-
-moment.locale('pt-BR');
 
 function LotoMania() {
 
