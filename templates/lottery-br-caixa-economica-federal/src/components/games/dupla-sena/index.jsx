@@ -177,22 +177,24 @@ function DuplaSena() {
         </div>
       </div>
       <div className="spacer3" />
-      <div className="special-prizes">
-        Acumulado para Sorteio Especial de Páscoa:
-        <strong>
-          &nbsp;
-          R$
-          &nbsp;
-          <CountUp
-            duration={5}
-            start={0}
-            end={nextSpecialPrizeAccumulated}
-            decimals={2}
-            separator="."
-            decimal=","
-          />
-        </strong>
-      </div>
+      {nextSpecialPrizeAccumulated > 0 && (
+        <div className="special-prizes">
+          Acumulado para Sorteio Especial de Páscoa:
+          <strong>
+            &nbsp;
+            R$
+            &nbsp;
+            <CountUp
+              duration={5}
+              start={0}
+              end={nextSpecialPrizeAccumulated}
+              decimals={2}
+              separator="."
+              decimal=","
+            />
+          </strong>
+        </div>
+      )}
     </div>
   );
 }

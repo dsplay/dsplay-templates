@@ -119,22 +119,24 @@ function MegaSena() {
         </div>
       </div>
       <div className="spacer3" />
-      <div className="special-prizes">
-        Acumulado para Mega da Virada:
-        <strong>
-          &nbsp;
-          R$
-          &nbsp;
-          <CountUp
-            duration={5}
-            start={0}
-            end={accumulatedMegaVirada}
-            decimals={2}
-            separator="."
-            decimal=","
-          />
-        </strong>
-      </div>
+      {accumulatedMegaVirada > 0 && (
+        <div className="special-prizes">
+          Acumulado para Mega da Virada:
+          <strong>
+            &nbsp;
+            R$
+            &nbsp;
+            <CountUp
+              duration={5}
+              start={0}
+              end={accumulatedMegaVirada}
+              decimals={2}
+              separator="."
+              decimal=","
+            />
+          </strong>
+        </div>
+      )}
     </div>
   );
 }
