@@ -1,0 +1,39 @@
+.match
+    display: flex
+    align-items: center
+    font-family: Roboto
+    line-height: 1.6
+    white-space: nowrap
+
+    .game
+        opacity: .5
+        flex: none
+        width: 2.2em
+
+    .team
+        flex: 1
+        overflow: hidden
+        text-overflow: ellipsis
+
+        &.left
+            text-align: right
+
+        &.right
+            text-align: left
+
+        &.winner
+            font-weight: bold
+
+    .score
+        font-weight: bold
+        margin: 0 .8em
+        min-width: 3em
+        text-align: center
+
+    .column
+        font-weight: bold
+        width: 1.6em
+        margin-left: .8em
+        text-align: center
+        border-radius: .3em
+        background-color: rgba(0, 0, 0, .12)
