@@ -28,7 +28,8 @@ src/
     games/
       mega-sena/ dupla-sena/ quina/ loto-facil/ loto-mania/ time-mania/ dia-de-sorte/ federal/ super-sete/ loteca/
                                      <-- one component per game, each with its own index.jsx + per-screen-format .sass files
-build.sh                    <-- zips the Vite build output into template.zip
+scripts/
+  pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```
 
 ## File and folder naming
@@ -63,7 +64,7 @@ Skip a numbered section entirely rather than including it empty. This template h
 
 ## Runtime model
 
-- `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development** (renamed from legacy unprefixed `media`/`config`/`template` globals during the 2026 migration — `@dsplay/template-utils` supports both, but the prefixed names match every other template). `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
+- `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development** (renamed from legacy unprefixed `media`/`config`/`template` globals during the 2026 migration — `@dsplay/template-utils` supports both, but the prefixed names match every other template). `scripts/pack.mjs` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
 - This template reads `@dsplay/react-template-utils`'s `useMedia()` hook, called inside each component that needs it (`app`, and each of the 8 game components). It used to read `@dsplay/template-utils`'s `media` export directly instead — that predated the hooks library and was originally left as-is, then migrated later at the maintainer's request (same as [`template-horizontal-info-bar`](https://github.com/dsplay/template-horizontal-info-bar)). `@dsplay/template-utils` is no longer a direct dependency (still pulled in transitively via `@dsplay/react-template-utils`).
 - **Always read template data through these hooks, called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant.**
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This template has zero `dsplay_template` variables today, but this applies to any added from now on — never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
@@ -91,7 +92,7 @@ Once the import bug above was fixed, `loto-facil` (specifically) still crashed �
 
 ## Template variable manifest
 
-`vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`useTemplateVal`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `build.sh`, which zips the whole build output). For this template, `template-variables.json` is legitimately an empty list — see "Runtime model" above.
+`vite.config.js` registers `@dsplay/template-manifest`'s Vite plugin, which on every build statically scans `src/` for `tval`/`useTemplateVal`-style reads and captures `public/dsplay-data.js` as example data, writing `template-variables.json` + `template-example-data.json` into the build output — and therefore into `template.zip` (`npm run zip` runs `scripts/pack.mjs`, which zips the whole build output). For this template, `template-variables.json` is legitimately an empty list — see "Runtime model" above.
 
 ## Browser/WebView compatibility (Android SDK 23 minimum)
 
@@ -114,7 +115,7 @@ This repo's `browserslist` was `[">0.2%", "not dead", "not ie <= 11", "not op_mi
 - `npm run build` — lints, then builds for production.
 - `npm test` / `npm run test:watch` — Vitest.
 - `npm run linter` / `npm run linter:fix` — ESLint on `src`.
-- `npm run zip` — builds, then runs `build.sh` to produce `template.zip` ready for the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `build/` and `template.zip` are gitignored.
+- `npm run zip` — builds, then runs `scripts/pack.mjs` to produce `template.zip` ready for the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `build/` and `template.zip` are gitignored.
 
 `build`/`zip` chain their steps with `&&` directly in the script (`"build": "npm run linter && vite build"`, `"zip": "npm run build && ..."`) rather than `prebuild`/`prezip` lifecycle hooks — `.npmrc`'s `ignore-scripts=true` (see below) silently skips `pre*`/`post*` hooks for `npm run-script` too, not just install scripts, so a `prezip` step would never actually run and `npm run zip` would silently package a stale/missing `build/`. Keep new multi-step scripts explicit for the same reason — don't reach for `pre*`/`post*` naming in this repo.
 
@@ -130,6 +131,10 @@ This repo's `browserslist` was `[">0.2%", "not dead", "not ie <= 11", "not op_mi
 Regular npm dependencies, not vendored files — versions are pinned, so bump explicitly (`npm outdated`, then `npm install <pkg>@<version>`) or merge Dependabot PRs. For a major bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
 `react-countup` was bumped from `4.x` to `6.x` and `core-js`/`node-sass`/`react-scripts` were dropped entirely during the 2026 migration (Vite + `@vitejs/plugin-legacy` now handles the polyfill/legacy-browser story that `core-js` used to). `react-countup`'s core props (`start`/`end`/`duration`/`decimals`/`decimal`/`separator`) are unchanged across that range, so no call sites needed updating.
+
+### Fixed: `npm run zip` didn't work on Windows at all
+
+`build.sh` (bash + the system `zip` CLI) was the only thing `npm run zip` ran after building — neither ships on Windows, not even under Git Bash (Git for Windows doesn't bundle `zip`/`unzip`). Replaced with `scripts/pack.mjs`, a plain Node script (`fs` + the `archiver` devDependency, pinned to `7.0.1` — the long-established CJS-style `archiver('zip', opts)` API, not `8.x`'s from-scratch ESM rewrite with a very different class-based API and far less real-world mileage) that does the exact same thing (strip `build/test-assets`, write the `dsplay-data.js` placeholder, zip `build/`'s contents flat into `template.zip`) with no OS-specific tooling at all. `npm run zip` now works identically on Windows, macOS and Linux.
 
 ### Known pending bump: ESLint 9 -> 10
 
