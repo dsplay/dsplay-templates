@@ -26,7 +26,8 @@ src/
     today-calendar/              <-- current date/time panel
     calendar/                    <-- month grid, with a compact single-week layout for short/banner screens
     loader-calendar/              <-- loading placeholder
-build.sh                    <-- zips the Vite build output into template.zip
+scripts/
+  pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```
 
 ## File and folder naming
@@ -62,7 +63,7 @@ Skip a numbered section entirely rather than including it empty.
 
 ## Runtime model
 
-- `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `build.sh` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
+- `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `scripts/pack.mjs` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
 - **Always read template data through [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils)'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This only applies to variables added from now on — never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
 - This template reads no `dsplay_template` variables at all — everything (colors, layout) is hardcoded in each component's Sass file. `src/components/calendar/index.jsx` switches to a compact single-week layout when `window.innerHeight` is small (horizontal banner screens).
@@ -89,7 +90,7 @@ After touching either of these, verify by actually running `npm run build` and g
 - `npm run build` — lints, then builds for production.
 - `npm test` / `npm run test:watch` — Vitest.
 - `npm run linter` / `npm run linter:fix` — ESLint on `src`.
-- `npm run zip` — builds, then runs `build.sh` to produce `template.zip` ready for the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `build/` and `template.zip` are gitignored.
+- `npm run zip` — builds, then runs `scripts/pack.mjs` to produce `template.zip` ready for the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `build/` and `template.zip` are gitignored.
 
 `build`/`zip` chain their steps with `&&` directly in the script (`"build": "npm run linter && vite build"`, `"zip": "npm run build && ..."`) rather than `prebuild`/`prezip` lifecycle hooks — `.npmrc`'s `ignore-scripts=true` (see below) silently skips `pre*`/`post*` hooks for `npm run-script` too, not just install scripts, so a `prezip` step would never actually run and `npm run zip` would silently package a stale/missing `build/`. Keep new multi-step scripts explicit for the same reason — don't reach for `pre*`/`post*` naming in this repo.
 
@@ -105,6 +106,10 @@ After touching either of these, verify by actually running `npm run build` and g
 Regular npm dependencies, not vendored files — versions are pinned, so bump explicitly (`npm outdated`, then `npm install <pkg>@<version>`) or merge Dependabot PRs. For a major bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
 `phosphor-react` (deprecated, last released years ago) was replaced with its actively-maintained successor `@phosphor-icons/react` during the 2026 Vite/React 19 migration — same icon names (`CaretLeft`/`CaretRight`), drop-in swap. `date-fns` was bumped 2 -> 4; v3+ moved locale imports from one-file-per-locale default exports (`date-fns/locale/pt-BR`) to named exports off a single `date-fns/locale` barrel (`import { ptBR } from 'date-fns/locale'`) — already updated in `src/translate-settings/language-settings.js`.
+
+### Fixed: `npm run zip` didn't work on Windows at all
+
+`build.sh` (bash + the system `zip` CLI) was the only thing `npm run zip` ran after building — neither ships on Windows, not even under Git Bash (Git for Windows doesn't bundle `zip`/`unzip`). Replaced with `scripts/pack.mjs`, a plain Node script (`fs` + the `archiver` devDependency, pinned to `7.0.1` — the long-established CJS-style `archiver('zip', opts)` API, not `8.x`'s from-scratch ESM rewrite with a very different class-based API and far less real-world mileage) that does the exact same thing (strip `build/test-assets`, write the `dsplay-data.js` placeholder, zip `build/`'s contents flat into `template.zip`) with no OS-specific tooling at all. `npm run zip` now works identically on Windows, macOS and Linux.
 
 ### Known pending bump: ESLint 9 -> 10
 
