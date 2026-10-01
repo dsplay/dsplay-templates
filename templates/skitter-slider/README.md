@@ -76,7 +76,7 @@ values, instead of requiring manual registration.
 
 It then zips `index.html`, `images/`, `scripts/`, `styles/`, and the two generated JSON files into `template.zip`.
 
-> **IMPORTANT**: `index.html` must be located in the root of the `.zip` file, not inside any folder — `pack.sh`
+> **IMPORTANT**: `index.html` must be located in the root of the `.zip` file, not inside any folder — `pack.mjs`
 > already takes care of this.
 
 `template.zip`, `node_modules/`, and the two generated JSON files are gitignored and should never be committed;

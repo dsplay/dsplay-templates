@@ -25,7 +25,7 @@ styles/
   main.css                          <- this template's own styling (full-bleed black background)
   skitter.css                       <- vendored Skitter theme CSS
 test/basic.test.js                  <- smoke tests (see "Testing" below)
-pack.sh                             <- generates the manifest and builds template.zip for upload to DSPLAY Web Manager (wrapped by `npm run zip`)
+pack.mjs                             generates the manifest and builds template.zip for upload to DSPLAY Web Manager (wrapped by `npm run zip`) (Windows/macOS/Linux)
 update-deps.sh                      <- updates vendored dependencies (boilerplate maintainers only, see below; wrapped by `npm run update-deps`)
 package.json                        <- devDependencies only (@dsplay/template-manifest for "zip", servor for "start", node:test for "test"), not a build step
 scripts/.vendored-versions.json     <- tracks the currently-vendored version of each dep for update-deps.sh
@@ -93,7 +93,7 @@ slideshow renders, then commit.
 
 - `npm install` - installs the devDependencies (once).
 - `npm start` - see "Local development" above.
-- `npm run zip` (wraps `./pack.sh`) - runs `dsplay-scan-template`, then builds `template.zip` ready for the
+- `npm run zip` (wraps `pack.mjs`) - calls `@dsplay/template-manifest`'s `generateManifest()`, then builds `template.zip` ready for the
   [DSPLAY Web Manager](https://manager.dsplay.tv/template/create). `node_modules/` and the two generated JSON
   files are gitignored - `npm run zip` regenerates them every run.
 - `npm test` - see "Testing" above. There is no lint configured.
