@@ -26,7 +26,7 @@ scripts/
 styles/main.css
 assets/                             <- audio, font, image, video
 test/basic.test.js                  <- smoke tests (see "Testing" below)
-pack.sh                             <- generates the manifest and builds template.zip for upload to DSPLAY Web Manager (wrapped by `npm run zip`)
+pack.mjs                             generates the manifest and builds template.zip for upload to DSPLAY Web Manager (wrapped by `npm run zip`) (Windows/macOS/Linux)
 update-deps.sh                      <- updates vendored dependencies (boilerplate maintainers only, see below; wrapped by `npm run update-deps`)
 package.json                        <- devDependencies only (@dsplay/template-manifest for "zip", servor for "start", node:test for "test"), not a build step
 scripts/.vendored-versions.json     <- tracks the currently-vendored version of each dep for update-deps.sh
@@ -100,7 +100,7 @@ data from `dsplay-data.js` renders, then commit.
 
 - `npm install` — installs the devDependencies (once).
 - `npm start` — see "Local development" above.
-- `npm run zip` (wraps `./pack.sh`) — runs `dsplay-scan-template` (scans `scripts/app.js` for
+- `npm run zip` (wraps `pack.mjs`) — calls `@dsplay/template-manifest`'s `generateManifest()` (scans `scripts/app.js` for
   `dsplayTemplateUtils.tval`/`tbval`/`tival`/`tfval` calls and direct `template.*` reads, captures `dsplay-data.js`
   as example data, writes `template-variables.json` + `template-example-data.json` to the project root — the
   DSPLAY CMS reads these to auto-detect this template's variables), then builds `template.zip` (with `index.html`
