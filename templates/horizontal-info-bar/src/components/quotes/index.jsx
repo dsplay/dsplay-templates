@@ -129,6 +129,8 @@ function Quotes() {
   const from2 = useTemplateVal('source_currency_2');
   const targetCurrency = useTemplateVal('target_currency');
 
+  if (!from1 || !from2 || !targetCurrency) return null;
+
   return <QuotesContent from1={from1} from2={from2} targetCurrency={targetCurrency} />;
 }
 

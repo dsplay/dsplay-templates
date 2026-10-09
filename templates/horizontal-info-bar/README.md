@@ -14,7 +14,7 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 - **News** — one random headline from an RSS feed, refreshed periodically.
 - **Sponsor** — a single logo image.
 
-Every widget is independently optional — it only renders once its required variable(s) are set. `widgets_sequence_query` controls which widgets appear and in what order.
+Every widget is independently optional — it only renders once its required variable(s) are set (see the table below for which ones, per widget). `widgets_sequence_query` controls the *order* widgets appear in — it does **not** control which widgets are shown; a widget left out of it still appears, just last.
 
 ## Supported screen formats
 
@@ -32,14 +32,14 @@ The widgets are always laid out in a single thin horizontal row. If the containe
 | `latitude`              | string  | Latitude of the place to get weather for, e.g. `41.1621376`. Weather widget is hidden if unset.  |
 | `longitude`             | string  | Longitude of the place to get weather for, e.g. `-8.656973`. Weather widget is hidden if unset.  |
 | `weather_unit`          | string  | Temperature unit shown in the Weather widget: `Celsius` or `Fahrenheit`. Defaults to `Celsius`.  |
-| `source_currency_1`     | string  | First source currency to convert, e.g. `BRL`, `USD`, `EUR`.                                     |
-| `source_currency_2`     | string  | Second source currency to convert.                                                               |
-| `target_currency`       | string  | Target currency both source currencies are converted to.                                        |
+| `source_currency_1`     | string  | First source currency to convert, e.g. `BRL`, `USD`, `EUR`. Currency quotes widget is hidden unless this, `source_currency_2`, and `target_currency` are **all** set. |
+| `source_currency_2`     | string  | Second source currency to convert. See `source_currency_1`.                                     |
+| `target_currency`       | string  | Target currency both source currencies are converted to. See `source_currency_1`.                |
 | `rss_url`               | string  | RSS feed URL. Leave empty to hide the News widget.                                               |
 | `rss_logo_box_color`    | color   | Background color behind the feed's channel image.                                               |
 | `sponsor_logo`          | image   | Logo shown in the Sponsor widget. Leave empty to hide it.                                        |
 | `sponsor_logo_box_color`| color   | Background color behind the sponsor logo.                                                        |
-| `widgets_sequence_query`| string  | Order and selection of widgets — see [Widget sequence syntax](#widget-sequence-syntax) below.    |
+| `widgets_sequence_query`| string  | Display order of widgets (does not hide any) — see [Widget sequence syntax](#widget-sequence-syntax) below. |
 | `bg_color`              | color   | Background color of the whole bar. Defaults to `white`.                                         |
 | `bg_image`              | image   | Background image of the whole bar.                                                              |
 | `text_color`            | color   | Text color of the whole bar. Defaults to `black`.                                               |
@@ -51,7 +51,7 @@ The widgets are always laid out in a single thin horizontal row. If the containe
 
 ### Widget sequence syntax
 
-`widgets_sequence_query` is a comma-separated list of single-character widget codes, controlling both which widgets show and their order:
+`widgets_sequence_query` is a comma-separated list of single-character widget codes controlling the order widgets are displayed in. It does **not** hide any widget — to hide a widget, unset its own required variable(s) instead (see the table above: `clock` for the Clock widget, `latitude`/`longitude` for Weather, `source_currency_1`/`source_currency_2`/`target_currency` for Currency quotes, `rss_url` for News, `sponsor_logo` for Sponsor).
 
 | Character | Widget          |
 |-----------|-----------------|

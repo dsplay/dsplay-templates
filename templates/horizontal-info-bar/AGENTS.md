@@ -132,6 +132,10 @@ Neither is read anywhere in `src/` (grepped every `useTemplateVal`/`useTemplateB
 
 `index.html` loads it via a plain `<script src="/dsplay-data.js">`, not an ES module import — so it never entered Vite's module graph, and Vite's dev server only reloads/HMRs files it's tracking through that graph. Editing the mock data while `npm start` was running did nothing in the browser until a manual refresh. `vite.config.js`'s `watchDsplayData()` plugin now watches that one file directly (`server.watcher.add` + `handleHotUpdate`) and forces a full page reload on change — confirmed via a raw HMR-websocket connection that editing the file sends `{"type":"full-reload"}`.
 
+### Fixed: Quotes widget had no "required variable(s) unset" guard
+
+Every other widget returns `null` early when its required variable(s) aren't set (Weather: `latitude`/`longitude`; News: `rss_url`; Sponsor: `sponsor_logo`) — Quotes didn't. Leaving `source_currency_1`/`source_currency_2`/`target_currency` unset used to still mount `QuotesContent`, which attempted a currency-API fetch with empty/`undefined` currency codes, logged an error, and only then rendered nothing once the request failed — instead of doing nothing from the start. `Quotes()` now checks all three vars up front, consistent with every other widget.
+
 ### Known pending bump: ESLint 9 -> 10
 
 `eslint`/`@eslint/js` are pinned to `9.39.5` (latest is `10.x`). Bumping them currently fails on peer dependency conflicts: `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` haven't declared ESLint 10 support yet as of 2026-08-12 — they're still the actively-maintained canonical packages, not abandoned or superseded, just lagging behind the major. `eslint-plugin-react-hooks` already supports it. `eslint-plugin-unicorn` is pinned to `65.0.1` for the same reason (`66.0.0+` requires ESLint `>=10.4`). Don't force this with `--legacy-peer-deps` — re-check peer ranges periodically and bump all of them together once the laggards catch up.
