@@ -22,7 +22,10 @@ function App() {
   const { screenFormat } = useScreenInfo();
 
   const [lng] = (locale || 'en').split('_');
-  i18n.changeLanguage(lng);
+
+  useEffect(() => {
+    i18n.changeLanguage(lng);
+  }, [lng]);
 
   // pagination
   const viewHeight = window.innerHeight;

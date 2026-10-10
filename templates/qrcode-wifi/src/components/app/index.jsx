@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Loader, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
 import Intro from '../intro';
@@ -22,7 +23,10 @@ function App() {
   const { locale } = useConfig();
 
   const [lng] = (locale || 'en').split('_');
-  i18n.changeLanguage(lng);
+
+  useEffect(() => {
+    i18n.changeLanguage(lng);
+  }, [lng]);
 
   return (
     <I18nextProvider i18n={i18n}>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   LoaderContext,
@@ -28,7 +28,12 @@ function Main() {
   const { t, i18n } = useTranslation();
 
   const [lng] = locale.split('_');
-  i18n.changeLanguage(lng);
+
+  // In an effect, not in the render body: changing the language updates every component that uses
+  // useTranslation, and doing that while rendering loops ("Maximum update depth exceeded").
+  useEffect(() => {
+    i18n.changeLanguage(lng);
+  }, [i18n, lng]);
 
   return (
     <div className="main">
