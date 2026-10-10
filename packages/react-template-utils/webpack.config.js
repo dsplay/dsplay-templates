@@ -35,13 +35,17 @@ const createConfig = (target) => ({
       commonjs: "react",
       commonjs2: "react",
       amd: "React",
-      root: "React"
+      root: "React",
+      var: "React",
+      system: "react"
     },
     "react-dom": {
       commonjs: "react-dom",
       commonjs2: "react-dom",
       amd: "ReactDOM",
-      root: "ReactDOM"
+      root: "ReactDOM",
+      var: "ReactDOM",
+      system: "react-dom"
     }
   }
 });
