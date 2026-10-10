@@ -1,0 +1,91 @@
+import React from 'react';
+import { QRCodeSVG } from 'qrcode.react';
+import moment from 'moment';
+import { FitText, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
+import './style.sass';
+import reactionLike from '../../images/reaction-like-small.gif';
+import reactionLove from '../../images/reaction-love-small.gif';
+import reactionHaha from '../../images/reaction-haha-small.gif';
+import reactionWow from '../../images/reaction-wow-small.gif';
+import reactionSad from '../../images/reaction-sad-small.gif';
+import reactionAngry from '../../images/reaction-angry-small.gif';
+
+const reactionsMap = {
+  like: reactionLike,
+  love: reactionLove,
+  haha: reactionHaha,
+  wow: reactionWow,
+  sad: reactionSad,
+  angry: reactionAngry,
+};
+
+function Reaction({
+  type,
+  count,
+}) {
+  if (!count) return null;
+
+  return (
+    <span className="reaction">
+      <img src={reactionsMap[type]} alt="" />
+      <span className="count">{count}</span>
+    </span>
+  );
+}
+
+function Info({
+  link = 'https://dsplay.tv',
+  created = new Date().toDateString(),
+  className = '',
+  reactions: {
+    like,
+    love,
+    wow,
+    haha,
+    sad,
+    angry,
+  } = {},
+}) {
+  moment.locale('en');
+  const { osVersion } = useConfig();
+
+  const { w, h } = useScreenInfo();
+  const smallDim = Math.min(w, h);
+  const qrCodeBottomPadding = osVersion < 17 ? '1rem' : '0';
+
+  const reactions = like || love || wow || haha || sad || angry;
+
+  return (
+    <div className={`info-container ${className}`}>
+      <div className="info-box">
+        {
+          link
+          && (
+          <div className="qrcode-container" style={{ paddingBottom: qrCodeBottomPadding }}>
+            <QRCodeSVG size={15 * (smallDim / 100)} style={{ width: '100%', height: '100%' }} value={link} />
+          </div>
+          )
+        }
+        <div className="info">
+          <span className={`created-at ${reactions ? '' : 'no-reactions'}`}>
+            <FitText>
+              {moment(created).format('L')}
+              <br />
+              {moment(created).format('HH:mm:ss')}
+            </FitText>
+          </span>
+          <span className="reactions">
+            <Reaction type="like" count={like} />
+            <Reaction type="love" count={love} />
+            <Reaction type="haha" count={haha} />
+            <Reaction type="wow" count={wow} />
+            <Reaction type="sad" count={sad} />
+            <Reaction type="angry" count={angry} />
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Info;
