@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>DSPLAY - BCB Exchange Rates</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <link rel="shortcut icon" type="image/png" href="assets/image/favicon.png">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  <div id="root">
+    <div class="logo">
+      <img src="assets/image/titulo.png" alt="">
+    </div>
+    <div class="exchanges">
+      <div class="exchange">
+        <img class="icon" src="assets/image/eur2.png" alt="EUR">
+        <div class="rates">
+          <div class="rate">
+            <div class="label">COMPRA</div>
+            <div class="value" id="eur-buy"></div>
+          </div>
+          <div class="rate">
+            <div class="label">VENDA</div>
+            <div class="value" id="eur-sell"></div>
+          </div>
+        </div>
+      </div>
+      <div class="exchange">
+        <img class="icon" src="assets/image/usd2.png" alt="USD">
+        <div class="rates">
+          <div class="rate">
+            <div class="label">COMPRA</div>
+            <div class="value" id="usd-buy"></div>
+          </div>
+          <div class="rate">
+            <div class="label">VENDA</div>
+            <div class="value" id="usd-sell"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- import core-js (try to use the latest version) -->
+  <script src="scripts/core-js-3.50.0.js"></script>
+  <!-- import dsplay-data.js -->
+  <script src="scripts/dsplay-data.js"></script>
+  <!-- import dsplay-template-utils. (get the latest version from https://unpkg.com/@dsplay/template-utils) -->
+  <script src="scripts/dsplay-template-utils.js"></script>
+  <!-- import jQuery (try to use the latest version) -->
+  <script src="scripts/jquery-4.0.0.min.js"></script>
+  <!-- import your main script file after -->
+  <script src="scripts/app.js"></script>
+</body>
+
+</html>
