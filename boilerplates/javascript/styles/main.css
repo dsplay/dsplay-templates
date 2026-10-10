@@ -1,0 +1,22 @@
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: teal;
+}
+
+#root {
+    opacity: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    border-radius: 10px;
+    padding: 4px;
+    background-color: white;
+    margin-top: 4px;
+}
