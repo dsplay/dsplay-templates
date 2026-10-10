@@ -1,19 +1,33 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "agentGuidance": false,
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["build/**", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "build/**",
+        "dist/**"
+      ]
     },
     "linter": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "zip": {
-      "dependsOn": ["^build"],
-      "outputs": ["template.zip"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "template.zip"
+      ]
     }
   }
 }

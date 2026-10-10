@@ -30,5 +30,15 @@
     "@changesets/cli": "3.0.3",
     "semver": "7.8.5",
     "turbo": "2.11.7"
+  },
+  "overrides": {
+    "kute.js": {
+      "svg-path-commander": "2.1.11"
+    },
+    "color-thief-react": {
+      "use-current-effect": {
+        "react": ">=16.8.0 <20"
+      }
+    }
   }
 }
