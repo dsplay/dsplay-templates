@@ -19,7 +19,7 @@
     "start": "vite",
     "build-examples": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest run --passWithNoTests",
     "build:types": "tsc",
     "build": "rimraf dist && NODE_ENV=production webpack && npm run build:types",
     "prepublish": "npm run build",
