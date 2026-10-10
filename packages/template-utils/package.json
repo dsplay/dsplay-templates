@@ -1,0 +1,46 @@
+{
+  "name": "@dsplay/template-utils",
+  "version": "1.4.0",
+  "main": "dist/dsplay-template-utils.js",
+  "module": "dist/dsplay-template-utils.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "vite",
+    "build-examples": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "build:types": "tsc",
+    "build": "rimraf dist && NODE_ENV=production webpack && npm run build:types",
+    "prepublish": "npm run build",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-transform-modules-umd": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@vitejs/plugin-react": "^6.0.4",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rimraf": "^6.1.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10",
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
