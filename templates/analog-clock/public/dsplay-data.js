@@ -1,0 +1,20 @@
+var dsplay_config = {
+  // config parameters
+  // locale: 'de_DE',
+  orientation: window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
+  // Android SDK version
+  osVersion: 19,
+  // DSPLAY App version code
+  appVersion: 112,
+};
+
+var dsplay_media = {
+  duration: 30000,
+};
+
+var dsplay_template = {
+  // template parameter
+  background_theme: 'light',
+  clock_theme: 'dark',
+  background: 'https://upload.wikimedia.org/wikipedia/commons/1/1f/White_stone_brick_wall.jpg',
+};
