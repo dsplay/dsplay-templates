@@ -1,5 +1,11 @@
 # @dsplay/react-template-utils
 
+## 5.2.3
+
+### Patch Changes
+
+- e29d1a9: Remove the `module` field, which pointed at `src/lib/index.js` although only `dist/` is published. npm consumers already fell back to `main`; this makes workspace consumers (the dsplay-templates monorepo) use the same built UMD file instead of compiling the source.
+
 ## 5.2.2
 
 ### Patch Changes
