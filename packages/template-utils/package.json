@@ -1,6 +1,11 @@
 {
   "name": "@dsplay/template-utils",
   "version": "1.4.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsplay/dsplay-templates.git",
+    "directory": "packages/template-utils"
+  },
   "main": "dist/dsplay-template-utils.js",
   "module": "dist/dsplay-template-utils.js",
   "types": "dist/types/index.d.ts",
