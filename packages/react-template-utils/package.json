@@ -1,6 +1,6 @@
 {
   "name": "@dsplay/react-template-utils",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dsplay/dsplay-templates.git",
@@ -66,7 +66,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@dsplay/template-utils": "^1.4.0",
+    "@dsplay/template-utils": "^1.4.1",
     "easyqrcodejs": "^4.6.2",
     "use-fit-text": "^2.4.0"
   },
