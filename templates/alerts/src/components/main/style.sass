@@ -1,0 +1,91 @@
+@import ../../styles/effects
+
+.dsplay-fit-text-ready
+  @include animation(fadeIn 1s ease-in)
+
+
+.flex-container
+  display: flex
+  justify-content: flex-start 
+  /* flex-flow: row wrap */ 
+  flex-direction: row 
+  flex-wrap: wrap 
+  align-content: stretch
+  background-color: rgba(0, 0, 0, 0.7)
+  height: 100vh
+
+.flex-container > .item2
+    background: #FFE739
+    border-radius: 16px
+    outline-width: 16px
+    outline-offset: 0
+    outline-color: red
+    outline-style: solid
+    animation: animateOutline 4s ease infinite
+
+
+.app h1
+  color: #000 !important
+  text-align: center
+  captlize: uppercase
+
+.portrait
+  .alert-text
+    height: 40vh
+    width: auto
+  .item1
+    /* flex:1 1 auto */
+    flex-grow: 1
+    height: 45vh
+    width: 50vw
+    padding: 1em
+    margin: 1em
+  .item2
+    /* flex:1 1 auto */
+    flex-grow: 1
+    height: 40vh
+    width: 40vw
+    padding: 1em
+    margin: 4em
+    align-content: center
+
+.landscape
+  .alert-text
+    text-align: center
+    height: 80vh
+    width: auto
+  .item1
+    /* flex:1 1 auto */
+    flex-grow: 1
+    height: 92vh
+    width: 40vw
+    margin: 2em
+  .item2
+    /* flex:1 1 auto */
+    flex-grow: 1
+    height: 80vh
+    width: 30vw
+    padding: 1em
+    margin: 4em
+    border-radius: 1em
+    align-items: center
+
+
+@keyframes animateOutline 
+  0% 
+    outline-width: 16px
+    outline-offset: 0
+    outline-color: red
+  10% 
+    outline-color: red
+    /* The animation finishes at 50% */
+  50% 
+    outline-width: 32px
+    outline-offset: 16px
+    outline-color: rgba(0, 130, 206, 0)
+  100% 
+    outline-width: 32px
+    outline-offset: 16px
+    outline-color: rgba(102, 102, 102, 0)
+  
+
