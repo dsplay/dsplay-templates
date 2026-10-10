@@ -32,3 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # No npm token: publishing authenticates through npm Trusted Publishing (OIDC, see id-token above).
+      # `changeset publish` tags each released package in the local checkout, but changesets/action does not
+      # push those tags with this Changesets version, so push them here (a no-op when nothing was published).
+      - name: Push release tags
+        run: git push origin --tags
