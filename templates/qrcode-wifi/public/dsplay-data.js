@@ -1,0 +1,37 @@
+/* eslint-disable vars-on-top */
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
+/* eslint-disable no-var */
+var dsplay_config = {
+  // config parameters
+  locale: 'pt_br',
+  orientation:
+    window.innerHeight < window.innerWidth ? 'landscape' : 'portrait',
+  // Android SDK version
+  osVersion: 19,
+  // DSPLAY App version code
+  appVersion: 99,
+};
+
+// eslint-disable-next-line no-unused-vars
+var dsplay_media = {
+  duration: 30000,
+
+  // custom media parameters
+  ssid: 'Customer Wifi',
+  password: 'wifi-password-123',
+  auth_type: 'wpa',
+  hidden: false,
+};
+
+var dsplay_template = {
+  qr_code_dot_scale: .8,
+  qr_code_dot_scale_timing: 1,
+  qr_code_logo: 'https://ui-avatars.com/api/?name=WiFi&size=256&background=0d9488&color=fff&bold=true&format=png',
+  qr_code_logo_background_transparent: true,
+  qr_code_quiet_zone_color: 'white',
+  qr_code_foreground_color: '#0f172a',
+  qr_code_background_color: 'white',
+};
