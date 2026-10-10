@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /packages/*
+      - /templates/*
+      - /boilerplates/*
+    schedule:
+      interval: weekly
+    # Pinned versions: Dependabot bumps the exact version in package.json.
+    versioning-strategy: increase
+    cooldown:
+      default-days: 3
+      semver-major-days: 7
+    open-pull-requests-limit: 10
+    # Internal packages are versioned by Changesets + tools/check-versions.mjs, not by Dependabot.
+    ignore:
+      - dependency-name: '@dsplay/*'
+    # One PR per week for all minor/patch bumps across the whole repo, instead of one per template.
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
+      semver-major-days: 7

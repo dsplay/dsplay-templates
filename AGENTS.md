@@ -1,0 +1,27 @@
+# AGENTS.md
+
+Guidance for AI agents (and humans) working in this repository. Each template/boilerplate/package also has its own `AGENTS.md` with the details specific to it; read that one first when working inside it.
+
+## Layout
+
+- `packages/` - libraries published to npm (`@dsplay/template-utils`, `@dsplay/template-manifest`, `@dsplay/react-template-utils`).
+- `templates/<name>/` - one DSPLAY template each, `private`, delivered as `template.zip` uploaded to the CMS.
+- `boilerplates/<name>/` - references people copy out of the monorepo to start a template. They must keep working standalone.
+- `tools/` - repo scripts. `new-template.mjs`, `check-versions.mjs`, `validate-boilerplates.mjs`, `supply-chain.test.mjs`, plus the one-off `migrate-repos.sh`.
+
+## Rules
+
+- **npm workspaces + Turborepo.** Install from the root only. One lockfile, at the root; never commit a per-package `package-lock.json`.
+- **Exact versions** for every dependency (`save-exact`). Internal packages are referenced by their real version, **never `workspace:*`**: a template or boilerplate copied out of the repo must still resolve. After changing a library's version run `npm run check-versions` (`-- --fix` re-pins).
+- **Don't add scripts, installs or ranges that weaken the supply-chain config** in `.npmrc` (`ignore-scripts`, `min-release-age`) or the Dependabot cooldowns; `tools/supply-chain.test.mjs` asserts them.
+- Boilerplates keep their own `.npmrc`, `.nvmrc` and `.github/`; templates rely on the root's.
+- Library change? Add a changeset (`npm run changeset`). Templates and boilerplates are not versioned by Changesets.
+- New template: `npm run new-template -- --from <source> --name <name>`, then review the files it lists.
+
+## Verifying a change
+
+```bash
+npm run check-versions && npm run test:repo
+npx turbo run build test --filter=<package>...      # the package and everything that depends on it
+npm run validate-boilerplates                       # when touching boilerplates/ or packages/
+```

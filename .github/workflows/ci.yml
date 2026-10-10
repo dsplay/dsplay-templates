@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # turbo --filter needs the base branch to find what changed
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check-versions
+      - run: npm run test:repo
+      # On PRs only build/test what the diff can affect (a library change still rebuilds its dependents).
+      - name: Build and test changed packages
+        if: github.event_name == 'pull_request'
+        run: npx turbo run build test --filter="...[origin/${{ github.base_ref }}]"
+      - name: Build and test everything
+        if: github.event_name != 'pull_request'
+        run: npx turbo run build test
+
+  # Boilerplates are references people copy out of the repo, so check they work from a plain copy.
+  boilerplates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run validate-boilerplates

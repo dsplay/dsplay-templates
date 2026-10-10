@@ -1,0 +1,43 @@
+name: Package templates
+
+# Builds the template.zip files to upload to the DSPLAY CMS.
+# Run it from the Actions tab; leave "template" empty to package every template.
+on:
+  workflow_dispatch:
+    inputs:
+      template:
+        description: 'Folder name under templates/ (e.g. countdown). Empty = all'
+        required: false
+        default: ''
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Package
+        env:
+          TEMPLATE: ${{ inputs.template }}
+        run: |
+          if [ -n "$TEMPLATE" ]; then
+            npx turbo run zip --filter="./templates/$TEMPLATE"
+          else
+            npx turbo run zip --filter="./templates/*"
+          fi
+      - name: Collect zips
+        run: |
+          mkdir zips
+          for zip in templates/*/template.zip; do
+            [ -f "$zip" ] && cp "$zip" "zips/$(basename "$(dirname "$zip")").zip"
+          done
+          ls zips
+      - uses: actions/upload-artifact@v4
+        with:
+          name: template-zips
+          path: zips/*.zip
+          if-no-files-found: error
