@@ -4,15 +4,15 @@ import {
   useTemplateVal,
 } from '@dsplay/react-template-utils';
 import './style.sass';
-import ColorThief from 'color-thief-react';
+import useDominantColor from '../../hooks/use-dominant-color';
 import useLanguage from '../../hooks/use-language';
-
-const Color = ColorThief.default || ColorThief;
 
 function Main() {
   const media = useMedia();
   const imgEventLogo = useTemplateVal('eventLogo');
   const imgHostLogo = useTemplateVal('hostLogo');
+  const eventLogoColor = useDominantColor(imgEventLogo);
+  const hostLogoColor = useDominantColor(imgHostLogo);
   const {
     location,
   } = media;
@@ -54,24 +54,16 @@ function Main() {
           </p>
           <p className="meeting-name"><FitText>{media.eventName}</FitText></p>
         </div>
-        <Color src={imgEventLogo} format="hex" crossOrigin="anonymous">
-          {({ data }) => (
-            <div
-              className="flex-item-left-bottom"
-              style={{
-                backgroundImage: `url("${useTemplateVal('eventLogo')}")`, backgroundColor: data,
-              }}
-            />
-          )}
-        </Color>
+        <div
+          className="flex-item-left-bottom"
+          style={{
+            backgroundImage: `url("${imgEventLogo}")`, backgroundColor: eventLogoColor,
+          }}
+        />
       </div>
       <div className="flex-item-right">
         <div className="flex-item-right-top" style={{ backgroundColor: useTemplateVal('rightColorTop') }}>
-          <Color src={imgHostLogo} format="hex" crossOrigin="anonymous">
-            {({ data }) => (
-              <div className="local-brand" style={{ backgroundImage: `url("${useTemplateVal('hostLogo')}")`, backgroundColor: data }} />
-            )}
-          </Color>
+          <div className="local-brand" style={{ backgroundImage: `url("${imgHostLogo}")`, backgroundColor: hostLogoColor }} />
         </div>
         <div className="flex-item-right-bottom" style={{ backgroundColor: useTemplateVal('rightColorBottom') }}>
           <div className="local-info">

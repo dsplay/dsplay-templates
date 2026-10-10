@@ -34,11 +34,6 @@
   "overrides": {
     "kute.js": {
       "svg-path-commander": "2.1.11"
-    },
-    "color-thief-react": {
-      "use-current-effect": {
-        "react": ">=16.8.0 <20"
-      }
     }
   }
 }

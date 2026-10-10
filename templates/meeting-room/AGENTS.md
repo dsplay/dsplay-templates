@@ -19,6 +19,7 @@ src/
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   hooks/
     use-language.js           <-- derives an Intl-compatible locale from dsplay_config.locale
+    use-dominant-color.js     <-- dominant color (hex) of an image, extracted with colorthief
   components/
     app/                      <-- top-level component (loader, fonts)
     main/                     <-- lays out event name/dates/location/logos
@@ -77,7 +78,7 @@ This template has **no static, developer-authored UI text at all** — every vis
 - [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils) exposes `useTemplateVal` (used for `eventLogo`/`hostLogo`/`mainColor`/`rightColorTop`/`rightColorBottom`) and `useMedia` (used for `eventName`/`location`/`startDate`/`endDate`).
 - **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This only applies to variables added from now on — never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
-- `src/components/main/index.jsx` lays out the event info; `color-thief-react` extracts a dominant color from `eventLogo`/`hostLogo` to use as their card background (so logos with transparent backgrounds don't show a jarring white box).
+- `src/components/main/index.jsx` lays out the event info; the `useDominantColor` hook extracts a dominant color from `eventLogo`/`hostLogo` to use as their card background (so logos with transparent backgrounds don't show a jarring white box).
 
 ## Template variable manifest
 
@@ -104,18 +105,16 @@ This template has **no static, developer-authored UI text at all** — every vis
 
 Regular npm dependencies, not vendored files — versions are pinned, so bump explicitly (`npm outdated`, then `npm install <pkg>@<version>`) or merge Dependabot PRs. For a major bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
-### Known accepted risk: `npm audit` flags `color-thief-react`'s transitive `colorthief` dependency
+### Changed: `color-thief-react` replaced by `colorthief` and a `useDominantColor` hook
 
-`npm audit` reports 8 vulnerabilities (2 critical) in `request`/`form-data`/`qs`/`tough-cookie`/`uuid`, all pulled in transitively via `color-thief-react` -> `colorthief@2.3.2` -> `get-pixels` -> `request`. This is `colorthief`'s **Node.js-only** pixel-reading fallback — `color-thief-react` actually imports the pre-built browser bundle `colorthief/dist/color-thief.umd.js` (confirmed by grepping it: zero references to `get-pixels`/`request`/`form-data`), which uses `<canvas>` instead. None of the vulnerable code is reachable from this template's Vite build. Newer `colorthief` majors aren't a safe drop-in fix: `2.6.0+` switched to the native `sharp` binary (wrong runtime for a browser bundle), and `3.x` is a WASM/worker rewrite with a different file layout and likely a different (async) API — either would need `color-thief-react` itself to update its `colorthief` dependency and be verified working, not just an `overrides` pin. Revisit if `color-thief-react` ships a release compatible with a non-vulnerable `colorthief`.
+`color-thief-react` has had no release since April 2022. It pins `colorthief@2.3.2` exactly (whose Node-only `get-pixels` -> `request` chain made `npm audit` report 8 vulnerabilities, 2 critical, none reachable from the browser bundle) and depends on `use-current-effect`, whose peer dependency is `react@^16.8.0` (also unmaintained since 2022), which needed an `overrides` entry to coexist with React 19. Both are gone: `src/hooks/use-dominant-color.js` loads the image and calls [`colorthief`](https://github.com/lokesh/color-thief) (3.x, maintained, no runtime dependencies) directly.
 
-### Fixed: `color-thief-react`'s default import resolved to the whole module object, crashing `Main`
+Two details that are easy to get wrong:
 
-`color-thief-react`'s CJS build (`lib/index.js`) exports `Color`/`useColor`/`getPalette`/`Palette`/`usePalette`/`getColor` alongside `default`. Vite/esbuild's dependency pre-bundling turned this into `export default require_lib();` — the entire `module.exports` object, not `exports.default` specifically — so `import Color from 'color-thief-react'` made `Color` an object, not the component. React threw "Element type is invalid... Check the render method of `Main`" the instant it tried to render `<Color>`. This is the exact same failure mode found in [`template-lottery-br-caixa-economica-federal`](https://github.com/dsplay/template-lottery-br-caixa-economica-federal) with `react-countup` (see that repo's AGENTS.md) — a UMD/multi-export CJS module confusing esbuild's default-export detection, not specific to this template. Fixed the same way:
-```js
-import ColorThief from 'color-thief-react';
-const Color = ColorThief.default || ColorThief;
-```
-The `|| ColorThief` fallback is kept defensively (matching the `react-countup` fix) even though, unlike that case, `ColorThief.default` was confirmed truthy under both the browser dev/prod bundle *and* Vitest's SSR transform here — verified by temporarily testing without the fallback and confirming `npm test` still passed with `eventLogo`/`hostLogo` set to real URLs in `dsplay-data.js`.
+- **Pass `{ colorSpace: 'rgb' }`.** colorthief 3.x quantizes in OKLCH by default, which lands noticeably off the logo's own background color (measured on the dev-data logos: `rgb(39, 88, 255)` vs the logo's `rgb(10, 87, 254)`), leaving a visible seam around it. RGB reproduces the colors the old component produced exactly (`rgb(12, 84, 252)` / `rgb(4, 92, 252)` on the dev-data logos).
+- **`img.crossOrigin = 'anonymous'` is required**, and the image host must send CORS headers. Otherwise the canvas is tainted, the pixels can't be read, and the hook returns `undefined` (the card then has no background color, same as while loading).
+
+The hook returns `undefined` until the image has loaded (or if the color can't be read), so `backgroundColor` simply stays unset in those cases.
 
 ### Fixed: `npm run zip` didn't work on Windows at all
 
