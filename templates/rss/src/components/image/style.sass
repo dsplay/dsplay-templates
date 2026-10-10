@@ -1,0 +1,66 @@
+@import ../../styles/mixins
+@import ../../styles/config
+
+.image
+  position: absolute
+  width: 100%
+  height: 100%
+  transform: scale(1, 1)
+  @include animation(fadeIn 1s ease-in)
+
+  .container
+    position: relative
+    height: 100%
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .bg
+      position: absolute
+      opacity: $opacity
+      width: 100%
+      height: 100%
+      left: 0
+      top: 0
+      z-index: 0
+
+    .wrapper
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      overflow: hidden
+      z-index: 1
+      .content
+        z-index: 1
+        width: 100%
+        height: 100%
+        background-size: cover
+        background-position: center
+        @include animation(zoomIn 10s 1s ease-in forwards)
+
+.portrait, .square
+  .image
+    height: calc(100vh - #{$portraitDescHeight} - #{$portraitTitleHeight})
+.h-banner
+  .image
+    left: $hBannerTitleWidth
+    width: 100vh
+    height: 100vh
+    color: white
+    @include animation(slideInBottom 1s ease-in)
+    .container
+      padding: 5vh
+      .bg
+        opacity: .1
+
+      .wrapper
+        top: 5vh
+        bottom: 5vh
+        left: 5vh
+        right: 5vh
+        .content
+          width: 90vh
+          height: 90vh
