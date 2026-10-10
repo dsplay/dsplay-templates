@@ -1,0 +1,127 @@
+$color: #FFF600
+$textColor: #049645
+    
+.time-mania
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    align-items: center
+    justify-content: center
+
+    .header
+        display: flex
+        justify-content: center
+        background-color: $color
+        width: 100%
+
+        .logo 
+            color: $textColor
+            padding: 1em
+            display: flex
+            justify-content: center
+            align-items: center
+
+            justify-self: flex-start
+            img
+                max-height: 5em
+            span
+                font-family: Roboto
+                font-weight: bolder
+                font-size: 4em
+                margin-left: .5em
+
+
+    .next-round
+        align-items: center
+        width: 100%
+
+        .text
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            .title
+                font-size: 2em
+                text-transform: uppercase
+                font-weight: bold
+
+            .date
+                font-size: 1.1em
+        
+        .estimated-prize
+            font-family: Roboto
+            font-weight: bolder
+            align-items: center
+            justify-content: center
+            background-color: rgba(255, 255, 255, .5)
+            border-radius: 2em
+            width: 95%
+            margin-top: 1em
+
+
+            .value-container
+                position: relative
+
+
+
+    .last-round
+
+        border: 2px solid $color
+        border-radius: 1em
+        padding: .2em 2em .1em 2em
+        align-items: center
+        margin-bottom: 1em
+
+        .title
+            font-size: 1.2em
+            text-transform: uppercase
+            font-weight: bold
+
+        .results
+
+            display: flex
+            align-items: center
+            flex-direction: column
+
+            .numbers
+                display: flex
+                font-size: 3em
+                text-align: center
+                
+                .ball
+                    background-color: $color
+                    color: $textColor
+                    margin: .1em .3em
+            .extra-result
+                display: inline-flex
+                background-color: $color
+                color: $textColor
+                border-radius: 1em
+                margin: .5em 1em
+                padding: .5em 2em .2em
+                align-self: center
+                justify-self: center
+                justify-content: center
+                .value
+                    font-weight: bold
+                    text-transform: uppercase
+                    margin-left: .5em
+
+            .result
+                text-transform: uppercase
+                text-align: center
+                font-size: 1em
+                margin: .2em 0
+
+                .winner
+                    font-weight: normal
+        .info
+            text-align: center
+            opacity: .5
+    .special-prizes
+        background-color: $color
+        text-align: center
+        width: 100%
+        color: white
+        padding: .2em 0
