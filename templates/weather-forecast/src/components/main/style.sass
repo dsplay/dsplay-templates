@@ -1,0 +1,451 @@
+.app
+  padding: 0 !important
+  margin: 0 !important
+  overflow: hidden
+
+@mixin landscapeViewport
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+
+@mixin portraitViewport
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+
+@mixin squaredViewport
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+
+@mixin bannerVViewport
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-inline-flexbox
+  display: -webkit-inline-flex
+  display: inline-flex
+  -webkit-box-direction: normal
+  -moz-box-direction: normal
+  -webkit-box-orient: vertical
+  -moz-box-orient: vertical
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+
+@mixin bannerHViewport
+  display: -ms-inline-flexbox
+  display: -webkit-inline-flex
+  display: inline-flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+
+.city
+  font-family: "Roboto Regular"
+
+.today,
+.city
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+
+.current-min-max-temperature-label
+  text-transform: uppercase
+  
+.landscape
+  .flex-container
+    @include landscapeViewport
+  .today,
+  .city
+    height: 6vh
+    margin: 1vw
+
+  .weather-description
+    height: 6vh
+    width: 55vw
+    margin: 1vw 0
+    text-transform: capitalize
+
+  .current-temperature
+    font-family: 'Roboto Regular'
+    text-shadow: -5px 0px 2px #494949
+    height: 25vh
+    width: 25vw
+
+  .current-min-max-temperature
+    height: 8vh
+    width: 8vw
+    margin: 0 1vw 1vw 0vw
+
+  .w-day,
+  .w-date
+    height: 6vh
+    width: 6vw
+
+  .w-min-temperature,
+  .w-max-temperature
+    height: 6vh
+    width: 6vw
+    margin: 0 2vw 
+  .weather-item
+    height: 25vh
+
+.portrait
+  .flex-container
+    @include portraitViewport
+  .flex-item:nth-child(1),
+  .flex-item:nth-child(2)
+    height: 50vh
+    width: 100vw
+  .icon-weather-today img
+    width: 12vh
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 12vh
+    width: 30vw
+  .weather-description
+    height: 5vw
+    width: 90vw
+    margin: 2vh 0
+    text-transform: capitalize
+  .current-min-max-temperature
+    height: 5vh
+    width: 10vw
+    margin: 0 2vw 1vw 0vw
+  .current-min-max-temperature-label
+    height: 3vh
+    width: 3vw
+  .today,
+  .city
+    height: 4vh
+    width: 95vw
+  .weather-item
+    .forecast-list-header
+      height: 5vh
+      width: auto
+    &:nth-child(2)
+      height: 10vh
+      width: auto
+      margin: .8vw
+  .w-day,
+  .w-date
+    height: 4vh
+  .w-min-temperature,
+  .w-max-temperature
+    height: 3.5vh
+    width: 15vw
+    margin: 0 6vw
+  .icon-weather-list img
+    height: 10vw
+    width: auto
+
+.square
+  .flex-item:nth-child(2)
+    display: none
+  .flex-item:nth-child(1)
+    height: 100vh
+    width: 100vw
+  .today
+    height: 6vh
+    width: 25vw
+  .city
+    height: 6vh
+    width: 75vw
+  .icon-weather-today img
+    width: 25vw
+    height: auto
+  .current-temperature
+    font-family: 'Roboto Regular'
+    text-shadow: -5px 0px 2px #494949
+    height: 35vh
+    width: 35vw
+  .weather-description
+    height: 6vh
+    width: 95vw
+    margin: 4vh 0 0
+    text-transform: capitalize
+  .current-min-max-temperature
+    height: 10vh
+    width: 13vw
+    .current-min-max-temperature-label
+      margin: 1vw 0vw 2vw 0vw
+      height: 5vh
+      width: 5vw
+
+.h-banner
+  .flex-item
+    @include bannerHViewport
+  .flex-item:nth-child(2)
+    display: none
+  .flex-item:nth-child(1)
+    height: 100vh
+    width: 100vw
+  .icon-weather-today img
+    width: 5.5vw
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 90vh
+    width: 7vw
+  .weather-description
+    height: 35vh
+    width: 20vw
+    margin: 0 1vw
+    text-transform: capitalize
+  .current-min-max-temperature
+    height: 50vh
+    width: 5vw
+    .current-min-max-temperature-label
+      margin: 1vh 1vw
+  .section-row
+    margin: 1vw
+  .today
+    display: none
+  .city
+    height: 35vh
+    width: 30vw
+    
+  
+.v-banner
+  .flex-container
+    @include bannerVViewport
+  .flex-item:nth-child(2)
+    display: none
+  .flex-item:nth-child(1)
+    height: 100vh
+    width: 100vw
+  .today
+    height: 2.2vh
+    width: 95vw
+  .icon-weather-today img
+    width: 5.5vh
+    height: auto
+  .current-temperature
+    text-shadow: -5px 0px 2px #494949
+    height: 3.5vh
+    width: 95vw
+    margin: 2vh 0
+  .current-min-max-temperature
+    height: 3vh
+    width: 75vw
+  .section-row
+    margin: 1vh 0
+  .flex-container
+    .flex-item:nth-child(1)
+      .section-row:nth-child(2)
+        display: none
+  .city,
+  .weather-description
+    display: none
+
+
+.flex-container 
+  height: 100vh
+  width: 100vw
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: wrap
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: center
+  -ms-flex-line-pack: center
+  align-content: center
+  -webkit-align-items: flex-start
+  -ms-flex-align: start
+  align-items: flex-start
+
+.flex-item,
+.weather-item
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: center
+  -ms-flex-line-pack: center
+  align-content: center
+
+
+.flex-item:nth-child(1)
+  height: 100%
+  width: 60vw
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 0 1 auto
+  -ms-flex: 0 1 auto
+  flex: 0 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+
+.flex-item:nth-child(2)
+  height: 100%
+  width: 40vw
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 0 1 auto
+  -ms-flex: 0 1 auto
+  flex: 0 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+  background: #f0f0f0
+
+.section-row
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: wrap
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: center
+  -ms-flex-line-pack: center
+  align-content: center
+  -webkit-align-items: center
+  -ms-flex-align: center
+  align-items: center
+
+
+// Forecast
+.weather-item
+  font-family: 'Roboto Light'
+  color: #999
+  height: 20vh
+  width: auto
+  margin: 0 6vw
+
+
+.forecast-list-header
+  margin: 0 2vw
+  border-bottom: 1px solid rgba(211, 216, 224, 0.88)
+
+.w-day,
+.w-date
+  font-family: 'Roboto Regular'
+  height: 6vh
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  -webkit-align-self: auto
+  -ms-flex-item-align: auto
+  align-self: auto
+
+.w-min-temperature,
+.w-max-temperature
+  font-family: 'Roboto Regular'
+  height: 7vh
+  margin: 0 2vw
+  text-transform: uppercase
+      
+
+.w-min-temperature
+  color: #44848d
+
+.w-max-temperature
+  color: #c57d7d
+
+.icon-weather-today img
+  width: 15vw
+  height: auto
+
+.icon-weather-list img
+  width: 6vw
+
+//Background styles
+    
+.weather-thunderstorm
+  background: linear-gradient(180deg, #2c394e 0%, #adadad 100%)
+
+.weather-drizzle
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #5a6475 0%, #98b1e0 100%)
+
+.weather-rain
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #394b5a 0%, #70808f 100%)
+
+.weather-snow
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #808388 0%, #bdc7ce 100%)
+
+.weather-mist-smoke-fog-haze
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #cfa46b 0%, #867d6b 100%)
+
+.weather-clearsky
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #70d7ff 0%, #2493cf 100%)
+
+.weather-clearsky-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #196e8f 0%, #092838 100%)
+
+.weather-few-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #70d7ff 0%, #467188 100%)
+
+.weather-few-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #333a3d 0%, #081218 100%)
+
+.weather-scattered-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #81cfee 0%, #5188a5 100%)
+
+.weather-scattered-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #32505c 0%, #021a27 100%)
+
+.weather-broken-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #6e9cb1 0%, #465a68 100%) 
+  
+.weather-broken-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #435d69 0%, #252f36 100%) 
+
+.weather-overcast-clouds
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #95999b 0%, #313a3f 100%)
+
+.weather-overcast-clouds-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #525557 0%, #13181b 100%)
+
+.weather-unknown-precipitation
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, #5a7686 0%, #0a2d36 100%)
+
+.weather-unknown-precipitation-n
+  background: rgb(0,0,0)
+  background: linear-gradient(180deg, rgba(90, 118, 134, .5) 0%, rgba(10, 45, 54, .5) 100%)
+

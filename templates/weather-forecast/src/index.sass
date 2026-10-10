@@ -1,0 +1,41 @@
+@import "./styles/effects"
+
+html
+  width: 100%
+  height: 100%
+  margin: 0
+
+body
+  box-sizing: border-box
+  margin: 0
+  width: 100%
+  height: 100%
+  background-color: black
+
+#root
+  width: 100%
+  height: 100%
+
+
+.fade-in
+  @include animation(fadeIn 1s ease-in)
+
+.fade-in-2
+  @include animation(fadeIn 2s ease-in)
+
+.portrait
+  display: none !important
+
+.dsplay-fit-text-ready
+  @include animation(fadeIn 1s ease-in)
+
+@media screen and (orientation:portrait)
+
+  html
+    font-size: 2vw
+
+  .landscape
+    display: none !important
+
+  .portrait
+    display: inherit !important
