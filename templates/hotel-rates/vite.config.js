@@ -29,6 +29,11 @@ function watchDsplayData() {
 
 export default defineConfig({
   base: './',
+  // Workspace packages are symlinks, which Vite serves as-is instead of pre-bundling. The libraries ship UMD
+  // builds, so without this the dev server fails on their named imports (npm installs get this for free).
+  optimizeDeps: {
+    include: ['@dsplay/react-template-utils'],
+  },
   plugins: [
     watchDsplayData(),
     react(),

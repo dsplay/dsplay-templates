@@ -29,6 +29,12 @@ function watchDsplayData() {
 
 export default defineConfig({
   base: './',
+  // Only needed inside the dsplay-templates monorepo, where the library is a workspace symlink that Vite
+  // serves as-is instead of pre-bundling (its UMD build then fails on named imports). Harmless once copied
+  // out, so you can delete this block in your own template.
+  optimizeDeps: {
+    include: ['@dsplay/react-template-utils'],
+  },
   plugins: [
     watchDsplayData(),
     react(),

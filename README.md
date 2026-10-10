@@ -15,11 +15,13 @@ Requires Node.js 22.22.2+, 24.15.0+ or 26+ (see `.nvmrc`). It is an [npm workspa
 
 ```bash
 npm install                                 # once, from the root - never inside a template
-npm start -w dsplay-template-countdown      # dev server of one template
+npm start -- --filter=dsplay-template-countdown   # dev server of one template (builds the libraries first)
 npm run zip -- --filter=./templates/countdown   # build + template.zip, ready for the CMS
 npm run build                               # everything, in dependency order, cached
 npm test
 ```
+
+`npm start` goes through Turborepo so the libraries are built before the dev server starts: the templates use their built `dist/` (as when installed from npm), and a fresh clone has none. Running `vite` straight inside a template folder only works after `npm run build -- --filter='./packages/*'`. Each Vite template lists `@dsplay/react-template-utils` in `optimizeDeps.include` because workspace packages are symlinks that Vite does not pre-bundle, and the libraries ship UMD builds.
 
 A template's `template.zip` lands in its own folder (`templates/<name>/template.zip`). To get zips without building locally, run the **Package templates** workflow from the Actions tab and download the artifact.
 

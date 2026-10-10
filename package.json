@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "turbo run build",
+    "start": "turbo run start",
     "test": "turbo run test",
     "test:repo": "node --test tools/supply-chain.test.mjs",
     "linter": "turbo run linter",
