@@ -16,8 +16,10 @@ This template has no configurable Template Vars — the displayed number comes e
 
 ## Local development
 
+This template lives in the [dsplay-templates monorepo](https://github.com/dsplay/dsplay-templates/blob/main/README.md). It has no build step and no shared-library dependency, so it runs straight from this folder:
+
 ```sh
-npm install
+npm install   # once; installs this template's own tooling (the dev server and the packaging script)
 npm start
 ```
 
@@ -39,9 +41,9 @@ Upload the resulting `template.zip` to the [DSPLAY Web Manager](https://manager.
 
 ## Supply chain hardening
 
-**Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). `.npmrc` sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current npm dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
+**Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). The repository's root [`.npmrc`](https://github.com/dsplay/dsplay-templates/blob/main/.npmrc) sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current npm dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
 
-[Dependabot](.github/dependabot.yml) proposes npm devDependency updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR. Since versions are pinned, `npm update` does nothing; bump packages explicitly with `npm install <pkg>@<version>`. (Vendored bundles in `scripts/` are not covered by Dependabot — see below.)
+[Dependabot](https://github.com/dsplay/dsplay-templates/blob/main/.github/dependabot.yml) proposes npm devDependency updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR. Since versions are pinned, `npm update` does nothing; bump packages explicitly with `npm install <dependency>@<version> -w dsplay-template-chamador-loterias-caixa`. (Vendored bundles in `scripts/` are not covered by Dependabot — see below.)
 
 ## Updating vendored dependencies
 
@@ -50,3 +52,5 @@ See [AGENTS.md](AGENTS.md).
 ## More
 
 To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
+
+To work on this template together with the others (shared libraries, creating a new template from an existing one, releases), see the [repository README](https://github.com/dsplay/dsplay-templates/blob/main/README.md).

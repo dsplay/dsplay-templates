@@ -9,8 +9,8 @@ You can use this project as a skeleton for creating a new HTML Template with Rea
 > This project is built with [Vite](https://vitejs.dev/) and requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`).
 
 This README has two audiences:
-- **[Building your own template](#building-your-own-template)** — if you cloned this repo to create a new DSPLAY template.
-- **[Maintaining this boilerplate](#maintaining-this-boilerplate)** — for the DSPLAY team, keeping this repo itself up to date for future template authors.
+- **[Building your own template](#building-your-own-template)** — if you copied this boilerplate to create a new DSPLAY template.
+- **[Maintaining this boilerplate](#maintaining-this-boilerplate)** — for the DSPLAY team, keeping this boilerplate (it lives in the [dsplay-templates monorepo](https://github.com/dsplay/dsplay-templates/blob/main/README.md)) up to date for future template authors.
 
 ---
 
@@ -19,9 +19,8 @@ This README has two audiences:
 ### Getting started
 
 ```sh
-git clone https://github.com/dsplay/template-boilerplate-react.git my-awesome-template
+npx degit dsplay/dsplay-templates/boilerplates/react my-awesome-template   # copies just this folder, no git history
 cd my-awesome-template
-rm -rf .git
 git init
 npm install
 npm start
@@ -29,7 +28,9 @@ npm start
 
 `npm install` is safe to run as-is: the project's [.npmrc](.npmrc) disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`). None of the current dependencies need a post-install build step, so no extra setup is required. If you add one that does, add a `setup` script to `package.json` that runs `npm install` followed by `npm rebuild <package>`, and document it here.
 
-You're now developing your own template, detached from this boilerplate's history — changes here don't get pushed back to `dsplay/template-boilerplate-react`.
+> **`npm install` stops with `ETARGET … with a date before …`?** The [.npmrc](.npmrc) only accepts package versions published at least 3 days ago (`min-release-age=3`). Right after a new `@dsplay/*` release, this project pins a version that is still inside that window, so the first install can fail until it passes. Wait, or — after checking the version on npm — install once with `npm install --min-release-age=0`.
+
+You're now developing your own template, detached from this boilerplate's history — changes here don't get pushed back to `dsplay/dsplay-templates`.
 
 ### `dsplay-data.js`
 
@@ -39,7 +40,7 @@ In this boilerplate, `dsplay-data.js` is located at the `public` folder.
 
 ### Using template/media/config values in your template
 
-The easiest way to access `dsplay-data.js` values in your project is through [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils) (already included in this boilerplate).
+The easiest way to access `dsplay-data.js` values in your project is through [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils) (already included in this boilerplate).
 
 ```jsx
 // src/components/main/index.jsx
@@ -125,7 +126,7 @@ function Main() {
 }
 ```
 
-This boilerplate's own `src/components/app/index.jsx` and `src/components/main/index.jsx` include a small working example of a task that deliberately fails, for reference. See [`template-flight-information`](https://github.com/dsplay/template-flight-information) for a complete, production example built on this pattern (a translated error message shown only when there's truly no data to fall back on — not just on any single failed fetch).
+This boilerplate's own `src/components/app/index.jsx` and `src/components/main/index.jsx` include a small working example of a task that deliberately fails, for reference. See [`template-flight-information`](https://github.com/dsplay/dsplay-templates/tree/main/templates/flight-information) for a complete, production example built on this pattern (a translated error message shown only when there's truly no data to fall back on — not just on any single failed fetch).
 
 ### Test assets
 
@@ -158,7 +159,7 @@ This builds the template with Vite, which also generates `template-variables.jso
 
 ## Maintaining this boilerplate
 
-This section is for the DSPLAY team, keeping this boilerplate itself current for the next person who clones it.
+This section is for the DSPLAY team, keeping this boilerplate itself current for the next person who copies it.
 
 ### Updating dependencies
 
@@ -168,10 +169,10 @@ Unlike the vanilla-js/jQuery boilerplates, dependencies here are regular npm pac
 
 ```sh
 npm outdated   # see what has newer versions available
-npm install <pkg>@<version>   # bump a dependency (stays pinned)
+npm install <dependency>@<version> -w dsplay-template-react-boilerplate   # from the repository root (stays pinned)
 ```
 
-Since versions are pinned, `npm update` does nothing; bump each package explicitly (or merge Dependabot's PRs). For a major bump (e.g. a new `@dsplay/react-template-utils` major), test the boilerplate still works (`npm start`, `npm run build`, `npm test`) before committing — major bumps may contain breaking changes and this boilerplate is consumed by other templates.
+Since versions are pinned, `npm update` does nothing; bump each package explicitly (or merge Dependabot's PRs). For a major bump (e.g. a new `@dsplay/react-template-utils` major), test the boilerplate still works (from the repository root: `npm start -- --filter=dsplay-template-react-boilerplate`, `npx turbo run build test --filter=dsplay-template-react-boilerplate`, and `npm run validate-boilerplates`) before committing — major bumps may contain breaking changes and this boilerplate is consumed by other templates.
 
 ### Commit conventions
 

@@ -9,8 +9,8 @@ You can use this project as a skeleton for creating a new HTML Template with pur
 There is **no build step and no bundler** — every script is a plain `<script>` tag loaded directly by the browser. A `package.json` exists only for packaging-time tooling (generating the template variable manifest, keeping vendored dependencies up to date); it has no effect on how the template itself runs.
 
 This README has two audiences:
-- **[Building your own template](#building-your-own-template)** — if you cloned this repo to create a new DSPLAY template.
-- **[Maintaining this boilerplate](#maintaining-this-boilerplate)** — for the DSPLAY team, keeping this repo itself up to date for future template authors.
+- **[Building your own template](#building-your-own-template)** — if you copied this boilerplate to create a new DSPLAY template.
+- **[Maintaining this boilerplate](#maintaining-this-boilerplate)** — for the DSPLAY team, keeping this boilerplate (it lives in the [dsplay-templates monorepo](https://github.com/dsplay/dsplay-templates/blob/main/README.md)) up to date for future template authors.
 
 ---
 
@@ -18,10 +18,13 @@ This README has two audiences:
 
 ### Getting started
 
-1. Clone or download this repository into your own new project folder.
-2. Detach it from this boilerplate's history — you're starting a template of your own, not contributing back here:
+1. Copy this boilerplate into your own new project folder, without the monorepo around it (no git history comes along):
    ```sh
-   rm -rf .git
+   npx degit dsplay/dsplay-templates/boilerplates/javascript my-awesome-template
+   cd my-awesome-template
+   ```
+2. Start a git history of your own — you're starting a template of your own, not contributing back here:
+   ```sh
    git init
    ```
 3. Install the packaging-time tooling (only needed once):
@@ -33,6 +36,8 @@ This README has two audiences:
    npm start
    ```
    and visit `http://localhost:3000` (visit the root URL, not `http://localhost:3000/index.html` directly — the reload script is only injected on that path). The page auto-reloads whenever you edit and save a file.
+
+> **`npm install` stops with `ETARGET … with a date before …`?** The [.npmrc](.npmrc) only accepts package versions published at least 3 days ago (`min-release-age=3`). Right after a new `@dsplay/*` release, this project pins a version that is still inside that window, so the first install can fail until it passes. Wait, or — after checking the version on npm — install once with `npm install --min-release-age=0`.
 
 ### Directory Structure
 
@@ -126,13 +131,13 @@ Upload the resulting `template.zip` to the [DSPLAY Web Manager](https://manager.
 
 ## Maintaining this boilerplate
 
-This section is for the DSPLAY team, keeping this boilerplate itself current for the next person who clones it.
+This section is for the DSPLAY team, keeping this boilerplate itself current for the next person who copies it.
 
 ### Supply chain hardening
 
 **Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). `.npmrc` sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current npm dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
 
-[Dependabot](.github/dependabot.yml) proposes npm devDependency updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR. Since versions are pinned, `npm update` does nothing; bump packages explicitly with `npm install <pkg>@<version>`. (Vendored bundles in `scripts/` are not covered by Dependabot — see below.)
+[Dependabot](.github/dependabot.yml) proposes npm devDependency updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR. Since versions are pinned, `npm update` does nothing; bump packages explicitly with `npm install <dependency>@<version> -w dsplay-template-boilerplate-javascript` (from the repository root). (Vendored bundles in `scripts/` are not covered by Dependabot — see below.)
 
 ### Updating vendored dependencies
 

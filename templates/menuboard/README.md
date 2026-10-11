@@ -4,7 +4,7 @@
 
 A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.tv/docs/html-templates) for the [DSPLAY - Digital Signage](https://dsplay.tv/) platform — a JSON-driven restaurant/store menu board that auto-lays-out categories and items across up to 3 columns and paginates when content overflows.
 
-> Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`).
+> Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see the repository's [`.nvmrc`](https://github.com/dsplay/dsplay-templates/blob/main/.nvmrc)).
 
 ## Supported screen formats
 
@@ -55,14 +55,16 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 | `bgOpacityThreshold`    | string  | `75%`     | Gradient stop where the background starts fading to transparent.                                                        |
 | `image1` ... `image15`  | string  |           | Pool of images referenced by `/fi(n)`/`/li(n)` commands in menu item `num` fields (`image1` = `/fi(1)`, etc). |
 
-> Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS. **`logo`, `currencySymbol`, `currencyMaxCols`, and `image1`...`image15` are read as direct `template.<key>` property access rather than through `tval()`, so [`@dsplay/template-manifest`](https://github.com/dsplay/template-manifest)'s static scanner can't auto-detect them** — double check they're registered manually in the CMS.
+> Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS. **`logo`, `currencySymbol`, `currencyMaxCols`, and `image1`...`image15` are read as direct `template.<key>` property access rather than through `tval()`, so [`@dsplay/template-manifest`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-manifest)'s static scanner can't auto-detect them** — double check they're registered manually in the CMS.
 > New variable names should use `snake_case` (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's label from its key, and snake_case reads more naturally there.
 
 ## Local development
 
+This template lives in the [dsplay-templates monorepo](https://github.com/dsplay/dsplay-templates/blob/main/README.md): install and run it from the **repository root**. The dev server builds the shared `@dsplay/*` libraries first, which a bare `npm start` inside this folder does not, and `npm install` run inside this folder only installs this template's own packages, not the repository tooling (Turborepo) that does that build.
+
 ```sh
-npm install
-npm start
+npm install                       # once
+npm start -- --filter=dsplay-template-menuboard
 ```
 
 `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only when the template isn't running inside the actual DSPLAY app. `dsplay_media.result.data.categories` is where the actual menu content lives — edit it to try out different menus. The DSPLAY Player App replaces it with real content at runtime.
@@ -70,8 +72,10 @@ npm start
 ## Packing (release build)
 
 ```sh
-npm run zip
+npm run zip -- --filter=./templates/menuboard   # from the repository root
 ```
+
+`template.zip` is written to this folder (`templates/menuboard/template.zip`). The **Package templates** GitHub workflow builds it too (Actions tab, then download the artifact), so you can get it without a local build.
 
 This builds the template with Vite, which also generates `template-variables.json` + `template-example-data.json` (via [@dsplay/template-manifest](https://www.npmjs.com/package/@dsplay/template-manifest)'s Vite plugin) — the DSPLAY CMS reads these two files to auto-detect this template's variables and seed default preview values. It then generates `template.zip`, ready to be deployed to the [DSPLAY Web Manager](https://manager.dsplay.tv/template/create).
 
@@ -81,16 +85,16 @@ To use test assets (images, videos, etc) during development, put them in the `pu
 
 ## Maintaining dependencies
 
-**Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). `.npmrc` sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
+**Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). The repository's root [`.npmrc`](https://github.com/dsplay/dsplay-templates/blob/main/.npmrc) sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
 
-[Dependabot](.github/dependabot.yml) proposes updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR.
+[Dependabot](https://github.com/dsplay/dsplay-templates/blob/main/.github/dependabot.yml) proposes updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR.
 
 ```sh
-npm outdated                  # see what has newer versions available
-npm install <pkg>@<version>   # bump a dependency (stays pinned)
+npm outdated                  # from the repository root: what has newer versions available
+npm install <dependency>@<version> -w dsplay-template-menuboard   # bump a dependency of this template (stays pinned)
 ```
 
-Since versions are pinned, `npm update` does nothing; bump each package explicitly (or merge Dependabot's PRs). For a major bump, verify `npm start`, `npm run build`, and `npm test` still work before committing.
+Since versions are pinned, `npm update` does nothing; bump each package explicitly (or merge Dependabot's PRs). For a major bump, verify `npm start -- --filter=dsplay-template-menuboard` and `npx turbo run build test --filter=dsplay-template-menuboard` (from the repository root) still work before committing.
 
 ### Commit conventions
 
@@ -99,3 +103,5 @@ See [AGENTS.md](AGENTS.md).
 ## More
 
 To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
+
+To work on this template together with the others (shared libraries, creating a new template from an existing one, releases), see the [repository README](https://github.com/dsplay/dsplay-templates/blob/main/README.md).

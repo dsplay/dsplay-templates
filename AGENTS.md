@@ -19,6 +19,7 @@ Guidance for AI agents (and humans) working in this repository. Each template/bo
 - **Root `overrides` (npm only honours them at the root, never in a workspace's own package.json).** `kute.js` -> `svg-path-commander` 2.1.11 (moved here from voice-ai). `flowbite-react` -> `deepmerge-ts` 8.0.2: flowbite-react pins 7.1.5, which has a high advisory (GHSA-ggr8-5vv4-36mx, fixed in 8.x); verified on the menuboard-featured-products carousel. Drop that one once flowbite-react ships a release that depends on a fixed `deepmerge-ts`.
 - **Every `eslint.config.js` must keep `files: ['**/*.{js,jsx}']`.** ESLint 9's flat config only matches `*.js` by default, so without it `eslint src` (which runs inside `npm run build`) silently skips every `.jsx` component. A `setState` called synchronously in an effect is reported by `react-hooks/set-state-in-effect`; fix it by deriving the value or using lazy initial state, and only where that would change timing/caching add an `eslint-disable-next-line` that says why.
 - Library change? Add a changeset (`npm run changeset`). Templates and boilerplates are not versioned by Changesets.
+- **A release re-pins every template and boilerplate to the new library version in the same PR**, so for 3 days (`min-release-age`) a boilerplate copied out of the repo cannot `npm install` (`ETARGET`). That is expected, not a bug; the boilerplate READMEs say what to do. Inside the workspace it is unaffected.
 - New template: `npm run new-template -- --from <source> --name <name>`, then review the files it lists.
 
 ## Verifying a change

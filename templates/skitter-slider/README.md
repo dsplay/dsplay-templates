@@ -19,7 +19,7 @@ styles, powered by the [Skitter](http://www.gustavowb.com/skitter/) jQuery plugi
 > Vertical banner is omitted: Skitter's built-in responsive breakpoints (`small` below 768px width) rewrite the image URL to insert a `-small` filename suffix for narrower screens, expecting a matching pre-generated variant to exist. The demo images used here (and any extensionless/query-string image URL) have no such variant, so at the 200px-wide vertical banner format the rewritten URL 404s and no image loads at all — confirmed via the page showing Skitter's own "Error loading images" message with zero `<img>` elements rendered. This is an inherent limitation of the plugin's responsive-image feature at extreme aspect ratios, not something fixable by CSS alone.
 
 This README has two audiences:
-- **[Building your own template](#building-your-own-template)** — if you cloned this repo to create a new DSPLAY template.
+- **[Building your own template](#building-your-own-template)** — if you copied this template to create a new DSPLAY template.
 - **[Maintaining this boilerplate](#maintaining-this-boilerplate)** — for the DSPLAY team, keeping this repo itself up to date.
 
 ---
@@ -28,10 +28,13 @@ This README has two audiences:
 
 ### Getting started
 
-1. Clone or download this repository into your own new project folder.
-2. Detach it from this repo's history — you're starting a template of your own, not contributing back here:
+1. Copy this template into your own new project folder, without the monorepo around it (no git history comes along):
    ```sh
-   rm -rf .git
+   npx degit dsplay/dsplay-templates/templates/skitter-slider my-awesome-template
+   cd my-awesome-template
+   ```
+2. Start a git history of your own — you're starting a template of your own, not contributing back here:
+   ```sh
    git init
    ```
 3. Install the packaging-time tooling (only needed once):
@@ -43,6 +46,8 @@ This README has two audiences:
    npm start
    ```
    and visit `http://localhost:3000` (visit the root URL, not `http://localhost:3000/index.html` directly — the reload script is only injected on that path). The page auto-reloads whenever you edit and save a file.
+
+> **`npm install` stops with `ETARGET … with a date before …`?** The repository's [.npmrc](https://github.com/dsplay/dsplay-templates/blob/main/.npmrc) only accepts package versions published at least 3 days ago (`min-release-age=3`). Right after a new `@dsplay/*` release, this project pins a version that is still inside that window, so the first install can fail until it passes. Wait, or — after checking the version on npm — install once with `npm install --min-release-age=0`.
 
 ### Template variables
 
@@ -94,9 +99,9 @@ This section is for the DSPLAY team, keeping this template itself current.
 
 ### Supply chain hardening
 
-**Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). `.npmrc` sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current npm dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
+**Dependencies must always be pinned to an exact version** (never `^`, `~` or any other range). The repository's root [`.npmrc`](https://github.com/dsplay/dsplay-templates/blob/main/.npmrc) sets `save-exact=true`, so `npm install <pkg>@<version>` pins automatically. It also disables dependency install scripts (`ignore-scripts=true`) and only accepts package versions published at least 3 days ago (`min-release-age=3`), to reduce supply chain risk. None of the current npm dependencies need a post-install build step; if one ever does, add a `setup` script to `package.json` (`npm install && npm rebuild <package>`) and document it here.
 
-[Dependabot](.github/dependabot.yml) proposes npm devDependency updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR. Since versions are pinned, `npm update` does nothing; bump packages explicitly with `npm install <pkg>@<version>`. (Vendored bundles in `scripts/` are not covered by Dependabot — see below.)
+[Dependabot](https://github.com/dsplay/dsplay-templates/blob/main/.github/dependabot.yml) proposes npm devDependency updates weekly, waiting 3 days after a release (7 days for major versions) before opening a PR. Since versions are pinned, `npm update` does nothing; bump packages explicitly with `npm install <pkg>@<version>`. (Vendored bundles in `scripts/` are not covered by Dependabot — see below.)
 
 ### Updating vendored dependencies
 
@@ -127,3 +132,5 @@ See [AGENTS.md](AGENTS.md).
 ## More
 
 To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
+
+To work on this template together with the others (shared libraries, creating a new template from an existing one, releases), see the [repository README](https://github.com/dsplay/dsplay-templates/blob/main/README.md).

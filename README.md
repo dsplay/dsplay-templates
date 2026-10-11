@@ -11,6 +11,50 @@ tools/          scripts for this repo (scaffolding, checks, one-off migration)
 
 Requires Node.js 22.22.2+, 24.15.0+ or 26+ (see `.nvmrc`). It is an [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) repo with [Turborepo](https://turborepo.com) running tasks, so use **npm**, not pnpm/yarn.
 
+## What is in here
+
+| Folder | |
+|---|---|
+| [`packages/template-utils`](packages/template-utils/) | `@dsplay/template-utils`: vanilla helpers for reading the DSPLAY globals |
+| [`packages/react-template-utils`](packages/react-template-utils/) | `@dsplay/react-template-utils`: hooks and components for React templates |
+| [`packages/template-manifest`](packages/template-manifest/) | `@dsplay/template-manifest`: scans a template's variables for the CMS |
+| [`boilerplates/react`](boilerplates/react/), [`javascript`](boilerplates/javascript/), [`jquery`](boilerplates/jquery/) | starting points: copy one with `npx degit dsplay/dsplay-templates/boilerplates/<name> my-template` |
+
+The 30 templates (each has its own README with its variables and screen formats):
+
+| Template | |
+|---|---|
+| [`alerts`](templates/alerts/) | Alert Template |
+| [`analog-clock`](templates/analog-clock/) | Analog Clock Template |
+| [`bcb-exchange-rates`](templates/bcb-exchange-rates/) | BCB Exchange Rates |
+| [`building-directions-board`](templates/building-directions-board/) | Building Directions Board Template |
+| [`chamador-loterias-caixa`](templates/chamador-loterias-caixa/) | Chamador Loterias Caixa |
+| [`count-up`](templates/count-up/) | Count Up Template |
+| [`countdown`](templates/countdown/) | Countdown Template |
+| [`digital-clock-basic`](templates/digital-clock-basic/) | Digital Clock |
+| [`facebook-posts`](templates/facebook-posts/) | Facebook Posts Template |
+| [`flight-information`](templates/flight-information/) | Flight Information Template |
+| [`horizontal-info-bar`](templates/horizontal-info-bar/) | Horizontal Information Bar |
+| [`hotel-rates`](templates/hotel-rates/) | Hotel Rates Template |
+| [`image`](templates/image/) | Image Template |
+| [`instagram-basic`](templates/instagram-basic/) | Instagram Basic Template |
+| [`instagram-image-only`](templates/instagram-image-only/) | Instagram Image Only Template |
+| [`lottery-br-caixa-economica-federal`](templates/lottery-br-caixa-economica-federal/) | Loterias Caixa Template |
+| [`meeting-room`](templates/meeting-room/) | Meeting Room Template |
+| [`menuboard-featured-products`](templates/menuboard-featured-products/) | Menu Board (Featured Products) Template |
+| [`menuboard-standard`](templates/menuboard-standard/) | Menu Board (Standard) Template |
+| [`menuboard`](templates/menuboard/) | Menu Board |
+| [`photo-collage`](templates/photo-collage/) | Photo Collage Template |
+| [`qrcode-wifi`](templates/qrcode-wifi/) | Wi-Fi QR Code Template |
+| [`rss`](templates/rss/) | RSS Template |
+| [`simple-calendar`](templates/simple-calendar/) | Simple Calendar Template |
+| [`skitter-slider`](templates/skitter-slider/) | Skitter Slider |
+| [`tide-sheet`](templates/tide-sheet/) | Tide Sheet Template |
+| [`twitter-basic`](templates/twitter-basic/) | Twitter Basic Template |
+| [`voice-ai`](templates/voice-ai/) | Voice AI Template |
+| [`weather-forecast`](templates/weather-forecast/) | Weather Forecast Template |
+| [`world-clocks-analog`](templates/world-clocks-analog/) | World Clocks (analog) Template |
+
 ## Everyday commands
 
 ```bash
@@ -43,6 +87,8 @@ This copies the source to `templates/<name>`, renames the package to `dsplay-tem
 ## Boilerplates
 
 They are references, so they must work for someone who copies the folder out of the monorepo. They keep their own `.npmrc`, `.nvmrc` and `.github/` for that reason, and CI runs `npm run validate-boilerplates`, which copies each one to a temp dir, installs it like a stranger would (using freshly packed local libraries) and runs its tests and `zip`.
+
+> **Right after a library release**, `npm install` of a boilerplate (or of a template copied out of this repo) can fail with `ETARGET … with a date before …`: the version it pins is younger than the 3-day `min-release-age` in `.npmrc`. Inside this workspace nothing is affected, because the libraries resolve locally. The boilerplate READMEs explain the workaround.
 
 ## Releasing the libraries
 
