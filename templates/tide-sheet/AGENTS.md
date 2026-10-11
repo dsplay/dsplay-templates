@@ -112,7 +112,7 @@ This repo's `browserslist` was `[">0.2%", "not dead", "not ie <= 11", "not op_mi
 
 Regular npm dependencies, not vendored files — versions are pinned, so bump explicitly (`npm outdated`, then `npm install <pkg>@<version>`) or merge Dependabot PRs. For a major bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
-The 2026 Vite/React 19 migration removed `chart.js`/`react-chartjs-2`, `d3`, `date-fns`, `dayjs`, `react-compass`, `@types/leaflet`, `@types/react-compass` — none were actually imported anywhere in `src/` (this template renders its charts with `recharts` and its map with `react-leaflet` only). It also removed two clearly accidental dependencies, `"-"` and `"save"` (leftovers from a mistyped `npm install` command), and added an explicit `prop-types` dependency — it was being imported by `piechartrosecompass`/`piechartuvgauge` without ever being declared, working only by luck via CRA's flattened `node_modules`. That dependency was later removed again together with the `propTypes` declarations: the package's repository is archived and React 19 no longer checks `propTypes` at runtime.
+The 2026 Vite/React 19 migration removed `chart.js`/`react-chartjs-2`, `d3`, `date-fns`, `dayjs`, `react-compass`, `@types/leaflet`, `@types/react-compass` — none were actually imported anywhere in `src/` (this template renders its charts with `recharts` and its map with `react-leaflet` only). It also removed two clearly accidental dependencies, `"-"` and `"save"` (leftovers from a mistyped `npm install` command).
 
 ### Changed: recharts 2 -> 3
 
