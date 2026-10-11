@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import {
   useMedia, Loader, useScreenInfo, useConfig,
@@ -46,18 +46,16 @@ function App() {
 
   const timeoutInterval = timePage;
   const [currentPage, setCurrentPage] = useState(1);
-  const [visibleTargets, setVisibleTargets] = useState([]);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleTargets = useMemo(
+    () => media.targets.slice(startIndex, endIndex),
+    [media.targets, startIndex, endIndex],
+  );
 
   useEffect(() => {
-    const targets = media.targets;
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentTargets = targets.slice(startIndex, endIndex);
-
-    setVisibleTargets(currentTargets);
-
     const timer = setTimeout(() => {
-      if (endIndex < targets.length) {
+      if (endIndex < media.targets.length) {
         setCurrentPage(currentPage + 1);
       } else {
         // restarts
@@ -66,7 +64,7 @@ function App() {
     }, timeoutInterval);
 
     return () => clearTimeout(timer);
-  }, [media.targets, currentPage, itemsPerPage, timeoutInterval]);
+  }, [media.targets, currentPage, endIndex, timeoutInterval]);
 
   return (
     <I18nextProvider i18n={i18n}>

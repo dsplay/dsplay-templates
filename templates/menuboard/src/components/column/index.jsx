@@ -9,8 +9,6 @@ function Column({
   width,
   items = [],
 }) {
-  let i = 0;
-
   return (
     <div className="fade-in">
       {
@@ -27,9 +25,8 @@ function Column({
           price,
           size,
           last,
-        }) => {
-          i += 1;
-          const key = `${id}_${i}`;
+        }, index) => {
+          const key = `${id}_${index + 1}`;
 
           switch (type) {
             case 'category':

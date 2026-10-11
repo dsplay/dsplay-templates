@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import moment from 'moment';
 import { useMedia, useConfig, useTemplateBoolVal } from '@dsplay/react-template-utils';
 import logo from '../../images/logo.png';

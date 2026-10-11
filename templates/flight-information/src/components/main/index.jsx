@@ -79,6 +79,7 @@ function Main({ startTime }) {
     const endIndex = startIndex + itemsPerPage;
     if (allFlights) {
       const currentFlights = allFlights.slice(startIndex, endIndex);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- kept as state so the previous page stays visible while allFlights is unavailable
       setFlightsView(currentFlights);
     }
   }, [currentPage, allFlights]);
@@ -86,6 +87,7 @@ function Main({ startTime }) {
   useEffect(() => {
     if (!fetchingAllFligts && !hasFlightsError) {
       const maxPageDuration = (media.maxPageDurationSeconds || 60) * 1000;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- pageTime below is computed from the pageCount of the previous render; deriving both would change page timing
       setPageCount(Math.ceil(allFlights.length / itemsPerPage));
       setPageTime(Math.min(media.duration / pageCount, maxPageDuration));
     }

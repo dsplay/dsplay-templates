@@ -1,4 +1,4 @@
-/* eslint-disable no-shadow */
+ 
 import { PureComponent } from 'react';
 import {
   PieChart,
@@ -44,6 +44,7 @@ const needle = (windDirection, data, cx, cy, iR, oR, color) => {
 
   return [
     <svg
+      key="compass-artwork"
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
@@ -220,8 +221,8 @@ const needle = (windDirection, data, cx, cy, iR, oR, color) => {
         <circle className="st0" cx="712.3" cy="1053.5" r="11.5" />
       </g>
     </svg>,
-    <path d={`M${xba} ${yba}L${xbb} ${ybb} L${xp} ${yp} L${xba} ${yba}`} stroke="none" fill={color} />,
-    <circle id="needle-dot" cx={x0} cy={y0} r={r} fill={color} stroke="#fff" strokeWidth={3} />,
+    <path key="needle-arrow" d={`M${xba} ${yba}L${xbb} ${ybb} L${xp} ${yp} L${xba} ${yba}`} stroke="none" fill={color} />,
+    <circle key="needle-dot" id="needle-dot" cx={x0} cy={y0} r={r} fill={color} stroke="#fff" strokeWidth={3} />,
   ];
 };
 

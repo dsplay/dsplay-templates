@@ -23,7 +23,7 @@ function WeatherContent({ lat, lon }) {
     if (storedWeather) {
       try {
         weather = JSON.parse(storedWeather);
-      } catch (e) {
+      } catch {
         localStorage.removeItem(storageKey);
       }
     }
@@ -45,6 +45,7 @@ function WeatherContent({ lat, lon }) {
         }
       })();
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- serves the cached weather from localStorage synchronously; the fetch path above is async
       setResult(weather.value);
     }
   }, [lat, lon]);

@@ -26,7 +26,7 @@ function Item({
 
   const priceCols = prices.map((price1, i) => (
     <td
-      // eslint-disable-next-line react/no-array-index-key
+       
       key={`col_${i}`}
       rowSpan="2"
       className={`price ${priceAuxClassName}`}

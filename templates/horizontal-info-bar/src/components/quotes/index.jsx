@@ -71,7 +71,7 @@ function QuotesContent({ from1, from2, targetCurrency }) {
     if (storedQuotes) {
       try {
         quotes = JSON.parse(storedQuotes);
-      } catch (e) {
+      } catch {
         localStorage.removeItem(storageKey);
         logger.error(`[quotes] error parsing stored value: ${storedQuotes}`);
       }
@@ -97,6 +97,7 @@ function QuotesContent({ from1, from2, targetCurrency }) {
       })();
     } else {
       logger.log('[quotes] using value from localStorage');
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- serves the cached quotes from localStorage synchronously; the fetch path above is async
       setResult(quotes.value);
     }
   }, [counter, storageKey, from1, from2, targetCurrency]);

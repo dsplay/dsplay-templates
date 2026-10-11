@@ -1,4 +1,3 @@
-import React from 'react';
 import { FitText, useTemplateVal } from '@dsplay/react-template-utils';
 import './style.sass';
 

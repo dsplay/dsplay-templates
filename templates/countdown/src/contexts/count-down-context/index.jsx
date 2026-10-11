@@ -121,10 +121,12 @@ export function CountDownContextProvider({ children }) {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- seeds the context state on mount; setStartValues is also exposed on the context
     setStartValues();
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- countingTime drives the one-second tick (a timer state machine), not derivable state
     countingTime();
   }, [oclock, isActiveTimerDown]);
 

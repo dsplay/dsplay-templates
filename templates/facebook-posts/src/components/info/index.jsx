@@ -1,4 +1,3 @@
-import React from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import moment from 'moment';
 import { FitText, useScreenInfo, useConfig } from '@dsplay/react-template-utils';

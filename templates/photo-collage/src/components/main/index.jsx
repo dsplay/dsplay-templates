@@ -3,15 +3,10 @@ import { GridGallery, LoaderContext, useTemplateIntVal } from '@dsplay/react-tem
 import './style.sass';
 
 function Main() {
-  const [height, setHeight] = useState();
-  const [width, setWidth] = useState();
+  const [height] = useState(() => document.getElementById('root').clientHeight);
+  const [width] = useState(() => document.getElementById('root').clientWidth);
   const margin = useTemplateIntVal('margin', 0);
   const { tasksResults, tasksErrors } = useContext(LoaderContext);
-
-  useEffect(() => {
-    setHeight(document.getElementById('root').clientHeight);
-    setWidth(document.getElementById('root').clientWidth);
-  }, []);
 
   useEffect(() => {
     tasksErrors?.forEach((error) => {

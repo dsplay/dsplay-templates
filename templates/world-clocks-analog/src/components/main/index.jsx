@@ -53,7 +53,7 @@ function Main() {
         }
 
         {
-          /* eslint-disable react/no-array-index-key */
+           
 
           cities.slice(0, maxCities).map((city, i) => (
 

@@ -14,7 +14,7 @@ function PricesHead({
 
   const priceCols = prices.map((price, i) => (
     <td
-      // eslint-disable-next-line react/no-array-index-key
+       
       key={`price_${i}`}
       rowSpan="2"
       className={`priceHeadItem ${i < prices.length - 1 ? 'rightBorder ' : ''}${priceAuxClassName}`}

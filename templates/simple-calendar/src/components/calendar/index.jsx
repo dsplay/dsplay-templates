@@ -1,4 +1,4 @@
-/* eslint-disable no-shadow */
+ 
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
@@ -64,7 +64,7 @@ function Calendar() {
     const weekStartDate = startOfWeek(activeDate);
     const weekdays = [];
 
-    // eslint-disable-next-line no-plusplus
+     
     for (let day = 0; day < 7; day++) {
       weekdays.push(
         <div className="day weekNames" key={day + weekStartDate}>
@@ -76,11 +76,11 @@ function Calendar() {
     return <div className="weekContainer">{weekdays}</div>;
   };
   const generateDatesForCurrentWeek = ({ date, selectedDate, activeDate }) => {
-    // eslint-disable-next-line prefer-const
+     
     let currentDate = date;
     const week = [];
 
-    // eslint-disable-next-line no-plusplus
+     
     for (let day = 0; day < 7; day++) {
       const cloneDate = currentDate;
 
@@ -113,7 +113,6 @@ function Calendar() {
     let currentDate = startDate;
 
     const allWeeks = [];
-    const i = 0;
     while (currentDate <= endDate) {
       allWeeks.push(
         generateDatesForCurrentWeek({ date: currentDate, selectedDate, activeDate }),

@@ -54,7 +54,7 @@ function MenuBoardItens() {
           </div>
         </div>
         {items.map(([name, price], i) => (
-          // eslint-disable-next-line react/no-array-index-key -- fixed-length, order-stable slots
+           
           <div key={i} className="grow min-h-fit mx-h-20 flex justify-between  ml-4 mr-4 -mt-3">
             <div className="order-01 chalk-writed">
               <FitText>{name}</FitText>

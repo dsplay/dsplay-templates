@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   Loader, useMedia, useScreenInfo, useTemplateVal, screen,
 } from '@dsplay/react-template-utils';

@@ -19,7 +19,7 @@ function Home() {
         streamRef.current = stream;
         setMicrophoneActive(true);
         logger.log('Microphone activated');
-      } catch (error) {
+      } catch {
         setPermissionDenied(true);
         logger.error('Error accessing the microphone');
       }

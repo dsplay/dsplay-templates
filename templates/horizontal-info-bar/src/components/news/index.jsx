@@ -37,7 +37,7 @@ function NewsContent({ url, logoBoxColor }) {
       if (storedNews) {
         try {
           news = JSON.parse(storedNews);
-        } catch (e) {
+        } catch {
           localStorage.removeItem(storageKey);
           logger.error(`[news] error parsing stored value: ${storedNews}`);
         }
@@ -64,6 +64,7 @@ function NewsContent({ url, logoBoxColor }) {
           }
         })();
       } else {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- serves the cached feed from localStorage synchronously; the fetch path above is async
         setResult(news.value);
       }
     }
@@ -73,6 +74,7 @@ function NewsContent({ url, logoBoxColor }) {
 
   useEffect(() => {
     if (result && result.items && result.items.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- picks a new random item whenever the feed or the counter changes
       setItem(result.items[Math.floor(Math.random() * result.items.length)]);
     }
   }, [count, result]);

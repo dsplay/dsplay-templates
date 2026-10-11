@@ -1,4 +1,3 @@
-import React from 'react';
 import { Render, FitText, screen } from '@dsplay/react-template-utils';
 import Info from '../info';
 import UserProfile from '../user-profile';
@@ -19,7 +18,7 @@ function PostContent({
     backgroundColor: text ? textBgColor : 'transparent',
   };
 
-  /* eslint-disable react/no-danger */
+   
   return (
     <div className="text-wrapper" style={style}>
       <FitText>

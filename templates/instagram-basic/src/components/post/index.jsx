@@ -65,7 +65,7 @@ function PostContent({
     <Fragment>
       <div className="text-wrapper" key={id}>
         <div className="text-ratio" style={{ fontSize: `${ratio}em` }}>
-          {/* eslint-disable-next-line react/no-danger -- template text may contain highlighted hashtags/links/mentions */}
+          { }
           <div style={{ color: textColor }} className="post-text" dangerouslySetInnerHTML={{ __html: highlight(text, highlightColors) }} />
         </div>
       </div>

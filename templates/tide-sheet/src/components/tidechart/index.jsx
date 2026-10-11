@@ -1,6 +1,6 @@
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable no-shadow */
-/* eslint-disable no-use-before-define */
+ 
+ 
+ 
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
