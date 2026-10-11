@@ -15,6 +15,8 @@ export default [
   jsxA11y.flatConfigs.recommended,
   importPlugin.flatConfigs.recommended,
   {
+    // ESLint 9 only matches *.js by default, so without this every .jsx component went unlinted.
+    files: ['**/*.{js,jsx}'],
     plugins: {
       'react-hooks': reactHooks,
       unicorn,
@@ -31,6 +33,10 @@ export default [
     settings: {
       react: {
         version: 'detect',
+      },
+      // so that `import x from '../intro'` finds intro/index.jsx
+      'import/resolver': {
+        node: { extensions: ['.js', '.jsx'] },
       },
     },
     rules: {
