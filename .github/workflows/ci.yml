@@ -1,10 +1,23 @@
 name: CI
 
+# Cost control: documentation-only changes do not run it, a newer push to the same PR cancels the older run,
+# commits build/test only what they can affect (plus dependents), the Turborepo cache is restored between runs,
+# and the boilerplate check only runs when something it depends on changed.
 on:
   push:
     branches: [main]
+    paths-ignore: ['**.md', 'LICENSE', '.github/dependabot.yml']
   pull_request:
     branches: [main]
+    paths-ignore: ['**.md', 'LICENSE', '.github/dependabot.yml']
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  # What this run is compared against: the PR's base branch, or the commit before the push.
+  BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
 
 jobs:
   test:
@@ -12,30 +25,51 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0 # turbo --filter needs the base branch to find what changed
+          fetch-depth: 0 # turbo --filter needs the base commit to find what changed
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
+      - uses: actions/cache@v6
+        with:
+          path: .turbo/cache
+          key: turbo-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-${{ runner.os }}-
       - run: npm ci
       - run: npm run check-versions
       - run: npm run test:repo
-      # On PRs only build/test what the diff can affect (a library change still rebuilds its dependents).
-      - name: Build and test changed packages
-        if: github.event_name == 'pull_request'
-        run: npx turbo run build test --filter="...[origin/${{ github.base_ref }}]"
-      - name: Build and test everything
-        if: github.event_name != 'pull_request'
-        run: npx turbo run build test
+      - name: Build and test what changed
+        run: |
+          # No usable base (first push, force push, unknown commit): build everything.
+          if [ -n "$BASE" ] && ! echo "$BASE" | grep -qE '^0+$' && git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            npx turbo run build test --filter="...[$BASE]"
+          else
+            npx turbo run build test
+          fi
 
   # Boilerplates are references people copy out of the repo, so check they work from a plain copy.
   boilerplates:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+        with:
+          fetch-depth: 0
+      - name: Did anything the boilerplates depend on change?
+        id: changes
+        run: |
+          if [ -z "$BASE" ] || echo "$BASE" | grep -qE '^0+$' || ! git cat-file -e "$BASE^{commit}" 2>/dev/null \
+             || git diff --name-only "$BASE" HEAD | grep -qE '^(boilerplates/|packages/|tools/|package\.json|package-lock\.json|\.npmrc|\.nvmrc)'; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Nothing the boilerplates depend on changed: skipped."
+          fi
+      - if: steps.changes.outputs.run == 'true'
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-      - run: npm run validate-boilerplates
+      - if: steps.changes.outputs.run == 'true'
+        run: npm ci
+      - if: steps.changes.outputs.run == 'true'
+        run: npm run validate-boilerplates
