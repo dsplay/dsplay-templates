@@ -15,6 +15,7 @@ Guidance for AI agents (and humans) working in this repository. Each template/bo
 - **Exact versions** for every dependency (`save-exact`). Internal packages are referenced by their real version, **never `workspace:*`**: a template or boilerplate copied out of the repo must still resolve. After changing a library's version run `npm run check-versions` (`-- --fix` re-pins).
 - **Don't add scripts, installs or ranges that weaken the supply-chain config** in `.npmrc` (`ignore-scripts`, `min-release-age`) or the Dependabot cooldowns; `tools/supply-chain.test.mjs` asserts them.
 - Boilerplates keep their own `.npmrc`, `.nvmrc` and `.github/`; templates rely on the root's.
+- **Every `eslint.config.js` must keep `files: ['**/*.{js,jsx}']`.** ESLint 9's flat config only matches `*.js` by default, so without it `eslint src` (which runs inside `npm run build`) silently skips every `.jsx` component. A `setState` called synchronously in an effect is reported by `react-hooks/set-state-in-effect`; fix it by deriving the value or using lazy initial state, and only where that would change timing/caching add an `eslint-disable-next-line` that says why.
 - Library change? Add a changeset (`npm run changeset`). Templates and boilerplates are not versioned by Changesets.
 - New template: `npm run new-template -- --from <source> --name <name>`, then review the files it lists.
 
