@@ -25,12 +25,11 @@ jobs:
           cache: npm
           registry-url: https://registry.npmjs.org
       - run: npm ci
+      # No npm token: publishing authenticates through npm Trusted Publishing (OIDC, see id-token above).
       - uses: changesets/action@v2
         with:
           version-script: npm run version-packages
           publish-script: npm run release
-        env:
-          # No npm token: publishing authenticates through npm Trusted Publishing (OIDC, see id-token above).
       # changesets/action v2 pushes the release tags itself (through the GitHub API); this is only a fallback in case
       # it could not (a no-op when nothing was published or the tags are already on the remote).
       - name: Push release tags
