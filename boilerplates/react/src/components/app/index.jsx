@@ -26,7 +26,7 @@ const fonts = [
 // template can render. A rejected task no longer leaves Loader stuck on the placeholder forever:
 // it settles as undefined in tasksResults at that same index, with the rejection reason exposed
 // via tasksErrors on LoaderContext. The second task below deliberately fails to demonstrate this -
-// see Main for how to read tasksErrors, and template-flight-information for a full example of an
+// see Main for how to read tasksErrors, and templates/flight-information for a full example of an
 // error UI built on top of it.
 function createFailingExampleTask() {
   const failingTask = Promise.reject(new Error('example task failure'));

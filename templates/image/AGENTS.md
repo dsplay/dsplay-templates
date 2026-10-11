@@ -35,11 +35,11 @@ scripts/
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-image` (was already correct here).
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`boilerplates/react`](https://github.com/dsplay/dsplay-templates/tree/main/boilerplates/react)'s AGENTS.md for the full convention. This template's is `dsplay-template-image` (was already correct here).
 
 ## README structure
 
-Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+Every DSPLAY template's `README.md` follows the same skeleton (see `boilerplates/react`'s AGENTS.md for the full reference copy):
 
 1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
 2. *(optional, only if the template has more than one visual arrangement)* **Features**.

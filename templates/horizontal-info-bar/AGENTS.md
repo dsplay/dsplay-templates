@@ -41,11 +41,11 @@ scripts/
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-horizontal-info-bar` (previously `@dsplay/template-horizontal-bar`, which didn't even match the repo's own name).
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`boilerplates/react`](https://github.com/dsplay/dsplay-templates/tree/main/boilerplates/react)'s AGENTS.md for the full convention. This template's is `dsplay-template-horizontal-info-bar` (previously `@dsplay/template-horizontal-bar`, which didn't even match the repo's own name).
 
 ## README structure
 
-Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+Every DSPLAY template's `README.md` follows the same skeleton (see `boilerplates/react`'s AGENTS.md for the full reference copy):
 
 1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
 2. *(optional, only if the template has more than one visual arrangement)* **Features**.
@@ -57,12 +57,12 @@ Skip a numbered section entirely rather than including it empty.
 
 ## Internationalization (i18n)
 
-This template renders no static, developer-authored UI text at all — every widget only renders data it fetched or a template variable's own value (time, temperature, currency codes/amounts, a feed headline, an image). There is nothing to route through `react-i18next`, so this template has no `i18n.js` and no `react-i18next` dependency, unlike the other React templates in this ecosystem. If a future change adds any static label, wire up i18n then — see `template-boilerplate-react`'s AGENTS.md for the full convention (key = English text, `en`/`pt`/`es`/`it`/`de`/`nl` minimum, etc.).
+This template renders no static, developer-authored UI text at all — every widget only renders data it fetched or a template variable's own value (time, temperature, currency codes/amounts, a feed headline, an image). There is nothing to route through `react-i18next`, so this template has no `i18n.js` and no `react-i18next` dependency, unlike the other React templates in this ecosystem. If a future change adds any static label, wire up i18n then — see `boilerplates/react`'s AGENTS.md for the full convention (key = English text, `en`/`pt`/`es`/`it`/`de`/`nl` minimum, etc.).
 
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `scripts/pack.mjs` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
-- This template reads `dsplay_template`/`config` values via [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils)'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useConfig`), called inside each component's function body — matching every other migrated template. It used to read [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s `tval`/`tbval`/`config` directly at module scope instead; that was a deliberate "don't fix what isn't broken" call made during the initial 2026 migration, later reversed at the maintainer's request. `@dsplay/template-utils` is no longer a direct dependency (still pulled in transitively via `@dsplay/react-template-utils`).
+- This template reads `dsplay_template`/`config` values via [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils)'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useConfig`), called inside each component's function body — matching every other migrated template. It used to read [`@dsplay/template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-utils)'s `tval`/`tbval`/`config` directly at module scope instead; that was a deliberate "don't fix what isn't broken" call made during the initial 2026 migration, later reversed at the maintainer's request. `@dsplay/template-utils` is no longer a direct dependency (still pulled in transitively via `@dsplay/react-template-utils`).
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This only applies to variables added from now on — never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
 - Each widget independently fetches its own data (weather via DSPLAY's own API, currency quotes via a free public API, RSS via DSPLAY's own rss-gateway) and caches the result in `localStorage` with its own TTL/version key, refreshing on its own interval. `src/utils/logger.js` gates the diagnostic `console.log`/`console.error` calls so they're silent in production builds but still visible when debugging a dev build via remote WebView inspection.
 - Each widget is independently optional — `src/components/app/index.jsx` only renders the ones whose required variable(s) are set (e.g. `Weather` renders nothing without both `latitude`/`longitude`).

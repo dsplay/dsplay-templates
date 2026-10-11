@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) working in this repository.
 
 The DSPLAY **Menu Board (Featured Products)** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/): a two-column chalkboard-style menu board (promo carousel + logo on the left, up to 10 product rows on the right). Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
 
-This is one of four sibling menu-board templates in the DSPLAY catalog ([`template-menuboard`](https://github.com/dsplay/template-menuboard), `template-menuboard-featured-products` (this one), `template-menuboard-promo-banner`, [`template-menuboard-standard`](https://github.com/dsplay/template-menuboard-standard)) — each a distinct fixed layout, not variants of shared code. Don't assume changes here apply to the others.
+This is one of four sibling menu-board templates in the DSPLAY catalog ([`templates/menuboard`](https://github.com/dsplay/dsplay-templates/tree/main/templates/menuboard), `templates/menuboard-featured-products` (this one), `template-menuboard-promo-banner`, [`templates/menuboard-standard`](https://github.com/dsplay/dsplay-templates/tree/main/templates/menuboard-standard)) — each a distinct fixed layout, not variants of shared code. Don't assume changes here apply to the others.
 
 ## Directory structure
 
@@ -41,11 +41,11 @@ scripts/
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-menuboard-featured-products`.
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`boilerplates/react`](https://github.com/dsplay/dsplay-templates/tree/main/boilerplates/react)'s AGENTS.md for the full convention. This template's is `dsplay-template-menuboard-featured-products`.
 
 ## README structure
 
-Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+Every DSPLAY template's `README.md` follows the same skeleton (see `boilerplates/react`'s AGENTS.md for the full reference copy):
 
 1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
 2. *(optional, only if the template has more than one visual arrangement)* **Features**.
@@ -66,8 +66,8 @@ Skip a numbered section entirely rather than including it empty.
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `scripts/pack.mjs` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
-- [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils) exposes `useTemplateVal` (used for every variable in this template) and `FitText` (auto-scales text to fill its container — used for every text element here, all styled via the `.chalk-writed`/`.promo-title` classes which apply the Chalkboard/Vtkschalk fonts only once `FitText` signals it's ready).
-- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
+- [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils) exposes `useTemplateVal` (used for every variable in this template) and `FitText` (auto-scales text to fill its container — used for every text element here, all styled via the `.chalk-writed`/`.promo-title` classes which apply the Chalkboard/Vtkschalk fonts only once `FitText` signals it's ready).
+- **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This template's existing keys (`logo`, `promo_title`, `prod_name01`..`10`, etc.) already follow snake_case; this note is forward-looking guidance for any keys added from now on, not a prompt to rename anything.
 - `src/components/app/index.jsx` previously read a `background_blackboard` template variable that was never actually rendered anywhere (its only use was in a broken `useMemo(fn, dep1, dep2, ...)` call — `useMemo` only ever reads its second argument, so extra array arguments were silently ignored, meaning only `logo` was ever actually preloaded) — removed the dead variable and fixed the preload call to include every real image dependency in one array.
 

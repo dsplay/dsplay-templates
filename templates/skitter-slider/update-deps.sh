@@ -81,7 +81,7 @@ update_template_utils() {
 
   if [ -n "$current" ] && [ "$(major "$current")" != "$(major "$latest")" ]; then
     echo "@dsplay/template-utils has a new MAJOR version available: $current -> $latest"
-    echo "  Skipping - this may include breaking changes. Review https://github.com/dsplay/template-utils/releases"
+    echo "  Skipping - this may include breaking changes. Review https://github.com/dsplay/dsplay-templates/blob/main/packages/template-utils/CHANGELOG.md"
     echo "  and update manually (see README.md) if you want it."
     return
   fi

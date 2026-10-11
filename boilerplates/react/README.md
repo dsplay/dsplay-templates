@@ -126,7 +126,7 @@ function Main() {
 }
 ```
 
-This boilerplate's own `src/components/app/index.jsx` and `src/components/main/index.jsx` include a small working example of a task that deliberately fails, for reference. See [`template-flight-information`](https://github.com/dsplay/dsplay-templates/tree/main/templates/flight-information) for a complete, production example built on this pattern (a translated error message shown only when there's truly no data to fall back on — not just on any single failed fetch).
+This boilerplate's own `src/components/app/index.jsx` and `src/components/main/index.jsx` include a small working example of a task that deliberately fails, for reference. See [`templates/flight-information`](https://github.com/dsplay/dsplay-templates/tree/main/templates/flight-information) for a complete, production example built on this pattern (a translated error message shown only when there's truly no data to fall back on — not just on any single failed fetch).
 
 ### Test assets
 

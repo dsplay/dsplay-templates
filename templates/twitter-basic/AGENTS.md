@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) working in this repository.
 
 The DSPLAY **Twitter Basic** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/) that cycles through a Twitter/X user's recent posts. Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
 
-Unlike the more recently authored templates in this ecosystem, this one predates [`@dsplay/react-template-utils`](https://github.com/dsplay/react-template-utils)'s hooks-based API — it reads `dsplay_template`/`dsplay_config`/`dsplay_media` directly via [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s `tval`/`tbval`/`config`/`media` exports, and uses class components. This was kept as-is during the Vite/React 19 migration rather than rewritten to hooks — same precedent as [`template-horizontal-info-bar`](https://github.com/dsplay/template-horizontal-info-bar) and [`template-instagram-basic`](https://github.com/dsplay/template-instagram-basic).
+Unlike the more recently authored templates in this ecosystem, this one predates [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils)'s hooks-based API — it reads `dsplay_template`/`dsplay_config`/`dsplay_media` directly via [`@dsplay/template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-utils)'s `tval`/`tbval`/`config`/`media` exports, and uses class components. This was kept as-is during the Vite/React 19 migration rather than rewritten to hooks — same precedent as [`templates/horizontal-info-bar`](https://github.com/dsplay/dsplay-templates/tree/main/templates/horizontal-info-bar) and [`templates/instagram-basic`](https://github.com/dsplay/dsplay-templates/tree/main/templates/instagram-basic).
 
 ## Directory structure
 
@@ -40,11 +40,11 @@ scripts/
 
 ## Package identity
 
-`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`template-boilerplate-react`](https://github.com/dsplay/template-boilerplate-react)'s AGENTS.md for the full convention. This template's is `dsplay-template-twitter-basic`.
+`package.json`'s `"name"` must identify this template, not the boilerplate it was cloned from — see [`boilerplates/react`](https://github.com/dsplay/dsplay-templates/tree/main/boilerplates/react)'s AGENTS.md for the full convention. This template's is `dsplay-template-twitter-basic`.
 
 ## README structure
 
-Every DSPLAY template's `README.md` follows the same skeleton (see `template-boilerplate-react`'s AGENTS.md for the full reference copy):
+Every DSPLAY template's `README.md` follows the same skeleton (see `boilerplates/react`'s AGENTS.md for the full reference copy):
 
 1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
 2. *(optional, only if the template has more than one visual arrangement)* **Features**.
@@ -56,7 +56,7 @@ Skip a numbered section entirely rather than including it empty.
 
 ## Internationalization (i18n)
 
-This template has **no static, developer-authored UI text** — every visible string comes from the tweeted post data or from `dsplay_template` variables (colors, etc). `react-i18next` was not added; if a future change introduces real UI copy, wire it up then, following the convention documented in `template-boilerplate-react`'s AGENTS.md (key = English text, `en` self-mapped, minimum `en`/`pt`/`es`/`it`/`de`/`nl`).
+This template has **no static, developer-authored UI text** — every visible string comes from the tweeted post data or from `dsplay_template` variables (colors, etc). `react-i18next` was not added; if a future change introduces real UI copy, wire it up then, following the convention documented in `boilerplates/react`'s AGENTS.md (key = English text, `en` self-mapped, minimum `en`/`pt`/`es`/`it`/`de`/`nl`).
 
 `moment` locale imports (`pt-br`, `pt`, `es`, `de`, `fr`, `it`, `nl`) are a separate concern from i18n — they only affect date/time *formatting* in `src/components/info/index.jsx`, not translated UI copy. Keep this set in sync with the minimum language list above when adding new locales elsewhere.
 
@@ -69,7 +69,7 @@ This template has **no static, developer-authored UI text** — every visible st
 
 ### Fixed: almost the entire stylesheet was lost during the CRA→Vite migration, not just the `.App` background
 
-`src/components/app/style.css` was imported correctly but was completely empty — confirmed via `git log`/`git show` that the pre-migration `src/App.css` was *already* empty even before the migration (that part's fine), but the pre-migration `src/index.css` (355 lines: `.App`, `.user-profile`, `.user-picture`, `.post`, `.with-media`, `.text-wrapper`, `.media`, `.info-box`, the flaticon icon sizing rules, the portrait media query, everything) was never carried over into *any* file during the split into per-component styles — not into `style.css`, not anywhere else. Every other component folder (`user-profile`, `post`, `posts`, `info`) had zero CSS files at all, despite their JSX using class names (`user-profile`, `post-text`, `info-box`, etc.) that only `index.css` ever defined. The symptom was a near-blank white page with unstyled, tiny default-browser-font text — same failure mode as `template-horizontal-info-bar`'s missing per-component imports, but here the CSS *rules themselves* were gone, not just the import statements.
+`src/components/app/style.css` was imported correctly but was completely empty — confirmed via `git log`/`git show` that the pre-migration `src/App.css` was *already* empty even before the migration (that part's fine), but the pre-migration `src/index.css` (355 lines: `.App`, `.user-profile`, `.user-picture`, `.post`, `.with-media`, `.text-wrapper`, `.media`, `.info-box`, the flaticon icon sizing rules, the portrait media query, everything) was never carried over into *any* file during the split into per-component styles — not into `style.css`, not anywhere else. Every other component folder (`user-profile`, `post`, `posts`, `info`) had zero CSS files at all, despite their JSX using class names (`user-profile`, `post-text`, `info-box`, etc.) that only `index.css` ever defined. The symptom was a near-blank white page with unstyled, tiny default-browser-font text — same failure mode as `templates/horizontal-info-bar`'s missing per-component imports, but here the CSS *rules themselves* were gone, not just the import statements.
 
 Fixed by restoring `index.css`'s full content (from the commit immediately before the migration) into `src/components/app/style.css`, with the two `url(...)` background-image paths (`twitter-basic-background.jpg`, `play-button.png`) adjusted from `images/...` to `../../images/...` to account for the file's new location (`src/components/app/` vs. the old `src/`). The actual `@font-face` declarations (`flaticon.css`, `google/fonts.css`) were already correctly imported in `src/index.jsx` and untouched by this bug — only the *layout/color* stylesheet was missing.
 

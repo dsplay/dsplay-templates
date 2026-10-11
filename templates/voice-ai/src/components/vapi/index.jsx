@@ -37,7 +37,7 @@ function VapiAssistant() {
           // an invalid/misconfigured assistant_id or api_key only surfaces once a call is
           // actually attempted (the widget itself renders fine regardless) - these are the
           // Vapi SDK's own error events, not a Loader task, so this can't be caught proactively
-          // during the intro the way template-flight-information handles its API key
+          // during the intro the way templates/flight-information handles its API key
           vapiInstance?.on?.('error', () => setCallError(true));
           vapiInstance?.on?.('call-start-failed', () => setCallError(true));
         }

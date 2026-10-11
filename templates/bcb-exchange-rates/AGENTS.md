@@ -52,7 +52,7 @@ scripts/.vendored-versions.json     <-- tracks the currently-vendored version of
 ## Runtime model
 
 - `scripts/dsplay-data.js` defines `dsplay_config`, `dsplay_media`, and `dsplay_template` globals used only in **development**. Its contents are ignored at runtime on the actual DSPLAY device/app.
-- `scripts/dsplay-template-utils.js` (the [`@dsplay/template-utils`](https://github.com/dsplay/template-utils) UMD bundle) exposes `window.dsplayTemplateUtils` with `media`, `config`, `template`, `DSPLAY`, and the `tval`/`tbval`/`tival`/`tfval`/`isVertical` helpers.
+- `scripts/dsplay-template-utils.js` (the [`@dsplay/template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-utils) UMD bundle) exposes `window.dsplayTemplateUtils` with `media`, `config`, `template`, `DSPLAY`, and the `tval`/`tbval`/`tival`/`tfval`/`isVertical` helpers.
 - `scripts/app.js` reads `dsplayTemplateUtils.media.result.exchanges` (an object keyed by ISO currency code, each with a `buy`/`sell` rate) and writes the EUR/USD buy/sell values into the page. This template has **no `dsplay_template` variables at all** — everything comes from the JSON-service-backed `media`, and the images described above are fixed template assets, not CMS-configurable.
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This template currently has none (see above), but this applies if any are ever added.
 - `scripts/core-js-<version>.js` is a vendored polyfill bundle for older WebViews used by DSPLAY devices.
@@ -73,7 +73,7 @@ Script load order in `index.html` matters: `core-js` → `dsplay-data.js` → `d
 
 ## README structure
 
-Every DSPLAY template's `README.md` follows the same skeleton (see [`template-boilerplate-jquery`](https://github.com/dsplay/template-boilerplate-jquery)'s AGENTS.md for the full reference copy):
+Every DSPLAY template's `README.md` follows the same skeleton (see [`boilerplates/jquery`](https://github.com/dsplay/dsplay-templates/tree/main/boilerplates/jquery)'s AGENTS.md for the full reference copy):
 
 1. Logo badge + `# DSPLAY - <Name>` + a one/two-sentence description.
 2. *(optional)* **Features**. 3. *(optional)* **Supported screen formats**.
@@ -82,7 +82,7 @@ Every DSPLAY template's `README.md` follows the same skeleton (see [`template-bo
 
 ## Dependency management (boilerplate maintainers only)
 
-The *template's own* runtime code has no `npm install` step — third-party code it uses (`core-js`, `dsplay-template-utils.js`, jQuery) is vendored directly into `scripts/` as pre-built bundles, not installed via npm. `npm install` in this repo installs devDependencies for tooling around the template ([`@dsplay/template-manifest`](https://github.com/dsplay/template-manifest) for `npm run zip`, `servor` for `npm start`).
+The *template's own* runtime code has no `npm install` step — third-party code it uses (`core-js`, `dsplay-template-utils.js`, jQuery) is vendored directly into `scripts/` as pre-built bundles, not installed via npm. `npm install` in this repo installs devDependencies for tooling around the template ([`@dsplay/template-manifest`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-manifest) for `npm run zip`, `servor` for `npm start`).
 
 Run `npm run update-deps` (wraps `./update-deps.sh`) to update the vendored bundles. For each dependency it fetches the latest published version from the npm registry, compares it against `scripts/.vendored-versions.json`, and:
 - if it's a **major** version bump, skips it and prints a warning — needs a human to review the changelog first. Never bypass this guard as an agent; surface the warning to the user instead.
