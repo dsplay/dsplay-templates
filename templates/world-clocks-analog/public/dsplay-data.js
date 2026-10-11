@@ -6,6 +6,8 @@ var dsplay_config = {
   osVersion: 19,
   // DSPLAY App version code
   appVersion: 112,
+  // the terminal's time in ms, in step with the server's (newer players only; without it the device clock is used)
+  timestamp: Date.now(),
 };
 
 var dsplay_media = {

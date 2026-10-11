@@ -17,11 +17,11 @@ public/
 src/
   index.jsx                  <-- React entry point
   services/
-    wordtime.js                <-- resolves each configured city to a UTC offset (worldtimeapi.org, cached in localStorage)
+    time-zones.js              <-- maps each configured city to its IANA zone and computes the zone's UTC offset from the browser's tz database (no network)
     cities-map.js               <-- city name -> IANA timezone lookup table
   utils/
     constants.js                <-- LOCAL_CITY sentinel value
-    local-storage.js             <-- localStorage get/set with expiry
+    clock-offset.js              <-- how far the device clock is from `dsplay_config.timestamp`, the player's (server-synced) time
   hooks/
     use-language.js               <-- splits dsplay_config.locale into a bare language code, for Intl date formatting
   components/
@@ -72,7 +72,8 @@ Skip a numbered section entirely rather than including it empty.
 - **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This only applies to variables added from now on — never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
 - `city_1..city_8` are read dynamically (`useTemplateVal(\`city_${i + 1}\`)` in a loop) — `@dsplay/template-manifest`'s static scanner can't detect dynamically-constructed keys like this, so they never show up in the generated `template-variables.json`. This is a known scanner limitation, not a bug; document these 8 variables manually in the README (already done).
-- `src/services/wordtime.js` resolves each configured city (except the special value `Local`, meaning the viewer's own timezone) to a UTC offset via `worldtimeapi.org` (through a CORS proxy), caching the result in `localStorage` for 24h via `src/utils/local-storage.js`.
+- **No network at runtime.** `src/services/time-zones.js` maps each configured city (except the special value `Local`, meaning the viewer's own timezone) to an IANA zone and computes its UTC offset **every second** from `Intl` (`toLocaleString` with `timeZone`), so daylight saving is followed by the browser's own tz database. It used to ask `worldtimeapi.org` through a CORS proxy (`api.allorigins.win`); both stopped answering in 2026 (the proxy with 500, the API unreachable), which left the loader on screen for about 11 s and then showed the local time for every city. Never reintroduce a web service for the time: a signage screen may be offline, and a dependency that dies takes the template with it.
+- **The time comes from the player when it can.** Newer players put `timestamp` (epoch ms, the terminal's time kept in step with the server's) in `dsplay_config`; `main` computes the offset to the device clock once (`clock-offset.js`) and adds it on every tick, so a device with a wrong clock still shows the right hour. Without it (Android players today) the device clock is used. `timestamp` is not a template variable and needs no CMS registration.
 
 ## Browser/WebView compatibility (Android SDK 23 minimum)
 

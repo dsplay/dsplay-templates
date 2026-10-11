@@ -6,7 +6,7 @@ import {
 import Intro from '../intro';
 import Main from '../main';
 import i18n from '../../i18n';
-import { loadData } from '../../services/wordtime';
+import { loadData } from '../../services/time-zones';
 import './style.sass';
 
 const MIN_LOADING_DURATION = 2000;

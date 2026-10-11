@@ -4,12 +4,14 @@ import moment from 'moment';
 import {
   LoaderContext,
   useTemplateVal,
+  useConfig,
   useInterval,
   useScreenInfo,
   screen,
 } from '@dsplay/react-template-utils';
 import City from '../city';
 import './style.sass';
+import clockOffset from '../../utils/clock-offset';
 import { LOCAL_CITY } from '../../utils/constants';
 
 function Main() {
@@ -32,9 +34,14 @@ function Main() {
     maxCities += 1;
   }
 
-  const [date, setDate] = useState(moment());
+  // The player says what time it is (the server's), so a device with a wrong clock still shows the right hour.
+  const { timestamp } = useConfig();
+  const [offset] = useState(() => clockOffset(timestamp));
+  const now = () => moment(Date.now() + offset);
 
-  useInterval(() => setDate(moment()), 1000);
+  const [date, setDate] = useState(now);
+
+  useInterval(() => setDate(now()), 1000);
 
   return (
 
