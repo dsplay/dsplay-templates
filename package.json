@@ -35,6 +35,9 @@
   "overrides": {
     "kute.js": {
       "svg-path-commander": "2.1.11"
+    },
+    "flowbite-react": {
+      "deepmerge-ts": "8.0.2"
     }
   }
 }
