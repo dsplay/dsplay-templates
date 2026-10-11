@@ -26,7 +26,6 @@
     "prepare": "npm run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.7",
     "@babel/plugin-transform-modules-umd": "^7.29.7",
     "@babel/preset-env": "^7.29.7",

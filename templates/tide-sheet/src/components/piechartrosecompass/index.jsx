@@ -5,7 +5,6 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import PropTypes from 'prop-types';
 import './style.sass';
 
 const RADIAN = Math.PI / 180;
@@ -242,6 +241,9 @@ class PieChartWithNeedle extends PureComponent {
             innerRadius={iR}
             outerRadius={oR}
             fill="#8884d8"
+          // recharts 3 draws a Pie above custom SVG children (zIndex 100 vs 0); v2 drew them in DOM order,
+          // i.e. the needle (and the compass artwork) on top. Keep that.
+          zIndex={-1}
             stroke="#fff"
           >
             {data.map((entry) => (
@@ -254,9 +256,5 @@ class PieChartWithNeedle extends PureComponent {
     );
   }
 }
-
-PieChartWithNeedle.propTypes = {
-  windDirection: PropTypes.number.isRequired,
-};
 
 export default PieChartWithNeedle;
