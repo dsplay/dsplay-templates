@@ -39,8 +39,6 @@ function Main({ startTime }) {
   const airpoirtName = airports.find((a) => a.codeIataAirport === iataAirpot);
   const { t } = useTranslation();
   const departureArrival = media.arrivalDeparture;
-  const [pageCount, setPageCount] = useState(1);
-  const [pageTime, setPageTime] = useState(media.duration);
 
   let itemsPerPage = 20;
 
@@ -84,15 +82,11 @@ function Main({ startTime }) {
     }
   }, [currentPage, allFlights, itemsPerPage]);
 
-  useEffect(() => {
-    if (!fetchingAllFligts && !hasFlightsError) {
-      const maxPageDuration = (media.maxPageDurationSeconds || 60) * 1000;
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- pageTime below is computed from the pageCount of the previous render; deriving both would change page timing
-      setPageCount(Math.ceil(allFlights.length / itemsPerPage));
-      setPageTime(Math.min(media.duration / pageCount, maxPageDuration));
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- pageCount is set here and read above to compute pageTime, so listing it (or the media timings) would change when and how often pages rotate
-  }, [fetchingAllFligts, allFlights, hasFlightsError]);
+  // every page gets an equal share of the media's duration, but never more than maxPageDurationSeconds.
+  // Derived (not state set from an effect) so pageTime always uses the current pageCount.
+  const pageCount = Math.max(1, Math.ceil((allFlights?.length ?? 0) / itemsPerPage));
+  const maxPageDuration = (media.maxPageDurationSeconds || 60) * 1000;
+  const pageTime = Math.min(media.duration / pageCount, maxPageDuration);
 
   useInterval(() => {
     setCurrentPage(((currentPage) % pageCount) + 1);
