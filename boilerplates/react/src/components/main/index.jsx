@@ -78,7 +78,7 @@ function Main() {
           <span className="val">{context.tasksErrors?.[1]?.message ?? t('None')}</span>
         </p>
         <p>{t('This task intentionally fails to demonstrate error handling')}</p>
-        <p>{t('See template-flight-information for a complete example')}</p>
+        <p>{t('See templates/flight-information in the dsplay-templates repository for a complete example')}</p>
       </div>
       <h2>Configuration Values Examples</h2>
       <div>

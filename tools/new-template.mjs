@@ -37,8 +37,8 @@ if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(values.name)) {
   fail(`--name must be lowercase words separated by "-" (got "${values.name}")`);
 }
 
-// "countdown", "template-countdown", "boilerplate-react" and "template-boilerplate-react" all work.
-const wanted = values.from.replace(/^template-/, '');
+// A template by its folder name ("countdown") or a boilerplate as "boilerplate-<folder>" ("boilerplate-react").
+const wanted = values.from;
 const source = sources.find((s) => s.group === 'templates' && s.slug === wanted)
   ?? sources.find((s) => s.group === 'boilerplates' && s.slug === wanted.replace(/^boilerplate-/, ''));
 if (!source) fail(`no template or boilerplate matches "${values.from}". Available:\n${listSources()}`);

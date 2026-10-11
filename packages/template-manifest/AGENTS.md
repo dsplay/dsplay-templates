@@ -19,7 +19,7 @@ vite-plugin.js    <-- thin Vite plugin wrapper (exports["./vite-plugin"]), for r
 cli.js            <-- CLI entry point (bin: dsplay-scan-template), for bundler-less/old-stack repos
 ```
 
-This package deliberately lives on its own, separate from `@dsplay/template-utils` — putting it there would have forced `@babel/parser`/`@babel/traverse` (needed only by this scanner) onto every consumer of `template-utils`, including every React template via `@dsplay/react-template-utils`, none of which need this tool at runtime.
+This package deliberately lives on its own, separate from `@dsplay/template-utils` — putting it there would have forced `@babel/parser`/`@babel/traverse` (needed only by this scanner) onto every consumer of [`@dsplay/template-utils`](https://www.npmjs.com/package/@dsplay/template-utils), including every React template via `@dsplay/react-template-utils`, none of which need this tool at runtime.
 
 ## How templates consume this
 

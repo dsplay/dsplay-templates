@@ -65,7 +65,7 @@ boilerplate it was originally cloned from.
 
 ## Vendored dependencies (boilerplate maintainers only)
 
-The *template's own* runtime code has no npm dependency on jQuery/core-js/template-utils - those files in
+The *template's own* runtime code has no npm dependency on jQuery/core-js/[`@dsplay/template-utils`](https://www.npmjs.com/package/@dsplay/template-utils) - those files in
 `scripts/` are downloaded pre-built and committed as-is, not installed via npm. `npm install` in this repo installs
 devDependencies for tooling around the template (`@dsplay/template-manifest` for `npm run zip`, `servor` for
 `npm start`).

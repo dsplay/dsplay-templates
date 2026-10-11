@@ -20,7 +20,7 @@ i18n
           Error: 'Error',
           None: 'None',
           'This task intentionally fails to demonstrate error handling': 'This task intentionally fails to demonstrate error handling',
-          'See template-flight-information for a complete example': 'See template-flight-information for a complete example',
+          'See templates/flight-information in the dsplay-templates repository for a complete example': 'See templates/flight-information in the dsplay-templates repository for a complete example',
         },
       },
       pt: {
@@ -34,7 +34,7 @@ i18n
           Error: 'Erro',
           None: 'Nenhum',
           'This task intentionally fails to demonstrate error handling': 'Esta task falha propositalmente para demonstrar o tratamento de erro',
-          'See template-flight-information for a complete example': 'Veja o template-flight-information para um exemplo completo',
+          'See templates/flight-information in the dsplay-templates repository for a complete example': 'Veja templates/flight-information no repositório dsplay-templates para um exemplo completo',
         },
       },
       es: {
@@ -48,7 +48,7 @@ i18n
           Error: 'Error',
           None: 'Ninguno',
           'This task intentionally fails to demonstrate error handling': 'Esta tarea falla intencionalmente para demostrar el manejo de errores',
-          'See template-flight-information for a complete example': 'Consulte template-flight-information para ver un ejemplo completo',
+          'See templates/flight-information in the dsplay-templates repository for a complete example': 'Consulta templates/flight-information en el repositorio dsplay-templates para ver un ejemplo completo',
         },
       },
       it: {
@@ -62,7 +62,7 @@ i18n
           Error: 'Errore',
           None: 'Nessuno',
           'This task intentionally fails to demonstrate error handling': 'Questa task fallisce intenzionalmente per dimostrare la gestione degli errori',
-          'See template-flight-information for a complete example': 'Vedi template-flight-information per un esempio completo',
+          'See templates/flight-information in the dsplay-templates repository for a complete example': 'Vedi templates/flight-information nel repository dsplay-templates per un esempio completo',
         },
       },
       de: {
@@ -76,7 +76,7 @@ i18n
           Error: 'Fehler',
           None: 'Keiner',
           'This task intentionally fails to demonstrate error handling': 'Diese Task schlägt absichtlich fehl, um die Fehlerbehandlung zu demonstrieren',
-          'See template-flight-information for a complete example': 'Siehe template-flight-information für ein vollständiges Beispiel',
+          'See templates/flight-information in the dsplay-templates repository for a complete example': 'Siehe templates/flight-information im Repository dsplay-templates für ein vollständiges Beispiel',
         },
       },
       nl: {
@@ -90,7 +90,7 @@ i18n
           Error: 'Fout',
           None: 'Geen',
           'This task intentionally fails to demonstrate error handling': 'Deze taak mislukt opzettelijk om foutafhandeling te demonstreren',
-          'See template-flight-information for a complete example': 'Zie template-flight-information voor een volledig voorbeeld',
+          'See templates/flight-information in the dsplay-templates repository for a complete example': 'Zie templates/flight-information in de dsplay-templates repository voor een volledig voorbeeld',
         },
       },
     },

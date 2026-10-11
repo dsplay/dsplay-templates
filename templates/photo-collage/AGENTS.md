@@ -100,7 +100,7 @@ After touching either of these, verify by actually running `npm run build` and g
 
 Regular npm dependencies, not vendored files — versions are pinned, so bump explicitly (`npm outdated`, then `npm install <pkg>@<version>`) or merge Dependabot PRs. For a major bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
-`@dsplay/react-template-components` was removed during the 2026 Vite/React 19 migration — its only feature this template used, `GridGallery`, was ported into `@dsplay/react-template-utils@5.2.0` (that library was a stalled TypeScript rewrite attempt; see `react-template-utils`'s own history for the full reasoning). Import `GridGallery` from `@dsplay/react-template-utils` going forward, not the old package.
+`@dsplay/react-template-components` was removed during the 2026 Vite/React 19 migration — its only feature this template used, `GridGallery`, was ported into `@dsplay/react-template-utils@5.2.0` (that library was a stalled TypeScript rewrite attempt; see the git history of `packages/react-template-utils` for the full reasoning). Import `GridGallery` from `@dsplay/react-template-utils` going forward, not the old package.
 
 ### Fixed: `npm run zip` didn't work on Windows at all
 

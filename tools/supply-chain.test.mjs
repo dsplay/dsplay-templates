@@ -1,5 +1,4 @@
-// Supply-chain guardrails that used to be asserted separately in every template repo's sanity test.
-// In the monorepo the install config lives once, at the root. Run with `npm run test:repo`.
+// Supply-chain guardrails for the repository's install config, which lives once, at the root. Run with `npm run test:repo`.
 //
 // Per-package checks (exact pins, package name, legacy WebView invariants) stay in each package's own tests.
 import { test } from 'node:test';

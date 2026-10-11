@@ -3,7 +3,7 @@
 Monorepo with the [DSPLAY](https://dsplay.tv) HTML templates, the boilerplates to start new ones from, and the libraries they share.
 
 ```
-packages/       published to npm: template-utils, template-manifest, react-template-utils
+packages/       published to npm: @dsplay/template-utils, @dsplay/template-manifest, @dsplay/react-template-utils
 templates/      one folder per template (private, delivered as a template.zip)
 boilerplates/   starting points people copy to build a new template
 tools/          scripts for this repo (scaffolding, checks, one-off migration)
@@ -15,9 +15,9 @@ Requires Node.js 22.22.2+, 24.15.0+ or 26+ (see `.nvmrc`). It is an [npm workspa
 
 | Folder | |
 |---|---|
-| [`packages/template-utils`](packages/template-utils/) | `@dsplay/template-utils`: vanilla helpers for reading the DSPLAY globals |
-| [`packages/react-template-utils`](packages/react-template-utils/) | `@dsplay/react-template-utils`: hooks and components for React templates |
-| [`packages/template-manifest`](packages/template-manifest/) | `@dsplay/template-manifest`: scans a template's variables for the CMS |
+| [`packages/template-utils`](packages/template-utils/) | [`@dsplay/template-utils`](https://www.npmjs.com/package/@dsplay/template-utils): vanilla helpers for reading the DSPLAY globals |
+| [`packages/react-template-utils`](packages/react-template-utils/) | [`@dsplay/react-template-utils`](https://www.npmjs.com/package/@dsplay/react-template-utils): hooks and components for React templates |
+| [`packages/template-manifest`](packages/template-manifest/) | [`@dsplay/template-manifest`](https://www.npmjs.com/package/@dsplay/template-manifest): scans a template's variables for the CMS |
 | [`boilerplates/react`](boilerplates/react/), [`javascript`](boilerplates/javascript/), [`jquery`](boilerplates/jquery/) | starting points: copy one with `npx degit dsplay/dsplay-templates/boilerplates/<name> my-template` |
 
 The 30 templates (each has its own README with its variables and screen formats):
@@ -102,21 +102,12 @@ On `main`, the Release workflow opens a "Version Packages" PR; merging it publis
 
 Templates keep their own `version` by hand.
 
+### One-time npm setup
+
+For each of the three packages, on npmjs.com open the package → **Settings** → **Trusted Publisher** → **GitHub Actions** and enter organization `dsplay`, repository `dsplay-templates`, workflow `release.yml`, and allow `npm publish`. (CLI: `npm trust github <package> --file release.yml --repo dsplay/dsplay-templates --allow-publish`.) Also add the `repository` field to each library's `package.json`, matching the GitHub repo exactly (`"url": "git+https://github.com/dsplay/dsplay-templates.git"`, `"directory": "packages/<name>"`): npm checks it. Do this right before the first release: an unused configuration expires after 2 days.
+
 ## What CI does
 
 - PRs: `check-versions`, repo checks, then `build` + `test` only for packages the diff can affect (a library change rebuilds its dependents).
 - `main`: the full build and test, plus the boilerplate validation.
 - Dependabot opens one grouped PR a week for minor/patch bumps across the whole repo. Internal `@dsplay/*` packages are left to Changesets.
-
-## Migration from the old repos
-
-`tools/migrate-repos.sh <dir-with-old-repos>` imports each repo with its git history (using `git-filter-repo`, on temporary clones; the originals are untouched). It drops what the root replaces (lockfile, CI, Dependabot, `.npmrc`/`.nvmrc` - boilerplates keep theirs) and moves the `.npmrc` / lockfile / Dependabot assertions out of each package's sanity test into `tools/supply-chain.test.mjs`.
-
-Two library fixes are needed after importing, because the old per-repo lockfiles used to hide them:
-
-- `react-template-utils`: webpack >= 5.111 fails the `system` build. Add `var` and `system` entries to the `react` / `react-dom` externals in `webpack.config.js` (`var: "React", system: "react"`, `var: "ReactDOM", system: "react-dom"`).
-- `template-utils`: its `test` script is `vitest` but there are no tests, so it exits 1. Use `vitest run --passWithNoTests`.
-
-### One-time npm setup
-
-For each of the three packages, on npmjs.com open the package → **Settings** → **Trusted Publisher** → **GitHub Actions** and enter organization `dsplay`, repository `dsplay-templates`, workflow `release.yml`, and allow `npm publish`. (CLI: `npm trust github <package> --file release.yml --repo dsplay/dsplay-templates --allow-publish`.) Also add the `repository` field to each library's `package.json`, matching the GitHub repo exactly (`"url": "git+https://github.com/dsplay/dsplay-templates.git"`, `"directory": "packages/<name>"`): npm checks it. Do this right before the first release: an unused configuration expires after 2 days.

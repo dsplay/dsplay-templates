@@ -7,7 +7,7 @@ Guidance for AI agents (and humans) working in this repository. Each template/bo
 - `packages/` - libraries published to npm (`@dsplay/template-utils`, `@dsplay/template-manifest`, `@dsplay/react-template-utils`).
 - `templates/<name>/` - one DSPLAY template each, `private`, delivered as `template.zip` uploaded to the CMS.
 - `boilerplates/<name>/` - references people copy out of the monorepo to start a template. They must keep working standalone.
-- `tools/` - repo scripts. `new-template.mjs`, `check-versions.mjs`, `validate-boilerplates.mjs`, `supply-chain.test.mjs`, plus the one-off `migrate-repos.sh`.
+- `tools/` - repo scripts. `new-template.mjs`, `check-versions.mjs`, `validate-boilerplates.mjs`, `supply-chain.test.mjs`.
 
 ## Rules
 
