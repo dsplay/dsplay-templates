@@ -110,9 +110,7 @@ After touching either of these, verify by actually running `npm run build` and g
 
 Regular npm dependencies, not vendored files — versions are pinned, so bump explicitly (`npm outdated`, then `npm install <pkg>@<version>`) or merge Dependabot PRs. For a major bump, apply it deliberately and verify `npm start`, `npm run build`, and `npm test` still work before committing.
 
-`@mui/material`, `@emotion/react`, `@emotion/styled`, and `react-router-dom` were removed during the 2026 Vite/React 19 migration — none were actually used anywhere in `src/` (the only consumer, `src/components/navigation`, was itself unused dead code). `kute.js` is still used, by `src/components/vapi`.
-
-`package.json` pins `overrides.kute.js["svg-path-commander"]` to `2.1.11`. `kute.js` declares `svg-path-commander: ^2.1.11`, but `2.2.0+` restructured `svg-path-commander`'s public exports and dropped the named utility functions (`distanceSquareRoot`, `getPointAtLength`, etc.) that `kute.js`'s ESM build imports by name — an undeclared breaking change within what semver calls a compatible range, which fails the Vite build with `MISSING_EXPORT` errors. Remove the override once a `kute.js` release re-pins or works around the newer `svg-path-commander` API.
+`@mui/material`, `@emotion/react`, `@emotion/styled`, and `react-router-dom` were removed during the 2026 Vite/React 19 migration — none were actually used anywhere in `src/` (the only consumer, `src/components/navigation`, was itself unused dead code). `kute.js` was removed afterwards (see the gradient animation section below).
 
 ### Fixed: `npm run zip` didn't work on Windows at all
 
@@ -122,9 +120,9 @@ Regular npm dependencies, not vendored files — versions are pinned, so bump ex
 
 `index.html` loads it via a plain `<script src="/dsplay-data.js">`, not an ES module import — so it never entered Vite's module graph, and Vite's dev server only reloads/HMRs files it's tracking through that graph. Editing the mock data while `npm start` was running did nothing in the browser until a manual refresh. `vite.config.js`'s `watchDsplayData()` plugin now watches that one file directly (`server.watcher.add` + `handleHotUpdate`) and forces a full page reload on change — confirmed via a raw HMR-websocket connection that editing the file sends `{"type":"full-reload"}`.
 
-### Known: the `gradiente_color_1`/`gradiente_color_2` KUTE tween in `vapi/index.jsx` never animates anything
+### The `gradiente_color_1` -> `gradiente_color_2` cross-fade is SMIL
 
-The effect that calls `KUTE.fromTo(amplitudeBackRef.current, { fill: gradienteColor1 }, { fill: gradienteColor2 }, ...)` has been dead code since the template's first commit, for two independent reasons. `amplitudeBackRef` is declared but never attached to an element (no `ref={amplitudeBackRef}` anywhere in the JSX, in any version of the file), so the tween's target is `null`. And attaching it is not enough: attaching it to the back waveform `<path>` left its `fill` unchanged (checked in headless Chrome), because the KUTE bundle this template imports does not animate the SVG `fill` property. The two colors are still used, as the stops of the static `gradientFade*` gradients. Making the colors animate means deciding what moves (for example the `stop-color` of the `ampGradientFade` stops, which today read the `--amp-spinner-color` CSS variable) and with what, which is a visual change to the template, so it was left alone; the effect is kept (with its cleanup) so the intent is not lost.
+The back waveform (`ampGradientFade`, the one drawn behind the other two) fades between the two template colors and back, 10s each way, using an `<animate attributeName="stop-color">` on each of its stops (`src/components/vapi/index.jsx`). A KUTE tween used to be meant for this and never animated anything (its target ref was never attached, and the KUTE bundle does not animate SVG `fill`), so it was replaced rather than repaired: SMIL needs no library or timer and is supported by Chrome 45. If either color is unset the `<animate>` is not rendered and the stops keep the `--amp-spinner-color` default from `anim.sass`.
 
 ### Known pending bump: ESLint 9 -> 10
 

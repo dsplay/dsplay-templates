@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useTemplateVal } from '@dsplay/react-template-utils';
 import { useTranslation } from 'react-i18next';
-import KUTE from 'kute.js';
 import './anim.sass';
 import logger from '../../utils/logger';
 
@@ -20,7 +19,6 @@ function VapiAssistant() {
   const dataArrayRef = useRef(null);
   const rafIdRef = useRef(null);
   const bubbleRef = useRef(null);
-  const amplitudeBackRef = useRef(null);
 
   useEffect(() => {
     let vapiInstance = null;
@@ -53,23 +51,6 @@ function VapiAssistant() {
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps -- the Vapi widget script is appended once; apiKey/assistant are template variables that do not change while it runs, and re-running would append a second script
   }, []);
-
-  useEffect(() => {
-    const targetElement = amplitudeBackRef.current;
-    const tween = KUTE.fromTo(
-      targetElement,
-      { fill: gradienteColor1 },
-      { fill: gradienteColor2 },
-      {
-        duration: 10000,
-        repeat: 999,
-        yoyo: true,
-      },
-    );
-    tween.start();
-
-    return () => tween.stop();
-  }, [gradienteColor1, gradienteColor2]);
 
   useEffect(() => {
     const draw = () => {
@@ -167,11 +148,20 @@ function VapiAssistant() {
             <stop offset="100%" stopColor={gradienteColor1} stopOpacity="5%" />
           </linearGradient>
           <linearGradient id="ampGradientFade" x1="20%" x2="50%" y1="60%" y2="100%">
-            <stop offset="0%" className="amp-spinner-gradient-stop" />
-            <stop offset="25%" stopOpacity="75%" className="amp-spinner-gradient-stop" />
-            <stop offset="50%" stopOpacity="50%" className="amp-spinner-gradient-stop" />
-            <stop offset="75%" stopOpacity="25%" className="amp-spinner-gradient-stop" />
-            <stop offset="100%" stopOpacity="5%" className="amp-spinner-gradient-stop" />
+            {[['0%', undefined], ['25%', '75%'], ['50%', '50%'], ['75%', '25%'], ['100%', '5%']].map(([offset, opacity]) => (
+              <stop key={offset} offset={offset} stopOpacity={opacity} className="amp-spinner-gradient-stop">
+                {/* SMIL, not JS: the colors cross-fade from gradiente_color_1 to gradiente_color_2 and back,
+                    on the same 10s cycle as the spinner, with no timer or library behind it */}
+                {gradienteColor1 && gradienteColor2 && (
+                  <animate
+                    attributeName="stop-color"
+                    values={`${gradienteColor1};${gradienteColor2};${gradienteColor1}`}
+                    dur="20s"
+                    repeatCount="indefinite"
+                  />
+                )}
+              </stop>
+            ))}
           </linearGradient>
           <filter
             id="blurry-filter"
