@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) working in this repository.
 
 The DSPLAY **Menu Board (Featured Products)** template — a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/): a two-column chalkboard-style menu board (promo carousel + logo on the left, up to 10 product rows on the right). Requires Node.js 22.22.2+, 24.15.0+, or 26+ (see `.nvmrc`). See README.md for the template's variables.
 
-This is one of four sibling menu-board templates in the DSPLAY catalog ([`templates/menuboard`](https://github.com/dsplay/dsplay-templates/tree/main/templates/menuboard), `templates/menuboard-featured-products` (this one), `template-menuboard-promo-banner`, [`templates/menuboard-standard`](https://github.com/dsplay/dsplay-templates/tree/main/templates/menuboard-standard)) — each a distinct fixed layout, not variants of shared code. Don't assume changes here apply to the others.
+This is one of four sibling menu-board templates in the DSPLAY catalog ([`templates/menuboard`](https://github.com/dsplay/dsplay-templates/tree/main/templates/menuboard), `templates/menuboard-featured-products` (this one), [`template-menuboard-promo-banner`](https://github.com/dsplay/template-menuboard-promo-banner) (archived, not part of this repository), [`templates/menuboard-standard`](https://github.com/dsplay/dsplay-templates/tree/main/templates/menuboard-standard)) — each a distinct fixed layout, not variants of shared code. Don't assume changes here apply to the others.
 
 ## Directory structure
 
