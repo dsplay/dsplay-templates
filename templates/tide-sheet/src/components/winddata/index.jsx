@@ -67,7 +67,7 @@ const WindData = () => {
     };
 
     fetchWindData();
-  }, []);
+  }, [latitude, longitude, stormGlassAPIKey]);
 
   if (loading) return <div>{t('Loading...')}</div>;
   if (error) return <div>{t('Error fetching data')}</div>;

@@ -82,7 +82,7 @@ function Main({ startTime }) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- kept as state so the previous page stays visible while allFlights is unavailable
       setFlightsView(currentFlights);
     }
-  }, [currentPage, allFlights]);
+  }, [currentPage, allFlights, itemsPerPage]);
 
   useEffect(() => {
     if (!fetchingAllFligts && !hasFlightsError) {
@@ -91,6 +91,7 @@ function Main({ startTime }) {
       setPageCount(Math.ceil(allFlights.length / itemsPerPage));
       setPageTime(Math.min(media.duration / pageCount, maxPageDuration));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- pageCount is set here and read above to compute pageTime, so listing it (or the media timings) would change when and how often pages rotate
   }, [fetchingAllFligts, allFlights, hasFlightsError]);
 
   useInterval(() => {

@@ -123,11 +123,13 @@ export function CountDownContextProvider({ children }) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- seeds the context state on mount; setStartValues is also exposed on the context
     setStartValues();
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- runs once on mount; setStartValues is recreated every render (and is also exposed on the context)
   }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- countingTime drives the one-second tick (a timer state machine), not derivable state
     countingTime();
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- countingTime is recreated every render; the tick is keyed on oclock/isActiveTimerDown, and listing it would re-run this every render
   }, [oclock, isActiveTimerDown]);
 
   return (

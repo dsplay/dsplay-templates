@@ -51,11 +51,12 @@ function VapiAssistant() {
     return () => {
       if (vapiInstance) vapiInstance = null;
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- the Vapi widget script is appended once; apiKey/assistant are template variables that do not change while it runs, and re-running would append a second script
   }, []);
 
   useEffect(() => {
     const targetElement = amplitudeBackRef.current;
-    KUTE.fromTo(
+    const tween = KUTE.fromTo(
       targetElement,
       { fill: gradienteColor1 },
       { fill: gradienteColor2 },
@@ -64,17 +65,20 @@ function VapiAssistant() {
         repeat: 999,
         yoyo: true,
       },
-    ).start();
-  }, []);
+    );
+    tween.start();
 
-  const draw = () => {
-    analyserRef.current.getByteTimeDomainData(dataArrayRef.current);
-    const normalizedAmplitudes = Array.from(dataArrayRef.current).map((value) => value / 128 - 1);
-    setAmplitudes(normalizedAmplitudes);
-    rafIdRef.current = requestAnimationFrame(draw);
-  };
+    return () => tween.stop();
+  }, [gradienteColor1, gradienteColor2]);
 
   useEffect(() => {
+    const draw = () => {
+      analyserRef.current.getByteTimeDomainData(dataArrayRef.current);
+      const normalizedAmplitudes = Array.from(dataArrayRef.current).map((value) => value / 128 - 1);
+      setAmplitudes(normalizedAmplitudes);
+      rafIdRef.current = requestAnimationFrame(draw);
+    };
+
     const setupMicrophone = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });

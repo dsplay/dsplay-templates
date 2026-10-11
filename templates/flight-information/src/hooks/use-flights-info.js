@@ -53,7 +53,7 @@ export function useFlightsInfoPromise(currentTime) {
 
     // console.log('fetching', currentTime);
     return fetch();
-  }, [currentTime]);
+  }, [currentTime, API_KEY, airportIATA, departureArrival, offset]);
 
   return result;
 }
@@ -84,7 +84,7 @@ export function useFlightsInfoFromPromise(currentTime) {
     }
 
     fetch();
-  }, [currentTime]);
+  }, [promise]);
 
   return [loading, result, error];
 }
