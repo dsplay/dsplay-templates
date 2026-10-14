@@ -34,8 +34,13 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 Unlike a generic custom template, each item shown here is populated by DSPLAY from a JSON-service-backed feed, not typed in through Template Vars. `src/util/defaults.js` and the components under `src/components/` read the following `media` fields (see `useMedia()` call sites):
 
-- `source` — an internal marker for which feed produced this item (e.g. `'UOLIndoor'`). It flips which field is treated as the main text: for `UOLIndoor` sources the title comes from `itemDescription` and the description from `itemTitle`; for every other source it's the reverse (`title`/`itemTitle`).
+- `source` — an internal marker for which feed produced this item (e.g. `'UOLIndoor'`). For `UOLIndoor` on a player that does **not** send `config.platform` and whose `config.appVersion` is below `40100` (or unknown), the title comes from `itemDescription` and the description from `itemTitle`, the swap that the older Android players needed; in every other case (another source, a newer app, or any player that sends `config.platform`) it's the reverse (`title`/`itemTitle`). The newer players send `platform` because they get the item from the DSPLAY gateway, which already normalizes it.
 - `title`, `itemTitle`, `itemDescription`, `itemContent` — text fields, see the `source`-dependent swap above.
+
+The item can reach the template in two ways, and the flat keys above win when both are present:
+
+- **The flat keys of `media`** (`itemTitle`, `itemDescription`, `itemContent`, `categories`, `link`, `hasImage`, `imageUrl`, `imageTitle`, `source`, `title`): built by the Android player from the feed it parses, or sent ready-made by a player that gets them from the gateway.
+- **The gateway's body in `media.result.data`**: `{ title, link, items: [{ title, description, content, link, categories, images: [{ url, title }] }] }`. When the flat keys are absent, the template shows **one item per showing, in turn** (`media.iteration` modulo the number of items) and builds the flat keys from it: `title` is the item's title, `description` its description, the first image is `imageUrl`, and `title` (the heading bar) is the media's own title, else the feed's.
 - `hasImage`, `imageUrl` — when `hasImage` is falsy, `src/components/image` falls back to a bundled placeholder image (and hides entirely on banner screen formats).
 - `link` — the item's URL. `src/components/qr-code` only renders when this is set.
 - `qrCode` — when falsy, hides the QR code regardless of `show_qr_code`.
