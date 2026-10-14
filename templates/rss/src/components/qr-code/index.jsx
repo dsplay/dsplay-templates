@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { useMedia, QrCode as QR, useScreenInfo, screen } from '@dsplay/react-template-utils';
+import { QrCode as QR, useScreenInfo, screen } from '@dsplay/react-template-utils';
+import useRssItem from '../../util/use-rss-item';
 import './style.sass';
 
 function QrCode() {
-  const media = useMedia();
+  const media = useRssItem();
   const ref = useRef();
   const [rect, setRect] = useState();
   const { screenFormat } = useScreenInfo();

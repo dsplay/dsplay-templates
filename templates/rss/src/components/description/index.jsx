@@ -1,5 +1,4 @@
 import {
-  useMedia,
   useConfig,
   useTemplateVal,
   useTemplateBoolVal,
@@ -10,6 +9,7 @@ import {
 import QrCode from '../qr-code';
 import { DEFAULT_TEXT_BG_COLOR, DEFAULT_TEXT_COLOR } from '../../util/defaults';
 import needsUolIndoorFix from '../../util/uol-indoor';
+import useRssItem from '../../util/use-rss-item';
 
 import './style.sass';
 
@@ -21,8 +21,8 @@ function decodeHTMLEntities(text) {
 
 function Description() {
   // media properties
-  const { itemDescription, itemTitle, source, qrCode, hasImage } = useMedia();
-  const { appVersion } = useConfig();
+  const { itemDescription, itemTitle, source, qrCode, hasImage } = useRssItem();
+  const { appVersion, platform } = useConfig();
 
   // template properties
   const showQrCode = useTemplateBoolVal('show_qr_code', true);
@@ -32,7 +32,7 @@ function Description() {
   // component properties
   const extraClass = (showQrCode && qrCode) ? 'with-qr-code' : '';
 
-  const text = needsUolIndoorFix(source, appVersion) ? itemDescription : itemTitle;
+  const text = needsUolIndoorFix(source, appVersion, platform) ? itemDescription : itemTitle;
 
   const { w, h, screenFormat } = useScreenInfo();
 

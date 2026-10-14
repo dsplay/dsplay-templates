@@ -1,16 +1,16 @@
 import './style.sass';
 import {
-  useMedia,
   useTemplateVal,
   useScreenInfo,
   screen,
 } from '@dsplay/react-template-utils';
 import defaultImage from '../../images/bg.jpg';
 import { DEFAULT_TEXT_BG_COLOR } from '../../util/defaults';
+import useRssItem from '../../util/use-rss-item';
 
 function Image() {
   // media properties
-  const { hasImage, imageUrl } = useMedia();
+  const { hasImage, imageUrl } = useRssItem();
 
   // template properties
   const backgroundColor = useTemplateVal('text_bg_color', DEFAULT_TEXT_BG_COLOR);
