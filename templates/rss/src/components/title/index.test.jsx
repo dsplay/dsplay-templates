@@ -12,7 +12,6 @@ vi.mock('@dsplay/react-template-utils', () => ({
   useTemplateBoolVal: (_name, fallback) => fallback,
 }));
 
-// eslint-disable-next-line import/first
 import Title from '.';
 
 afterEach(cleanup);
