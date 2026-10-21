@@ -20,6 +20,7 @@ Guidance for AI agents (and humans) working in this repository. Each template/bo
 - **Every `eslint.config.js` must keep `files: ['**/*.{js,jsx}']`.** ESLint 9's flat config only matches `*.js` by default, so without it `eslint src` (which runs inside `npm run build`) silently skips every `.jsx` component. A `setState` called synchronously in an effect is reported by `react-hooks/set-state-in-effect`; fix it by deriving the value or using lazy initial state, and only where that would change timing/caching add an `eslint-disable-next-line` that says why.
 - Library change? Add a changeset (`npm run changeset`). Templates and boilerplates are not versioned by Changesets.
 - **A release re-pins every template and boilerplate to the new library version in the same PR**, so for 3 days (`min-release-age`) a boilerplate copied out of the repo cannot `npm install` (`ETARGET`). That is expected, not a bug; the boilerplate READMEs say what to do. Inside the workspace it is unaffected.
+- **Dependabot PRs: analyze, test, one batch, one merge.** Never merge a Dependabot PR alone. Run the `dependabot-batch` skill (`.claude/skills/dependabot-batch/SKILL.md`): read each bump's changelog, test it in one integration worktree, fix what breaks, migrate and test framework majors before they enter, reject what raises the browser floor or weakens the supply-chain rules, then open ONE `⬆️ chore(deps): YYYY-MM-DD batch` PR and merge only that.
 - New template: `npm run new-template -- --from <source> --name <name>`, then review the files it lists.
 
 ## Verifying a change
