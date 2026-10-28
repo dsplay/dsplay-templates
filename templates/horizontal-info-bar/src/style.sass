@@ -34,3 +34,21 @@ body
 @media screen and (max-aspect-ratio: 9999/10000)
   html
     font-size: 2vh
+
+// Thin strips (e.g. 1920x52, aspect ~37:1). Every size in the widgets is in `em`, and the base
+// `1vw` makes the tallest widget (the weather icon, 7em, plus the 3em clock and the stacked quotes)
+// taller than the strip itself, so it is clipped by `#root`'s overflow. Past 10:1 the strip is
+// shorter than the ~7.5em the widgets need at `1vw`, so scale by the strip's height instead:
+// 11vh keeps the tallest widget inside it (7em * 11vh = 77% of the height) and meets the `1vw`
+// sizing continuously at exactly 10:1. Plain Level 3 `min-aspect-ratio`, as above.
+@media screen and (min-aspect-ratio: 10/1)
+  html
+    font-size: 11vh
+
+// In the strip the news widget (`flex-grow: 1`) would swallow all the free width and push the other
+// widgets against one edge. Capping it leaves the remainder to `.App`'s `space-between`, which
+// spreads it as gaps between all the widgets. `.App .news` outranks `.news` from the component's
+// stylesheet regardless of import order.
+@media screen and (min-aspect-ratio: 10/1)
+  .App .news
+    max-width: 45%
