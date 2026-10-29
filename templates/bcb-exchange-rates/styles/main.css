@@ -76,6 +76,46 @@ body {
   margin-top: 0.5vh;
 }
 
+/* Portrait screens: always stack the currency boxes. With flex-wrap alone the
+   two boxes fit side by side whenever the viewport is a few pixels wider (or
+   the font a bit narrower), so the stacking depended on rounding. */
+@media (orientation: portrait) {
+  .exchanges {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 3vh;
+  }
+
+  /* the landscape sizes are tuned for a wide screen; on a portrait one they
+     leave the boxes at under half of the width, so scale everything up */
+  .logo img {
+    max-width: 80vw;
+  }
+
+  .exchange {
+    gap: 5vw;
+    padding: 4vh 6vw;
+  }
+
+  .exchange .icon {
+    width: 22vw;
+    max-width: none;
+  }
+
+  .rates {
+    gap: 6vw;
+  }
+
+  .rate .label {
+    font-size: 3vw;
+  }
+
+  .rate .value {
+    font-size: 6vw;
+  }
+}
+
 /* Vertical banner (very narrow, very tall) - vw-based sizing above collapses
    to unreadably small text at ~200px width, so switch to vh-based sizing
    here instead, and stack the icon above the rates within each box. */
