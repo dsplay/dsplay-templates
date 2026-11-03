@@ -25,7 +25,7 @@ Nothing open: say so and stop. Config: `.github/dependabot.yml` (weekly, 3-day c
 Read the diff and the changelog of every bumped package from its real source (GitHub releases, CHANGELOG), not from memory. Per PR write down: what changed, breaking changes, whether it ships in the output (a template's bundle, a boilerplate, a published `@dsplay/*` package) or is build/dev tooling only.
 
 Reject (close with a one-line reason, optionally `@dependabot ignore this major version`) when:
-- **It breaks the browser floor.** Templates run on `Chrome >= 45` / `Android >= 4.4` (the `browserslist` every template keeps). Tailwind stays on 3.4.x; anything that raises the floor (a runtime, polyfill-less syntax, a bundler target) is rejected.
+- **It breaks the browser floor.** The platform minimum is Android 6.0 (API 23), and old signage WebViews (Chrome ~40-51) still have to work. Every template keeps `Chrome >= 45` / `Android >= 4.4` in its `browserslist` as a deliberately wider safety margin than that minimum. Tailwind stays on 3.4.x; anything that raises the floor (a runtime, polyfill-less syntax, a bundler target) is rejected.
 - **It weakens the supply-chain rules** (`.npmrc` `ignore-scripts`/`min-release-age`, the Dependabot cooldowns, exact versions, `workspace:*`); `tools/supply-chain.test.mjs` asserts them.
 - **It drops a root `overrides` entry that is still needed** (see AGENTS.md).
 
