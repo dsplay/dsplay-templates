@@ -24,11 +24,15 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 | Key                    | Type   | Description                                                                                     |
 |------------------------|--------|---------------------------------------------------------------------------------------------------|
 | `assistant_id`         | string | The Vapi assistant ID to connect to.                                                             |
-| `api_key`              | string | The Vapi API key used to authenticate the widget.                                                |
+| `api_key`              | string | The Vapi **public** key used to authenticate the widget (see the note below).                    |
 | `gradiente_color_1`    | string | Primary color of the visualizer's gradient.                                                      |
 | `gradiente_color_2`    | string | Secondary color of the visualizer's gradient.                                                    |
 | `background_media`     | string | Background image shown behind the visualizer. Falls back to `background_image_url` when unset.  |
 | `background_image_url` | string | Alternate background image URL, used only when `background_media` is unset.                     |
+
+> **Use the Vapi _public_ key, never the private one.** The widget runs in the browser, so this value is delivered to the screen with the template. Vapi's [Web SDK quickstart](https://docs.vapi.ai/quickstart/web) designs it that way: its examples use `YOUR_PUBLIC_API_KEY` and, for the HTML script tag, say "Substitute with your Public key from Vapi Dashboard". The private key (the one Vapi's server SDKs read from `VAPI_API_KEY`) must never be placed in this variable.
+
+> The Vapi widget script is loaded from jsDelivr at a pinned version (`VapiAI/html-script-tag@1.1.10`, see `VAPI_SCRIPT_URL` in `src/components/vapi/index.jsx`) instead of `@latest`, so a Vapi release can't change deployed screens unannounced. Bump it deliberately and test a call end to end.
 
 > Remember to also register these as Template Vars (same name and type) when configuring this template in the DSPLAY CMS.
 
