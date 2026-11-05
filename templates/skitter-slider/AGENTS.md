@@ -89,6 +89,15 @@ each it fetches the latest published version from the npm registry, compares it 
 After running it, sanity check with `npm start` and confirming the page loads with no console errors and the mock
 slideshow renders, then commit.
 
+## Browser/WebView compatibility (Android SDK 23 minimum)
+
+Minimum supported: Android 6.0 (API 23). Locked-down signage hardware that never receives WebView updates via Play Store can be stuck on the Chrome ~40-51 era that shipped with that OS generation, so this template must run on an old, non-evergreen JS engine. There is **no build step** here (no `@vitejs/plugin-legacy`, no Babel, no `browserslist`), so compatibility is kept by hand:
+
+- `core-js` only polyfills built-in APIs; it does **not** transpile syntax. `scripts/app.js` currently uses ES2015+ syntax (arrow functions, `const`/`let`, destructuring, array spread, template literals). Destructuring needs Chrome 49+ and array spread Chrome 46+, so on a Chrome ~40-45 WebView this script may fail to parse. Keep new code conservative, and treat this as an open compatibility risk until validated on a real Android 6 / old WebView (see below).
+- `scripts/core-js-x.y.z.js` is loaded first in `index.html` and polyfills the missing built-ins. Do not remove it or move it after other scripts.
+- The vendored jQuery 3.x and the frozen Skitter/easing plugins are plain ES5-era code; re-check this after updating any of them with `npm run update-deps`.
+- Nothing in this repo is tested on a real Android 6 WebView automatically; verify visually on an Android 6.0 device or WebView (or at least Chrome 45) before releasing.
+
 ## Commands
 
 - `npm install` - installs the devDependencies (once).
