@@ -37,6 +37,12 @@ scripts/.vendored-versions.json     <- tracks the currently-vendored version of 
 - `dsplay-data.js` is only used in development mode (outside the DSPLAY Android app); in production, data comes
   from the native app via `window.DSPLAY.getData()`.
 
+## Browser/WebView compatibility (Android SDK 23 minimum)
+
+DSPLAY's Android app supports devices back to Android 6.0 (API 23). On locked-down signage hardware that never receives WebView updates via Play Store, the actual JS engine can be stuck around the Chrome ~40-51 era that shipped with that OS generation — not a modern evergreen browser. This project has no build step or transpiler at all (unlike the React/Vite templates in this fleet, which rely on `@vitejs/plugin-legacy` and a `browserslist`), so the vendored `core-js` bundle can only patch missing *APIs* — it does nothing for unsupported *syntax*. `scripts/app.js` is deliberately written in plain, old-safe syntax (`var`, `function`, no arrow functions, template literals, optional chaining/nullish coalescing, object spread or async/await) so it doesn't need a transpiler; keep it that way rather than introducing modern syntax that would hard-fail with a `SyntaxError` on an old WebView, and stick to the vendored jQuery version rather than switching to a build that requires a newer engine.
+
+There is no `browserslist` here to keep in sync. For reference, the React templates keep `Chrome >= 45` and `Android >= 4.4` in theirs as a deliberately wider safety margin than the SDK 23 minimum; it is not the support floor. Any vendored script you add or update must also run on Chrome ~40-51 (check its docs/browser-support notes before vendoring it).
+
 ## Local development
 
 `npm start` runs [`servor`](https://www.npmjs.com/package/servor) (`. index.html 3000 --reload --browse`) — a zero-dependency static file server with live reload, picked specifically because it doesn't pull in a bundler (Vite et al.), matching this template's whole "no build step" premise. Visit `http://localhost:3000` (the **root** URL) — `servor` only injects its live-reload script into extension-less "route" requests, so `http://localhost:3000/index.html` (with the explicit filename) silently serves the page without reload wired up. The page auto-reloads whenever any file changes and you save.

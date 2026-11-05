@@ -45,6 +45,12 @@ scripts/.vendored-versions.json     <-- tracks the currently-vendored version of
 
 Script load order in `index.html` matters: `core-js` → `dsplay-data.js` → `dsplay-template-utils.js` → `app.js`.
 
+## Browser/WebView compatibility (Android SDK 23 minimum)
+
+DSPLAY's Android app supports devices back to Android 6.0 (API 23). On locked-down signage hardware that never receives WebView updates via Play Store, the actual JS engine can be stuck around the Chrome ~40-51 era that shipped with that OS generation — not a modern evergreen browser. This project has no build step or transpiler at all (unlike the React/Vite templates in this fleet, which rely on `@vitejs/plugin-legacy` and a `browserslist`), so the vendored `core-js` bundle can only patch missing *APIs* — it does nothing for unsupported *syntax*. `scripts/app.js` is deliberately written in plain, old-safe syntax (`var`, `function`, no arrow functions, template literals, optional chaining/nullish coalescing, object spread or async/await) so it doesn't need a transpiler; keep it that way rather than introducing modern syntax that would hard-fail with a `SyntaxError` on an old WebView.
+
+There is no `browserslist` here to keep in sync. For reference, the React templates keep `Chrome >= 45` and `Android >= 4.4` in theirs as a deliberately wider safety margin than the SDK 23 minimum; it is not the support floor. Any vendored script you add or update must also run on Chrome ~40-51 (check its docs/browser-support notes before vendoring it).
+
 ## Testing
 
 `npm test` runs `node --test` against `test/basic.test.js` — three smoke tests using only Node's built-in `node:test`/`node:assert`/`node:vm` (no Vitest/jsdom; this template deliberately has no bundler). See [`boilerplates/javascript`](https://github.com/dsplay/dsplay-templates/tree/main/boilerplates/javascript)'s AGENTS.md for what each test checks and why — this file is copied verbatim from there. (`dsplay_template` being an empty `{}` here, per the note above, still passes the "defined as an object" check.)

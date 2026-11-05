@@ -157,6 +157,10 @@ After running it, review the diff, test locally, and commit.
 
 See [AGENTS.md](AGENTS.md).
 
+## Browser/WebView compatibility
+
+DSPLAY supports devices back to **Android 6.0 (API 23)**. Signage hardware that never updates its WebView can be stuck around Chrome ~40-51. This boilerplate has no build step, so `scripts/app.js` must stay in plain, old-safe syntax (`var`, `function`, no arrow functions, template literals, optional chaining/nullish coalescing or async/await); the vendored `core-js` bundle only patches missing APIs, not syntax. See `AGENTS.md` for the details.
+
 ## More
 
 To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
