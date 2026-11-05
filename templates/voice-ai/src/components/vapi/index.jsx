@@ -4,6 +4,10 @@ import { useTranslation } from 'react-i18next';
 import './anim.sass';
 import logger from '../../utils/logger';
 
+// Pinned on purpose: `@latest` would let a Vapi release change every deployed screen overnight.
+// Bump deliberately after testing a call end to end (1.1.10 is the newest release on jsDelivr as of 2026-11-02).
+const VAPI_SCRIPT_URL = 'https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@1.1.10/dist/assets/index.js';
+
 function VapiAssistant() {
   const assistant = useTemplateVal('assistant_id');
   const apiKey = useTemplateVal('api_key');
@@ -26,7 +30,7 @@ function VapiAssistant() {
 
     const loadVapiScript = () => {
       const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js';
+      script.src = VAPI_SCRIPT_URL;
       script.defer = true;
       script.async = true;
       script.onload = () => {
