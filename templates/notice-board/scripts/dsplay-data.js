@@ -30,7 +30,6 @@ var dsplay_media = {
 
 // these variables must be registered during the template creation in the Web Manager
 var dsplay_template = {
-    base_font_size: '4.2vmin',
     text_color: '#ffffff',
     background_color: '#0b3b4a',
     show_title: 'true',

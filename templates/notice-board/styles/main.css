@@ -8,7 +8,7 @@ html, body, #root {
 
 #root { opacity: 0; position: relative; }
 
-.layout { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-sizing: border-box; }
+.layout { display: none; overflow: hidden; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-sizing: border-box; }
 
 /* Card: a framed message in the middle of the region. */
 .card { flex-direction: column; justify-content: center; align-items: center; padding: 6%; text-align: center; }
@@ -22,7 +22,7 @@ html, body, #root {
 
 /* Ticker: one line that scrolls from right to left, vertically centred. */
 .ticker { align-items: center; white-space: nowrap; }
-.ticker .track { display: inline-block; position: relative; left: 100%; font-size: 1.2em; }
+.ticker .track { display: inline-block; position: relative; left: 100%; }
 .ticker .track.run { animation-name: ticker-scroll; animation-timing-function: linear; animation-iteration-count: 1; -webkit-animation-name: ticker-scroll; -webkit-animation-timing-function: linear; -webkit-animation-iteration-count: 1; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-100%) translateX(-100vw); } }
 @-webkit-keyframes ticker-scroll { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(-100%) translateX(-100vw); } }

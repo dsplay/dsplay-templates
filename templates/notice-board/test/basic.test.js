@@ -45,14 +45,14 @@ test('app.js has valid JavaScript syntax', () => {
 // The layout choice: run app.js against a tiny fake DOM and check which layout shows what.
 function run(media, template) {
   const els = {};
-  const make = (name) => (els[name] = { style: {}, innerHTML: '', className: name, offsetWidth: 600, querySelector: (s) => make(name + ' ' + s) });
+  const make = (name) => (els[name] = { style: {}, innerHTML: '', className: name, offsetWidth: 600, clientWidth: 1000, scrollWidth: 0, clientHeight: 200, get scrollHeight() { return parseFloat(this.style.fontSize || 0) * 10; }, querySelector: (s) => make(name + ' ' + s) });
   const document = {
     body: { style: {} },
     querySelector: (s) => (s.indexOf('.layout.') === 0 ? make(s.slice(8)) : make(s)),
   };
   const sandbox = {
     document,
-    window: { innerWidth: 1000 },
+    window: { innerWidth: 1000, innerHeight: 500 },
     dsplayTemplateUtils: {
       media,
       tval: (k, d) => (template[k] !== undefined ? template[k] : d),
@@ -88,4 +88,12 @@ test('the ticker scrolls its line, never faster than the speed allows and never 
 test('an unknown kind falls back to the card layout', () => {
   const els = run({ kind: 'surprise', html: 'x' }, {});
   assert.equal(els.card.style.display, 'flex');
+});
+
+test('the text shrinks until it fits the region, and the ticker follows the region height', () => {
+  const card = run({ kind: 'card', title: 'a', html: 'b' }, {});
+  const size = parseFloat(card.card.style.fontSize);
+  assert.ok(size <= 20 && size >= 10, 'fitted size ' + size);
+  const ticker = run({ kind: 'ticker', html: 'a' }, {});
+  assert.equal(ticker.ticker.style.fontSize, '200px');
 });
