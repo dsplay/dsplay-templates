@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>DSPLAY - Notice board</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <link rel="shortcut icon" type="image/png" href="assets/image/favicon.png">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  <div id="root">
+    <!-- One of the three layouts is shown, chosen by the kind of the post the player picked (card, notice, ticker). -->
+    <div class="layout card"><div class="title"></div><div class="text"></div></div>
+    <div class="layout notice"><div class="title"></div><div class="text"></div></div>
+    <div class="layout ticker"><div class="track"></div></div>
+  </div>
+  <script src="scripts/core-js-3.50.0.js"></script>
+  <script src="scripts/dsplay-data.js"></script>
+  <script src="scripts/dsplay-template-utils.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+
+</html>
