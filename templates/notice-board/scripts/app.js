@@ -31,11 +31,17 @@
     if (kind === 'ticker') {
         var track = layout.querySelector('.track');
         track.innerHTML = media.html || '';
-        layout.style.fontSize = Math.max(12, Math.floor(height * 0.4)) + 'px';
+        // 40% of the height, capped at 6% of the width: on a thin strip the height decides, on a big screen the width does.
+        layout.style.fontSize = Math.max(12, Math.floor(Math.min(height * 0.4, width * 0.06))) + 'px';
         // Pixels per second; the line enters from the right edge and leaves through the left one.
         var speed = u.tfval('ticker_speed', 120);
         var distance = track.offsetWidth + window.innerWidth;
-        var seconds = Math.max(distance / speed, 5);
+        var seconds = distance / speed;
+        // The player ends the showing after the media's duration, so a pass slower than that would be cut on its first words:
+        // the whole line crosses within the showing, faster than ticker_speed when it has to.
+        var showing = ((media.duration || 0) / 1000) * 0.95;
+        if (showing >= 5 && seconds > showing) seconds = showing;
+        seconds = Math.max(seconds, 5);
         track.style.animationDuration = seconds + 's';
         track.style.webkitAnimationDuration = seconds + 's';
         track.className += ' run';

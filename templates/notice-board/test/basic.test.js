@@ -85,6 +85,13 @@ test('the ticker scrolls its line, never faster than the speed allows and never 
   assert.equal(els['ticker .track'].style.animationDuration, '16s');
 });
 
+test('the ticker crosses the whole line within the showing, faster than the speed when it must', () => {
+  const cut = run({ kind: 'ticker', html: 'a', duration: 10000 }, { ticker_speed: '100' });
+  assert.equal(cut['ticker .track'].style.animationDuration, '9.5s');
+  const roomy = run({ kind: 'ticker', html: 'a', duration: 60000 }, { ticker_speed: '100' });
+  assert.equal(roomy['ticker .track'].style.animationDuration, '16s');
+});
+
 test('an unknown kind falls back to the card layout', () => {
   const els = run({ kind: 'surprise', html: 'x' }, {});
   assert.equal(els.card.style.display, 'flex');
@@ -95,5 +102,5 @@ test('the text shrinks until it fits the region, and the ticker follows the regi
   const size = parseFloat(card.card.style.fontSize);
   assert.ok(size <= 20 && size >= 10, 'fitted size ' + size);
   const ticker = run({ kind: 'ticker', html: 'a' }, {});
-  assert.equal(ticker.ticker.style.fontSize, '200px');
+  assert.equal(ticker.ticker.style.fontSize, '60px', 'width caps the text: 6% of 1000 px is under 40% of 500 px');
 });
