@@ -1,9 +1,10 @@
 "use strict";
 
-// The notice board template. The player gateway answers with posts already turned into the only HTML allowed (text escaped,
-// **bold**, *italic* and line breaks), the player picks one per showing (or the one ticker line) and hands it over as
-// `media.kind`, `media.title` and `media.html`. This script chooses the layout and sizes the text from the region it is
-// rendered in (the page is exactly as big as the region), so there is no font size variable: the text is as large as fits.
+// The notice board template. The player gateway answers with each post as `blocks` (runs of text with `bold`, `italic` and a
+// named `color`), never as HTML; the player picks one post per showing (or the one ticker line) and hands it over as `media.kind`,
+// `media.title` and `media.blocks`. This script draws the blocks (every text is set as text, never as markup), chooses the layout
+// and sizes the text from the region it is rendered in (the page is exactly as big as the region), so there is no font size
+// variable: the text is as large as fits.
 (function () {
     var u = dsplayTemplateUtils;
     var media = u.media || {};
@@ -14,6 +15,23 @@
     var height = window.innerHeight;
     body.style.color = u.tval('text_color', '#ffffff');
     body.style.backgroundColor = u.tval('background_color', '#0b3b4a');
+
+    // Named colours are tuned for the template's dark background; the post says "red", the template decides which red.
+    var COLORS = { red: '#ff8a80', teal: '#5eead4', amber: '#fbbf24' };
+
+    function draw(box, blocks) {
+        box.textContent = '';
+        for (var i = 0; i < (blocks || []).length; i++) {
+            var block = blocks[i];
+            if (!block || typeof block.text !== 'string') continue;
+            var run = document.createElement('span');
+            run.textContent = block.text;
+            if (block.bold === true) run.style.fontWeight = 'bold';
+            if (block.italic === true) run.style.fontStyle = 'italic';
+            if (COLORS.hasOwnProperty(block.color)) run.style.color = COLORS[block.color];
+            box.appendChild(run);
+        }
+    }
 
     var layout = document.querySelector('.layout.' + kind);
     layout.style.display = 'flex';
@@ -30,7 +48,7 @@
 
     if (kind === 'ticker') {
         var track = layout.querySelector('.track');
-        track.innerHTML = media.html || '';
+        draw(track, media.blocks);
         // 40% of the height, capped at 6% of the width: on a thin strip the height decides, on a big screen the width does.
         layout.style.fontSize = Math.max(12, Math.floor(Math.min(height * 0.4, width * 0.06))) + 'px';
         // Pixels per second; the line enters from the right edge and leaves through the left one.
@@ -47,9 +65,9 @@
         track.className += ' run';
     } else {
         var title = layout.querySelector('.title');
-        title.innerHTML = u.tbval('show_title', true) ? (media.title || '') : '';
-        title.style.display = title.innerHTML ? 'block' : 'none';
-        layout.querySelector('.text').innerHTML = media.html || '';
+        title.textContent = u.tbval('show_title', true) ? (media.title || '') : '';
+        title.style.display = title.textContent ? 'block' : 'none';
+        draw(layout.querySelector('.text'), media.blocks);
         // The margin follows the shorter side too: a percentage would be measured on the width and eat a wide, short region.
         layout.style.padding = Math.round(Math.min(width, height) * (kind === 'notice' ? 0.04 : 0.06)) + 'px';
         fit(layout, Math.min(height * 0.2, width * 0.08));

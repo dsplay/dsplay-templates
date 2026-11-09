@@ -6,7 +6,7 @@ Shows the posts of a DSPLAY notice board (DSP-1222) in a region of the screen. O
 - `notice`: a heading and left-aligned text, like a paper notice.
 - `ticker`: one line with every live post, scrolling right to left.
 
-The posts come from the player gateway (the `NOTICE_BOARD` media, served as `PLAYER_GATEWAY`): the Worker answers with HTML that is already escaped and limited to bold, italic and line breaks, and the player hands the picked post over as `media.kind`, `media.title` and `media.html`. This template only picks the layout and applies the style variables.
+The posts come from the player gateway (the `NOTICE_BOARD` media, served as `PLAYER_GATEWAY`): the Worker answers with each post as `blocks` (text runs with bold, italic and a named colour: red, teal, amber), never as HTML, and the player hands the picked post over as `media.kind`, `media.title` and `media.blocks`. The template draws the blocks as text. This template only picks the layout and applies the style variables.
 
 The text is sized from the region the template is rendered in (the page is as big as the region): as large as fits, so there is no font size variable. Variables (register them in the Web Manager): `text_color`, `background_color`, `show_title`, `ticker_speed`.
 

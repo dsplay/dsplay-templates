@@ -13,16 +13,16 @@ html, body, #root {
 /* Card: a framed message in the middle of the region. */
 .card { flex-direction: column; justify-content: center; align-items: center; padding: 6%; text-align: center; }
 .card .title { font-size: 1.3em; font-weight: bold; margin-bottom: .6em; opacity: .9; }
-.card .text { font-size: 1.1em; line-height: 1.35; max-width: 92%; }
+.card .text { font-size: 1.1em; line-height: 1.35; max-width: 92%; white-space: pre-line; }
 
 /* Notice: a heading bar on top and the text left-aligned below it, like a paper notice on a wall. */
 .notice { flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 4%; text-align: left; }
 .notice .title { font-size: 1.2em; font-weight: bold; padding-bottom: .4em; margin-bottom: .6em; border-bottom: .12em solid rgba(255, 255, 255, .6); }
-.notice .text { font-size: 1.05em; line-height: 1.4; }
+.notice .text { font-size: 1.05em; line-height: 1.4; white-space: pre-line; }
 
 /* Ticker: one line that scrolls from right to left, vertically centred. */
 .ticker { align-items: center; white-space: nowrap; }
-.ticker .track { display: inline-block; position: relative; left: 100%; }
+.ticker .track { white-space: pre; display: inline-block; position: relative; left: 100%; }
 .ticker .track.run { animation-name: ticker-scroll; animation-timing-function: linear; animation-iteration-count: 1; -webkit-animation-name: ticker-scroll; -webkit-animation-timing-function: linear; -webkit-animation-iteration-count: 1; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-100%) translateX(-100vw); } }
 @-webkit-keyframes ticker-scroll { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(-100%) translateX(-100vw); } }
