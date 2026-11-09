@@ -33,16 +33,22 @@
         }
     }
 
+    // Only a picture the gateway (an http(s) url) or the dashboard preview (a small JPEG data url) can send.
+    function imageSource(value) {
+        return typeof value === 'string' && /^(https?:\/\/|data:image\/jpeg;base64,)/.test(value) ? value : '';
+    }
+
     var layout = document.querySelector('.layout.' + kind);
     layout.style.display = 'flex';
 
     // The largest size the region allows, then smaller until neither the height nor the width overflows (never under 10 px).
-    function fit(box, largest) {
+    // The size is set on `host` and what has to fit is `box`, the body that holds the title and the text.
+    function fit(host, box, largest) {
         var size = Math.max(10, Math.floor(largest));
-        box.style.fontSize = size + 'px';
+        host.style.fontSize = size + 'px';
         while (size > 10 && (box.scrollHeight > box.clientHeight + 1 || box.scrollWidth > box.clientWidth + 1)) {
             size = Math.max(10, Math.floor(size * 0.92));
-            box.style.fontSize = size + 'px';
+            host.style.fontSize = size + 'px';
         }
     }
 
@@ -69,8 +75,35 @@
         title.style.display = title.textContent ? 'block' : 'none';
         draw(layout.querySelector('.text'), media.blocks);
         // The margin follows the shorter side too: a percentage would be measured on the width and eat a wide, short region.
-        layout.style.padding = Math.round(Math.min(width, height) * (kind === 'notice' ? 0.04 : 0.06)) + 'px';
-        fit(layout, Math.min(height * 0.2, width * 0.08));
+        var pad = Math.round(Math.min(width, height) * (kind === 'notice' ? 0.04 : 0.06));
+        layout.style.padding = pad + 'px';
+        var pic = layout.querySelector('.pic');
+        var body = layout.querySelector('.body');
+        var source = imageSource(media.image);
+        // With a picture, a wide short region puts it on the left (a third of the width) and any other puts it on top (under half of the height); the text takes the rest.
+        var arrange = function (withPicture) {
+            var wide = width / height > 1.8;
+            var innerWidth = width - pad * 2;
+            var innerHeight = height - pad * 2;
+            var gap = Math.round(pad / 2);
+            pic.style.display = withPicture ? 'block' : 'none';
+            layout.style.flexDirection = withPicture && wide ? 'row' : 'column';
+            if (withPicture) {
+                pic.style.width = (wide ? Math.round(innerWidth * 0.34) : innerWidth) + 'px';
+                pic.style.height = (wide ? innerHeight : Math.round(innerHeight * 0.46)) + 'px';
+                pic.style.marginRight = (wide ? gap : 0) + 'px';
+                pic.style.marginBottom = (wide ? 0 : gap) + 'px';
+                pic.style.borderRadius = Math.round(Math.min(width, height) * 0.02) + 'px';
+            }
+            fit(layout, body, Math.min(height * 0.2, width * 0.08));
+        };
+        if (source) {
+            var img = pic.querySelector('img');
+            // A picture that cannot load gives its room back to the text.
+            img.onerror = function () { arrange(false); };
+            img.src = source;
+        }
+        arrange(source !== '');
     }
 
     document.querySelector('#root').style.opacity = 1;

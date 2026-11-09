@@ -43,10 +43,10 @@ test('app.js has valid JavaScript syntax', () => {
 });
 
 // The layout choice: run app.js against a tiny fake DOM and check which layout shows what.
-function run(media, template) {
+function run(media, template, size) {
   const els = {};
-  const element = (name) => ({ style: {}, children: [], _text: '', get textContent() { return this.children.length ? this.children.map((c) => c.textContent).join('') : this._text; }, set textContent(v) { this._text = v; this.children = []; }, appendChild(c) { this.children.push(c); }, className: name, offsetWidth: 600, clientWidth: 1000, scrollWidth: 0, clientHeight: 200, get scrollHeight() { return parseFloat(this.style.fontSize || 0) * 10; }, querySelector: (s) => make(name + ' ' + s) });
-  const make = (name) => (els[name] = element(name));
+  const element = (name, host) => ({ style: {}, children: [], _text: '', get textContent() { return this.children.length ? this.children.map((c) => c.textContent).join('') : this._text; }, set textContent(v) { this._text = v; this.children = []; }, appendChild(c) { this.children.push(c); }, className: name, offsetWidth: 600, clientWidth: 1000, scrollWidth: 0, clientHeight: 200, get scrollHeight() { return parseFloat((host || this).style.fontSize || 0) * 10; }, querySelector(s) { return make(name + ' ' + s, this); } });
+  const make = (name, host) => (els[name] = element(name, host));
   const document = {
     body: { style: {} },
     createElement: () => element('span'),
@@ -54,7 +54,7 @@ function run(media, template) {
   };
   const sandbox = {
     document,
-    window: { innerWidth: 1000, innerHeight: 500 },
+    window: { innerWidth: (size || {}).width || 1000, innerHeight: (size || {}).height || 500 },
     dsplayTemplateUtils: {
       media,
       tval: (k, d) => (template[k] !== undefined ? template[k] : d),
@@ -85,6 +85,35 @@ test('markup in a post is text, never elements; an unknown colour is ignored', (
   assert.equal(els['card .text'].children.length, 1);
   assert.equal(els['card .text'].children[0].textContent, '<b>x</b>');
   assert.equal(els['card .text'].children[0].style.color, undefined);
+});
+
+test('a picture goes on top of a tall region and on the left of a wide one, and only a safe url is used', () => {
+  const url = 'https://s3-us-west-2.amazonaws.com/b/uploads/notice-1-a.jpg';
+  const tall = run({ kind: 'card', blocks: text(['x']), image: url }, {}, { width: 500, height: 1000 });
+  assert.equal(tall['card .pic'].style.display, 'block');
+  assert.equal(tall['card .pic img'].src, url);
+  assert.equal(tall.card.style.flexDirection, 'column');
+  assert.equal(tall['card .pic'].style.height, Math.round((1000 - 2 * 30) * 0.46) + 'px');
+  const wide = run({ kind: 'card', blocks: text(['x']), image: url }, {});
+  assert.equal(wide.card.style.flexDirection, 'row');
+  assert.equal(wide['card .pic'].style.width, Math.round((1000 - 2 * 30) * 0.34) + 'px');
+  assert.ok(parseFloat(tall.card.style.fontSize) >= 10);
+
+  const none = run({ kind: 'card', blocks: text(['x']), image: '' }, {});
+  assert.equal(none['card .pic'].style.display, 'none');
+  for (const bad of ['javascript:alert(1)', 'file:///etc/passwd', 'data:text/html;base64,AAAA', 42, null]) {
+    const els = run({ kind: 'notice', blocks: text(['x']), image: bad }, {});
+    assert.equal(els['notice .pic'].style.display, 'none', String(bad));
+    assert.equal(els['notice .pic img'], undefined);
+  }
+});
+
+test('a picture that fails to load gives its room back to the text', () => {
+  const els = run({ kind: 'notice', blocks: text(['x']), image: 'https://example.com/a.jpg' }, {});
+  assert.equal(els['notice .pic'].style.display, 'block');
+  els['notice .pic img'].onerror();
+  assert.equal(els['notice .pic'].style.display, 'none');
+  assert.equal(els.notice.style.flexDirection, 'column');
 });
 
 test('show_title false hides the title of a notice', () => {
