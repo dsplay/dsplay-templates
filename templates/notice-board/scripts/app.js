@@ -1,7 +1,7 @@
 "use strict";
 
 // The notice board template. The player gateway answers with each post as `blocks` (runs of text with `bold`, `italic` and a
-// named `color`), never as HTML; the player picks one post per showing (or the one ticker line) and hands it over as `media.kind`,
+// named `color`), never as HTML; the player picks one post per showing (the ticker included) and hands it over as `media.kind`,
 // `media.title` and `media.blocks`. This script draws the blocks (every text is set as text, never as markup), chooses the layout
 // and sizes the text from the region it is rendered in (the page is exactly as big as the region), so there is no font size
 // variable: the text is as large as fits.

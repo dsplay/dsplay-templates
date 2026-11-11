@@ -4,7 +4,7 @@ Shows the posts of a DSPLAY notice board (DSP-1222) in a region of the screen. O
 
 - `card`: a framed message in the middle of the region.
 - `notice`: a heading and left-aligned text, like a paper notice.
-- `ticker`: one line with every live post, scrolling right to left.
+- `ticker`: one line with the post of the showing, scrolling right to left (the player picks one post per showing, like the other formats).
 
 The posts come from the player gateway (the `NOTICE_BOARD` media, served as `PLAYER_GATEWAY`): the Worker answers with each post as `blocks` (text runs with bold, italic and a named colour: red, teal, amber), never as HTML, and the player hands the picked post over as `media.kind`, `media.title` and `media.blocks` (and `media.image`, the url of the post's picture, empty when it has none). The template draws the blocks as text; in the `card` and `notice` layouts a picture goes on top of the text, or on the left in a wide, short region. This template only picks the layout and applies the style variables.
 
