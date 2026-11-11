@@ -13,11 +13,19 @@
     var body = document.body;
     var width = window.innerWidth;
     var height = window.innerHeight;
-    body.style.color = u.tval('text_color', '#ffffff');
-    body.style.backgroundColor = u.tval('background_color', '#0b3b4a');
+    // The post may bring its own background (a name: the template paints it) and the alignment of its text; without them the template's variables rule.
+    var BACKGROUNDS = { navy: '#12284c', teal: '#0b3b4a', green: '#14532d', purple: '#4c1d95', red: '#7f1d1d', orange: '#9a3412', white: '#ffffff', black: '#000000' };
+    var background = BACKGROUNDS.hasOwnProperty(media.background) ? media.background : '';
+    var light = background === 'white';
+    body.style.color = light ? '#111827' : u.tval('text_color', '#ffffff');
+    body.style.backgroundColor = background ? BACKGROUNDS[background] : u.tval('background_color', '#0b3b4a');
 
-    // Named colours are tuned for the template's dark background; the post says "red", the template decides which red.
-    var COLORS = { red: '#ff8a80', teal: '#5eead4', amber: '#fbbf24' };
+    // Named colours: the post says "red", the template decides which red, one set tuned for dark backgrounds and one for the white one.
+    var COLORS_ON_DARK = { red: '#ff8a80', orange: '#fdba74', amber: '#fbbf24', green: '#86efac', teal: '#5eead4', blue: '#93c5fd', purple: '#d8b4fe', pink: '#f9a8d4' };
+    var COLORS_ON_LIGHT = { red: '#b91c1c', orange: '#c2410c', amber: '#b45309', green: '#15803d', teal: '#0f766e', blue: '#1d4ed8', purple: '#7e22ce', pink: '#be185d' };
+    var COLORS = light ? COLORS_ON_LIGHT : COLORS_ON_DARK;
+    // Sizes are relative to the text the script fits to the region.
+    var SIZES = { small: 0.75, large: 1.4, xlarge: 1.9 };
 
     function draw(box, blocks) {
         box.textContent = '';
@@ -28,6 +36,8 @@
             run.textContent = block.text;
             if (block.bold === true) run.style.fontWeight = 'bold';
             if (block.italic === true) run.style.fontStyle = 'italic';
+            if (block.underline === true) run.style.textDecoration = 'underline';
+            if (SIZES.hasOwnProperty(block.size)) run.style.fontSize = SIZES[block.size] + 'em';
             if (COLORS.hasOwnProperty(block.color)) run.style.color = COLORS[block.color];
             box.appendChild(run);
         }
@@ -74,11 +84,17 @@
         title.textContent = u.tbval('show_title', true) ? (media.title || '') : '';
         title.style.display = title.textContent ? 'block' : 'none';
         draw(layout.querySelector('.text'), media.blocks);
+
         // The margin follows the shorter side too: a percentage would be measured on the width and eat a wide, short region.
         var pad = Math.round(Math.min(width, height) * (kind === 'notice' ? 0.04 : 0.06));
         layout.style.padding = pad + 'px';
         var pic = layout.querySelector('.pic');
         var body = layout.querySelector('.body');
+        var ALIGNS = { left: 'flex-start', center: 'center', right: 'flex-end' };
+        if (ALIGNS.hasOwnProperty(media.align)) {
+            body.style.textAlign = media.align;
+            body.style.alignItems = ALIGNS[media.align];
+        }
         var source = imageSource(media.image);
         // With a picture, a wide short region puts it on the left (a third of the width) and any other puts it on top (under half of the height); the text takes the rest.
         var arrange = function (withPicture) {

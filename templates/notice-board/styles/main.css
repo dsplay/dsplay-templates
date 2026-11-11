@@ -24,7 +24,7 @@ html, body, #root {
 /* Notice: a heading bar on top and the text left-aligned below it, like a paper notice on a wall. */
 .notice { flex-direction: column; align-items: stretch; padding: 4%; }
 .notice .body { justify-content: flex-start; align-items: stretch; text-align: left; }
-.notice .title { font-size: 1.2em; font-weight: bold; padding-bottom: .4em; margin-bottom: .6em; border-bottom: .12em solid rgba(255, 255, 255, .6); }
+.notice .title { font-size: 1.2em; font-weight: bold; padding-bottom: .4em; margin-bottom: .6em; border-bottom: .12em solid currentColor; }
 .notice .text { font-size: 1.05em; line-height: 1.4; white-space: pre-line; }
 
 /* Ticker: one line that scrolls from right to left, vertically centred. */

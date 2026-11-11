@@ -48,7 +48,7 @@ function run(media, template, size) {
   const element = (name, host) => ({ style: {}, children: [], _text: '', get textContent() { return this.children.length ? this.children.map((c) => c.textContent).join('') : this._text; }, set textContent(v) { this._text = v; this.children = []; }, appendChild(c) { this.children.push(c); }, className: name, offsetWidth: 600, clientWidth: 1000, scrollWidth: 0, clientHeight: 200, get scrollHeight() { return parseFloat((host || this).style.fontSize || 0) * 10; }, querySelector(s) { return make(name + ' ' + s, this); } });
   const make = (name, host) => (els[name] = element(name, host));
   const document = {
-    body: { style: {} },
+    body: (els['#body'] = { style: {} }),
     createElement: () => element('span'),
     querySelector: (s) => (s.indexOf('.layout.') === 0 ? make(s.slice(8)) : make(s)),
   };
@@ -146,4 +146,43 @@ test('the text shrinks until it fits the region, and the ticker follows the regi
   assert.ok(size <= 20 && size >= 10, 'fitted size ' + size);
   const ticker = run({ kind: 'ticker', blocks: text(['a']) }, {});
   assert.equal(ticker.ticker.style.fontSize, '60px', 'width caps the text: 6% of 1000 px is under 40% of 500 px');
+});
+
+test('underline, a size and the wider palette are drawn on the run', () => {
+  const els = run({ kind: 'card', blocks: [{ text: 'a', underline: true }, { text: 'b', size: 'large', color: 'blue' }, { text: 'c', size: 'small' }, { text: 'd', size: 'huge', color: 'pink' }] }, {});
+  const [a, b, c, d] = els['card .text'].children;
+  assert.equal(a.style.textDecoration, 'underline');
+  assert.equal(b.style.fontSize, '1.4em');
+  assert.equal(b.style.color, '#93c5fd');
+  assert.equal(c.style.fontSize, '0.75em');
+  assert.equal(d.style.fontSize, undefined, 'an unknown size is ignored');
+  assert.equal(d.style.color, '#f9a8d4');
+});
+
+test('a post brings its own background, and the white one switches to dark text and darker colours', () => {
+  const plain = run({ kind: 'card', blocks: [{ text: 'a', color: 'red' }] }, {});
+  assert.equal(plain['#body'].style.backgroundColor, '#0b3b4a');
+  assert.equal(plain['#body'].style.color, '#ffffff');
+
+  const navy = run({ kind: 'card', blocks: [{ text: 'a' }], background: 'navy' }, { text_color: '#eeeeee' });
+  assert.equal(navy['#body'].style.backgroundColor, '#12284c');
+  assert.equal(navy['#body'].style.color, '#eeeeee');
+
+  const white = run({ kind: 'card', blocks: [{ text: 'a', color: 'red' }], background: 'white' }, {});
+  assert.equal(white['#body'].style.backgroundColor, '#ffffff');
+  assert.equal(white['#body'].style.color, '#111827');
+  assert.equal(white['card .text'].children[0].style.color, '#b91c1c');
+
+  const unknown = run({ kind: 'card', blocks: [{ text: 'a' }], background: 'pink' }, {});
+  assert.equal(unknown['#body'].style.backgroundColor, '#0b3b4a');
+});
+
+test('the alignment of a post sets the text and the flex alignment of the body, and none leaves the layout default', () => {
+  const left = run({ kind: 'card', blocks: [{ text: 'a' }], align: 'left' }, {});
+  assert.equal(left['card .body'].style.textAlign, 'left');
+  assert.equal(left['card .body'].style.alignItems, 'flex-start');
+  const right = run({ kind: 'notice', blocks: [{ text: 'a' }], align: 'right' }, {});
+  assert.equal(right['notice .body'].style.alignItems, 'flex-end');
+  const none = run({ kind: 'card', blocks: [{ text: 'a' }], align: 'justify' }, {});
+  assert.equal(none['card .body'].style.textAlign, undefined);
 });
