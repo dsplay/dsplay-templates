@@ -1,0 +1,16 @@
+{
+  "name": "dsplay-template-notice-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Notice board template: card, notice and ticker layouts for the NOTICE_BOARD gateway media (DSP-1222)",
+  "scripts": {
+    "start": "servor . index.html 3000 --reload --browse",
+    "zip": "node pack.mjs",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@dsplay/template-manifest": "1.0.5",
+    "archiver": "8.0.0",
+    "servor": "4.0.2"
+  }
+}
