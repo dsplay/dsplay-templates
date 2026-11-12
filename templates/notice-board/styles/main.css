@@ -8,7 +8,7 @@ html, body, #root {
 
 #root { opacity: 0; position: relative; }
 
-.layout { display: none; overflow: hidden; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-sizing: border-box; }
+.layout { z-index: 1; display: none; overflow: hidden; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-sizing: border-box; }
 
 /* Card and notice: an optional picture (sized by the script, on top or on the left) and the body that holds the title and the text. */
 .pic { display: none; flex: 0 0 auto; overflow: hidden; }
@@ -33,3 +33,11 @@ html, body, #root {
 .ticker .track.run { animation-name: ticker-scroll; animation-timing-function: linear; animation-iteration-count: 1; -webkit-animation-name: ticker-scroll; -webkit-animation-timing-function: linear; -webkit-animation-iteration-count: 1; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-100%) translateX(-100vw); } }
 @-webkit-keyframes ticker-scroll { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(-100%) translateX(-100vw); } }
+
+/* Backdrop: a blurred copy fills the region, the picture sits on it, a soft scrim keeps the text readable. */
+.backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
+.backdrop img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.backdrop .fill { object-fit: cover; -webkit-filter: blur(24px) brightness(.6); filter: blur(24px) brightness(.6); transform: scale(1.1); }
+.backdrop .whole { object-fit: contain; }
+.backdrop .scrim { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.25) 50%, rgba(0,0,0,.45)); }
+.backdrop ~ .layout { text-shadow: 0 1px 6px rgba(0,0,0,.85); }

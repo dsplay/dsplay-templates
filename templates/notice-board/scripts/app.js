@@ -283,6 +283,33 @@
             body.style.alignItems = ALIGNS[media.align];
         }
         var source = imageSource(media.image);
+        // A backdrop (a photo, or the first page of a PDF) is what the whole post is drawn over: a blurred copy fills the region, the picture sits on it whole
+        // (cropped to fill only when its shape is close to the region's), and a soft scrim keeps the text readable. It is not the small picture beside the text.
+        if (source !== '' && media.imageMode === 'backdrop') {
+            var back = document.createElement('div');
+            back.className = 'backdrop';
+            var fill = document.createElement('img');
+            fill.className = 'fill';
+            fill.alt = '';
+            var whole = document.createElement('img');
+            whole.className = 'whole';
+            whole.alt = '';
+            var scrim = document.createElement('div');
+            scrim.className = 'scrim';
+            back.appendChild(fill);
+            back.appendChild(whole);
+            back.appendChild(scrim);
+            document.querySelector('#root').insertBefore(back, document.querySelector('#root').firstChild);
+            whole.onload = function () {
+                var ratio = (whole.naturalWidth / whole.naturalHeight) / (width / height);
+                whole.style.objectFit = ratio > 0.75 && ratio < 1.33 ? 'cover' : 'contain';
+            };
+            // A backdrop that cannot load leaves the post on its own background.
+            whole.onerror = function () { back.parentNode.removeChild(back); };
+            fill.src = source;
+            whole.src = source;
+            source = '';
+        }
         // With a picture, a wide short region puts it on the left (a third of the width) and any other puts it on top (under half of the height); the text takes the rest.
         var arrange = function (withPicture) {
             var wide = width / height > 1.8;
