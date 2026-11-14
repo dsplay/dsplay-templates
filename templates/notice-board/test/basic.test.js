@@ -116,6 +116,12 @@ test('a picture that fails to load gives its room back to the text', () => {
   assert.equal(els.notice.style.flexDirection, 'column');
 });
 
+test('a long_post, the gateway name for the full-size post, draws the notice layout', () => {
+  const els = run({ kind: 'long_post', title: 'Aviso', blocks: text(['x']) }, {});
+  assert.equal(els.notice.style.display, 'flex');
+  assert.equal(els.card, undefined);
+});
+
 test('show_title false hides the title of a notice', () => {
   const els = run({ kind: 'notice', title: 'Aviso', blocks: text(['x']) }, { show_title: 'false' });
   assert.equal(els.notice.style.display, 'flex');

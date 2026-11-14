@@ -22,7 +22,7 @@ var dsplay_media = {
     iteration: 4, // A internal counter that stores haw many times this particular media was played
     duration: 15000, // The media duration in milliseconds
     
-    // what the notice board gateway hands over: one picked post (kind card, notice or ticker) with its html
+    // what the notice board gateway hands over: one picked post (kind card, long_post or ticker) with its html
     kind: 'card',
     title: 'Reunião de condomínio',
     html: 'Assembleia geral quinta-feira, <b>19h</b>, no salão de festas.<br>Pauta na portaria.',
