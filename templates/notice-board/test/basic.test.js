@@ -102,28 +102,28 @@ test('a picture goes on top of a tall region and on the left of a wide one, and 
   const none = run({ kind: 'card', blocks: text(['x']), image: '' }, {});
   assert.equal(none['card .pic'].style.display, 'none');
   for (const bad of ['javascript:alert(1)', 'file:///etc/passwd', 'data:text/html;base64,AAAA', 42, null]) {
-    const els = run({ kind: 'notice', blocks: text(['x']), image: bad }, {});
+    const els = run({ kind: 'long_post', blocks: text(['x']), image: bad }, {});
     assert.equal(els['notice .pic'].style.display, 'none', String(bad));
     assert.equal(els['notice .pic img'], undefined);
   }
 });
 
 test('a picture that fails to load gives its room back to the text', () => {
-  const els = run({ kind: 'notice', blocks: text(['x']), image: 'https://example.com/a.jpg' }, {});
+  const els = run({ kind: 'long_post', blocks: text(['x']), image: 'https://example.com/a.jpg' }, {});
   assert.equal(els['notice .pic'].style.display, 'block');
   els['notice .pic img'].onerror();
   assert.equal(els['notice .pic'].style.display, 'none');
   assert.equal(els.notice.style.flexDirection, 'column');
 });
 
-test('a long_post, the gateway name for the full-size post, draws the notice layout', () => {
-  const els = run({ kind: 'long_post', title: 'Aviso', blocks: text(['x']) }, {});
-  assert.equal(els.notice.style.display, 'flex');
-  assert.equal(els.card, undefined);
+test('the old kind name notice is no longer a layout: the post falls back to the card', () => {
+  const els = run({ kind: 'notice', title: 'Aviso', blocks: text(['x']) }, {});
+  assert.equal(els.card.style.display, 'flex');
+  assert.equal(els.notice, undefined);
 });
 
 test('show_title false hides the title of a notice', () => {
-  const els = run({ kind: 'notice', title: 'Aviso', blocks: text(['x']) }, { show_title: 'false' });
+  const els = run({ kind: 'long_post', title: 'Aviso', blocks: text(['x']) }, { show_title: 'false' });
   assert.equal(els.notice.style.display, 'flex');
   assert.equal(els['notice .title'].style.display, 'none');
 });
@@ -187,7 +187,7 @@ test('the alignment of a post sets the text and the flex alignment of the body, 
   const left = run({ kind: 'card', blocks: [{ text: 'a' }], align: 'left' }, {});
   assert.equal(left['card .body'].style.textAlign, 'left');
   assert.equal(left['card .body'].style.alignItems, 'flex-start');
-  const right = run({ kind: 'notice', blocks: [{ text: 'a' }], align: 'right' }, {});
+  const right = run({ kind: 'long_post', blocks: [{ text: 'a' }], align: 'right' }, {});
   assert.equal(right['notice .body'].style.alignItems, 'flex-end');
   const none = run({ kind: 'card', blocks: [{ text: 'a' }], align: 'justify' }, {});
   assert.equal(none['card .body'].style.textAlign, undefined);

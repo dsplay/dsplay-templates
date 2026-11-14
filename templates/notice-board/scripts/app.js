@@ -8,8 +8,8 @@
 (function () {
     var u = dsplayTemplateUtils;
     var media = u.media || {};
-    // The gateway names the full-size post `long_post` (it used to say `notice`, still accepted); its layout keeps the `notice` class.
-    var kind = media.kind === 'ticker' ? 'ticker' : (media.kind === 'long_post' || media.kind === 'notice') ? 'notice' : 'card';
+    // The gateway names the full-size post `long_post`; its layout keeps the `notice` class.
+    var kind = media.kind === 'ticker' ? 'ticker' : media.kind === 'long_post' ? 'notice' : 'card';
 
     var body = document.body;
     var width = window.innerWidth;
