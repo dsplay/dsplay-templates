@@ -104,6 +104,22 @@ describe('text', () => {
   });
 });
 
+describe('room for the art of a design', () => {
+  it('a design keeps the text clear of its art on the sides it takes, a plain post only has the base margin', () => {
+    const themed = pick(show({ kind: 'long_post', blocks: text(['x']), theme: 'maintenance' }), '.post');
+    expect(themed.style.padding).toBe(`${px(50)} ${px(150)} ${px(50)} ${px(30)}`);
+    cleanup();
+    expect(pick(show({ kind: 'long_post', blocks: text(['x']) }), '.post').style.padding).toBe(px(20));
+    cleanup();
+    expect(pick(show({ kind: 'card', blocks: text(['x']) }), '.post').style.padding).toBe(px(30));
+  });
+
+  it('a narrow tall region starts the text larger than 8% of its width', () => {
+    const c = show({ kind: 'card', blocks: text(['x']) }, {}, { width: 292, height: 1080 });
+    expect(pick(c, '.post').style.fontSize).toBe('40px');
+  });
+});
+
 describe('colours and designs', () => {
   it('a post brings its own background, and the white one switches to dark text and darker colours', () => {
     const plain = show({ kind: 'card', blocks: [{ text: 'a', color: 'red' }] });

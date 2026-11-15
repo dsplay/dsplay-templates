@@ -20,7 +20,7 @@ function App() {
   const [{ width, height }] = useState(() => ({ width: window.innerWidth, height: window.innerHeight }));
 
   const kind = kindOf(media);
-  const { style, colors } = lookOf(media, textColor, backgroundColor, width, height);
+  const { style, colors, insets } = lookOf(media, textColor, backgroundColor, width, height);
   const source = imageSource(media.image);
   const backdrop = kind !== 'ticker' && media.imageMode === 'backdrop' ? source : '';
 
@@ -34,6 +34,7 @@ function App() {
             kind={kind}
             media={media}
             colors={colors}
+            insets={insets}
             picture={backdrop === '' && kind !== 'ticker' ? source : ''}
             showTitle={showTitle}
             width={width}

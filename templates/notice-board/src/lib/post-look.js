@@ -1,4 +1,4 @@
-import { THEMES, themeArt } from './theme-art';
+import { THEMES, THEME_INSETS, themeArt } from './theme-art';
 
 // What a post may bring besides its text: a named background (the template paints it), named text colours and sizes, an alignment. A name the template does
 // not know is ignored, never passed on as a style.
@@ -26,7 +26,7 @@ export const known = (table, key) => (has(table, key) ? key : '');
 /** The layout a post is drawn in: only the three the gateway sends, the card for anything else. */
 export const kindOf = (media) => (media.kind === 'ticker' || media.kind === 'long_post' ? media.kind : 'card');
 
-/** The colours of the region: the template's variables, the post's own background, or its design (always light text on its dark gradient). */
+/** The colours of the region: the template's variables, the post's own background, or its design (always light text on its dark gradient); `insets` is the room the design's art takes. */
 export function lookOf(media, textColor, backgroundColor, width, height) {
   const background = known(BACKGROUNDS, media.background);
   const theme = known(THEMES, media.theme);
@@ -44,7 +44,7 @@ export function lookOf(media, textColor, backgroundColor, width, height) {
     style.backgroundRepeat = 'no-repeat';
     style.backgroundSize = '100% 100%';
   }
-  return { style, colors: light ? COLORS_ON_LIGHT : COLORS_ON_DARK };
+  return { style, colors: light ? COLORS_ON_LIGHT : COLORS_ON_DARK, insets: theme ? THEME_INSETS[theme] : null };
 }
 
 /** Only a picture the gateway (an http(s) url) or the dashboard preview (a small JPEG data url) can send. */

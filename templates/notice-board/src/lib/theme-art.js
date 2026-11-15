@@ -176,3 +176,23 @@ export function themeArt(name, w, h) {
     var g = THEMES[name];
     return '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + g[0] + '"/><stop offset="1" stop-color="' + g[1] + '"/></linearGradient></defs><rect width="' + w + '" height="' + h + '" fill="url(#g)"/>' + art + '</svg>';
 }
+
+// The room each design's art takes on every side, as a share of the region's shorter side: the post's margin is at least this, so the text never runs over a band,
+// a picture or a corner drawing; a design that scatters pieces over its edge (confetti, stars, drops) keeps 13% clear. Measured from `themeArt` above; change both together.
+export const THEME_INSETS = {
+  birthday: { top: 0.13, right: 0.13, bottom: 0.3, left: 0.13 },
+  notice: { top: 0.1, right: 0.08, bottom: 0.22, left: 0.08 },
+  assembly: { top: 0.12, right: 0.2, bottom: 0.2, left: 0.2 },
+  elevator: { top: 0.12, right: 0.2, bottom: 0.1, left: 0.08 },
+  maintenance: { top: 0.1, right: 0.3, bottom: 0.1, left: 0.06 },
+  celebration: { top: 0.13, right: 0.13, bottom: 0.13, left: 0.13 },
+  christmas: { top: 0.13, right: 0.22, bottom: 0.13, left: 0.22 },
+  easter: { top: 0.13, right: 0.13, bottom: 0.22, left: 0.13 },
+  junina: { top: 0.2, right: 0.13, bottom: 0.13, left: 0.13 },
+  recycling: { top: 0.1, right: 0.3, bottom: 0.16, left: 0.26 },
+  water: { top: 0.13, right: 0.13, bottom: 0.16, left: 0.13 },
+  pool: { top: 0.17, right: 0.06, bottom: 0.14, left: 0.06 },
+  security: { top: 0.1, right: 0.26, bottom: 0.1, left: 0.08 },
+  health: { top: 0.13, right: 0.13, bottom: 0.14, left: 0.13 },
+  pets: { top: 0.17, right: 0.2, bottom: 0.2, left: 0.17 },
+};
