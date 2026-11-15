@@ -1,0 +1,27 @@
+.ticker
+  z-index: 1
+  display: flex
+  overflow: hidden
+  position: absolute
+  inset: 0
+  box-sizing: border-box
+  align-items: center
+  white-space: nowrap
+
+  .track
+    white-space: pre
+    display: inline-block
+    position: relative
+    left: 100%
+
+    &.run
+      animation-name: ticker-scroll
+      animation-timing-function: linear
+      animation-iteration-count: 1
+
+@keyframes ticker-scroll
+  from
+    transform: translateX(0)
+
+  to
+    transform: translateX(-100%) translateX(-100vw)
