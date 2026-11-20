@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import rssItemOf, { hasFlatItem, itemsOf, pickItem, flatKeysOf } from './rss-item';
+import rssItemOf, { hasFlatItem, itemsOf, pickItem, flatKeysOf, channelLogoOf } from './rss-item';
 
 const items = [
   {
@@ -99,5 +99,22 @@ describe('rssItemOf', () => {
   it('returns the media as it is without flat keys and without items', () => {
     const media = { iteration: 1 };
     expect(rssItemOf(media)).toBe(media);
+  });
+});
+
+describe('channelLogoOf', () => {
+  it('reads the channel logo of the gateway body', () => {
+    expect(channelLogoOf({ result: { data: { logo: 'https://a.example/logo.png' } } })).toBe('https://a.example/logo.png');
+  });
+
+  it('is undefined for an old player, a channel without a logo or a body that is not a url', () => {
+    expect(channelLogoOf({})).toBeUndefined();
+    expect(channelLogoOf({ result: { data: { logo: null } } })).toBeUndefined();
+    expect(channelLogoOf({ result: { data: { logo: '' } } })).toBeUndefined();
+    expect(channelLogoOf({ result: { data: { logo: 42 } } })).toBeUndefined();
+  });
+
+  it('still finds it when the player also sent the flat keys', () => {
+    expect(channelLogoOf({ itemTitle: 'x', result: { data: { logo: 'https://a.example/l.png' } } })).toBe('https://a.example/l.png');
   });
 });

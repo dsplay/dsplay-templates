@@ -18,7 +18,7 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 |-------------------|---------|-------------------------------------------------------------------------|
 | `show_qr_code`    | boolean | Shows a QR code linking to `media.link`, next to the text. Defaults to `true`. |
 | `bg_color`        | string  | Background color of the whole item. Defaults to `black`.             |
-| `logo`            | string  | Logo image shown next to the title. Falls back to a bundled RSS icon. |
+| `logo`            | string  | Logo image shown next to the title when the channel has none of its own (see below). |
 | `logo_bg_color`   | string  | Background color behind the logo. Defaults to `white`.               |
 | `title_color`     | string  | Title text color. Defaults to `white`.                                |
 | `title_bg_color`  | string  | Background color behind the title. Defaults to `darkorange`.         |
@@ -92,3 +92,11 @@ See [AGENTS.md](AGENTS.md).
 To see more about DSPLAY HTML Templates, visit: https://developers.dsplay.tv/docs/html-templates
 
 To work on this template together with the others (shared libraries, creating a new template from an existing one, releases), see the [repository README](https://github.com/dsplay/dsplay-templates/blob/main/README.md).
+
+## Logo
+
+The picture next to the title is, in order: the channel's own logo (a player that sends the gateway body, `media.result.data.logo`), the `logo` template variable, then the default RSS icon (drawn with plain boxes, animated). A picture that fails to load hands over to the next one. Players that do not send `result` (the old ones) have no channel logo, so they show the variable or the icon.
+
+## Trying every way the template is fed
+
+In development, `public/dsplay-data.js` reads the query string: no parameters is an old player (flat `itemTitle`/`itemDescription`, no `result`); `?player=new` feeds the gateway body in `media.result.data`; add `&clogo=0` for a channel without a logo and `&tlogo=0` for an empty `logo` variable.

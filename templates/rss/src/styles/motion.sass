@@ -1,0 +1,62 @@
+@import ./mixins
+
+// Entrance and idle motion. Only opacity and transform on HTML boxes (never SVG): the Android 4.4 WebView. Every entrance starts from `.dsplay-ready`
+// (the class the Loader's wrapper gets once fonts and images are in), never from mount: started at mount it would run while the template is hidden.
+// The blocks come in one after the other (title, picture, text, then the small marks); about 700 ms in total.
+
++keyframes(enter-from-left)
+  from
+    opacity: 0
+    +transform(translateX(-110%))
+
++keyframes(enter-from-bottom)
+  from
+    opacity: 0
+    +transform(translateY(110%))
+
++keyframes(enter-from-right)
+  from
+    opacity: 0
+    +transform(translateX(110%))
+
++keyframes(enter-fade)
+  from
+    opacity: 0
+
++keyframes(enter-pop)
+  from
+    opacity: 0
+    +transform(scale(.6))
+
+// the picture drifts closer for the whole time the media stays on screen
++keyframes(idle-zoom)
+  from
+    +transform(scale(1))
+  to
+    +transform(scale(1.3))
+
+.dsplay-ready
+  .image
+    +animation(enter-fade 700ms ease-out both)
+    .content
+      +animation(idle-zoom 16s ease-out 500ms both)
+
+  .title
+    +animation(enter-from-left 500ms ease-out 150ms both)
+    .logo
+      +animation(enter-pop 380ms ease-out 650ms both)
+
+  .description
+    +animation(enter-from-bottom 500ms ease-out 300ms both)
+    .qr-code
+      +animation(enter-fade 400ms ease-out 700ms both)
+
+.dsplay-ready.dsplay-reveal
+  .portrait, .square, .h-banner
+    .description
+      +animation(enter-from-right 500ms ease-out 300ms both)
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready .image, .dsplay-ready .image .content, .dsplay-ready .title, .dsplay-ready .title .logo, .dsplay-ready .description, .dsplay-ready .description .qr-code
+    -webkit-animation: none
+    animation: none

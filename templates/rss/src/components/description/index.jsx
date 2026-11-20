@@ -4,8 +4,8 @@ import {
   useTemplateBoolVal,
   useScreenInfo,
   screen,
-  FitText,
 } from '@dsplay/react-template-utils';
+import FitText from '../fit-text';
 import QrCode from '../qr-code';
 import { DEFAULT_TEXT_BG_COLOR, DEFAULT_TEXT_COLOR } from '../../util/defaults';
 import needsUolIndoorFix from '../../util/uol-indoor';

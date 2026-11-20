@@ -1,0 +1,73 @@
+@import ../../styles/mixins
+@import ../../styles/config
+
+$rssOrange: #f26522
+
+// 1em is the side of the icon (the logo slot of each format, set below), so the mark scales with it. Borders cannot take percentages.
+.rss-icon
+  position: relative
+  width: 1em
+  height: 1em
+
+  .dot
+    position: absolute
+    left: .17em
+    bottom: .17em
+    width: .15em
+    height: .15em
+    border-radius: 50%
+    background-color: $rssOrange
+
+  .wave
+    position: absolute
+    left: .17em
+    bottom: .17em
+    border-style: solid
+    border-color: $rssOrange
+    border-width: 0
+    opacity: .35
+
+  // a quarter circle: a square box whose top and right edges are drawn, rounded on the top-right corner
+  .wave-1
+    width: .38em
+    height: .38em
+    border-top-width: .08em
+    border-right-width: .08em
+    border-top-right-radius: 100%
+
+  .wave-2
+    width: .63em
+    height: .63em
+    border-top-width: .08em
+    border-right-width: .08em
+    border-top-right-radius: 100%
+
+.landscape .rss-icon
+  font-size: $landscapeTitleHeight - 2vh
+
+.portrait, .square
+  .rss-icon
+    font-size: $portraitTitleHeight - 2vh
+
+.h-banner .rss-icon
+  font-size: $hBanerLogoDimension
+
++keyframes(rss-wave)
+  0%, 100%
+    opacity: .3
+  25%, 55%
+    opacity: 1
+
+.dsplay-ready .rss-icon
+  .dot
+    +animation(rss-wave 2.4s ease-in-out infinite)
+  .wave-1
+    +animation(rss-wave 2.4s ease-in-out .35s infinite)
+  .wave-2
+    +animation(rss-wave 2.4s ease-in-out .7s infinite)
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready .rss-icon .dot, .dsplay-ready .rss-icon .wave
+    -webkit-animation: none
+    animation: none
+    opacity: 1
