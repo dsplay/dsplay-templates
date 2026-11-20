@@ -29,6 +29,16 @@ export function pickItem(items, iteration) {
   return items[turn % items.length];
 }
 
+/**
+ * The channel's own logo, from the gateway's body (`media.result.data.logo`). Players that send no body (the old ones) have none.
+ * @param {object} media the template's `media` object
+ * @returns {string|undefined}
+ */
+export function channelLogoOf(media) {
+  const logo = media.result && media.result.data && media.result.data.logo;
+  return typeof logo === 'string' && logo ? logo : undefined;
+}
+
 /** The flat keys the Android player sets, from one normalized item. */
 export function flatKeysOf(item, channel) {
   const images = Array.isArray(item.images) ? item.images : [];

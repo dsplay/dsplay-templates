@@ -24,7 +24,8 @@ src/
     title/                     <-- logo + title text
     description/                <-- description text + QR code
     image/                      <-- item image, hidden on banner formats when unset
-    logo/                       <-- logo image
+    logo/                       <-- logo image: channel logo, then the `logo` variable, then the default icon
+    rss-icon/                   <-- default RSS mark, drawn with boxes and animated
     qr-code/                    <-- QR code linking to media.link
     fit-text/                   <-- local FitText wrapper (see note below)
     debugger/                   <-- dev-only overlay dumping media/template/config/screen-info, toggled by the `debug` variable
@@ -39,7 +40,8 @@ scripts/
 - **Every component gets its own folder with an `index.jsx`.** For a simple component, `index.jsx` *is* the component. For one that grows into several files, `index.jsx` becomes a barrel re-exporting the folder's public API.
 - **Always import a component by its folder, never by reaching into `index`** — `import Title from '../title'`, never `.../title/index`.
 - Enforced automatically by ESLint's `unicorn/filename-case` rule for the naming half of this; the folder+`index.jsx`+import-by-folder structure is not machine-checked, just convention.
-- `src/components/fit-text` duplicates [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils)'s own `FitText` component (which `src/components/description` uses directly) with a slightly different config (`maxFontSize: 1000` vs `10000`, no ready-state visibility hiding). Pre-existing duplication, not touched during the 2026 migration — worth consolidating onto the shared component at some point, but that's a behavior change (adds hide-until-ready), not a pure refactor, so it wasn't done without a deliberate decision to do so.
+- `src/components/fit-text` wraps [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils)'s `FitText`, which stays hidden until its size is calculated, and remounts it once the `Loader` has revealed the template so it measures again with the real fonts. The old local copy showed its first, giant size for as long as the calculation took (the `Breaking news` flicker on opening).
+- Motion lives in `src/styles/motion.sass`: every entrance starts from `.dsplay-ready` (never from mount), opacity and transform only, with a reduced-motion block. The picture's slow zoom and the default icon's waves keep the screen from being static. See `docs/entrance-style.md` at the repository root.
 
 ## Runtime model
 

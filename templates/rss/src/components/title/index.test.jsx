@@ -5,7 +5,8 @@ import { render, cleanup } from '@testing-library/react';
 
 const state = { media: {}, config: {} };
 
-vi.mock('@dsplay/react-template-utils', () => ({
+vi.mock('@dsplay/react-template-utils', async (importOriginal) => ({
+  ...(await importOriginal()),
   useMedia: () => state.media,
   useConfig: () => state.config,
   useTemplateVal: (_name, fallback) => fallback,
