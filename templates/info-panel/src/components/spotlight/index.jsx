@@ -126,7 +126,9 @@ function Info({ s, boost }) {
               </div>
               {it.series && (
                 <div className={`q2chart ${it.dir}`}>
-                  <div className="bars"><svg viewBox="0 0 290 100" preserveAspectRatio="none" aria-hidden="true"><polyline points={it.series} fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" /></svg></div>
+                  <div className="bars">
+                    <div className="bars-win"><div className="bars-in"><svg viewBox="0 0 290 100" preserveAspectRatio="none" aria-hidden="true"><polyline points={it.series} fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" /></svg></div></div>
+                  </div>
                 </div>
               )}
             </div>

@@ -39,11 +39,18 @@
   100%
     opacity: 1
     transform: scale(1)
-@keyframes bars
+// the chart is drawn from the left at its final size (stretched while it enters it looked bad): the window slides in from the left, so what it clips grows, and the content slides
+// the other way by the same amount, so it never leaves its place
+@keyframes bars-window
   0%
-    transform: scaleX(0)
+    transform: translateX(-100%)
   100%
-    transform: scaleX(1)
+    transform: translateX(0)
+@keyframes bars-content
+  0%
+    transform: translateX(100%)
+  100%
+    transform: translateX(0)
 @keyframes slidein
   0%
     transform: translateX(.8em)
@@ -92,11 +99,21 @@
 .sp .slide.on .a-pop
   animation: pop .8s ease both
 .sp .bars
-  transform-origin: left center
-  transform: scaleX(0)
+  overflow: hidden
+.sp .bars-win,
+.sp .bars-in
+  width: 100%
+  height: 100%
+.sp .bars-win
+  overflow: hidden
+  transform: translateX(-100%)
+.sp .bars-in
+  transform: translateX(100%)
 
-.sp .slide.on .bars
-  animation: bars 1s ease .3s both
+.sp .slide.on .bars-win
+  animation: bars-window 1s ease .3s both
+.sp .slide.on .bars-in
+  animation: bars-content 1s ease .3s both
 .sp .od
   display: inline-block
   height: 1.15em
