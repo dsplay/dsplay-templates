@@ -16,14 +16,6 @@
     opacity: 1
     +transform(translateY(0) scale(1))
 
-+keyframes(cards-draw)
-  0%
-    opacity: 0
-    +transform(scaleX(0))
-  100%
-    opacity: 1
-    +transform(scaleX(1))
-
 +keyframes(cards-float)
   0%
     +transform(translateY(0))
@@ -166,7 +158,6 @@
 .cards__spark
   flex: none
   margin-top: auto
-  +transform-origin(left center)
 
 // colors of a direction that read on a white card
 .cards
@@ -343,8 +334,11 @@
   .cards--v-banner .marquee
     +animation(cards-fade 0.6s ease-out both)
 
-  .cards__spark
-    +animation(cards-draw 0.7s ease-out both)
+  .cards__spark .reveal__win
+    +animation(reveal-window 0.7s ease-out both)
+
+  .cards__spark .reveal__in
+    +animation(reveal-content 0.7s ease-out both)
 
   .cards__inner
     +animation(cards-float 7s ease-in-out infinite)
@@ -367,7 +361,8 @@
     .cards__card,
     .cards--h-banner .marquee,
     .cards--v-banner .marquee,
-    .cards__spark,
+    .cards__spark .reveal__win,
+    .cards__spark .reveal__in,
     .cards__inner
       -webkit-animation: none
       animation: none

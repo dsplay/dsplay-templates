@@ -6,6 +6,7 @@ import Badge from '../../components/badge';
 import Change from '../../components/change';
 import Price from '../../components/price';
 import Spark from '../../components/spark';
+import Reveal from '../../components/reveal';
 import { formatDate, formatPrice, trendOf } from '../../lib/format';
 import { rem } from '../../lib/layout';
 import { lastPoint, periodTrend, sparkArea, sparkPoints } from '../../lib/sparkline';
@@ -60,16 +61,18 @@ function Chart({
   return (
     <div className="spot__chartwrap" style={{ width: rem(width) }}>
     <div className={`spot__chartbox spot__chartbox--${tone(trend)}`} style={{ width: rem(width), height: rem(height) }}>
-      <svg viewBox={`0 0 ${width} ${height}`} width="100%" height="100%" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="spot-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" className="spot__stop" stopOpacity="0.5" />
-            <stop offset="1" className="spot__stop" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <polygon points={sparkArea(series, width, height, pad)} fill="url(#spot-fill)" />
-        <polyline className="spot__line" points={sparkPoints(series, width, height, pad)} fill="none" />
-      </svg>
+      <Reveal>
+        <svg viewBox={`0 0 ${width} ${height}`} width="100%" height="100%" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="spot-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" className="spot__stop" stopOpacity="0.5" />
+              <stop offset="1" className="spot__stop" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <polygon points={sparkArea(series, width, height, pad)} fill="url(#spot-fill)" />
+          <polyline className="spot__line" points={sparkPoints(series, width, height, pad)} fill="none" />
+        </svg>
+      </Reveal>
       {end && <i className="spot__dot" style={{ left: `${(end.x / width) * 100}%`, top: `${(end.y / height) * 100}%` }} />}
     </div>
     <div className="spot__range">
