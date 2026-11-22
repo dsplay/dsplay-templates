@@ -39,7 +39,7 @@ describe('readSpotlight', () => {
 
   it('makes the horoscope slide of the sign being read, with its dates', () => {
     const horo = readSpotlight(answer(), { lng: 'pt', now: NOW }).slides[7];
-    expect(horo).toMatchObject({ isHoro: true, signName: 'Leão', title: 'Confiança', text: 'Um bom dia.' });
+    expect(horo).toMatchObject({ isHoro: true, signName: 'Leão', title: 'Confiança', text: 'Um bom dia.', lead: 'Leão', line: 'Confiança: Um bom dia.' });
     expect(horo.tagText).toContain('Leão');
   });
 

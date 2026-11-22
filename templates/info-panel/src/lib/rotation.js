@@ -8,10 +8,15 @@
 import { useEffect, useMemo, useState } from 'react';
 
 const DEFAULT_DURATION = 20000;
-// What the player spends before the first page is on screen (the web view loads the template, the fonts and the data arrive, the page fades in) counts against the media's duration, and
-// it would all come out of the last page. The phases share the duration without it, so the last one gets its whole time. A media that short keeps its whole duration.
+// What the player spends before the first page is on screen (the web view loads the template, the fonts and the images arrive, the template is revealed) counts against the media's duration, and
+// it would all come out of the last page. The rotation starts when the template is shown, and the phases share what is left of the duration: the time since the page began to load (measured)
+// plus a safety margin for what happens before that (the player starting the media) and for the fade. `LEAD` is the guess used until it is measured. A media that short keeps its whole duration.
 const LEAD = 2000;
+const SAFETY = 500;
 const MIN_FOR_LEAD = 6000;
+
+/** Milliseconds since the page began to load: the part of the media's duration already gone when the template is shown. */
+const sinceLoad = () => (typeof performance !== 'undefined' && typeof performance.now === 'function' ? performance.now() : 0);
 
 /** The most a phase stays, ms, before the turn is repeated to share a long media (the rotating area of the panel, and the spotlight's slides). */
 export const PANEL_MAX_PHASE = 8000;
@@ -25,10 +30,11 @@ export const phasesOf = (items) => items.map((item) => Math.max(1, Math.trunc(Nu
  * @param {number} duration the media's duration, ms (the default is 20 s when it is unknown); the first 2 s of a media of more than 6 s are not shared (the page is loading)
  * @param {number} total phases in one turn of the items
  * @param {number} max the most one phase stays, ms
+ * @param {number} [lead] ms of the duration already gone (default 2 s); never more than half of it
  */
-export function dwellFor(duration, total, max) {
+export function dwellFor(duration, total, max, lead = LEAD) {
   const full = Number(duration) > 0 ? Number(duration) : DEFAULT_DURATION;
-  const length = full > MIN_FOR_LEAD ? full - LEAD : full;
+  const length = full > MIN_FOR_LEAD ? Math.max(full - lead, full / 2) : full;
   const phases = Math.max(1, total);
   const turns = Math.max(1, Math.ceil(length / (phases * max)));
   return { dwell: Math.floor(length / (turns * phases)), turns };
@@ -45,23 +51,33 @@ export function locate(step, phases) {
 }
 
 /**
- * The item showing now and its phase. With nothing to rotate (one phase) it stays on the first item and sets no timer. The turns the media holds are played one after the other, and after the last
- * phase of the last turn it stays there until the media ends: it does not go back to the first phase unless there was time for another whole turn (the 2 s kept back for the loading are slack
- * for the last phase, not the start of a new round).
- * @param {{phases: number[], duration: number, max: number}} options
+ * The item showing now and its phase. With nothing to rotate (one phase) it stays on the first item and sets no timer. Nothing moves while `hold` (the template is not shown yet: the fonts and
+ * images are loading): the rotation starts when it stops, with the first item and the time left of the media (`lead` is the time already gone, measured when it starts, unless given). The turns
+ * the media holds are played one after the other, and after the last phase of the last turn it stays there until the media ends: it does not go back to the first phase unless there was time
+ * for another whole turn (what is kept back for the loading is slack for the last phase, not the start of a new round).
+ * @param {{phases: number[], duration: number, max: number, hold?: boolean, lead?: number}} options
  */
-export function useRotation({ phases, duration, max }) {
+export function useRotation({
+  phases, duration, max, hold = false, lead: given,
+}) {
   const key = phases.join(',');
   const list = useMemo(() => phasesOf(key ? key.split(',').map(Number) : []), [key]);
   const total = list.reduce((sum, n) => sum + n, 0);
-  const { dwell, turns } = dwellFor(duration, total, max);
+  // measured once, the moment the hold ends
+  const [lead, setLead] = useState(null);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!hold && lead === null) setLead(given === undefined ? sinceLoad() + SAFETY : given);
+  }, [hold, lead, given]);
+  const waiting = hold || lead === null;
+  const { dwell, turns } = dwellFor(duration, total, max, lead === null ? LEAD : lead);
   const [step, setStep] = useState(0);
 
   useEffect(() => {
     // a changed duration (or list) restarts the rotation on its first step
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setStep(0);
-    if (total <= 1) return undefined;
+    if (waiting || total <= 1) return undefined;
     const last = turns * total;
     let played = 0;
     const timer = setInterval(() => {
@@ -73,7 +89,7 @@ export function useRotation({ phases, duration, max }) {
       setStep(played % total);
     }, dwell);
     return () => clearInterval(timer);
-  }, [dwell, total, turns]);
+  }, [dwell, total, turns, waiting]);
 
   return locate(step % Math.max(1, total), list);
 }

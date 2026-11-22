@@ -126,7 +126,9 @@ function Info({ s, boost }) {
               </div>
               {it.series && (
                 <div className={`q2chart ${it.dir}`}>
-                  <div className="bars"><svg viewBox="0 0 290 100" preserveAspectRatio="none" aria-hidden="true"><polyline points={it.series} fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" /></svg></div>
+                  <div className="bars">
+                    <div className="bars-win"><div className="bars-in"><svg viewBox="0 0 290 100" preserveAspectRatio="none" aria-hidden="true"><polyline points={it.series} fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" /></svg></div></div>
+                  </div>
                 </div>
               )}
             </div>
@@ -182,17 +184,19 @@ const LAYOUT = { poster: 'lay-overlay', night: 'lay-overlay', cards: 'lay-side',
 
 /** @param {{spotlight: {slides: object[], pinned: object}, style: string, format: string, lng: string}} props */
 export default function Spotlight({
-  spotlight, style, format, lng, backgroundStyle, textColor, logoBoxStyle, duration, boost = 1, height = 0, max,
+  spotlight, style, format, lng, backgroundStyle, textColor, logoBoxStyle, duration, boost = 1, height = 0, max, hold = false,
 }) {
   const { slides, pinned } = spotlight;
   // the strip draws one line per slide, fitted to its width instead of cut
   const slim = /sf-slim/.test(format);
-  // the strip's line takes the height it has (23px is the strip's type size): a 120px strip draws it at about 50px, a 56px one at 23px
-  const slimMax = Math.min(2.4, Math.max(0.9, ((Number(height) || 0) * 0.42) / 23));
-  const { active, phase } = useRotation({ phases: slides.map((s) => (s.isJoke ? 2 : 1)), duration, max });
+  // the strip's line takes the height it has (23px is the strip's type size), and may wrap over two lines: a 120px strip draws it at about 41px, a 56px one at 23px
+  const slimMax = Math.min(2.2, Math.max(0.9, ((Number(height) || 0) * 0.34) / 23));
+  const { active, phase } = useRotation({ phases: slides.map((s) => (s.isJoke ? 2 : 1)), duration, max, hold });
   const hasHead = Boolean(pinned.clock || pinned.logo);
   // on the strip a joke's line is its question, then its answer, as in the other formats
   const lineOf = (s, i) => (s.isJoke && i === active && phase === 1 ? s.a : s.line);
+  // a slide may open its line with a lead in bold (the horoscope's sign), never cut whatever the rest does
+  const withLead = (s, line) => (s.lead ? `${s.lead} \u00b7 ${line}` : line);
   return (
     <div className={`sp ${format} st-${style} ${LAYOUT[style]} ${hasHead ? 'withhead' : 'nohead'}`} style={{ width: '100%', height: '100%', color: textColor || undefined }}>
       <div className="sbg" style={backgroundStyle} />
@@ -204,9 +208,13 @@ export default function Spotlight({
         {slides.map((s, i) => (
           <div className={`slide sl-${s.kind} ${i === active ? 'on' : ''} ${i === active && phase === 1 ? 'ph1' : ''}`} key={s.key}>
             <div className="hero"><Hero s={s} format={format} /></div>
-            <Info s={s} boost={boost} />
+            <Info s={s} boost={LAYOUT[style] === 'lay-overlay' ? Math.min(boost, 1.15) : boost} />
             {slim && <SlimIcon s={s} size={slimMax} />}
-            {slim ? <FittedText className="sline" text={lineOf(s, i)} max={slimMax} min={0.45} /> : <span className="sline">{s.line}</span>}
+            {slim ? (
+              <FittedText className="sline" text={withLead(s, lineOf(s, i))} max={slimMax} min={0.45} lines={2}>
+                {s.lead ? <><b className="lead">{s.lead}</b>{` \u00b7 ${lineOf(s, i)}`}</> : undefined}
+              </FittedText>
+            ) : <span className="sline">{s.line}</span>}
           </div>
         ))}
       </div>

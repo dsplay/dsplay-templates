@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
-  Loader, useConfig, useMedia, useTemplateVal,
+  Loader, LoaderContext, useConfig, useMedia, useTemplateVal,
 } from '@dsplay/react-template-utils';
 import { formatOf, isFlat, spotFormatOf } from '../../lib/layout';
 import { fillOf, scaleOf } from '../../lib/scale';
@@ -47,7 +47,7 @@ const FIT = {
 const SHARE = [100, 65, 55, 45, 40];
 
 // how many lines a rotating text may take: a strip has one, a banner two, the tile formats three
-const linesOf = (format) => (/fmt-slim/.test(format) ? 1 : /fmt-band/.test(format) ? 2 : 3);
+const linesOf = (format) => (/fmt-(slim|band)/.test(format) ? 2 : 3);
 
 const windowSize = () => [window.innerWidth, window.innerHeight];
 
@@ -76,8 +76,17 @@ function Scaled({ format, size, children }) {
 
 const boxOf = (backgroundColor, color) => (backgroundColor || color ? { backgroundColor: backgroundColor || undefined, color: color || undefined } : undefined);
 
+/** Tells the app when the Loader shows the template (the fonts and images are in): the rotation starts then, not while the template is still hidden and its first phases would pass unseen. */
+function Revealed({ onReveal }) {
+  const loader = useContext(LoaderContext);
+  const shown = !loader || loader.ready !== false;
+  useEffect(() => { if (shown) onReveal(true); }, [shown, onReveal]);
+  return null;
+}
+
 function App() {
   const media = useMedia();
+  const [revealed, setRevealed] = useState(false);
   const { locale } = useConfig();
   const lng = lngOf(locale);
   const styleVar = useTemplateVal('style', DEFAULT_STYLE);
@@ -96,7 +105,7 @@ function App() {
 
   const iteration = media && media.iteration;
   const panel = spotlightFamily ? null : readPanel(media, { lng, iteration });
-  const rotation = useRotation({ phases: panel ? panel.slides.map((s) => s.slots) : [], duration: media && media.duration, max: maxPhase });
+  const rotation = useRotation({ phases: panel ? panel.slides.map((s) => s.slots) : [], duration: media && media.duration, max: maxPhase, hold: !revealed });
   const spotlight = spotlightFamily ? readSpotlight(media, { lng, iteration, pin }) : null;
   const flat = isFlat(format);
   const tall = format === 'fmt-tall';
@@ -119,7 +128,9 @@ function App() {
     const others = order.filter((k) => k !== 'rot').length;
     const share = SHARE[Math.min(others, 4)];
     const boost = fillOf(format, size[0], size[1]);
-    const fillStyle = boost > 1.02 ? { fontSize: `${boost}em` } : undefined;
+    // the fixed tiles keep their width, so they grow less than the rotating area (a quote's change would come out of its tile)
+    const fxBoost = Math.min(boost, 1.25);
+    const fillStyle = fxBoost > 1.02 ? { fontSize: `${fxBoost}em` } : undefined;
     // the big tile of the tile formats is mostly air at the design's size: its content is drawn a third bigger, on top of what the room left over adds
     const rotBoost = boost * (/fmt-(landscape|square|portrait)/.test(format) ? 1.3 : 1);
     const rotFill = rotBoost > 1.02 ? { fontSize: `${rotBoost}em` } : undefined;
@@ -155,9 +166,10 @@ function App() {
   if (spotlightFamily) {
     return (
       <Loader reveal fonts={FONTS[style]}>
+      <Revealed onReveal={setRevealed} />
         <Scaled format={format} size={size}>
         {spotlight ? (
-          <Spotlight spotlight={spotlight} style={style} format={format} lng={lng} backgroundStyle={bgStyle} textColor={textColor} logoBoxStyle={logoBox} duration={media && media.duration} boost={fillOf(format, size[0], size[1])} height={size[1]} max={maxPhase} />
+          <Spotlight spotlight={spotlight} style={style} format={format} lng={lng} backgroundStyle={bgStyle} textColor={textColor} logoBoxStyle={logoBox} duration={media && media.duration} hold={!revealed} boost={fillOf(format, size[0], size[1])} height={size[1]} max={maxPhase} />
         ) : <div className="sp nohead" style={{ width: '100%', height: '100%' }}><div className="sbg" style={bgStyle} /></div>}
         </Scaled>
       </Loader>
@@ -165,6 +177,7 @@ function App() {
   }
   return (
     <Loader reveal fonts={FONTS[style]}>
+        <Revealed onReveal={setRevealed} />
       <Scaled format={format} size={size}>
         <div className={rootClass} style={{ width: '100%', height: '100%', color: textColor || undefined }}>
           <div className="bg" style={bgStyle} />

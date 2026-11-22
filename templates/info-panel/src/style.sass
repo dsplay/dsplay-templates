@@ -417,7 +417,7 @@ body
   align-items: center
   padding: 0 .8em
 .fmt-slim .fx .w + .w
-  margin-left: 1.6em
+  margin-left: 2.2em
 .fmt-slim .rot
   flex: 1
   min-width: 0
@@ -433,27 +433,34 @@ body
 .fmt-slim .logo b
   font-size: .5em
 .fmt-slim .wk-clock .date
-  font-size: 1.15em
+  font-size: .92em
 .fmt-slim .wk-clock .time
-  font-size: 1.15em
+  font-size: .92em
 .fmt-slim .wx
-  font-size: 1em
+  font-size: .8em
 .fmt-slim .wx-t
-  font-size: 1.15em
+  font-size: .92em
 .fmt-slim .wx-p
   display: none
 .fmt-slim .wk-quotes .q-c
   font-size: .5em
 .fmt-slim .q-d
-  font-size: .6em
+  font-size: .55em
   padding: .05em .3em
   margin-left: .25em
 .fmt-slim .q-d .pc
   display: none
 .fmt-slim .q-v
-  font-size: .95em
+  font-size: .8em
 .fmt-slim .ri .tag
   display: none
+.ip .lead
+  display: none
+.fmt-slim .ri .lead
+  display: inline
+  font-weight: 800
+  text-transform: uppercase
+  letter-spacing: .04em
 .fmt-slim .rtop
   margin-right: .5em
 .fmt-slim .tile,
@@ -625,6 +632,8 @@ body
 .fmt-landscape .wk-quotes .quotes
   width: 100%
   justify-content: space-around
+  flex-wrap: wrap
+  row-gap: .3em
 .fmt-landscape .q-c
   font-size: .8em
 .fmt-landscape .q-v
@@ -712,6 +721,8 @@ body
 .fmt-square .wk-quotes .quotes
   width: 100%
   justify-content: space-around
+  flex-wrap: wrap
+  row-gap: .3em
 .fmt-square .q-c
   font-size: .7em
 .fmt-square .q-v
@@ -798,6 +809,8 @@ body
 .fmt-portrait .wk-quotes .quotes
   width: 100%
   justify-content: space-around
+  flex-wrap: wrap
+  row-gap: .3em
 .fmt-portrait .q-c
   font-size: .75em
 .fmt-portrait .q-v
@@ -1491,6 +1504,9 @@ body
 
 .fmt-band.flat > .w + .rot
   margin-left: .9em
+// the thin strip too: what follows a widget, and the divider the style draws after it, never touch (the strip's list has no wrapper with a margin of its own)
+.fmt-slim.flat > * + *
+  margin-left: 1em
 
 // the weather alert (the service's severity, CAP scale): the tag and the tile take the severity's color in every style, so a screen from afar reads yellow, orange or red
 .ip .ri.sev-moderate .tag
