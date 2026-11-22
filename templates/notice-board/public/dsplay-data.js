@@ -20,7 +20,6 @@ var dsplay_media = {
 };
 
 var dsplay_template = {
-    text_color: '#ffffff',
     background_color: '#0b3b4a',
     show_title: 'true',
     ticker_speed: '120',

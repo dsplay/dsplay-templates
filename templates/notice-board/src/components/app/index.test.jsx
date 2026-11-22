@@ -126,8 +126,14 @@ describe('colours and designs', () => {
     expect(pick(plain, '.app')).toHaveStyle({ backgroundColor: '#0b3b4a', color: '#ffffff' });
     cleanup();
 
-    const navy = show({ kind: 'card', blocks: text(['a']), background: 'navy' }, { text_color: '#eeeeee' });
-    expect(pick(navy, '.app')).toHaveStyle({ backgroundColor: '#12284c', color: '#eeeeee' });
+    const navy = show({ kind: 'card', blocks: text(['a']), background: 'navy' });
+    expect(pick(navy, '.app')).toHaveStyle({ backgroundColor: '#12284c', color: '#ffffff' });
+    cleanup();
+
+    // the text follows the template's own background too: a light one gets dark text and the darker colours
+    const light = show({ kind: 'card', blocks: [{ text: 'a', color: 'red' }] }, { background_color: '#fde68a' });
+    expect(pick(light, '.app')).toHaveStyle({ backgroundColor: '#fde68a', color: '#111827' });
+    expect(pick(light, '.text').children[0]).toHaveStyle({ color: '#b91c1c' });
     cleanup();
 
     const white = show({ kind: 'card', blocks: [{ text: 'a', color: 'red' }], background: 'white' });
@@ -142,7 +148,7 @@ describe('colours and designs', () => {
     const c = show({ kind: 'card', blocks: text(['a']), theme: 'birthday' });
     expect(pick(c, '.app')).toHaveStyle({ color: '#ffffff', backgroundColor: '#6d28d9' });
     // jsdom drops a data url from the style, so the url itself is checked where it is made
-    const { style } = lookOf({ theme: 'birthday' }, '#fff', '#000', 1000, 500);
+    const { style } = lookOf({ theme: 'birthday' }, '#000', 1000, 500);
     expect(style.backgroundImage).toMatch(/^url\("data:image\/svg\+xml;utf8,%3Csvg/);
     const payload = style.backgroundImage.slice('url("data:image/svg+xml;utf8,'.length, -2);
     expect(payload).not.toMatch(/[()']/);

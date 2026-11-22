@@ -26,14 +26,27 @@ export const known = (table, key) => (has(table, key) ? key : '');
 /** The layout a post is drawn in: only the three the gateway sends, the card for anything else. */
 export const kindOf = (media) => (media.kind === 'ticker' || media.kind === 'long_post' ? media.kind : 'card');
 
-/** The colours of the region: the template's variables, the post's own background, or its design (always light text on its dark gradient); `insets` is the room the design's art takes. */
-export function lookOf(media, textColor, backgroundColor, width, height) {
+/** Whether a `#rgb` or `#rrggbb` colour is light enough to need dark text (relative luminance above one half); anything else is taken as dark. */
+export function isLight(hex) {
+  const m = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(typeof hex === 'string' ? hex.trim() : '');
+  if (!m) return false;
+  const full = m[1].length === 3 ? m[1].replace(/./g, '$&$&') : m[1];
+  const [r, g, b] = [0, 2, 4].map((i) => {
+    const c = parseInt(full.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.5;
+}
+
+/** The colours of the region: the post's own background or its design (always light text on its dark gradient), else the template's `background_color`; the text colour follows the background, there is no text colour variable. `insets` is the room the design's art takes. */
+export function lookOf(media, backgroundColor, width, height) {
   const background = known(BACKGROUNDS, media.background);
   const theme = known(THEMES, media.theme);
-  const light = !theme && background === 'white';
+  const fill = background ? BACKGROUNDS[background] : backgroundColor;
+  const light = !theme && isLight(fill);
   const style = {
-    color: light ? '#111827' : textColor,
-    backgroundColor: background ? BACKGROUNDS[background] : backgroundColor,
+    color: light ? '#111827' : '#ffffff',
+    backgroundColor: fill,
   };
   if (theme) {
     style.color = '#ffffff';

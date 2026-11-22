@@ -13,14 +13,13 @@ import './style.sass';
 // as the region it is rendered in, so there is no font size variable: the text is as large as fits.
 function App() {
   const media = useMedia() || {};
-  const textColor = useTemplateVal('text_color', '#ffffff');
   const backgroundColor = useTemplateVal('background_color', '#0b3b4a');
   const showTitle = useTemplateBoolVal('show_title', true);
   const speed = useTemplateFloatVal('ticker_speed', 120);
   const [{ width, height }] = useState(() => ({ width: window.innerWidth, height: window.innerHeight }));
 
   const kind = kindOf(media);
-  const { style, colors, insets } = lookOf(media, textColor, backgroundColor, width, height);
+  const { style, colors, insets } = lookOf(media, backgroundColor, width, height);
   const source = imageSource(media.image);
   const backdrop = kind !== 'ticker' && media.imageMode === 'backdrop' ? source : '';
 

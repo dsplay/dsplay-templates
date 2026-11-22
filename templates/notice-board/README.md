@@ -22,8 +22,7 @@ The text is sized from the region the template is rendered in (the page is as bi
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| `text_color` | string | `#ffffff` | Text colour, unless the post brings its own background or design. |
-| `background_color` | string | `#0b3b4a` | Background colour, unless the post brings its own background or design. |
+| `background_color` | string | `#0b3b4a` | Background colour, unless the post brings its own background or design. The text is white on a dark background and dark on a light one; there is no text colour variable. |
 | `show_title` | boolean | `true` | Shows the post's title (card and long post). |
 | `ticker_speed` | float | `120` | Pixels per second of the ticker; a line longer than the showing crosses faster, never under 5 s. |
 
