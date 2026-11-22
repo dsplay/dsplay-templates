@@ -47,7 +47,7 @@ const FIT = {
 const SHARE = [100, 65, 55, 45, 40];
 
 // how many lines a rotating text may take: a strip has one, a banner two, the tile formats three
-const linesOf = (format) => (/fmt-slim/.test(format) ? 1 : /fmt-band/.test(format) ? 2 : 3);
+const linesOf = (format) => (/fmt-(slim|band)/.test(format) ? 2 : 3);
 
 const windowSize = () => [window.innerWidth, window.innerHeight];
 

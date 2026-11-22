@@ -104,9 +104,11 @@ export function Slide({
   // the bar, all centered together) would move under the eye
   const [settled, setSettled] = useState(0);
   const waitFor = fit ? (slide.alt ? 2 : 1) : 0;
+  // a slide may open its line with a lead (the horoscope's sign): the tag says it in the formats that show the tag, and the strip, which has none, draws the lead in front of the text
+  const lead = (value) => (slide.lead && value === slide.headline ? <><b className="lead">{slide.lead}</b>{' \u00b7 '}</> : null);
   const headline = (value, className, style) => (fit
-    ? <FittedText className={className} style={style} text={value} max={fit.max} min={fit.min} lines={slide.alt ? lines + 1 : lines} onReady={() => setSettled((n) => n + 1)} />
-    : <span className={className} style={style}>{value}</span>);
+    ? <FittedText className={className} style={style} text={slide.lead && value === slide.headline ? `${slide.lead} \u00b7 ${value}` : value} max={fit.max} min={fit.min} lines={slide.alt ? lines + 1 : lines} onReady={() => setSettled((n) => n + 1)}>{lead(value)}{value}</FittedText>
+    : <span className={className} style={style}>{lead(value)}{value}</span>);
   return (
     <div className={`ri ${settled >= waitFor ? '' : 'unfit'} ${slide.alt ? 'dbl' : ''} ${slide.sev ? `sev-${slide.sev}` : ''} ${active ? 'on' : ''} ${active && phase === 1 ? 'ph1' : ''}`}>
       <div className="rtop">

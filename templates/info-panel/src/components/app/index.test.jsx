@@ -44,6 +44,18 @@ describe('App', () => {
     expect(container.querySelector('.rot .headline').textContent).toBe('Uma notícia');
   });
 
+  it('the strip, which has no tag, opens a horoscope line with its sign, and the tile formats keep it in the tag', () => {
+    const horoscope = { ...answer, rotating: ['horoscope'], order: ['clock', 'horoscope'], fixed: ['clock'], widgets: { clock: answer.widgets.clock, horoscope: { type: 'horoscope', status: 'ok', data: { signs: [{ sign: 'scorpio', keyword: 'Intuição', text: 'Sua intuição está afiada hoje.' }] } } } };
+    player.media = { duration: 30000, result: horoscope };
+    const { container } = render(<App />);
+    expect(container.querySelector('.rot .headline .lead').textContent).toBe('Escorpião');
+    expect(container.querySelector('.rot .headline').textContent).toBe('Escorpião · Sua intuição está afiada hoje.');
+    cleanup();
+    screen(1920, 1080);
+    const tiles = render(<App />).container;
+    expect(tiles.querySelector('.rot .tag').textContent).toContain('Escorpião');
+  });
+
   it('keeps the customer\'s order: the rotating area where the first rotating widget was', () => {
     const { container } = render(<App />);
     const keys = [...container.querySelector('.ip').children].map((n) => n.className.split(' ')[0]);
