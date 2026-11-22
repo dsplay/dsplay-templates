@@ -190,7 +190,7 @@ const horoscopeSlide = (data, ctx) => {
   const dates = signDates(entry.from, entry.to, ctx.lng);
   return {
     kind: 'horo', isHoro: true, isTitled: true, hasTag: true, signName: name, icon: GLYPH[entry.sign], tagText: [ctx.t.horoscope, name, dates].filter(Boolean).join(' \u00b7 '),
-    title: text(entry.keyword) || name, text: text(entry.text), lead: name, line: text(entry.keyword) || text(entry.text),
+    title: text(entry.keyword) || name, text: text(entry.text), lead: name, line: [text(entry.keyword), text(entry.text)].filter(Boolean).join(': '),
   };
 };
 
