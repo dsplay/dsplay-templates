@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { createContext, useEffect } from 'react';
 
 // What the components read from @dsplay/react-template-utils, in one place: tests set `player` and mock the module with `mockUtils`.
 export const player = { media: {}, template: {}, locale: 'pt_br' };
@@ -11,7 +11,10 @@ function MockFittedText({
   return <span className={className} style={style}>{children !== undefined ? children : text}</span>;
 }
 
+const LoaderContext = createContext({});
+
 export const mockUtils = () => ({
+  LoaderContext,
   useMedia: () => player.media,
   useConfig: () => ({ locale: player.locale }),
   useTemplateVal: (key, fallback) => (player.template[key] === undefined ? fallback : player.template[key]),

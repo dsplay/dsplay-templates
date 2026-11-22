@@ -27,6 +27,13 @@ describe('dwellFor', () => {
     expect(dwell * turns * 5).toBeGreaterThan(117900);
   });
 
+  it('takes off the time already gone when the rotation starts, never more than half of the duration', () => {
+    // 3.5 s gone of 30 s (the page took 3 s to show, and the safety margin): 26.5 s for 5 phases
+    expect(dwellFor(30000, 5, PANEL_MAX_PHASE, 3500)).toEqual({ dwell: 5300, turns: 1 });
+    // a page that took 40 s to show leaves half of the duration at least
+    expect(dwellFor(30000, 5, PANEL_MAX_PHASE, 40000)).toEqual({ dwell: 3000, turns: 1 });
+  });
+
   it('takes 20 s when the media has no duration', () => {
     expect(dwellFor(undefined, 4, PANEL_MAX_PHASE)).toEqual({ dwell: 4500, turns: 1 });
     expect(dwellFor(0, 4, PANEL_MAX_PHASE)).toEqual({ dwell: 4500, turns: 1 });
@@ -48,7 +55,7 @@ describe('useRotation', () => {
   it('moves to the next phase every dwell and stays on the last one when the media has no time for another turn', () => {
     vi.useFakeTimers();
     // 4 phases in 6 s (nothing taken off a media of 6 s or less): 1.5 s each, one turn
-    const { result } = renderHook(() => useRotation({ phases: [1, 2, 1], duration: 6000, max: PANEL_MAX_PHASE }));
+    const { result } = renderHook(() => useRotation({ phases: [1, 2, 1], duration: 6000, max: PANEL_MAX_PHASE, lead: 2000 }));
     expect(result.current).toEqual({ active: 0, phase: 0 });
     act(() => { vi.advanceTimersByTime(1500); });
     expect(result.current).toEqual({ active: 1, phase: 0 });
@@ -65,7 +72,7 @@ describe('useRotation', () => {
   it('goes round again only for the whole turns the media holds, then stays on the last phase', () => {
     vi.useFakeTimers();
     // 62 s, 2 s of loading, 3 phases of at most 8 s: 3 turns of 6.666 s a phase
-    const { result } = renderHook(() => useRotation({ phases: [1, 1, 1], duration: 62000, max: PANEL_MAX_PHASE }));
+    const { result } = renderHook(() => useRotation({ phases: [1, 1, 1], duration: 62000, max: PANEL_MAX_PHASE, lead: 2000 }));
     const active = [];
     for (let at = 0; at < 9; at += 1) {
       active.push(result.current.active);
@@ -79,7 +86,7 @@ describe('useRotation', () => {
   it('shows every phase for the same time inside the media, the last one included', () => {
     vi.useFakeTimers();
     // 22 s, 2 s of loading, 4 phases: 5 s each, and the last one ends with the media
-    const { result } = renderHook(() => useRotation({ phases: [1, 1, 1, 1], duration: 22000, max: PANEL_MAX_PHASE }));
+    const { result } = renderHook(() => useRotation({ phases: [1, 1, 1, 1], duration: 22000, max: PANEL_MAX_PHASE, lead: 2000 }));
     const seen = [];
     for (let at = 0; at < 4; at += 1) {
       seen.push(result.current.active);
@@ -90,9 +97,35 @@ describe('useRotation', () => {
 
   it('keeps the first item and sets no timer when there is nothing to rotate', () => {
     vi.useFakeTimers();
-    const { result } = renderHook(() => useRotation({ phases: [1], duration: 12000, max: PANEL_MAX_PHASE }));
+    const { result } = renderHook(() => useRotation({ phases: [1], duration: 12000, max: PANEL_MAX_PHASE, lead: 2000 }));
     act(() => { vi.advanceTimersByTime(60000); });
     expect(result.current).toEqual({ active: 0, phase: 0 });
     expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('does not move while the template is held (not shown yet) and starts from the first item when it is shown', () => {
+    vi.useFakeTimers();
+    const { result, rerender } = renderHook(({ hold }) => useRotation({ phases: [1, 1, 1], duration: 12000, max: PANEL_MAX_PHASE, hold, lead: 2000 }), { initialProps: { hold: true } });
+    act(() => { vi.advanceTimersByTime(30000); });
+    expect(result.current).toEqual({ active: 0, phase: 0 });
+    expect(vi.getTimerCount()).toBe(0);
+    rerender({ hold: false });
+    // 12 s less 2 s, 3 phases: 3.33 s each, counted from now
+    act(() => { vi.advanceTimersByTime(3300); });
+    expect(result.current).toEqual({ active: 0, phase: 0 });
+    act(() => { vi.advanceTimersByTime(100); });
+    expect(result.current).toEqual({ active: 1, phase: 0 });
+  });
+
+  it('measures the time since the page began to load when the template is shown, and shares what is left', () => {
+    vi.useFakeTimers();
+    vi.spyOn(performance, 'now').mockReturnValue(4000);
+    // 4 s gone and 0.5 s of margin: 17.5 s for 5 phases = 3.5 s each
+    const { result } = renderHook(() => useRotation({ phases: [1, 1, 1, 1, 1], duration: 22000, max: PANEL_MAX_PHASE }));
+    act(() => { vi.advanceTimersByTime(3400); });
+    expect(result.current.active).toBe(0);
+    act(() => { vi.advanceTimersByTime(200); });
+    expect(result.current.active).toBe(1);
+    vi.restoreAllMocks();
   });
 });

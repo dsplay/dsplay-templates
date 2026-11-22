@@ -182,14 +182,14 @@ const LAYOUT = { poster: 'lay-overlay', night: 'lay-overlay', cards: 'lay-side',
 
 /** @param {{spotlight: {slides: object[], pinned: object}, style: string, format: string, lng: string}} props */
 export default function Spotlight({
-  spotlight, style, format, lng, backgroundStyle, textColor, logoBoxStyle, duration, boost = 1, height = 0, max,
+  spotlight, style, format, lng, backgroundStyle, textColor, logoBoxStyle, duration, boost = 1, height = 0, max, hold = false,
 }) {
   const { slides, pinned } = spotlight;
   // the strip draws one line per slide, fitted to its width instead of cut
   const slim = /sf-slim/.test(format);
   // the strip's line takes the height it has (23px is the strip's type size): a 120px strip draws it at about 50px, a 56px one at 23px
   const slimMax = Math.min(2.4, Math.max(0.9, ((Number(height) || 0) * 0.42) / 23));
-  const { active, phase } = useRotation({ phases: slides.map((s) => (s.isJoke ? 2 : 1)), duration, max });
+  const { active, phase } = useRotation({ phases: slides.map((s) => (s.isJoke ? 2 : 1)), duration, max, hold });
   const hasHead = Boolean(pinned.clock || pinned.logo);
   // on the strip a joke's line is its question, then its answer, as in the other formats
   const lineOf = (s, i) => (s.isJoke && i === active && phase === 1 ? s.a : s.line);

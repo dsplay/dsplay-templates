@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
-  Loader, useConfig, useMedia, useTemplateVal,
+  Loader, LoaderContext, useConfig, useMedia, useTemplateVal,
 } from '@dsplay/react-template-utils';
 import { formatOf, isFlat, spotFormatOf } from '../../lib/layout';
 import { fillOf, scaleOf } from '../../lib/scale';
@@ -76,8 +76,17 @@ function Scaled({ format, size, children }) {
 
 const boxOf = (backgroundColor, color) => (backgroundColor || color ? { backgroundColor: backgroundColor || undefined, color: color || undefined } : undefined);
 
+/** Tells the app when the Loader shows the template (the fonts and images are in): the rotation starts then, not while the template is still hidden and its first phases would pass unseen. */
+function Revealed({ onReveal }) {
+  const loader = useContext(LoaderContext);
+  const shown = !loader || loader.ready !== false;
+  useEffect(() => { if (shown) onReveal(true); }, [shown, onReveal]);
+  return null;
+}
+
 function App() {
   const media = useMedia();
+  const [revealed, setRevealed] = useState(false);
   const { locale } = useConfig();
   const lng = lngOf(locale);
   const styleVar = useTemplateVal('style', DEFAULT_STYLE);
@@ -96,7 +105,7 @@ function App() {
 
   const iteration = media && media.iteration;
   const panel = spotlightFamily ? null : readPanel(media, { lng, iteration });
-  const rotation = useRotation({ phases: panel ? panel.slides.map((s) => s.slots) : [], duration: media && media.duration, max: maxPhase });
+  const rotation = useRotation({ phases: panel ? panel.slides.map((s) => s.slots) : [], duration: media && media.duration, max: maxPhase, hold: !revealed });
   const spotlight = spotlightFamily ? readSpotlight(media, { lng, iteration, pin }) : null;
   const flat = isFlat(format);
   const tall = format === 'fmt-tall';
@@ -155,9 +164,10 @@ function App() {
   if (spotlightFamily) {
     return (
       <Loader reveal fonts={FONTS[style]}>
+      <Revealed onReveal={setRevealed} />
         <Scaled format={format} size={size}>
         {spotlight ? (
-          <Spotlight spotlight={spotlight} style={style} format={format} lng={lng} backgroundStyle={bgStyle} textColor={textColor} logoBoxStyle={logoBox} duration={media && media.duration} boost={fillOf(format, size[0], size[1])} height={size[1]} max={maxPhase} />
+          <Spotlight spotlight={spotlight} style={style} format={format} lng={lng} backgroundStyle={bgStyle} textColor={textColor} logoBoxStyle={logoBox} duration={media && media.duration} hold={!revealed} boost={fillOf(format, size[0], size[1])} height={size[1]} max={maxPhase} />
         ) : <div className="sp nohead" style={{ width: '100%', height: '100%' }}><div className="sbg" style={bgStyle} /></div>}
         </Scaled>
       </Loader>
@@ -165,6 +175,7 @@ function App() {
   }
   return (
     <Loader reveal fonts={FONTS[style]}>
+        <Revealed onReveal={setRevealed} />
       <Scaled format={format} size={size}>
         <div className={rootClass} style={{ width: '100%', height: '100%', color: textColor || undefined }}>
           <div className="bg" style={bgStyle} />
