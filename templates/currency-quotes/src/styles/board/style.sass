@@ -16,14 +16,6 @@
     opacity: 1
     +transform(translateY(0))
 
-+keyframes(board-draw)
-  0%
-    opacity: 0
-    +transform(scaleX(0))
-  100%
-    opacity: 1
-    +transform(scaleX(1))
-
 +keyframes(board-sheen)
   0%
     opacity: 1
@@ -167,7 +159,6 @@
 .board__spark
   flex: none
   margin: 0 u(28)
-  +transform-origin(left center)
 
 .board__figures
   flex: none
@@ -363,8 +354,11 @@
   .board .marquee
     +animation(board-fade 0.6s ease-out both)
 
-  .board__spark
-    +animation(board-draw 0.7s ease-out both)
+  .board__spark .reveal__win
+    +animation(reveal-window 0.7s ease-out both)
+
+  .board__spark .reveal__in
+    +animation(reveal-content 0.7s ease-out both)
 
   .board__row:after
     +animation(board-sheen 14s ease-in-out infinite)
@@ -373,7 +367,8 @@
   .dsplay-ready .board__row:nth-child(#{$i})
     +animation-delay-n(($i - 1) * 70ms)
 
-  .dsplay-ready .board__row:nth-child(#{$i}) .board__spark
+  .dsplay-ready .board__row:nth-child(#{$i}) .board__spark .reveal__win,
+  .dsplay-ready .board__row:nth-child(#{$i}) .board__spark .reveal__in
     +animation-delay-n(($i - 1) * 70ms + 300ms)
 
   .dsplay-ready .board__row:nth-child(#{$i}):after
@@ -386,7 +381,8 @@
     .board__lead,
     .board__row,
     .board .marquee,
-    .board__spark,
+    .board__spark .reveal__win,
+    .board__spark .reveal__in,
     .board__row:after
       -webkit-animation: none
       animation: none

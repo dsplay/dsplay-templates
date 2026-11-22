@@ -28,14 +28,6 @@
     opacity: 1
     +transform(scale(1))
 
-+keyframes(spot-draw)
-  0%
-    opacity: 0
-    +transform(scaleX(0))
-  100%
-    opacity: 1
-    +transform(scaleX(1))
-
 +keyframes(spot-drift-a)
   0%
     +transform(translate(0, 0) scale(1))
@@ -232,7 +224,6 @@
 .spot__chart
   flex: none
   margin-top: auto
-  +transform-origin(left center)
 
 .spot__chartbox
   position: relative
@@ -616,7 +607,6 @@
 .spot__slimspark
   flex: none
   margin-left: u(28)
-  +transform-origin(left center)
 
 .spot__slimcount
   flex: none
@@ -639,8 +629,11 @@
   .spot--h-slim .spot__change
     +animation(spot-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both)
 
-  .spot__slimspark
-    +animation(spot-draw 0.8s ease-out 0.25s both)
+  .spot__slimspark .reveal__win
+    +animation(reveal-window 0.8s ease-out 0.25s both)
+
+  .spot__slimspark .reveal__in
+    +animation(reveal-content 0.8s ease-out 0.25s both)
 
   .spot__bg--in
     +animation(spot-fade 1s ease-out both)
@@ -663,8 +656,11 @@
   .spot__meta
     +animation(spot-rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both)
 
-  .spot__chart
-    +animation(spot-draw 0.9s ease-out 0.35s both)
+  .spot__chart .reveal__win
+    +animation(reveal-window 0.9s ease-out 0.35s both)
+
+  .spot__chart .reveal__in
+    +animation(reveal-content 0.9s ease-out 0.35s both)
 
   .spot__dot
     +animation(spot-fade 0.4s ease-out 1.1s both)
@@ -689,7 +685,8 @@
     .spot__slimname,
     .spot__slimprice,
     .spot--h-slim .spot__change,
-    .spot__slimspark,
+    .spot__slimspark .reveal__win,
+    .spot__slimspark .reveal__in,
     .spot__bg--in,
     .spot__orb--a,
     .spot__orb--b,
@@ -697,7 +694,8 @@
     .spot__names,
     .spot__pricebox,
     .spot__meta,
-    .spot__chart,
+    .spot__chart .reveal__win,
+    .spot__chart .reveal__in,
     .spot__dot,
     .spot__dot:after,
     .spot__row
