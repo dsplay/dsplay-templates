@@ -204,7 +204,7 @@ export default function Spotlight({
         {slides.map((s, i) => (
           <div className={`slide sl-${s.kind} ${i === active ? 'on' : ''} ${i === active && phase === 1 ? 'ph1' : ''}`} key={s.key}>
             <div className="hero"><Hero s={s} format={format} /></div>
-            <Info s={s} boost={boost} />
+            <Info s={s} boost={LAYOUT[style] === 'lay-overlay' ? Math.min(boost, 1.15) : boost} />
             {slim && <SlimIcon s={s} size={slimMax} />}
             {slim ? <FittedText className="sline" text={lineOf(s, i)} max={slimMax} min={0.45} /> : <span className="sline">{s.line}</span>}
           </div>

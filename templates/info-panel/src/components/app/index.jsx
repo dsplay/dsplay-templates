@@ -128,7 +128,9 @@ function App() {
     const others = order.filter((k) => k !== 'rot').length;
     const share = SHARE[Math.min(others, 4)];
     const boost = fillOf(format, size[0], size[1]);
-    const fillStyle = boost > 1.02 ? { fontSize: `${boost}em` } : undefined;
+    // the fixed tiles keep their width, so they grow less than the rotating area (a quote's change would come out of its tile)
+    const fxBoost = Math.min(boost, 1.25);
+    const fillStyle = fxBoost > 1.02 ? { fontSize: `${fxBoost}em` } : undefined;
     // the big tile of the tile formats is mostly air at the design's size: its content is drawn a third bigger, on top of what the room left over adds
     const rotBoost = boost * (/fmt-(landscape|square|portrait)/.test(format) ? 1.3 : 1);
     const rotFill = rotBoost > 1.02 ? { fontSize: `${rotBoost}em` } : undefined;

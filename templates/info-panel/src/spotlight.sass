@@ -695,6 +695,13 @@
 .lay-overlay .head,
 .lay-overlay .foot
   z-index: 2
+// the quotes: two rows with their charts take the lower half, so the flags sit at the top of the picture, clear of them (and the overlay's text grows less than the side layouts')
+.lay-overlay.sf-landscape .sl-quotes2 .hero,
+.lay-overlay.sf-square .sl-quotes2 .hero,
+.lay-overlay.sf-portrait .sl-quotes2 .hero,
+.lay-overlay.sf-tall .sl-quotes2 .hero
+  align-items: flex-start
+  padding-top: 6%
 // ---------- style: poster ----------
 .st-poster
   color: #fff
