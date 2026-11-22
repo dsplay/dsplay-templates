@@ -12,7 +12,7 @@ One template, three layouts, chosen by the `kind` of the post the player picked:
 
 - `card`: a framed message in the middle of the region.
 - `long_post`: a heading and left-aligned text, like a paper notice.
-- `ticker`: one line with the post of the showing, scrolling right to left (the player picks one post per showing, like the other formats).
+- `ticker`: one line with the post of the showing, scrolling right to left (the player picks one post per showing, like the other formats). It has what the other layouts have: the title opens the line in bold, a picture is a thumbnail that stays at the left while the line scrolls beside it, a backdrop (photo or PDF page) always covers the strip, and a design paints it. Only the alignment does not apply to a scrolling line.
 
 Any other `kind` is drawn as a card. A post comes from the gateway as `blocks` (text runs with bold, italic, underline, a size `small`, `large` or `xlarge` relative to the fitted text, and a named colour), never as HTML: every text is set as text. It may also bring a title, a picture (beside the text, or a backdrop that fills the region), a named background, a ready-made design (`theme`) drawn as an SVG at the size of the region, and the alignment of its text.
 

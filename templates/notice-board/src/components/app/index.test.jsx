@@ -233,6 +233,47 @@ describe('ticker', () => {
     expect(track(show({ kind: 'ticker', blocks: text(['a\nb', 'c \n d']) }))).toHaveTextContent('a bc d');
   });
 
+  describe('with what the other layouts have', () => {
+    const url = 'https://s3-us-west-2.amazonaws.com/b/uploads/notice-1-a.jpg';
+    const strip = { width: 1000, height: 100 };
+
+    it('a picture is a thumbnail that stays at the left while the line scrolls in the room that is left', () => {
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockReturnValue(600);
+      const c = show({ kind: 'ticker', blocks: text(['a']), image: url }, { ticker_speed: '100' }, strip);
+      expect(pick(c, '.ticker .pic img')).toHaveAttribute('src', url);
+      expect(pick(c, '.ticker .pic').style.width).toBe(px(80));
+      // 600 px of line plus the room it crosses (1000 - 80 - 2 x 10 = 900), at 100 px per second
+      expect(track(c).style.animationDuration).toBe('15s');
+      fireEvent.error(pick(c, '.ticker .pic img'));
+      expect(pick(c, '.ticker .pic')).toBeNull();
+    });
+
+    it('a backdrop fills the strip and is always cropped to cover it', () => {
+      const c = show({ kind: 'ticker', blocks: text(['a']), image: url, imageMode: 'backdrop' }, {}, strip);
+      expect(pick(c, '.backdrop')).toBeInTheDocument();
+      expect(pick(c, '.ticker .pic')).toBeNull();
+      const whole = pick(c, '.backdrop .whole');
+      expect(whole.style.objectFit).toBe('cover');
+      Object.defineProperty(whole, 'naturalWidth', { value: 500, configurable: true });
+      Object.defineProperty(whole, 'naturalHeight', { value: 2000, configurable: true });
+      fireEvent.load(whole);
+      expect(whole.style.objectFit).toBe('cover');
+    });
+
+    it('the title opens the line in bold, unless show_title is off', () => {
+      const c = show({ kind: 'ticker', title: 'Aviso', blocks: text(['a']) }, {}, strip);
+      expect(track(c)).toHaveTextContent('Aviso • a');
+      expect(track(c).children[0].style.fontWeight).toBe('bold');
+      cleanup();
+      expect(track(show({ kind: 'ticker', title: 'Aviso', blocks: text(['a']) }, { show_title: 'false' }, strip))).toHaveTextContent(/^a$/);
+    });
+
+    it('a design paints the strip', () => {
+      const c = show({ kind: 'ticker', blocks: text(['a']), theme: 'birthday' }, {}, strip);
+      expect(pick(c, '.app')).toHaveStyle({ color: '#ffffff', backgroundColor: '#6d28d9' });
+    });
+  });
+
   it('follows the region height, capped by 6% of its width', () => {
     const c = show({ kind: 'ticker', blocks: text(['a']) });
     expect(pick(c, '.ticker').style.fontSize).toBe('60px');

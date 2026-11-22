@@ -2,9 +2,10 @@ import { useState } from 'react';
 import './style.sass';
 
 // A backdrop (a photo, or the first page of a PDF) is what the whole post is drawn over: a blurred copy fills the region, the picture sits on it whole
-// (cropped to fill only when its shape is close to the region's), and a soft scrim keeps the text readable. It is not the small picture beside the text.
+// (cropped to fill only when its shape is close to the region's, and always on a thin strip, where a whole picture would be a small thumbnail), and a soft scrim keeps
+// the text readable. It is not the small picture beside the text.
 function Backdrop({ source, width, height }) {
-  const [fit, setFit] = useState('contain');
+  const [fit, setFit] = useState(width / height > 4 ? 'cover' : 'contain');
   // A backdrop that cannot load leaves the post on its own background.
   const [failed, setFailed] = useState(false);
   if (failed) return null;
@@ -12,7 +13,7 @@ function Backdrop({ source, width, height }) {
   const onLoad = (event) => {
     const { naturalWidth, naturalHeight } = event.currentTarget;
     const ratio = (naturalWidth / naturalHeight) / (width / height);
-    setFit(ratio > 0.75 && ratio < 1.33 ? 'cover' : 'contain');
+    setFit((ratio > 0.75 && ratio < 1.33) || width / height > 4 ? 'cover' : 'contain');
   };
 
   return (

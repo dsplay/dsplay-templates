@@ -21,20 +21,20 @@ function App() {
   const kind = kindOf(media);
   const { style, colors, insets } = lookOf(media, backgroundColor, width, height);
   const source = imageSource(media.image);
-  const backdrop = kind !== 'ticker' && media.imageMode === 'backdrop' ? source : '';
+  const backdrop = media.imageMode === 'backdrop' ? source : '';
 
   return (
     <div className="app" style={style}>
       {backdrop !== '' && <Backdrop source={backdrop} width={width} height={height} />}
       {kind === 'ticker'
-        ? <Ticker media={media} colors={colors} speed={speed} width={width} height={height} />
+        ? <Ticker media={media} colors={colors} speed={speed} width={width} height={height} picture={backdrop === '' ? source : ''} showTitle={showTitle} />
         : (
           <Post
             kind={kind}
             media={media}
             colors={colors}
             insets={insets}
-            picture={backdrop === '' && kind !== 'ticker' ? source : ''}
+            picture={backdrop === '' ? source : ''}
             showTitle={showTitle}
             width={width}
             height={height}
