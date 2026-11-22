@@ -1,0 +1,46 @@
+/* Entrance: Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and images are in. The animation starts from that class, never before: started at mount it would run while the template is still hidden. Only opacity, prefixed for old Android WebViews. */
+@-webkit-keyframes dsplay-enter {
+  from { opacity: 0; }
+}
+
+@keyframes dsplay-enter {
+  from { opacity: 0; }
+}
+
+.dsplay-reveal.dsplay-ready > * {
+  -webkit-animation: dsplay-enter 800ms ease-in both;
+  animation: dsplay-enter 800ms ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-reveal.dsplay-ready > * {
+    -webkit-animation: none;
+    animation: none;
+  }
+}
+
+/* Main renders its two panels as a fragment, so they are flex items of .container-home; the reveal wrapper sits between them and takes over that flex row (a column in portrait or under 960px, as .container-home does). */
+.dsplay-reveal {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+@media only screen and (orientation: portrait) {
+  .dsplay-reveal {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .dsplay-reveal {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}

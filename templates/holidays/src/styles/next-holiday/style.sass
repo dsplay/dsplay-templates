@@ -1,0 +1,182 @@
+@import ../mixins
+
+.nh
+  font-family: 'Poppins', sans-serif
+  color: #fff
+  background: #0a1522
+  background: linear-gradient(155deg, #12304f 0%, #0a1522 70%)
+
+.nh .stage__plate
+  padding: u(64)
+
+.nh__medal
+  position: absolute
+  top: u(56)
+  right: u(56)
+  width: u(200)
+  height: u(200)
+  border-radius: u(56)
+  background: rgba(255, 180, 84, 0.14)
+  color: #ffb454
+
+.nh__label
+  font-size: u(24)
+  font-weight: 600
+  letter-spacing: 0.16em
+  text-transform: uppercase
+  opacity: 0.7
+
+.nh__count
+  display: flex
+  align-items: baseline
+  line-height: 0.8
+
+.nh__count b
+  font-weight: 800
+  color: #ffb454
+  letter-spacing: -0.04em
+  font-size: u(300)
+
+.nh__count i
+  margin-left: u(18)
+  font-style: normal
+  font-weight: 600
+  font-size: u(56)
+  opacity: 0.85
+
+.nh__name
+  margin: 0
+  font-weight: 800
+  letter-spacing: -0.02em
+
+.nh__date
+  margin: u(14) 0 u(18)
+  font-size: u(34)
+  font-weight: 600
+  opacity: 0.8
+
+.nh__tag
+  display: inline-block
+  padding: u(6) u(18)
+  border-radius: u(30)
+  background: rgba(255, 255, 255, 0.12)
+  font-size: u(22)
+  font-weight: 600
+  letter-spacing: 0.08em
+  text-transform: uppercase
+
+.nh__next
+  display: flex
+  align-items: center
+  padding: u(22) u(28)
+  border-radius: u(26)
+  background: rgba(255, 255, 255, 0.09)
+
+.nh__next-medal
+  width: u(84)
+  height: u(84)
+  margin-right: u(26)
+  border-radius: u(24)
+  background: rgba(255, 180, 84, 0.16)
+  color: #ffb454
+
+.nh__next-text
+  min-width: 0
+  flex: 1
+
+.nh__next-text small
+  display: block
+  font-size: u(20)
+  font-weight: 600
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  opacity: 0.6
+
+.nh__next-text b
+  display: block
+  font-size: u(40)
+  line-height: 1.15
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.nh__next-text span
+  display: block
+  font-size: u(26)
+  font-weight: 600
+  opacity: 0.75
+
+.nh--today .nh__label
+  color: #ffb454
+  opacity: 1
+
+// every plate: the label on top, the body (the count and the name) in the middle, the next holiday at the bottom on a holiday
+.nh .stage__plate
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.nh__body
+  display: flex
+  align-items: center
+  min-width: 0
+
+.nh__text
+  min-width: 0
+  flex: 1
+
+// landscape: the count on the left, the name on the right
+.nh--landscape .nh__count
+  width: u(430)
+  flex: none
+
+// portrait and square: the count over the name
+.nh--portrait .nh__body,
+.nh--square .nh__body
+  flex-direction: column
+  align-items: flex-start
+
+.nh--portrait .nh__medal
+  width: u(170)
+  height: u(170)
+
+.nh--portrait .nh__count b
+  font-size: u(330)
+
+.nh--square .nh__medal
+  width: u(150)
+  height: u(150)
+
+.nh--square .stage__plate
+  padding: u(56)
+
+.nh--square .nh__count b
+  font-size: u(240)
+
+.nh--square .nh__count i
+  font-size: u(48)
+
+.nh--portrait .nh__label
+  max-width: u(420)
+
+.nh--square .nh__label
+  max-width: u(560)
+
+// banners
+.nh .banner
+  background: #0a1522
+  background: linear-gradient(155deg, #12304f 0%, #0a1522 70%)
+  font-family: 'Poppins', sans-serif
+  color: #fff
+
+.nh .banner__medal
+  background: rgba(255, 180, 84, 0.16)
+  color: #ffb454
+
+.nh .banner__label
+  color: #ffb454
+  font-weight: 600
+
+.nh .banner__when
+  font-weight: 600
+  opacity: 0.8

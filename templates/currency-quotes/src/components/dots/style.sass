@@ -1,0 +1,18 @@
+@import ../../styles/mixins
+
+.dots
+  display: inline-block
+  white-space: nowrap
+
+.dots__dot
+  display: inline-block
+  width: 1.2rem
+  height: 1.2rem
+  margin: 0 0.5rem
+  border-radius: 50%
+  background: currentColor
+  opacity: 0.25
+  +transition(opacity 0.4s ease)
+
+.dots__dot--on
+  opacity: 0.95

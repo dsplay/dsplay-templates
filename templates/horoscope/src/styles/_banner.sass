@@ -1,0 +1,42 @@
+// The skeleton of a strip (a 240 design px thick plate, see lib/layout.js), shared by the styles' banners: `.p--h` is one row (art, who, body, side), `.p--v` one
+// narrow column in the same order. A style adds its own look to the parts: `__art`, `__who` (name, dates), `__body` (the text and, in a row, the notice), `__side`.
+=banner($p)
+  .#{$p}
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    display: flex
+
+  .#{$p}__art, .#{$p}__who, .#{$p}__side
+    flex: none
+
+  .#{$p}__body
+    min-width: 0
+
+  .#{$p}--h
+    flex-direction: row
+    align-items: center
+    padding: 0 u(28)
+
+    .#{$p}__body
+      flex: 1
+
+  .#{$p}--v
+    flex-direction: column
+    align-items: center
+    padding: u(16)
+    text-align: center
+
+    .#{$p}__art, .#{$p}__who, .#{$p}__side
+      width: 100%
+
+    .#{$p}__body
+      flex: 1
+      display: flex
+      flex-direction: column
+      justify-content: center
+      width: 100%
+      margin: u(12) 0
+      overflow: hidden

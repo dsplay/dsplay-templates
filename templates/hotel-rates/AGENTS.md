@@ -20,12 +20,11 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, i18n)
+    app/                      <-- top-level component (loader in reveal mode, i18n)
     main/                     <-- lays out the cards (rooms, images, weather, exchange rates)
     imagecard/                <-- a single photo card
     weathercard/ weather/     <-- local weather widget (calls DSPLAY's weather API directly)
     directionarrows/          <-- arrow icon under the hotel logo
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

@@ -1,4 +1,4 @@
-import { useTemplateVal } from '@dsplay/react-template-utils';
+import { FittedText, useTemplateVal } from '@dsplay/react-template-utils';
 import logo from '../../images/ig-logo.png';
 
 function UserProfile({
@@ -19,7 +19,7 @@ function UserProfile({
   return (
     <div className={`user-profile ${className}`}>
       <div className="user-picture" style={{ backgroundImage: `url("${finalPic}")` }} />
-      <span className="user-name" style={{ color: fullNameColor }}>{finalName}</span>
+      <FittedText className="user-name" style={{ color: fullNameColor }} text={finalName} max={3} min={1.4} />
       <span className="user-screen-name" style={{ color: screenNameColor }}>
         @
         {username}

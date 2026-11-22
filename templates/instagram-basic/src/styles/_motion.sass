@@ -1,0 +1,87 @@
+@import ./mixins
+
+// Entrance and idle motion. Only opacity and transform, prefixed, on HTML boxes (never on SVG): the Android 4.4 WebView. Every entrance starts from `.dsplay-ready`
+// (the class the Loader's wrapper gets once fonts and images are in), never from mount, and every post starts it again because `Posts` mounts a new `Post` per page.
+
++keyframes(enter-rise)
+  from
+    opacity: 0
+    +transform(translateY(1.4rem))
+
++keyframes(enter-pop)
+  from
+    opacity: 0
+    +transform(scale(.7))
+
++keyframes(enter-fade)
+  from
+    opacity: 0
+
+// the photo drifts closer, once, over the time a post stays on screen
++keyframes(idle-zoom)
+  from
+    +transform(scale(1))
+  to
+    +transform(scale(1.08))
+
+// a ring around the avatar swells and fades, again and again
++keyframes(idle-ring)
+  0%
+    opacity: .6
+    +transform(scale(1))
+  70%, 100%
+    opacity: 0
+    +transform(scale(1.18))
+
+// the Instagram mark floats a little
++keyframes(idle-float)
+  0%, 100%
+    +transform(translateY(0))
+  50%
+    +transform(translateY(-.35rem))
+
+.dsplay-ready
+  .post .user-picture
+    +animation(enter-pop 420ms ease-out both)
+  .post .user-info
+    +animation(enter-rise 420ms ease-out 80ms both)
+  .post .media, .post .media-slider
+    +animation(enter-fade 500ms ease-out 120ms both)
+  .post .text-wrapper
+    +animation(enter-rise 460ms ease-out 200ms both)
+  .post .info-container
+    +animation(enter-rise 420ms ease-out 280ms both)
+  .logo
+    +animation((enter-fade 400ms ease-out 360ms both, idle-float 3.6s ease-in-out 1s infinite))
+
+  .post .media-pic
+    +animation(idle-zoom 16s ease-out 120ms both)
+
+.user-picture:after
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  border: .14rem solid rgba(255, 255, 255, .7)
+  border-radius: 50%
+  opacity: 0
+
+.dsplay-ready .post .user-picture:after
+  +animation(idle-ring 3.2s ease-out 700ms infinite)
+
+.media-pic
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready .post .user-picture, .dsplay-ready .post .user-info, .dsplay-ready .post .media, .dsplay-ready .post .media-slider, .dsplay-ready .post .text-wrapper, .dsplay-ready .post .info-container, .dsplay-ready .logo, .dsplay-ready .post .media-pic, .dsplay-ready .post .user-picture:after
+    -webkit-animation: none
+    animation: none

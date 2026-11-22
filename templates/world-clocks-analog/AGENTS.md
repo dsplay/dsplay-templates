@@ -25,11 +25,10 @@ src/
   hooks/
     use-language.js               <-- splits dsplay_config.locale into a bare language code, for Intl date formatting
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                     <-- lays out the clocks grid, reads brand/background/theme
     city/                     <-- one clock + city name + local date/time
     clock/                    <-- the analog clock face itself (SVG + rotated hand divs)
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

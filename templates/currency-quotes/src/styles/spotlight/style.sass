@@ -1,0 +1,703 @@
+@import ../mixins
+
+// Entrance (from `dsplay-ready`, see docs/entrance-style.md): every time a quote takes the stage its flag pops in, its name, price and change rise one after the other,
+// the chart is drawn from the left and a dot lights up at "now". Idle: two soft lights drift behind everything and the dot pulses. Only opacity and transform, on HTML
+// boxes (never on SVG: the chart is static).
++keyframes(spot-fade)
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
++keyframes(spot-rise)
+  0%
+    opacity: 0
+    +transform(translateY(2.6rem))
+  100%
+    opacity: 1
+    +transform(translateY(0))
+
++keyframes(spot-pop)
+  0%
+    opacity: 0
+    +transform(scale(0.5))
+  70%
+    opacity: 1
+    +transform(scale(1.08))
+  100%
+    opacity: 1
+    +transform(scale(1))
+
++keyframes(spot-drift-a)
+  0%
+    +transform(translate(0, 0) scale(1))
+  100%
+    +transform(translate(-8rem, 6rem) scale(1.18))
+
++keyframes(spot-drift-b)
+  0%
+    +transform(translate(0, 0) scale(1.1))
+  100%
+    +transform(translate(9rem, -5rem) scale(0.92))
+
++keyframes(spot-ping)
+  0%
+    opacity: 0.7
+    +transform(scale(1))
+  80%
+    opacity: 0
+    +transform(scale(3.2))
+  100%
+    opacity: 0
+    +transform(scale(3.2))
+
+.spot
+  font-family: 'Inter', sans-serif
+  color: #f4f7ff
+  background: #05080f
+
+.spot .stage__plate
+  display: flex
+  flex-direction: column
+  padding: u(40) u(52) u(30)
+
+// ── the backdrop: the whole screen, not only the plate ──
+.spot__bg
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+.spot__bg--up
+  background-color: #052820
+  background: radial-gradient(ellipse at 16% 10%, rgba(30, 226, 168, 0.4) 0%, rgba(30, 226, 168, 0) 58%), linear-gradient(160deg, #04141a 0%, #063028 100%)
+
+.spot__bg--down
+  background-color: #2a0a17
+  background: radial-gradient(ellipse at 16% 10%, rgba(255, 86, 120, 0.36) 0%, rgba(255, 86, 120, 0) 58%), linear-gradient(160deg, #14060e 0%, #3a0f20 100%)
+
+.spot__bg--flat
+  background-color: #0e1536
+  background: radial-gradient(ellipse at 16% 10%, rgba(110, 140, 255, 0.32) 0%, rgba(110, 140, 255, 0) 58%), linear-gradient(160deg, #060a1b 0%, #131c44 100%)
+
+.spot__orb
+  position: fixed
+  width: u(760)
+  height: u(760)
+  border-radius: 50%
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 66%)
+
+.spot__orb--a
+  top: u(-260)
+  right: u(-160)
+
+.spot__orb--b
+  bottom: u(-340)
+  left: u(180)
+
+.spot__top,
+.spot__main
+  position: relative
+
+// ── the top bar of a screen ──
+.spot__top
+  flex: none
+  display: flex
+  align-items: center
+  height: u(78)
+  margin-bottom: u(18)
+
+.spot__lead
+  display: flex
+  align-items: center
+  flex: 1 1 0%
+  min-width: 0
+  overflow: hidden
+
+.spot__basebadge
+  margin-right: u(16)
+
+.spot__base
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+  font-size: u(48)
+  letter-spacing: -0.02em
+  margin-right: u(18)
+
+.spot__title
+  font-weight: 500
+  font-size: u(24)
+  color: rgba(244, 247, 255, 0.7)
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.spot__updated
+  flex: none
+  margin-left: u(28)
+  font-weight: 500
+  font-size: u(20)
+  color: rgba(244, 247, 255, 0.62)
+
+// ── the stage: the hero and the rail ──
+.spot__main
+  flex: 1 1 0%
+  min-height: 0
+  display: flex
+  flex-direction: row
+
+.spot__hero
+  flex: none
+  display: flex
+  flex-direction: column
+  width: u(700)
+
+.spot__who
+  display: flex
+  align-items: center
+
+.spot__names
+  min-width: 0
+  margin-left: u(22)
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+
+.spot__name
+  font-weight: 700
+  font-size: u(46)
+  letter-spacing: -0.01em
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  max-width: u(560)
+
+.spot__code
+  margin-top: u(6)
+  padding: u(3) u(14)
+  border-radius: u(16)
+  background: rgba(255, 255, 255, 0.14)
+  font-weight: 600
+  font-size: u(20)
+  letter-spacing: 0.08em
+
+.spot__pricebox
+  display: flex
+  align-items: baseline
+  margin-top: u(26)
+  white-space: nowrap
+
+.spot__price
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+  line-height: 1.05
+  letter-spacing: -0.03em
+  text-shadow: 0 0 u(44) rgba(255, 255, 255, 0.28)
+
+.spot__unit
+  margin-left: u(16)
+  font-weight: 600
+  font-size: u(34)
+  color: rgba(244, 247, 255, 0.6)
+
+.spot__meta
+  display: flex
+  align-items: center
+  margin-top: u(10)
+
+.spot__change
+  padding: u(6) u(20)
+  border-radius: u(30)
+  background: rgba(255, 255, 255, 0.1)
+  font-size: u(36)
+
+.spot__period
+  margin-left: u(18)
+  font-weight: 500
+  font-size: u(22)
+  color: rgba(244, 247, 255, 0.62)
+
+.spot__period:empty
+  display: none
+
+.spot__chart
+  flex: none
+  margin-top: auto
+
+.spot__chartbox
+  position: relative
+
+.spot__chartbox svg
+  display: block
+  -webkit-filter: drop-shadow(0 0 0.9rem rgba(255, 255, 255, 0.3))
+  filter: drop-shadow(0 0 0.9rem rgba(255, 255, 255, 0.3))
+
+.spot__line
+  stroke-width: 5
+  stroke-linecap: round
+  stroke-linejoin: round
+  stroke: #9fb0ff
+
+.spot__stop
+  stop-color: #9fb0ff
+
+.spot__chartbox--up
+  .spot__line
+    stroke: #3df5bd
+  .spot__stop
+    stop-color: #3df5bd
+  svg
+    -webkit-filter: drop-shadow(0 0 0.9rem rgba(61, 245, 189, 0.55))
+    filter: drop-shadow(0 0 0.9rem rgba(61, 245, 189, 0.55))
+
+.spot__chartbox--down
+  .spot__line
+    stroke: #ff7a90
+  .spot__stop
+    stop-color: #ff7a90
+  svg
+    -webkit-filter: drop-shadow(0 0 0.9rem rgba(255, 122, 144, 0.55))
+    filter: drop-shadow(0 0 0.9rem rgba(255, 122, 144, 0.55))
+
+.spot__dot
+  position: absolute
+  display: block
+  width: u(22)
+  height: u(22)
+  margin: u(-11) 0 0 u(-11)
+  border-radius: 50%
+  background: #fff
+  box-shadow: 0 0 u(18) rgba(255, 255, 255, 0.9)
+
+.spot__dot:after
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  border-radius: 50%
+  background: #fff
+  opacity: 0
+
+.spot__range
+  display: flex
+  justify-content: space-between
+  margin-top: u(10)
+  font-weight: 600
+  font-size: u(20)
+  color: rgba(244, 247, 255, 0.7)
+
+// ── the rail ──
+.spot__rail
+  flex: 1 1 0%
+  min-width: 0
+  margin-left: u(56)
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.spot__row
+  flex: 1 1 0%
+  min-height: 0
+  max-height: u(66)
+  display: flex
+  align-items: center
+  margin-bottom: u(8)
+  padding: 0 u(18)
+  border-radius: u(16)
+  background: rgba(255, 255, 255, 0.05)
+  +transition(background 0.6s ease)
+
+.spot__row--on
+  background: rgba(255, 255, 255, 0.17)
+  box-shadow: 0 0 0 u(2) rgba(255, 255, 255, 0.75)
+
+.spot__rowmain
+  flex: 1 1 0%
+  min-width: 0
+  margin-left: u(16)
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.spot__rowcode
+  font-weight: 600
+  font-size: u(16)
+  letter-spacing: 0.08em
+  color: rgba(244, 247, 255, 0.66)
+  line-height: 1.15
+
+.spot__rowprice
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 700
+  line-height: 1.1
+
+.spot__rowchange
+  flex: none
+  margin-left: u(10)
+  text-align: right
+  font-size: u(20)
+
+// ── portrait: the hero on top, the rail in two columns below ──
+.spot--portrait
+  .stage__plate
+    padding: u(48) u(48) u(36)
+  .spot__main
+    flex-direction: column
+  .spot__hero
+    width: 100%
+    flex: 1 1 0%
+    min-height: 0
+  .spot__rail
+    flex: none
+    margin: u(28) 0 0
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    align-content: flex-start
+  .spot__row
+    flex: none
+    width: 48.5%
+    height: u(72)
+    padding: 0 u(14)
+  .spot__rowchange
+    font-size: u(18)
+  .spot__title
+    display: none
+  .spot__name
+    font-size: u(52)
+
+// ── square: the hero on the left, the rail in one column on the right ──
+.spot--square
+  .stage__plate
+    padding: u(36) u(44) u(26)
+  .spot__top
+    height: u(66)
+    margin-bottom: u(10)
+  .spot__base
+    font-size: u(42)
+  .spot__title
+    display: none
+  .spot__hero
+    width: u(470)
+  .spot__rail
+    margin-left: u(34)
+  .spot__row
+    max-height: u(68)
+    padding: 0 u(12)
+  .spot__name
+    font-size: u(38)
+    max-width: u(340)
+  .spot__pricebox
+    margin-top: u(18)
+  .spot__unit
+    font-size: u(28)
+  .spot__change
+    font-size: u(28)
+    padding: u(5) u(16)
+  .spot__rowmain
+    margin-left: u(12)
+  .spot__rowchange
+    margin-left: u(6)
+    font-size: u(15)
+
+// ── banners: the base on a block, then the hero (and the rail on a vertical one) ──
+.spot--h-banner,
+.spot--v-banner
+  .stage__plate
+    padding: 0
+
+.spot--h-banner
+  .stage__plate
+    flex-direction: row
+  .spot__lead
+    flex: none
+    flex-direction: column
+    align-items: flex-start
+    justify-content: center
+    width: u(210)
+    padding: 0 u(22) 0 u(30)
+    background: rgba(255, 255, 255, 0.07)
+    border-right: u(2) solid rgba(255, 255, 255, 0.12)
+    position: relative
+  .spot__basebadge
+    margin: 0 0 u(8)
+  .spot__base
+    margin: 0
+    font-size: u(46)
+  .spot__title
+    margin-top: u(4)
+    font-size: u(17)
+    white-space: normal
+    line-height: 1.25
+  .spot__main
+    padding: 0 u(32)
+    align-items: center
+  .spot__hero
+    flex: 1 1 0%
+    width: auto
+    flex-direction: row
+    align-items: center
+  .spot__names
+    margin-left: u(16)
+    width: u(190)
+  .spot__name
+    font-size: u(32)
+    max-width: u(190)
+  .spot__pricebox
+    margin: 0 u(26) 0 u(18)
+  .spot__unit
+    font-size: u(24)
+    margin-left: u(10)
+  .spot__meta
+    margin: 0 u(24) 0 0
+    flex-direction: column
+    align-items: flex-start
+  .spot__change
+    font-size: u(28)
+    padding: u(4) u(16)
+  .spot__period
+    margin: u(6) 0 0
+    font-size: u(17)
+  .spot__chart
+    margin: 0 0 0 auto
+
+.spot--v-banner
+  .spot__lead
+    flex: none
+    justify-content: center
+    height: u(96)
+    background: rgba(255, 255, 255, 0.07)
+    border-bottom: u(2) solid rgba(255, 255, 255, 0.12)
+    position: relative
+  .spot__basebadge
+    margin: 0 u(12) 0 0
+  .spot__base
+    margin: 0
+    font-size: u(40)
+  .spot__main
+    flex-direction: column
+    padding: u(18) u(22) u(12)
+  .spot__hero
+    width: 100%
+    flex: none
+  .spot__who
+    flex-direction: column
+    align-items: flex-start
+  .spot__names
+    margin: u(10) 0 0
+  .spot__name
+    font-size: u(28)
+    max-width: u(196)
+  .spot__pricebox
+    margin-top: u(12)
+    flex-wrap: wrap
+  .spot__unit
+    margin: 0 0 0 u(8)
+    font-size: u(22)
+  .spot__change
+    font-size: u(24)
+    padding: u(4) u(14)
+  .spot__period
+    display: none
+  .spot__chart
+    margin-top: u(14)
+  .spot__rail
+    flex: 1 1 0%
+    margin: u(18) 0 0
+    justify-content: flex-start
+  .spot__row
+    flex: none
+    height: u(68)
+    max-height: none
+    margin-bottom: u(6)
+    padding: 0 u(10)
+  .spot__rowcode
+    margin-left: u(10)
+    font-size: u(20)
+  .spot__rowprice
+    display: none
+  .spot__rowmain
+    margin-left: u(10)
+  .spot__rowcode
+    font-size: u(18)
+    letter-spacing: 0.02em
+  .spot__rowchange
+    margin-left: u(6)
+    font-size: u(15)
+
+// ── thin banner: one line, one quote at a time ──
+.spot--h-slim
+  .stage__plate
+    padding: 0
+    flex-direction: row
+
+.spot__slim
+  position: relative
+  width: 100%
+  height: 100%
+  display: flex
+  align-items: center
+
+.spot__slimlead
+  flex: none
+  display: flex
+  align-items: center
+  width: u(250)
+  height: 100%
+  padding: 0 u(20)
+  background: rgba(255, 255, 255, 0.07)
+  border-right: u(2) solid rgba(255, 255, 255, 0.12)
+
+.spot__slimlead .spot__basebadge
+  margin-right: u(12)
+
+.spot__slimbase
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+  font-size: u(40)
+  letter-spacing: -0.02em
+
+.spot__slimhero
+  flex: 1 1 0%
+  min-width: 0
+  display: flex
+  align-items: center
+  padding: 0 u(30)
+
+.spot__slimcode
+  margin-left: u(16)
+  font-weight: 700
+  font-size: u(34)
+  letter-spacing: 0.02em
+
+.spot__slimname
+  flex: 0 1 u(300)
+  min-width: 0
+  margin-left: u(16)
+  font-weight: 500
+  font-size: u(24)
+  color: rgba(244, 247, 255, 0.66)
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.spot__slimprice
+  display: flex
+  align-items: baseline
+  margin: 0 u(26) 0 auto
+  white-space: nowrap
+
+.spot__slimprice .spot__price
+  text-shadow: 0 0 u(24) rgba(255, 255, 255, 0.28)
+
+.spot__slimunit
+  margin-left: u(10)
+  font-weight: 600
+  font-size: u(22)
+  color: rgba(244, 247, 255, 0.6)
+
+.spot--h-slim .spot__change
+  flex: none
+  padding: u(3) u(14)
+  font-size: u(26)
+
+.spot__slimspark
+  flex: none
+  margin-left: u(28)
+
+.spot__slimcount
+  flex: none
+  margin: 0 u(28) 0 0
+  font-weight: 600
+  font-size: u(20)
+  color: rgba(244, 247, 255, 0.55)
+
+// ── motion ──
+.dsplay-ready
+  .spot__top,
+  .spot__lead,
+  .spot__slimlead,
+  .spot__slimcount
+    +animation(spot-fade 0.6s ease-out both)
+
+  .spot__slimcode,
+  .spot__slimname,
+  .spot__slimprice,
+  .spot--h-slim .spot__change
+    +animation(spot-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both)
+
+  .spot__slimspark .reveal__win
+    +animation(reveal-window 0.8s ease-out 0.25s both)
+
+  .spot__slimspark .reveal__in
+    +animation(reveal-content 0.8s ease-out 0.25s both)
+
+  .spot__bg--in
+    +animation(spot-fade 1s ease-out both)
+
+  .spot__orb--a
+    +animation(spot-drift-a 22s ease-in-out infinite alternate)
+
+  .spot__orb--b
+    +animation(spot-drift-b 28s ease-in-out infinite alternate)
+
+  .spot__flag
+    +animation(spot-pop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both)
+
+  .spot__names
+    +animation(spot-rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both)
+
+  .spot__pricebox
+    +animation(spot-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.18s both)
+
+  .spot__meta
+    +animation(spot-rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both)
+
+  .spot__chart .reveal__win
+    +animation(reveal-window 0.9s ease-out 0.35s both)
+
+  .spot__chart .reveal__in
+    +animation(reveal-content 0.9s ease-out 0.35s both)
+
+  .spot__dot
+    +animation(spot-fade 0.4s ease-out 1.1s both)
+
+  .spot__dot:after
+    +animation(spot-ping 2.4s ease-out 1.5s infinite)
+
+  .spot__row
+    +animation(spot-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both)
+
+@for $i from 1 through 12
+  .dsplay-ready .spot__row:nth-child(#{$i})
+    +animation-delay-n(0.25s + ($i - 1) * 60ms)
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready
+    .spot__top,
+    .spot__lead,
+    .spot__slimlead,
+    .spot__slimcount,
+    .spot__slimcode,
+    .spot__slimname,
+    .spot__slimprice,
+    .spot--h-slim .spot__change,
+    .spot__slimspark .reveal__win,
+    .spot__slimspark .reveal__in,
+    .spot__bg--in,
+    .spot__orb--a,
+    .spot__orb--b,
+    .spot__flag,
+    .spot__names,
+    .spot__pricebox,
+    .spot__meta,
+    .spot__chart .reveal__win,
+    .spot__chart .reveal__in,
+    .spot__dot,
+    .spot__dot:after,
+    .spot__row
+      -webkit-animation: none
+      animation: none

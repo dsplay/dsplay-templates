@@ -6,6 +6,8 @@ import React from 'react';
  * order; a rejected task settles as `undefined` here instead of leaving `Loader` stuck forever
  * @property {unknown[]} [tasksErrors] - Rejection reason for each `tasks` entry, in the same order as
  * `tasksResults`; `undefined` at an index whose task fulfilled
+ * @property {boolean} [ready] - Reveal mode only: `true` once the fonts and images have loaded and
+ * the template is visible; use it to start JS-driven entrance animations
  */
 
 /** @type {React.Context<LoaderContextValue>} */

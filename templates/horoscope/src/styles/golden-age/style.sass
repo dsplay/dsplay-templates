@@ -1,0 +1,216 @@
+@import ../mixins
+
+.golden
+  color: #f3e6c4
+  font-family: 'Cormorant Garamond', serif
+  background: #120e08
+  background: radial-gradient(ellipse 70% 90% at 50% 40%, #2a2113 0%, #120e08 55%, #080604 100%)
+
+.golden__frame
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.golden__kicker
+  position: absolute
+  left: 0
+  right: 0
+  top: u(64)
+  text-align: center
+  font-family: 'Cinzel', serif
+  font-size: u(18)
+  letter-spacing: 0.42em
+  text-transform: uppercase
+  color: #c9a24c
+  font-weight: 500
+
+.golden__ring
+  position: absolute
+  left: u(90)
+  top: u(130)
+  width: u(360)
+  height: u(360)
+
+.golden__circles, .golden__stars
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.golden__info
+  position: absolute
+  left: u(520)
+  top: u(130)
+  width: u(660)
+  height: u(400)
+  display: flex
+  flex-direction: column
+
+.golden__head
+  display: flex
+  align-items: center
+
+.golden__glyph
+  width: u(46)
+  height: u(46)
+  margin-right: u(16)
+
+.golden__range
+  font-family: 'Cinzel', serif
+  font-size: u(20)
+  letter-spacing: 0.2em
+  text-transform: uppercase
+  color: #c9a24c
+
+.golden__name
+  margin: u(14) 0 0
+  font-family: 'Cinzel', serif
+  font-weight: 700
+  line-height: 1.05
+  color: #f1d68a
+  letter-spacing: 0.02em
+  text-transform: uppercase
+  white-space: nowrap
+
+.golden__keyword
+  margin-top: u(6)
+  font-style: italic
+  font-weight: 500
+  font-size: u(30)
+  color: #d9bd78
+
+.golden__rule
+  flex: none
+  height: u(1)
+  margin: u(20) 0
+  background: #c9a24c
+  background: linear-gradient(90deg, #c9a24c, rgba(201, 162, 76, 0))
+
+.golden__body
+  flex: 1
+  min-height: 0
+  overflow: hidden
+
+.golden__text
+  margin: 0
+  font-style: italic
+  font-weight: 500
+  color: #f6ecd2
+
+.golden__scores
+  position: absolute
+  left: u(90)
+  right: u(90)
+  bottom: u(82)
+  display: flex
+  align-items: center
+  justify-content: space-between
+  font-family: 'Inter', sans-serif
+  font-size: u(15)
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  color: #bda468
+
+  .meter
+    display: flex
+    align-items: center
+
+  .meter__label
+    margin-right: u(12)
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(18)
+    height: u(18)
+    margin-right: u(4)
+
+  .meter__unit svg
+    display: block
+    width: 100%
+    height: 100%
+
+  .meter__unit path
+    fill: rgba(231, 198, 115, 0.2)
+
+  .meter__unit.is-on path
+    fill: #e7c673
+
+.golden__lucky b
+  margin-left: u(6)
+  font-size: u(20)
+  color: #f1d68a
+
+.golden__disclaimer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: u(52)
+  margin: 0
+  text-align: center
+  font-family: 'Inter', sans-serif
+  font-size: u(12)
+  color: #7f6f45
+
+// ---- portrait and square: everything on the center line
+.stage--portrait, .stage--square
+  .golden__ring
+    left: 50%
+    top: u(130)
+    width: u(300)
+    height: u(300)
+    margin-left: u(-150)
+
+  .golden__info
+    left: u(90)
+    width: auto
+    right: u(90)
+    top: u(450)
+    height: u(560)
+    text-align: center
+
+  .golden__head
+    justify-content: center
+
+  .golden__rule
+    background: #c9a24c
+    background: linear-gradient(90deg, rgba(201, 162, 76, 0), #c9a24c, rgba(201, 162, 76, 0))
+
+  .golden__scores
+    flex-wrap: wrap
+    justify-content: center
+    bottom: u(80)
+    left: u(60)
+    right: u(60)
+
+    .meter
+      margin: 0 u(14) u(8)
+
+.stage--portrait
+  .golden__info
+    height: u(560)
+
+.stage--square
+  .golden__ring
+    top: u(110)
+    width: u(240)
+    height: u(240)
+    margin-left: u(-120)
+
+  .golden__info
+    top: u(360)
+    height: u(400)
+    left: u(80)
+    right: u(80)
+
+  .golden__glyph
+    width: u(36)
+    height: u(36)
+
+  .golden__scores
+    bottom: u(86)

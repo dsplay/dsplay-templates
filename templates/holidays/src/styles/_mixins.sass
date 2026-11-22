@@ -1,0 +1,72 @@
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=transform($property)
+  -webkit-transform: #{$property}
+  -moz-transform: #{$property}
+  -ms-transform: #{$property}
+  transform: #{$property}
+
+=animation($property)
+  -webkit-animation: #{$property}
+  -moz-animation: #{$property}
+  -ms-animation: #{$property}
+  animation: #{$property}
+
+=animation-delay($property)
+  -webkit-animation-delay: #{$property}
+  -moz-animation-delay: #{$property}
+  -ms-animation-delay: #{$property}
+  animation-delay: #{$property}
+
+=transition($property...)
+  -webkit-transition: #{$property}
+  -moz-transition: #{$property}
+  -ms-transition: #{$property}
+  transition: #{$property}
+
+
+// Design pixels: a style is drawn on a fixed plate (lib/layout.js) and `u(96)` is 96 of its pixels, scaled to the screen by the root font size the Stage sets.
+@function u($px)
+  @return $px * 0.1rem
+
+=animation-fill($property)
+  -webkit-animation-fill-mode: #{$property}
+  animation-fill-mode: #{$property}
+
+=transform-origin($property)
+  -webkit-transform-origin: #{$property}
+  transform-origin: #{$property}
+
+// The drawings of other templates use a 660 x 371 mockup stage; kept for the styles that want it.
+@function m($px)
+  @return u($px * 1.94)
+
+// A pop: the answer arrives bigger than it ends up, with a little bounce, from nothing. `$turn` is the angle it rests at.
+=pop($name, $turn)
+  +keyframes($name)
+    0%
+      opacity: 0
+      +transform(scale(0.4) rotate($turn - 10deg))
+    60%
+      opacity: 1
+      +transform(scale(1.08) rotate($turn + 1deg))
+    100%
+      opacity: 1
+      +transform(scale(1) rotate($turn))
+
+=fade-up($name)
+  +keyframes($name)
+    0%
+      opacity: 0
+      +transform(translateY(30px))
+    100%
+      opacity: 1
+      +transform(translateY(0))

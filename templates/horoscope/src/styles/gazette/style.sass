@@ -1,0 +1,208 @@
+@import ../mixins
+
+.gazette
+  color: #1c1a17
+  font-family: 'Inter', sans-serif
+  background: #f3eee3
+
+.gazette__rules
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.gazette__header
+  position: absolute
+  left: u(56)
+  right: u(56)
+  top: u(46)
+  display: flex
+  justify-content: space-between
+  align-items: baseline
+  font-size: u(15)
+  letter-spacing: 0.2em
+  text-transform: uppercase
+  font-weight: 600
+
+.gazette__date
+  font-family: 'Playfair Display', serif
+  font-style: italic
+  font-weight: 500
+  letter-spacing: 0
+  text-transform: none
+  font-size: u(20)
+
+.gazette__art
+  position: absolute
+  left: u(56)
+  top: u(130)
+  width: u(444)
+  height: u(490)
+  display: flex
+  align-items: center
+  justify-content: center
+
+.gazette__glyph
+  width: u(400)
+  height: u(400)
+
+.gazette__stamp
+  position: absolute
+  right: u(12)
+  bottom: u(6)
+  width: u(130)
+  height: u(130)
+
+.gazette__info
+  position: absolute
+  left: u(548)
+  top: u(126)
+  width: u(676)
+  height: u(494)
+  display: flex
+  flex-direction: column
+
+.gazette__name
+  margin: 0
+  font-family: 'Playfair Display', serif
+  font-weight: 700
+  line-height: 1
+  letter-spacing: -0.02em
+  white-space: nowrap
+
+.gazette__meta
+  display: flex
+  align-items: baseline
+  margin-top: u(14)
+  font-size: u(20)
+
+.gazette__range
+  font-weight: 600
+
+.gazette__keyword
+  margin-left: u(18)
+  font-family: 'Playfair Display', serif
+  font-style: italic
+  font-weight: 500
+  font-size: u(30)
+  color: #c8442b
+
+.gazette__body
+  flex: 1
+  min-height: 0
+  margin-top: u(26)
+  overflow: hidden
+
+.gazette__text
+  margin: 0
+  font-family: 'Playfair Display', serif
+  font-weight: 500
+
+.gazette__rulers
+  display: flex
+  flex: none
+  margin-top: u(14)
+  font-size: u(14)
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  font-weight: 600
+
+  .meter
+    flex: 1
+    margin-right: u(30)
+
+    &:last-child
+      margin-right: 0
+
+  .meter__label
+    display: block
+    margin-bottom: u(8)
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    flex: 1
+    height: u(4)
+    margin-right: u(4)
+    background: rgba(28, 26, 23, 0.18)
+
+  .meter__unit:last-child
+    margin-right: 0
+
+  .meter__unit.is-on
+    background: #1c1a17
+
+.gazette__footer
+  position: absolute
+  left: u(56)
+  right: u(56)
+  bottom: u(24)
+  display: flex
+  justify-content: space-between
+  font-size: u(14)
+
+.gazette__disclaimer
+  color: #6c675c
+  text-align: right
+
+// ---- portrait and square: the page in one column
+.stage--portrait, .stage--square
+  .gazette__header
+    top: u(46)
+
+  .gazette__art
+    left: 0
+    width: 100%
+    top: u(130)
+
+  .gazette__info
+    left: u(56)
+    width: u(608)
+
+  .gazette__footer
+    flex-direction: column
+    align-items: center
+    bottom: u(16)
+
+  .gazette__disclaimer
+    margin-top: u(4)
+    text-align: center
+
+.stage--portrait
+  .gazette__art
+    height: u(380)
+
+  .gazette__glyph
+    width: u(340)
+    height: u(340)
+
+  .gazette__info
+    top: u(520)
+    height: u(640)
+
+  .gazette__stamp
+    right: u(150)
+    bottom: u(0)
+
+.stage--square
+  .gazette__art
+    height: u(250)
+
+  .gazette__glyph
+    width: u(230)
+    height: u(230)
+
+  .gazette__stamp
+    width: u(100)
+    height: u(100)
+    right: u(250)
+    bottom: u(0)
+
+  .gazette__info
+    left: u(80)
+    width: u(740)
+    top: u(400)
+    height: u(420)

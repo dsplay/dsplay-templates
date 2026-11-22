@@ -22,6 +22,7 @@ Guidance for AI agents (and humans) working in this repository. Each template/bo
 - **A release re-pins every template and boilerplate to the new library version in the same PR**, so for 3 days (`min-release-age`) a boilerplate copied out of the repo cannot `npm install` (`ETARGET`). That is expected, not a bug; the boilerplate READMEs say what to do. Inside the workspace it is unaffected.
 - **Dependabot PRs: analyze, test, one batch, one merge.** Never merge a Dependabot PR alone. Run the `dependabot-batch` skill (`.claude/skills/dependabot-batch/SKILL.md`): read each bump's changelog, test it in one integration worktree, fix what breaks, migrate and test framework majors before they enter, reject what raises the browser floor or weakens the supply-chain rules, then open ONE `⬆️ chore(deps): YYYY-MM-DD batch` PR and merge only that.
 - New template: `npm run new-template -- --from <source> --name <name>`, then review the files it lists.
+- **No template has a loader screen.** `Loader` runs in `reveal` mode (mounted hidden, shown with the class `dsplay-ready` once fonts and images are in) and the template animates its own entrance from that class, written in the house style of [`docs/entrance-style.md`](docs/entrance-style.md): read it before adding a template or touching an entrance.
 
 ## Verifying a change
 

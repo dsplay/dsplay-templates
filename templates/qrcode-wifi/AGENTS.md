@@ -18,10 +18,9 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, fonts, i18n, background image)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n, background image)
     main/                     <-- lays out the Wi-Fi symbol + QR code
     wifi-qrcode/              <-- builds the WIFI: connection string and renders the QR code
-    intro/                    <-- loading placeholder
   utils/
     auth-types.js              <-- maps dsplay_media.auth_type -> the WIFI: QR string's auth token
     calculate-qr-code-size.js  <-- sizes the QR code relative to the viewport

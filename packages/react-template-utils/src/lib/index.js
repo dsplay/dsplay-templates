@@ -8,6 +8,7 @@ export { default as GridGallery } from './components/grid-gallery/grid-gallery';
 export { default as Loader } from './components/loader/loader';
 export { default as LoaderContext } from './components/loader/loader-context';
 export { default as FitText } from './components/fit-text/fit-text';
+export { default as FittedText } from './components/fitted-text/fitted-text';
 export { default as Render } from './components/render/render';
 export { default as Landscape } from './components/landscape/landscape';
 export { default as Portrait } from './components/portrait/portrait';

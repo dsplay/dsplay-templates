@@ -1,0 +1,161 @@
+@import ../../mixins
+
+// ---- the strip: the plate is 240 design px thick (see lib/layout.js); the constellation, the name, the text, the scores
+.starry-b
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+
+.starry-b__kicker
+  display: flex
+  align-items: center
+  font-size: u(12)
+  letter-spacing: 0.16em
+  text-transform: uppercase
+  color: #aab2d5
+  font-weight: 500
+
+.starry-b__stars
+  flex: none
+  position: relative
+
+.starry-b__glyph
+  width: u(46)
+  height: u(46)
+  margin: u(18) 0 u(2)
+
+.starry-b__name
+  margin: 0
+
+.starry-b__range
+  margin-top: u(6)
+  font-size: u(17)
+  color: #c7cdea
+
+.starry-b__chip
+  display: inline-block
+  margin-top: u(10)
+  font-size: u(14)
+
+.starry-b__body
+  min-width: 0
+
+.starry-b .starry-b__notice
+  position: static
+  margin: u(6) 0 0
+  text-align: left
+  font-size: u(11)
+
+.starry-b__meters
+  .meter
+    display: flex
+    align-items: center
+    margin-bottom: u(7)
+
+  .meter__label
+    width: u(92)
+    font-size: u(12)
+    letter-spacing: 0.1em
+    text-transform: uppercase
+    color: #98a0c8
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(12)
+    height: u(12)
+    margin-right: u(5)
+    border-radius: 50%
+    background: rgba(255, 255, 255, 0.14)
+
+  .meter__unit.is-on
+    background: #eef1fb
+
+.starry-b__lucky
+  margin-top: u(4)
+  font-size: u(14)
+  color: #d6dbf3
+
+  b
+    margin-left: u(4)
+    font-size: u(22)
+    color: #fff
+
+// ---- horizontal: one row
+.starry-b--h
+  flex-direction: row
+  align-items: center
+  padding: 0 u(28)
+
+  .starry-b__kicker
+    position: absolute
+    left: u(28)
+    top: u(14)
+
+  .starry-b__stars
+    width: u(208)
+    height: u(178)
+    margin-right: u(24)
+
+  .starry-b__who
+    flex: none
+    width: u(300)
+    margin-right: u(28)
+    padding-right: u(28)
+    border-right: u(1) solid rgba(255, 255, 255, 0.14)
+
+  .starry-b__body
+    flex: 1
+    padding-top: u(8)
+
+  .starry-b__side
+    flex: none
+    width: u(170)
+    margin-left: u(28)
+
+// ---- vertical: one narrow column
+.starry-b--v
+  flex-direction: column
+  align-items: center
+  padding: u(16)
+  text-align: center
+
+  .starry-b__stars
+    width: u(208)
+    height: u(158)
+    margin-top: u(6)
+
+  .starry-b__who
+    flex: none
+    margin-top: u(2)
+    width: 100%
+
+  .starry-b__body
+    flex: 1
+    display: flex
+    flex-direction: column
+    justify-content: center
+    width: 100%
+    margin: u(12) 0
+    overflow: hidden
+
+  .starry-b__side
+    flex: none
+    width: 100%
+
+  .starry-b__meters .meter
+    justify-content: center
+
+  .starry-b__meters .meter__label
+    width: u(92)
+    text-align: left
+
+  .starry-b__notice
+    flex: none
+    text-align: center
+    margin: u(8) 0 0

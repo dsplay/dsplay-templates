@@ -1,0 +1,28 @@
+@import ../../styles/mixins
+
+.badge
+  flex: none
+  display: block
+  text-align: center
+  border-radius: 50%
+  font-weight: 700
+  color: #fff
+  letter-spacing: -0.02em
+  overflow: hidden
+
+.badge--fiat
+  background: #2f6df6
+  background: linear-gradient(135deg, #4f8bff 0%, #2751d6 100%)
+
+.badge--crypto
+  background: #f59e0b
+  background: linear-gradient(135deg, #ffb83d 0%, #e8590c 100%)
+
+// a flag: the square SVG cropped to the circle, with a thin ring so a white flag does not vanish on a white card
+.badge--flag
+  background-color: #fff
+  background-repeat: no-repeat
+  background-position: center
+  -webkit-background-size: cover
+  background-size: cover
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.55), 0 0.2rem 0.8rem rgba(0, 0, 0, 0.25)

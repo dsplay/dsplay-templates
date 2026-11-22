@@ -1,0 +1,388 @@
+@import ../mixins
+
+// Entrance (from `dsplay-ready`, see docs/entrance-style.md): the head fades in, the rows rise one after the other, the chart of each row is drawn from the
+// left. Idle: a soft sheen crosses the rows, one after the other. Only opacity and transform, on HTML boxes (never on SVG).
++keyframes(board-fade)
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
++keyframes(board-rise)
+  0%
+    opacity: 0
+    +transform(translateY(2.4rem))
+  100%
+    opacity: 1
+    +transform(translateY(0))
+
++keyframes(board-sheen)
+  0%
+    opacity: 1
+    +transform(translateX(-130%))
+  22%
+    opacity: 1
+    +transform(translateX(330%))
+  23%
+    opacity: 0
+    +transform(translateX(330%))
+  100%
+    opacity: 0
+    +transform(translateX(330%))
+
+.board
+  font-family: 'Inter', sans-serif
+  color: #eef2ff
+  background: #0a0f1e
+  background: linear-gradient(160deg, #0a0f1e 0%, #111b36 100%)
+
+.board .stage__plate
+  display: flex
+  flex-direction: column
+  padding: u(32) u(40) u(20)
+
+.board__head
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: u(72)
+  margin-bottom: u(10)
+
+.board__headmain
+  display: flex
+  align-items: center
+  min-width: 0
+
+.board__basebadge
+  margin-right: u(18)
+
+.board__base
+  font-weight: 700
+  font-size: u(44)
+  letter-spacing: -0.02em
+  margin-right: u(18)
+
+.board__title
+  font-weight: 500
+  font-size: u(24)
+  color: #8d99b3
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.board__period
+  flex: none
+  margin-left: u(20)
+  padding: u(6) u(16)
+  border-radius: u(20)
+  background: rgba(255, 255, 255, 0.07)
+  font-weight: 600
+  font-size: u(20)
+  color: #b9c3dc
+
+.board__period:empty
+  display: none
+
+.board__list
+  flex: 1 1 0%
+  min-height: 0
+
+// on a screen the rows share the height of the list, up to a limit: two quotes are two taller rows in the middle, not two small ones at the top
+.board--landscape .board__list,
+.board--portrait .board__list,
+.board--square .board__list
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.board__row
+  position: relative
+  display: flex
+  align-items: center
+  flex: 1 1 0%
+  min-height: 0
+  max-height: u(132)
+  margin-bottom: u(8)
+  padding: 0 u(26) 0 u(30)
+  overflow: hidden
+  border-radius: u(18)
+  background: rgba(255, 255, 255, 0.055)
+
+.board__row:before
+  content: ''
+  position: absolute
+  top: u(16)
+  bottom: u(16)
+  left: 0
+  width: u(5)
+  border-radius: 0 u(4) u(4) 0
+  background: #8d99b3
+
+.board__row--up:before
+  background: #2be3a0
+
+.board__row--down:before
+  background: #ff6b7a
+
+.board__row:after
+  content: ''
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  width: 22%
+  background: rgba(255, 255, 255, 0.07)
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0) 100%)
+  opacity: 0
+
+.board__info
+  flex: 1 1 0%
+  min-width: 0
+  margin-left: u(20)
+  display: flex
+  flex-direction: column
+
+.board__name
+  font-weight: 600
+  font-size: u(26)
+  line-height: 1.12
+  max-height: 2.3em
+  overflow: hidden
+
+.board__code
+  font-weight: 500
+  font-size: u(18)
+  color: #8d99b3
+  letter-spacing: 0.04em
+
+.board__spark
+  flex: none
+  margin: 0 u(28)
+
+.board__figures
+  flex: none
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  text-align: right
+
+.board__price
+  font-weight: 700
+  line-height: 1.1
+
+.board__change
+  font-size: u(22)
+  line-height: 1.3
+
+.board__foot
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: u(44)
+  padding-top: u(6)
+  font-weight: 500
+  font-size: u(18)
+  color: #8d99b3
+
+// ── portrait ──
+.board--portrait
+  .stage__plate
+    padding: u(40) u(32) u(24)
+  .board__head
+    height: u(92)
+  .board__base
+    font-size: u(50)
+  .board__title
+    font-size: u(22)
+  .board__row
+    max-height: u(150)
+    margin-bottom: u(12)
+    padding: 0 u(22) 0 u(26)
+  .board__info
+    margin-left: u(16)
+  .board__name
+    font-size: u(26)
+  .board__spark
+    margin: 0 u(14)
+  .board__change
+    font-size: u(22)
+
+// ── square ──
+.board--square
+  .stage__plate
+    padding: u(32) u(36) u(20)
+  .board__row
+    margin-bottom: u(8)
+  .board__info
+    margin-left: u(16)
+  .board__spark
+    margin: 0 u(18)
+
+// ── horizontal banner: the base on the left, then columns ──
+.board--h-banner
+  .stage__plate
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0 u(12) 0 0
+
+.board--h-banner .board__lead
+  flex: none
+  display: flex
+  flex-direction: column
+  justify-content: center
+  width: u(210)
+  height: 100%
+  padding: 0 u(24) 0 u(32)
+  border-right: u(2) solid rgba(255, 255, 255, 0.08)
+
+.board--h-banner .board__basebadge
+  margin: 0 0 u(8)
+
+.board--h-banner .board__base
+  margin: 0
+  font-size: u(48)
+
+.board--h-banner .board__title
+  margin-top: u(6)
+  font-size: u(17)
+  white-space: normal
+  line-height: 1.25
+
+.board--h-banner .board__list
+  height: 100%
+  min-width: 0
+  overflow: hidden
+
+.board__col
+  position: relative
+  flex: none
+  width: u(236)
+  height: u(204)
+  padding: u(16) u(18)
+  display: flex
+  flex-direction: column
+  justify-content: center
+  overflow: hidden
+
+.board__colhead
+  display: flex
+  align-items: center
+  margin-bottom: u(8)
+
+.board__colhead .board__code
+  margin-left: u(12)
+  font-weight: 700
+  font-size: u(24)
+  color: #eef2ff
+
+.board__col .board__change
+  font-size: u(22)
+
+.board__col .board__spark
+  margin: u(8) 0 0
+
+.board__col:after
+  content: ''
+  position: absolute
+  top: u(30)
+  bottom: u(30)
+  right: 0
+  width: u(2)
+  background: rgba(255, 255, 255, 0.08)
+
+// ── vertical banner: the base on top, then short rows ──
+.board--v-banner
+  .stage__plate
+    display: flex
+    flex-direction: column
+    padding: 0
+
+.board--v-banner .board__lead
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: center
+  height: u(96)
+  border-bottom: u(2) solid rgba(255, 255, 255, 0.08)
+
+.board--v-banner .board__basebadge
+  margin: 0 u(12) 0 0
+
+.board--v-banner .board__base
+  margin: 0
+  font-size: u(44)
+
+.board--v-banner .board__list
+  padding: u(12) u(16) 0
+
+.board__short
+  position: relative
+  height: u(112)
+  padding: u(14) u(8)
+  display: flex
+  flex-direction: column
+  justify-content: center
+  border-bottom: u(2) solid rgba(255, 255, 255, 0.07)
+
+.board__shorthead
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin-bottom: u(4)
+
+.board__short .board__code
+  font-weight: 700
+  font-size: u(24)
+  color: #eef2ff
+
+.board__short .board__change
+  font-size: u(20)
+
+// ── motion ──
+.dsplay-ready
+  .board__head,
+  .board__foot,
+  .board__lead
+    +animation(board-fade 0.5s ease-out both)
+
+  .board__row
+    +animation(board-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both)
+
+  .board .marquee
+    +animation(board-fade 0.6s ease-out both)
+
+  .board__spark .reveal__win
+    +animation(reveal-window 0.7s ease-out both)
+
+  .board__spark .reveal__in
+    +animation(reveal-content 0.7s ease-out both)
+
+  .board__row:after
+    +animation(board-sheen 14s ease-in-out infinite)
+
+@for $i from 1 through 12
+  .dsplay-ready .board__row:nth-child(#{$i})
+    +animation-delay-n(($i - 1) * 70ms)
+
+  .dsplay-ready .board__row:nth-child(#{$i}) .board__spark .reveal__win,
+  .dsplay-ready .board__row:nth-child(#{$i}) .board__spark .reveal__in
+    +animation-delay-n(($i - 1) * 70ms + 300ms)
+
+  .dsplay-ready .board__row:nth-child(#{$i}):after
+    +animation-delay-n(4s + ($i - 1) * 1.6s)
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready
+    .board__head,
+    .board__foot,
+    .board__lead,
+    .board__row,
+    .board .marquee,
+    .board__spark .reveal__win,
+    .board__spark .reveal__in,
+    .board__row:after
+      -webkit-animation: none
+      animation: none

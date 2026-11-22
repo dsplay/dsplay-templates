@@ -49,8 +49,8 @@ function Main() {
               <div
                 className="grid grid-flow-row justify-start p-4 rounded-lg"
                 style={{
-                  backgroundColor: `${secondaryCardColor}`,
-                  color: `${secondaryCardFontColor}`,
+                  backgroundColor: secondaryCardColor,
+                  color: secondaryCardFontColor,
                 }}
               >
                 <div className="h-12 w-fit">
@@ -66,8 +66,8 @@ function Main() {
               <div
                 className="row-span-2 p-4 rounded-lg"
                 style={{
-                  backgroundColor: `${primaryCardColor}`,
-                  color: `${primaryCardFontColor}`,
+                  backgroundColor: primaryCardColor,
+                  color: primaryCardFontColor,
                 }}
               >
                 {/* Menu item 01 */}
@@ -122,14 +122,14 @@ function Main() {
               <div
                 className="flex flex-col items-center p-4 rounded-lg"
                 style={{
-                  backgroundColor: `${primaryCardColor}`,
-                  color: `${primaryCardFontColor}`,
+                  backgroundColor: primaryCardColor,
+                  color: primaryCardFontColor,
                 }}
               >
                 <div
                   className="h-28 w-28 rounded-full"
                   style={{
-                    backgroundImage: `url(${hotelLogo})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center',
+                    backgroundImage: hotelLogo ? `url(${hotelLogo})` : undefined, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center',
                   }}
                 >
                   &nbsp;
@@ -152,8 +152,8 @@ function Main() {
               <div
                 className="grid grid-flow-row p-4 rounded-lg"
                 style={{
-                  backgroundColor: `${primaryCardColor}`,
-                  color: `${primaryCardFontColor}`,
+                  backgroundColor: primaryCardColor,
+                  color: primaryCardFontColor,
                 }}
               >
                 <WeatherCard />
@@ -164,8 +164,8 @@ function Main() {
               <div
                 className="grid grid-flow-row p-4 rounded-lg"
                 style={{
-                  backgroundColor: `${secondaryCardColor}`,
-                  color: `${secondaryCardFontColor}`,
+                  backgroundColor: secondaryCardColor,
+                  color: secondaryCardFontColor,
                 }}
               >
                 <div className="h-10 max-w-full">

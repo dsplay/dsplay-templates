@@ -25,9 +25,8 @@ src/
   contexts/
     theme-context/                <-- static color theme (primary/secondary/line)
   components/
-    app/                      <-- top-level component (loader, i18n)
+    app/                      <-- top-level component (loader in reveal mode, i18n)
     main/                     <-- the flights table itself
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

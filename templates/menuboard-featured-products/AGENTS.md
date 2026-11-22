@@ -22,11 +22,10 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                     <-- lays out the promo column + menu column
     menucarousel/             <-- scrolling promo image carousel (flowbite-react's Carousel)
     menuitens/                <-- up to 10 product name/price rows
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

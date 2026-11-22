@@ -22,11 +22,10 @@ src/
     use-background.js        <-- maps weather condition code -> background CSS class
     night-interval.js        <-- day/night detection from sunrise/sunset
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                     <-- destructures media.result into city/current/forecast
     forecast-item/            <-- one row per forecast day
     icon/                     <-- weather condition code -> icon/animation
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

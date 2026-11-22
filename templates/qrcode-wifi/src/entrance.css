@@ -1,0 +1,34 @@
+/* Entrance: Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and images are in. The animations start from that class, never before: started at mount they would run while the template is still hidden. The logo rises in first, then the frame with the QR code settles in. Only opacity and transform, prefixed for old Android WebViews. */
+@-webkit-keyframes wifi-logo-in {
+  from { opacity: 0; -webkit-transform: translateY(24px); transform: translateY(24px); }
+}
+
+@keyframes wifi-logo-in {
+  from { opacity: 0; -webkit-transform: translateY(24px); transform: translateY(24px); }
+}
+
+@-webkit-keyframes wifi-frame-in {
+  from { opacity: 0; -webkit-transform: scale(0.94); transform: scale(0.94); }
+}
+
+@keyframes wifi-frame-in {
+  from { opacity: 0; -webkit-transform: scale(0.94); transform: scale(0.94); }
+}
+
+.dsplay-ready .wifi-symbol {
+  -webkit-animation: wifi-logo-in 700ms ease-out 150ms both;
+  animation: wifi-logo-in 700ms ease-out 150ms both;
+}
+
+.dsplay-ready #Frame {
+  -webkit-animation: wifi-frame-in 800ms ease-out 400ms both;
+  animation: wifi-frame-in 800ms ease-out 400ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .wifi-symbol,
+  .dsplay-ready #Frame {
+    -webkit-animation: none;
+    animation: none;
+  }
+}

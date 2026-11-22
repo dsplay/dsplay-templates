@@ -1,0 +1,111 @@
+@import ../../mixins
+
+.duob
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+  flex-direction: column
+  padding: u(14) u(24) u(8)
+
+.duob__cards
+  flex: 1
+  min-height: 0
+  display: flex
+
+.duob__card
+  flex: 1
+  min-width: 0
+  display: flex
+  align-items: center
+  margin-right: u(24)
+  padding: u(14) u(18)
+  border-radius: u(22)
+  border: u(1) solid rgba(255, 255, 255, 0.12)
+  background: rgba(255, 255, 255, 0.06)
+  overflow: hidden
+
+  &:last-child
+    margin-right: 0
+
+.duob__who
+  flex: none
+  width: u(150)
+  margin-right: u(14)
+
+.duob__glyph
+  display: block
+  width: u(34)
+  height: u(34)
+
+.duob__id
+  margin-top: u(6)
+
+.duob__name
+  margin: 0
+
+.duob__range
+  display: block
+  margin-top: u(4)
+  font-size: u(12)
+  letter-spacing: 0.04em
+
+.duob__body
+  flex: 1
+  min-width: 0
+
+.duob__foot
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: u(24)
+  padding-top: u(4)
+
+.duob__notice
+  font-size: u(11)
+  color: #7f87b3
+
+.duob--v
+  padding: u(16) u(16) u(10)
+
+  .duob__cards
+    flex-direction: column
+
+  .duob__card
+    flex: 1
+    flex-direction: column
+    align-items: stretch
+    margin-right: 0
+    margin-bottom: u(14)
+    padding: u(14)
+
+    &:last-child
+      margin-bottom: 0
+
+  .duob__who
+    display: flex
+    align-items: center
+    width: 100%
+    margin: 0 0 u(10)
+
+  .duob__glyph
+    margin-right: u(10)
+
+  .duob__id
+    margin-top: 0
+
+  .duob__body
+    flex: 1
+    overflow: hidden
+
+  .duob__foot
+    height: auto
+    flex-direction: column
+    padding-top: u(8)
+
+  .duob__notice
+    text-align: center
+    margin-bottom: u(6)

@@ -1,5 +1,14 @@
 "use strict";
 
+// Fonts: the cover waits for them (an old WebView has no document.fonts: a short fixed wait there).
+function whenFontsReady(done) {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(done, done);
+  } else {
+    setTimeout(done, 300);
+  }
+}
+
 function updateTime() {
   var now = new Date();
 
@@ -75,5 +84,7 @@ $(function () {
     $("#mainDiv").css("background-image", "url('" + template.background + "')");
   }
 
-  $('#overlay').fadeOut(500);
+  whenFontsReady(function () {
+    $('#overlay').fadeOut(500);
+  });
 });

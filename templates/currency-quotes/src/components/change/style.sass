@@ -1,0 +1,37 @@
+@import ../../styles/mixins
+
+.change
+  display: inline-block
+  white-space: nowrap
+  font-weight: 700
+
+.change__arrow
+  display: inline-block
+  width: 0
+  height: 0
+  margin-right: 0.35em
+  vertical-align: 0.08em
+  border-left: 0.32em solid transparent
+  border-right: 0.32em solid transparent
+
+// the arrow is always drawn in the color of the text (`currentColor`) and points the real way
+.change__arrow--up
+  border-bottom: 0.5em solid currentColor
+
+.change__arrow--down
+  border-top: 0.5em solid currentColor
+
+.change__arrow--flat
+  width: 0.6em
+  height: 0.14em
+  border: 0
+  background: currentColor
+
+.change--up
+  color: #2be3a0
+
+.change--down
+  color: #ff6b7a
+
+.change--flat
+  color: #8d99b3

@@ -18,10 +18,9 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                     <-- lays out the icon + alert message
     icon/                     <-- alert icon name -> SVG map
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

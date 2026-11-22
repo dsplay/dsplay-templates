@@ -1,0 +1,247 @@
+@import ../mixins
+
++pop(bubbles-pop, -2deg)
++fade-up(bubbles-chip)
+
+.bubbles
+  font-family: 'Fredoka', 'Inter', sans-serif
+  color: #fff
+  background: #ffd84d
+
+.bubbles__bg
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  opacity: 0
+  background: #ff9f43
+  background: linear-gradient(135deg, #ff7ab8 0%, #ff9f43 100%)
+  -webkit-transition: opacity 0.4s ease-out
+  transition: opacity 0.4s ease-out
+
+.bubbles.is-revealed .bubbles__bg
+  opacity: 1
+
+.bubbles__air
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+.bubbles__air i
+  position: absolute
+  display: block
+  border-radius: 50%
+  background: rgba(255, 255, 255, 0.28)
+  opacity: 0
+
+.bubbles__air-1
+  left: 6%
+  bottom: m(-170)
+  width: m(170)
+  height: m(170)
+  -webkit-animation-delay: 0s
+  animation-delay: 0s
+
+.bubbles__air-2
+  left: 20%
+  bottom: m(-90)
+  width: m(90)
+  height: m(90)
+  -webkit-animation-delay: 3s
+  animation-delay: 3s
+
+.bubbles__air-3
+  left: 33%
+  bottom: m(-130)
+  width: m(130)
+  height: m(130)
+  -webkit-animation-delay: 6s
+  animation-delay: 6s
+
+.bubbles__air-4
+  left: 48%
+  bottom: m(-70)
+  width: m(70)
+  height: m(70)
+  -webkit-animation-delay: 1.5s
+  animation-delay: 1.5s
+
+.bubbles__air-5
+  left: 60%
+  bottom: m(-150)
+  width: m(150)
+  height: m(150)
+  -webkit-animation-delay: 8s
+  animation-delay: 8s
+
+.bubbles__air-6
+  left: 74%
+  bottom: m(-100)
+  width: m(100)
+  height: m(100)
+  -webkit-animation-delay: 4.5s
+  animation-delay: 4.5s
+
+.bubbles__air-7
+  left: 86%
+  bottom: m(-180)
+  width: m(180)
+  height: m(180)
+  -webkit-animation-delay: 2s
+  animation-delay: 2s
+
+.bubbles__air-8
+  left: 94%
+  bottom: m(-80)
+  width: m(80)
+  height: m(80)
+  -webkit-animation-delay: 9.5s
+  animation-delay: 9.5s
+
+.bubbles__decor
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.bubbles__question
+  position: absolute
+  left: m(48)
+  top: m(44)
+  width: m(470)
+  padding: m(30) m(34)
+  border-radius: m(34)
+  background: #fff
+  box-shadow: 0 m(8) 0 rgba(58, 42, 0, 0.18)
+  -webkit-transition: opacity 0.3s ease-in
+  transition: opacity 0.3s ease-in
+
+.bubbles__question.is-gone
+  opacity: 0
+
+.bubbles__question-text, .bubbles__answer-text
+  margin: 0
+  color: #3a2a00
+  font-weight: 600
+
+.bubbles__answer-text
+  font-weight: 700
+
+.bubbles__tail
+  position: absolute
+  right: m(56)
+  bottom: m(-34)
+  width: m(46)
+  height: m(40)
+
+.bubbles__face
+  position: absolute
+  right: m(44)
+  bottom: m(26)
+  width: m(170)
+  height: m(170)
+
+.bubbles__chip
+  position: absolute
+  left: m(36)
+  top: m(22)
+  max-width: m(588)
+  padding: m(8) m(20)
+  border-radius: m(26)
+  background: rgba(255, 255, 255, 0.35)
+  +animation(bubbles-chip 0.4s ease-out)
+  +animation-fill(both)
+
+.bubbles__chip-text
+  margin: 0
+  font-weight: 500
+
+.bubbles__answer
+  position: absolute
+  left: m(48)
+  top: m(96)
+  width: m(440)
+  padding: m(28) m(34)
+  border-radius: m(38)
+  background: #fff
+  box-shadow: 0 m(8) 0 rgba(58, 42, 0, 0.2)
+  +transform(rotate(-2deg))
+  +animation(bubbles-pop 0.6s ease-out)
+  +animation-fill(both)
+
+// ---- portrait
+.bubbles--portrait
+  .bubbles__question
+    left: u(50)
+    top: u(150)
+    width: u(620)
+    padding: u(40) u(40)
+    border-radius: u(44)
+    box-shadow: 0 u(10) 0 rgba(58, 42, 0, 0.18)
+
+  .bubbles__tail
+    right: u(90)
+    bottom: u(-44)
+    width: u(60)
+    height: u(52)
+
+  .bubbles__face
+    right: 50%
+    margin-right: u(-140)
+    bottom: u(90)
+    width: u(280)
+    height: u(280)
+
+  .bubbles__chip
+    left: u(40)
+    top: u(50)
+    max-width: u(640)
+    padding: u(12) u(26)
+    border-radius: u(34)
+
+  .bubbles__answer
+    left: u(50)
+    top: u(280)
+    width: u(620)
+    padding: u(40)
+    border-radius: u(48)
+
+// ---- square
+.bubbles--square
+  .bubbles__question
+    left: u(50)
+    top: u(70)
+    width: u(800)
+    padding: u(40)
+    border-radius: u(44)
+
+  .bubbles__tail
+    right: u(380)
+    bottom: u(-44)
+    width: u(60)
+    height: u(52)
+
+  .bubbles__face
+    right: u(60)
+    bottom: u(50)
+    width: u(260)
+    height: u(260)
+
+  .bubbles__chip
+    left: u(40)
+    top: u(36)
+    max-width: u(820)
+    padding: u(10) u(26)
+    border-radius: u(34)
+
+  .bubbles__answer
+    left: u(50)
+    top: u(150)
+    width: u(800)
+    padding: u(40)
+    border-radius: u(48)

@@ -6,13 +6,11 @@ import {
 import MainContainer from '../main';
 import SecondaryContainer from '../secondary';
 import Seta from '../../assets/image/seta.png';
-import Intro from '../intro';
 import i18n from '../../i18n';
 import defaultLogo from '../../assets/image/dsplay-logo.png';
 import noneBackground from '../../assets/image/noneBackground.png';
 import './style.sass';
-
-const MIN_LOADING_DURATION = 2800;
+import '../../entrance.css';
 
 function App() {
   const media = useMedia();
@@ -69,8 +67,7 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <Loader
-        placeholder={<Intro />}
-        minDuration={MIN_LOADING_DURATION}
+        reveal
       >
         <div className={`app-container fade-in ${screenFormat}`}>
           <MainContainer mainLogo={mainLogo} />

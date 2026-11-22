@@ -1,0 +1,420 @@
+// Palette
+$bg-body: #0b0e12
+$bg-header: #11161d
+$bg-card: #141a22
+$border: #232c38
+$text-primary: #f2f4f7
+$text-secondary: #8a96a6
+$accent: #ff6a00
+$amber: #ffb300
+$up: #ff5a36
+$down: #4cc38a
+$flat: #8a96a6
+
+.dashboard
+  display: flex
+  flex-direction: column
+  width: 100%
+  height: 100%
+  box-sizing: border-box
+  padding: 1.5vw
+  background: $bg-body
+  color: $text-primary
+  font-family: 'Roboto Regular', sans-serif
+  overflow: hidden
+
+.dashboard__header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0.5em 1.2em
+  background: $bg-header
+  border-bottom: 2px solid $accent
+  flex-shrink: 0
+
+.dashboard__title
+  display: flex
+  flex-direction: column
+
+.dashboard__title-main
+  font-family: 'Oswald', sans-serif
+  font-size: 1.7vw
+  letter-spacing: 0.05em
+  text-transform: uppercase
+
+.dashboard__title-sub
+  font-size: 0.9vw
+  color: $text-secondary
+  letter-spacing: 0.06em
+
+.dashboard__clock
+  font-family: 'Roboto Light', sans-serif
+  font-size: 2.4vw
+  letter-spacing: 0.08em
+  color: $amber
+
+.dashboard__body
+  display: flex
+  flex: 1
+  min-height: 0
+  gap: 1.2vw
+  padding: 1.2vw 0
+
+.dashboard__map
+  flex: 3
+  min-width: 0
+  min-height: 0
+
+.dashboard__side
+  flex: 2
+  min-width: 0
+  display: flex
+  flex-direction: column
+  gap: 1.2vw
+
+// The headline number
+.stat
+  display: flex
+  flex-direction: column
+  padding: 1vw 1.4vw
+  background: $bg-card
+  border: 1px solid $border
+  border-left: 0.4vw solid $accent
+  flex-shrink: 0
+
+.stat__label
+  font-family: 'Oswald', sans-serif
+  font-size: 1.3vw
+  letter-spacing: 0.06em
+  text-transform: uppercase
+
+.stat__period
+  font-size: 0.95vw
+  color: $text-secondary
+
+.stat__value
+  font-family: 'Roboto Light', sans-serif
+  font-size: 6.4vw
+  line-height: 1.05
+  color: $accent
+
+.stat__before
+  font-size: 0.95vw
+  color: $text-secondary
+
+.trend
+  display: flex
+  align-items: center
+  font-size: 1.1vw
+
+.trend__arrow
+  margin-right: 0.5em
+  font-size: 0.9em
+
+.trend--up, .trend--new
+  color: $up
+
+.trend--down
+  color: $down
+
+.trend--flat
+  color: $flat
+
+// The ranking
+.regions
+  display: flex
+  flex-direction: column
+  flex: 1
+  min-height: 0
+  padding: 0.8vw 1.2vw
+  background: $bg-card
+  border: 1px solid $border
+  overflow: hidden
+
+.section-header
+  display: flex
+  justify-content: space-between
+  align-items: baseline
+  padding-bottom: 0.5vw
+  border-bottom: 1px solid $border
+
+.section-header__title
+  font-family: 'Oswald', sans-serif
+  font-size: 1.1vw
+  letter-spacing: 0.05em
+  text-transform: uppercase
+
+.section-header__meta
+  font-size: 0.85vw
+  color: $text-secondary
+
+.regions__list
+  flex: 1
+  min-height: 0
+  margin: 0
+  padding: 0
+  list-style: none
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+
+.region-row
+  display: flex
+  align-items: center
+  font-size: 1.15vw
+
+.region-row__rank
+  width: 1.6em
+  color: $text-secondary
+
+.region-row__name
+  width: 38%
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.region-row__bar
+  flex: 1
+  height: 0.7vw
+  margin: 0 0.8vw
+  background: $border
+
+.region-row__fill
+  display: block
+  height: 100%
+  background: $accent
+
+.region-row__trend
+  width: 1.4em
+  font-size: 0.8em
+  text-align: center
+
+.region-row__count
+  width: 4.2em
+  text-align: right
+
+.section-empty
+  display: flex
+  align-items: center
+  justify-content: center
+  flex: 1
+  color: $text-secondary
+  font-size: 1.3vw
+
+.dashboard__footer
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-shrink: 0
+  padding: 0.4em 1.2em
+  background: $bg-header
+  font-size: 0.8vw
+  color: $text-secondary
+
+.footer__note
+  margin: 0 1.5vw
+  text-align: center
+
+// Portrait and square: the same panels, stacked
+.dashboard--stacked
+  .dashboard__body
+    flex-direction: column
+
+  .dashboard__map
+    flex: 0 0 38%
+
+  .dashboard__side
+    flex: 1
+
+  .dashboard__title-main
+    font-size: 3.4vw
+
+  .dashboard__title-sub
+    font-size: 1.9vw
+
+  .dashboard__clock
+    font-size: 4.2vw
+
+  .stat
+    padding: 1.6vw 2.4vw
+
+  .stat__label
+    font-size: 2.6vw
+
+  .stat__period, .stat__before
+    font-size: 1.9vw
+
+  .stat__value
+    font-size: 11vw
+
+  .trend
+    font-size: 2.2vw
+
+  .regions
+    padding: 1.4vw 2.4vw
+
+  .section-header__title
+    font-size: 2.2vw
+
+  .section-header__meta
+    font-size: 1.7vw
+
+  .region-row
+    font-size: 2.3vw
+
+  .region-row__bar
+    height: 1.3vw
+
+  .section-empty
+    font-size: 2.6vw
+
+  .dashboard__footer
+    font-size: 1.5vw
+    flex-wrap: wrap
+
+.dashboard--square
+  .dashboard__map
+    flex: 0 0 34%
+
+  .stat__value
+    font-size: 9vw
+
+// Horizontal banner: a thin strip
+.banner
+  display: flex
+  width: 100%
+  height: 100%
+  box-sizing: border-box
+  background: $bg-header
+  color: $text-primary
+  font-family: 'Roboto Regular', sans-serif
+  overflow: hidden
+
+.banner--none
+  align-items: center
+  justify-content: center
+
+.banner__title
+  font-family: 'Oswald', sans-serif
+  letter-spacing: 0.05em
+  text-transform: uppercase
+
+.banner__scope, .banner__label, .banner__period
+  color: $text-secondary
+
+.banner--h
+  align-items: center
+  padding: 0 2vw
+  border-left: 0.5vh solid $accent
+
+  .banner__brand
+    display: flex
+    flex-direction: column
+    flex: 0 0 22%
+    min-width: 0
+
+  .banner__title
+    font-size: 15vh
+    white-space: nowrap
+
+  .banner__scope
+    font-size: 11vh
+
+  .banner__headline
+    display: grid
+    grid-template-columns: auto 1fr
+    grid-template-rows: auto auto
+    align-items: center
+    flex: 0 0 42%
+    min-width: 0
+
+  .banner__value
+    grid-row: 1 / span 2
+    font-family: 'Roboto Light', sans-serif
+    font-size: 46vh
+    line-height: 1
+    margin-right: 1.2vw
+    color: $accent
+
+  .banner__label
+    align-self: end
+    font-size: 14vh
+    white-space: nowrap
+
+  .banner__period
+    display: none
+
+  .trend
+    align-self: start
+    font-size: 11vh
+
+  .banner__rows
+    display: flex
+    flex: 1
+    justify-content: space-around
+    min-width: 0
+
+  .banner-row
+    display: flex
+    flex-direction: column
+    align-items: center
+    font-size: 13vh
+    white-space: nowrap
+
+  .banner-row__count
+    font-size: 24vh
+    color: $amber
+
+// Vertical banner: a narrow column
+.banner--v
+  flex-direction: column
+  padding: 4vw
+  border-top: 1vw solid $accent
+
+  .banner__brand
+    display: flex
+    flex-direction: column
+    margin-bottom: 5vw
+
+  .banner__title
+    font-size: 9vw
+
+  .banner__scope
+    font-size: 5.5vw
+
+  .banner__headline
+    display: flex
+    flex-direction: column
+    margin-bottom: 6vw
+
+  .banner__value
+    font-family: 'Roboto Light', sans-serif
+    font-size: 26vw
+    line-height: 1.05
+    color: $accent
+
+  .banner__label
+    font-size: 6.5vw
+
+  .banner__period
+    font-size: 5vw
+
+  .trend
+    font-size: 5vw
+
+  .banner__rows
+    display: flex
+    flex-direction: column
+    flex: 1
+    justify-content: flex-start
+
+  .banner-row
+    display: flex
+    flex-direction: column
+    font-size: 7vw
+    padding: 3vw 0
+    border-bottom: 1px solid $border
+
+  .banner-row__count
+    font-size: 9vw
+    color: $amber

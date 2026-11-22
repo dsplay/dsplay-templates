@@ -20,11 +20,10 @@ src/
   contexts/
     count-up-context/          <-- computes the days/hours/minutes/seconds diff and re-renders every second
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     count-up/                 <-- lays out the title/date header and the timer boxes
     box-timer/                 <-- two-digit hours/minutes/seconds box
     box-timer-days/             <-- variable-digit days box (grows past 2 digits)
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

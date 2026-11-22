@@ -19,7 +19,7 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                     <-- grid layout: title + tidechart + solardata + osmap + winddata
     tidechart/                <-- fetches tide extremes from Storm Glass, renders a recharts AreaChart
     solardata/                <-- fetches UV index from Storm Glass, renders piechartuvgauge per hour
@@ -27,7 +27,6 @@ src/
     piechartuvgauge/          <-- recharts gauge (half pie + needle) for UV index
     piechartrosecompass/      <-- recharts gauge (full pie + needle) for wind direction
     osmap/                    <-- react-leaflet map centered on the configured coordinate
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

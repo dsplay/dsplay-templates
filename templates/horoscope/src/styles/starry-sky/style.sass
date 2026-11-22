@@ -1,0 +1,299 @@
+@import ../mixins
+
+.starry
+  color: #eef1fb
+  font-family: 'Inter', sans-serif
+  background: #070b18
+  background: radial-gradient(ellipse 90% 120% at 18% 40%, #2a1d63 0%, #121233 45%, #070b18 100%)
+
+  &.stage--portrait, &.stage--square
+    background: radial-gradient(ellipse 120% 70% at 50% 18%, #2a1d63 0%, #121233 50%, #070b18 100%)
+
+.starry__field
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+// ---- landscape: the art on the left, the text on the right
+.starry__art
+  position: absolute
+  left: u(60)
+  top: u(90)
+  width: u(520)
+  height: u(540)
+  display: flex
+  align-items: center
+  justify-content: center
+
+.starry__watermark
+  position: absolute
+  left: u(60)
+  top: u(70)
+  width: u(400)
+  height: u(400)
+  opacity: 0.14
+
+.starry__stars
+  position: relative
+  width: u(440)
+  height: u(440)
+
+.starry__info
+  position: absolute
+  left: u(640)
+  top: u(70)
+  width: u(580)
+  height: u(580)
+  display: flex
+  flex-direction: column
+
+.starry__kicker
+  display: flex
+  align-items: center
+  font-size: u(15)
+  letter-spacing: 0.18em
+  text-transform: uppercase
+  color: #aab2d5
+  font-weight: 500
+
+.starry__rule
+  display: block
+  width: u(28)
+  height: u(1)
+  margin-right: u(12)
+
+.starry__name
+  margin: u(14) 0 0
+  font-family: 'Cormorant Garamond', serif
+  font-weight: 700
+  line-height: 1
+  letter-spacing: -0.01em
+  white-space: nowrap
+
+.starry__meta
+  margin-top: u(10)
+  display: flex
+  align-items: center
+  font-size: u(20)
+  color: #c7cdea
+
+.starry__chip
+  margin-left: u(14)
+  padding: u(3) u(12)
+  border: u(1) solid
+  border-radius: u(999)
+  font-size: u(16)
+  font-weight: 600
+
+.starry__body
+  flex: 1
+  min-height: 0
+  margin-top: u(26)
+  overflow: hidden
+
+.starry__text
+  margin: 0
+  color: #f2f4ff
+  font-weight: 500
+
+.starry__meters
+  display: flex
+  margin-top: u(12)
+
+  .meter
+    flex: 1
+    min-width: 0
+
+  .meter__label
+    display: block
+    margin-bottom: u(8)
+    font-size: u(14)
+    letter-spacing: 0.12em
+    text-transform: uppercase
+    color: #98a0c8
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(18)
+    height: u(18)
+    margin-right: u(6)
+    border-radius: 50%
+    background: rgba(255, 255, 255, 0.14)
+
+  .meter__unit.is-on
+    background: #eef1fb
+
+.starry__facts
+  display: flex
+  align-items: center
+  margin-top: u(22)
+  padding-top: u(18)
+  border-top: u(1) solid rgba(255, 255, 255, 0.12)
+  font-size: u(17)
+  color: #d6dbf3
+
+  > span
+    display: flex
+    align-items: center
+    margin-right: u(30)
+    white-space: nowrap
+
+  b
+    margin-left: u(6)
+    color: #fff
+    font-weight: 600
+
+  > span:first-child b
+    font-size: u(22)
+
+.starry__swatch
+  display: block
+  width: u(18)
+  height: u(18)
+  margin-left: u(8)
+  border-radius: 50%
+
+.starry__match
+  width: u(22)
+  height: u(22)
+  margin-left: u(8)
+
+.starry__disclaimer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: u(16)
+  margin: 0
+  text-align: center
+  font-size: u(13)
+  color: #7f87b3
+
+.starry__strip
+  display: none
+
+// ---- portrait and square: the art on top, everything centered below it
+.stage--portrait, .stage--square
+  .stage__plate
+    display: flex
+    flex-direction: column
+
+  .starry__art
+    position: relative
+    left: auto
+    top: auto
+    flex: none
+    width: 100%
+
+  .starry__stars
+    width: 100%
+
+  .starry__info
+    position: relative
+    left: auto
+    top: auto
+    flex: 1
+    min-height: 0
+    width: 100%
+    text-align: center
+
+  .starry__kicker
+    flex: none
+    justify-content: center
+
+  .starry__rule
+    display: none
+
+  .starry__meta
+    justify-content: center
+
+  .starry__meters
+    text-align: center
+
+    .meter__scale
+      justify-content: center
+
+  .starry__facts
+    justify-content: center
+    flex-wrap: wrap
+
+    > span
+      margin: 0 u(14)
+
+.stage--portrait
+  .stage__plate
+    padding: u(56) u(52) u(60)
+
+  .starry__art
+    height: u(420)
+    margin-top: u(28)
+
+  .starry__stars
+    height: u(420)
+
+  .starry__name
+    margin-top: u(10)
+
+  .starry__meta
+    margin-top: u(12)
+    font-size: u(22)
+
+  .starry__chip
+    font-size: u(18)
+    padding: u(3) u(14)
+
+  .starry__body
+    margin-top: u(32)
+
+  .starry__kicker
+    font-size: u(18)
+    letter-spacing: 0.2em
+
+  .starry__meters .meter__label
+    font-size: u(15)
+
+  .starry__facts
+    margin-top: u(14)
+    padding-top: u(14)
+    font-size: u(16)
+
+  .starry__strip
+    display: flex
+    justify-content: center
+    margin-top: u(18)
+
+  .starry__strip-glyph
+    width: u(40)
+    height: u(40)
+    margin: 0 u(5)
+
+  .starry__disclaimer
+    bottom: u(30)
+    font-size: u(14)
+
+.stage--square
+  .stage__plate
+    padding: u(44) u(60) u(46)
+
+  .starry__art
+    height: u(250)
+
+  .starry__stars
+    height: u(250)
+
+  .starry__name
+    margin-top: u(6)
+
+  .starry__body
+    margin-top: u(16)
+
+  .starry__facts
+    margin-top: u(12)
+    padding-top: u(12)
+
+  .starry__disclaimer
+    bottom: u(16)

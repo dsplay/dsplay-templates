@@ -22,10 +22,9 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, fonts, i18n, background)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n, background)
     main/                     <-- lays out logo + menuitens
     menuitens/                <-- the product list itself (chalkboard banner + 10 name/price rows)
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

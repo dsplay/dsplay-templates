@@ -1,0 +1,248 @@
+@import ../mixins
+
+.daylight
+  color: #2b2140
+  font-family: 'Inter', sans-serif
+  background: #fff1e2
+  background: linear-gradient(150deg, #fff7ea 0%, #ffeede 55%, #fde5ee 100%)
+
+.daylight .stage__plate
+  display: flex
+  padding: u(48) u(60) u(60)
+
+.daylight__main
+  flex: 1.15
+  min-width: 0
+  display: flex
+  flex-direction: column
+  margin-right: u(48)
+
+.daylight__side
+  flex: 0.85
+  min-width: 0
+  display: flex
+  flex-direction: column
+
+.daylight__kicker
+  font-size: u(15)
+  letter-spacing: 0.16em
+  text-transform: uppercase
+  color: #8a7aa0
+  font-weight: 600
+
+.daylight__hero
+  display: flex
+  align-items: center
+  margin-top: u(22)
+
+.daylight__tile
+  display: flex
+  flex: none
+  align-items: center
+  justify-content: center
+  width: u(150)
+  height: u(150)
+  margin-right: u(26)
+  border-radius: u(42)
+  box-shadow: 0 u(14) u(30) rgba(0, 0, 0, 0.2)
+
+.daylight__glyph
+  width: u(92)
+  height: u(92)
+
+.daylight__who
+  min-width: 0
+
+.daylight__name
+  margin: 0
+  font-family: 'Fraunces', serif
+  font-weight: 700
+  line-height: 1
+  white-space: nowrap
+
+.daylight__range
+  margin-top: u(8)
+  font-size: u(20)
+  color: #6f6188
+
+.daylight__chip
+  align-self: flex-start
+  margin-top: u(28)
+  padding: u(5) u(16)
+  border-radius: u(999)
+  color: #fff
+  font-size: u(18)
+  font-weight: 600
+
+.daylight__body
+  flex: 1
+  min-height: 0
+  margin-top: u(20)
+  overflow: hidden
+
+.daylight__text
+  margin: 0
+  font-weight: 500
+
+.daylight__facts
+  display: flex
+  align-items: center
+  flex: none
+  margin-top: u(12)
+  font-size: u(17)
+  color: #5b4d73
+
+  > span
+    display: flex
+    align-items: center
+    margin-right: u(30)
+
+  b
+    margin-left: u(8)
+    color: #2b2140
+    font-weight: 600
+
+.daylight__number
+  font-size: u(24)
+
+.daylight__swatch
+  display: block
+  width: u(20)
+  height: u(20)
+  margin-left: u(8)
+  border-radius: 50%
+  box-shadow: 0 0 0 u(2) #fff, 0 0 0 u(3) rgba(43, 33, 64, 0.25)
+
+.daylight__card
+  padding: u(14) u(24)
+  border-radius: u(24)
+  background: rgba(255, 255, 255, 0.7)
+  box-shadow: 0 u(8) u(24) rgba(120, 90, 150, 0.14)
+
+  .meter
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: u(8) 0
+
+  .meter__label
+    font-size: u(18)
+    font-weight: 600
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(20)
+    height: u(20)
+    margin-left: u(7)
+    border-radius: 50%
+    background: rgba(43, 33, 64, 0.14)
+
+  .meter__unit.is-on
+    background: #ff6a3d
+
+.daylight__caption
+  margin-top: u(22)
+  font-size: u(14)
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  color: #8a7aa0
+  font-weight: 600
+
+.daylight__tiles
+  display: flex
+  flex-wrap: wrap
+  margin-top: u(14)
+
+.daylight__cell
+  display: block
+  width: 25%
+  margin-bottom: u(14)
+
+.daylight__mini
+  display: flex
+  align-items: center
+  justify-content: center
+  width: u(64)
+  height: u(64)
+  border-radius: u(18)
+  opacity: 0.72
+
+  &.is-current
+    opacity: 1
+    box-shadow: 0 0 0 u(4) #fff, 0 0 0 u(7) #6a5cf0, 0 u(8) u(18) rgba(0, 0, 0, 0.2)
+
+.daylight__mini-glyph
+  width: u(30)
+  height: u(30)
+
+.daylight__disclaimer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: u(26)
+  margin: 0
+  text-align: center
+  font-size: u(13)
+  color: #8a7aa0
+
+// ---- portrait: one column, the tiles in a row of six
+.stage--portrait
+  .stage__plate
+    flex-direction: column
+    padding: u(56) u(52) u(60)
+
+  .daylight__main
+    flex: none
+    margin-right: 0
+    height: u(800)
+
+  .daylight__side
+    flex: 1
+
+  .daylight__tile
+    width: u(120)
+    height: u(120)
+    border-radius: u(34)
+
+  .daylight__glyph
+    width: u(72)
+    height: u(72)
+
+  .daylight__cell
+    width: 16.66%
+
+// ---- square: the two columns, smaller
+.stage--square
+  .stage__plate
+    padding: u(40) u(44) u(56)
+
+  .daylight__main
+    margin-right: u(32)
+
+  .daylight__tile
+    width: u(100)
+    height: u(100)
+    margin-right: u(18)
+    border-radius: u(28)
+
+  .daylight__glyph
+    width: u(60)
+    height: u(60)
+
+  .daylight__card
+    padding: u(8) u(16)
+
+  .daylight__mini
+    width: u(56)
+    height: u(56)
+    border-radius: u(16)
+
+  .daylight__mini-glyph
+    width: u(26)
+    height: u(26)
+
+  .daylight__cell
+    width: 33.33%

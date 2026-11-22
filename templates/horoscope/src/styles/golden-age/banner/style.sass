@@ -1,0 +1,132 @@
+@import ../../mixins
+@import ../../banner
+
++banner(goldb)
+
+.goldb__frame
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.goldb
+  padding-top: u(18)
+  padding-bottom: u(18)
+
+.goldb__art
+  position: relative
+  width: u(190)
+  height: u(190)
+
+.goldb__circles, .goldb__stars
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.goldb__head
+  display: flex
+  align-items: center
+
+.goldb__glyph
+  width: u(30)
+  height: u(30)
+  margin-right: u(10)
+
+.goldb__range
+  font-size: u(14)
+  letter-spacing: 0.14em
+
+.goldb__name
+  margin: u(8) 0 0
+
+.goldb__keyword
+  margin-top: u(4)
+  font-size: u(20)
+
+.goldb__notice
+  margin: u(6) 0 0
+  font-family: 'Inter', sans-serif
+  font-size: u(11)
+  color: #8d7a4c
+
+.goldb__side
+  .meter
+    display: flex
+    align-items: center
+    margin-bottom: u(5)
+
+  .meter__label
+    width: u(96)
+    font-family: 'Cinzel', serif
+    font-size: u(12)
+    letter-spacing: 0.12em
+    text-transform: uppercase
+    color: #c9a24c
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(16)
+    height: u(16)
+    margin-right: u(3)
+
+    svg
+      display: block
+      width: 100%
+      height: 100%
+      fill: none
+      stroke: #7b6430
+      stroke-width: 1.4
+
+  .meter__unit.is-on svg
+    fill: #e7c673
+    stroke: #e7c673
+
+.goldb__lucky
+  margin-top: u(6)
+  font-family: 'Cinzel', serif
+  font-size: u(13)
+  letter-spacing: 0.1em
+  color: #c9a24c
+
+  b
+    margin-left: u(6)
+    font-size: u(24)
+    color: #f1d68a
+
+.goldb--h
+  padding-left: u(44)
+  padding-right: u(44)
+
+  .goldb__art
+    margin-right: u(28)
+
+  .goldb__who
+    width: u(300)
+    margin-right: u(28)
+    padding-right: u(28)
+    border-right: u(1) solid rgba(201, 162, 76, 0.5)
+
+  .goldb__side
+    width: u(200)
+    margin-left: u(28)
+
+.goldb--v
+  padding: u(34) u(24)
+
+  .goldb__art
+    margin: 0 auto u(12)
+
+  .goldb__head
+    justify-content: center
+
+  .goldb__side .meter
+    justify-content: center
+
+  .goldb__notice
+    text-align: center

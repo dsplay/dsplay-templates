@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#222;overflow:hidden}iframe{border:0;transform-origin:0 0;position:absolute;left:0;top:0}</style></head>
+<body><iframe id="f"></iframe>
+<script>
+// Dev-only harness (public/test-assets is left out of the release build): the template in an iframe of an exact screen size, scaled to fit the window.
+var q = new URLSearchParams(location.search);
+var W = Number(q.get('w')), H = Number(q.get('h'));
+var f = document.getElementById('f');
+f.style.width = W + 'px'; f.style.height = H + 'px';
+var s = Math.min((Number(q.get("vw")) || innerWidth) / W, (Number(q.get("vh")) || innerHeight) / H, 1);
+f.style.transform = 'scale(' + s + ')';
+// every other parameter (?iteration=3&locale=en) goes to the template
+var rest = new URLSearchParams(q);
+['w', 'h', 'vw', 'vh'].forEach(function (k) { rest.delete(k); });
+f.src = '/' + (rest.toString() ? '?' + rest.toString() : '');
+document.title = 'scale ' + s.toFixed(4) + ' size ' + Math.round(W * s) + 'x' + Math.round(H * s);
+</script></body></html>

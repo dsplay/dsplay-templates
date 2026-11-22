@@ -1,0 +1,28 @@
+@import ../../styles/mixins
+
+.reveal
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+.reveal__win,
+.reveal__in
+  width: 100%
+  height: 100%
+
+// the window is what clips: its own box grows as it slides in
+.reveal__win
+  overflow: hidden
+
+// the two keyframes cancel each other: the window is at -100% + p, the content at 100% - p, so the content stays where it is while the window opens
++keyframes(reveal-window)
+  0%
+    +transform(translateX(-100%))
+  100%
+    +transform(translateX(0))
+
++keyframes(reveal-content)
+  0%
+    +transform(translateX(100%))
+  100%
+    +transform(translateX(0))

@@ -1,0 +1,114 @@
+@import ../../mixins
+@import ../../banner
+
++banner(specb)
+
+.specb__watermark
+  position: absolute
+  right: u(-40)
+  top: u(-90)
+  width: u(420)
+  height: u(420)
+  opacity: 0.16
+
+.specb__kicker
+  display: flex
+  align-items: center
+  font-size: u(12)
+  font-weight: 700
+  letter-spacing: 0.2em
+  text-transform: uppercase
+  opacity: 0.9
+
+.specb__icon
+  width: u(20)
+  height: u(20)
+  margin-right: u(8)
+
+.specb__name
+  margin: u(6) 0 0
+
+.specb__range
+  margin-top: u(8)
+  font-size: u(17)
+  font-weight: 600
+
+.specb__chip
+  margin-left: u(10)
+  padding: u(2) u(10)
+  border-radius: u(999)
+  background: #fff
+  font-size: u(13)
+  font-weight: 700
+
+.specb__body .spectrum__text
+  font-weight: 600
+
+.specb__notice
+  margin: u(6) 0 0
+  font-size: u(11)
+  opacity: 0.8
+
+.specb__side
+  .meter
+    display: flex
+    align-items: center
+    margin-bottom: u(8)
+
+  .meter__label
+    width: u(94)
+    font-size: u(12)
+    font-weight: 700
+    letter-spacing: 0.1em
+    text-transform: uppercase
+
+  .meter__track
+    flex: 1
+    display: block
+    height: u(8)
+    border-radius: u(4)
+    background: rgba(255, 255, 255, 0.3)
+
+  .meter__fill
+    display: block
+    height: 100%
+    border-radius: u(4)
+    background: #fff
+
+.specb__lucky
+  font-size: u(13)
+  font-weight: 700
+  letter-spacing: 0.1em
+  text-transform: uppercase
+
+  b
+    margin-left: u(6)
+    font-size: u(34)
+    font-weight: 800
+
+.specb--h
+  .specb__who
+    flex: none
+    margin-right: u(28)
+
+  .specb__body
+    margin-right: u(28)
+    padding-left: u(28)
+    border-left: u(2) solid rgba(255, 255, 255, 0.5)
+
+  .specb__side
+    width: u(220)
+
+.specb--v
+  .specb__kicker
+    justify-content: center
+
+  .specb__notice
+    text-align: center
+
+  .specb__side .meter
+    justify-content: center
+
+  .specb__chip
+    display: inline-block
+    margin: u(8) 0 0

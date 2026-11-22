@@ -1,0 +1,131 @@
+@import ../../mixins
+
+.chatb
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+
+.chatb__bar
+  flex: none
+  display: flex
+  align-items: center
+  background: #fff
+  box-shadow: 0 u(2) u(10) rgba(30, 60, 100, 0.12)
+
+  .chat__avatar
+    flex: none
+    width: u(50)
+    height: u(50)
+    margin-right: u(12)
+
+.chatb .chatb__title
+  font-size: u(16)
+
+.chatb .chatb__status
+  font-size: u(12)
+
+.chatb__bubble
+  display: flex
+  flex-direction: column
+  justify-content: center
+  background: #fff
+  box-shadow: 0 u(3) u(10) rgba(30, 60, 100, 0.12)
+
+.chatb__bubble--answer
+  position: relative
+  background: #4ade80
+  box-shadow: 0 u(5) u(14) rgba(20, 100, 50, 0.25)
+  +transform-origin(100% 100%)
+  +animation(chat-pop 0.5s ease-out)
+  +animation-fill(both)
+
+.chatb__bubble--typing
+  flex-direction: row
+  align-items: center
+  background: #4ade80
+
+.chatb__reaction
+  position: absolute
+  left: u(14)
+  bottom: u(-16)
+  display: flex
+  align-items: center
+  padding: u(3) u(10)
+  border-radius: u(999)
+  background: #fff
+  box-shadow: 0 u(3) u(8) rgba(30, 60, 100, 0.15)
+  font-weight: 700
+  font-size: u(13)
+  +animation(chat-reaction 0.4s ease-out 0.5s)
+  +animation-fill(both)
+
+  .chat__laugh
+    display: block
+    width: u(18)
+    height: u(18)
+    margin-right: u(6)
+
+// ---- horizontal: the contact, the question, the answer (or the typing dots) on the other side
+.chatb--h
+  flex-direction: row
+  align-items: center
+  padding: u(18) u(28)
+
+  .chatb__bar
+    width: u(200)
+    padding: u(14) u(14)
+    margin-right: u(24)
+    border-radius: u(24)
+
+  .chatb__bubble
+    max-height: 100%
+    padding: u(12) u(28)
+
+  .chatb__bubble--question
+    margin-right: u(20)
+    border-radius: u(30) u(30) u(30) u(8)
+
+  .chatb__bubble--answer
+    margin-left: auto
+    border-radius: u(30) u(30) u(8) u(30)
+
+  .chatb__bubble--typing
+    margin-left: auto
+    padding: u(18) u(26)
+    border-radius: u(26) u(26) u(8) u(26)
+
+// ---- vertical: the contact on top, the question, the answer
+.chatb--v
+  flex-direction: column
+  align-items: stretch
+  padding: u(14) u(16)
+
+  .chatb__bar
+    height: u(70)
+    padding: 0 u(14)
+    margin-bottom: u(14)
+    border-radius: u(24)
+
+  .chatb__bubble
+    padding: u(12) u(18)
+
+  .chatb__bubble--question
+    width: 88%
+    border-radius: u(26) u(26) u(26) u(8)
+
+  .chatb__bubble--answer
+    width: 88%
+    align-self: flex-end
+    margin-top: u(24)
+    border-radius: u(26) u(26) u(8) u(26)
+
+  .chatb__bubble--typing
+    align-self: flex-end
+    width: u(110)
+    height: u(56)
+    margin-top: u(14)
+    justify-content: center
+    border-radius: u(24) u(24) u(8) u(24)

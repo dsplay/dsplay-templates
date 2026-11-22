@@ -1,0 +1,1509 @@
+@use "sass:math"
+// Generated from the approved design (spot.css of the Claude Design canvas, ADR 0070) by converting it to the indented syntax; edit this file from now on.
+// The spotlight family: one widget at a time, with its detail. Flex and margins only, no grid, no gap, no CSS variables (Android 4.4's WebView).
+// A slide is on when the rotation (lib/rotation.js) says so; its inner animations play once when it comes on.
+
+// Info panel, spotlight family: one widget at a time, with its detail. Same rules as panel.css: flex and margins only, no grid, no gap, no CSS variables, opacity and transform on HTML boxes only.
+// Formats are classes here (sf-*); in the real template they are aspect-ratio queries. Sizes are em; a format sets the root font-size.
+.sp
+  position: relative
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  box-sizing: border-box
+  font-family: Inter,system-ui,sans-serif
+  line-height: 1.15
+.sp *
+  box-sizing: border-box
+.sp .sbg
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+// ---------- motion ----------
+@keyframes rise
+  0%
+    opacity: 0
+    transform: translateY(.7em)
+  100%
+    opacity: 1
+    transform: none
+@keyframes pop
+  0%
+    opacity: 0
+    transform: scale(.6)
+  60%
+    opacity: 1
+    transform: scale(1.06)
+  100%
+    opacity: 1
+    transform: scale(1)
+// the chart is drawn from the left at its final size (stretched while it enters it looked bad): the window slides in from the left, so what it clips grows, and the content slides
+// the other way by the same amount, so it never leaves its place
+@keyframes bars-window
+  0%
+    transform: translateX(-100%)
+  100%
+    transform: translateX(0)
+@keyframes bars-content
+  0%
+    transform: translateX(100%)
+  100%
+    transform: translateX(0)
+@keyframes slidein
+  0%
+    transform: translateX(.8em)
+  100%
+    transform: none
+@keyframes kspin
+  to
+    transform: rotate(360deg)
+@keyframes kdrift
+  0%,
+  100%
+    transform: translateX(-.1em)
+  50%
+    transform: translateX(.14em)
+@keyframes kblink
+  0%,
+  49%
+    opacity: 1
+  50%,
+  100%
+    opacity: .15
+@keyframes kfloat
+  0%,
+  100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-.12em)
+.sp .slide
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+  opacity: 0
+  visibility: hidden
+  transition: opacity .5s ease, visibility 0s linear .5s
+.sp .a-rise
+  opacity: 0
+
+.sp .slide.on .a-rise
+  animation: rise .7s ease both
+.sp .a-pop
+  opacity: 0
+
+.sp .slide.on .a-pop
+  animation: pop .8s ease both
+.sp .bars
+  overflow: hidden
+.sp .bars-win,
+.sp .bars-in
+  width: 100%
+  height: 100%
+.sp .bars-win
+  overflow: hidden
+  transform: translateX(-100%)
+.sp .bars-in
+  transform: translateX(100%)
+
+.sp .slide.on .bars-win
+  animation: bars-window 1s ease .3s both
+.sp .slide.on .bars-in
+  animation: bars-content 1s ease .3s both
+.sp .od
+  display: inline-block
+  height: 1.15em
+  line-height: 1.15em
+  overflow: hidden
+  vertical-align: bottom
+.sp .od-in
+  display: block
+.sp .ln
+  display: block
+  height: 1.15em
+  line-height: 1.15em
+  white-space: nowrap
+.sp .blink
+  animation: kblink 1s steps(1) infinite
+.sp .dot
+  display: block
+  width: .55em
+  height: .55em
+  border-radius: 50%
+  margin: 0 .28em
+  opacity: .35
+  background: currentColor
+// ---------- the frame: header (clock, logo), stage, dots ----------
+.sp .head
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: space-between
+  flex: none
+  padding: .7em 1em .3em 1em
+.sp .sclock
+  display: flex
+  align-items: baseline
+  white-space: nowrap
+  font-weight: 800
+  font-variant-numeric: tabular-nums
+.sp .sdate
+  font-weight: 700
+  font-size: .62em
+  letter-spacing: .1em
+  margin-right: .6em
+  opacity: .85
+.sp .stime
+  font-size: 1.15em
+.sp .slogo
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 4.4em
+  height: 2.5em
+  border-radius: .4em
+  font-weight: 900
+  letter-spacing: .08em
+.sp .slogo b
+  font-size: .5em
+  display: block
+  white-space: nowrap
+.sp .stage
+  position: relative
+  flex: 1
+  min-height: 0
+.sp .foot
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  flex: none
+  padding: .5em 0 .8em 0
+// ---------- slides ----------
+.sp .hero
+  position: relative
+  overflow: hidden
+  display: flex
+  align-items: center
+  justify-content: center
+.sp .info
+  position: relative
+  display: flex
+  flex-direction: column
+  justify-content: center
+  min-width: 0
+.sp .tag
+  display: flex
+  align-items: center
+  font-weight: 800
+  letter-spacing: .08em
+  text-transform: uppercase
+  font-size: .62em
+  margin-bottom: .7em
+.sp .tag svg
+  width: 1.7em
+  height: 1.7em
+  margin-right: .55em
+  flex: none
+.sp .title
+  font-weight: 800
+  line-height: 1.1
+.sp .text
+  opacity: .88
+  font-weight: 500
+  line-height: 1.35
+.sp .sline
+  display: none
+// photo (a stylised scene stands in for the news photo)
+.sp .photo
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  background: linear-gradient(180deg,#8cbbea 0%,#cfe2fa 62%,#f1e6c9 100%)
+.sp .photo i
+  position: absolute
+  display: block
+.sp .photo .sun
+  right: 16%
+  top: 14%
+  width: 13%
+  height: 0
+  padding-bottom: 13%
+  border-radius: 50%
+  background: #fff3b8
+.sp .photo .h1
+  left: -12%
+  bottom: -30%
+  width: 78%
+  height: 62%
+  border-radius: 50%
+  background: #6c9a78
+.sp .photo .h2
+  right: -18%
+  bottom: -36%
+  width: 86%
+  height: 66%
+  border-radius: 50%
+  background: #4d7d62
+.sp .photo .h3
+  left: 20%
+  bottom: -48%
+  width: 70%
+  height: 60%
+  border-radius: 50%
+  background: #3a6550
+// weather
+.sp .bigwx
+  position: relative
+  width: 11em
+  height: 9em
+.sp .bigwx .bsun
+  position: absolute
+  left: .4em
+  top: 0
+  width: 6em
+  height: 6em
+.sp .bigwx .bsun .core
+  position: absolute
+  left: 1.5em
+  top: 1.5em
+  width: 3em
+  height: 3em
+  border-radius: 50%
+  background: #ffd93b
+.sp .bigwx .bsun .spin
+  position: absolute
+  left: 0
+  top: 0
+  width: 6em
+  height: 6em
+  animation: kspin 14s linear infinite
+.sp .bigwx .bsun .ray
+  position: absolute
+  left: 2.7em
+  top: .1em
+  width: .6em
+  height: .9em
+  border-radius: .3em
+  background: #ffd93b
+  transform-origin: .3em 2.9em
+.sp .bigwx .bcloud
+  position: absolute
+  left: 2.6em
+  top: 3em
+  width: 8em
+  height: 5em
+  animation: kdrift 6s ease-in-out infinite
+.sp .bigwx .bcloud i
+  position: absolute
+  display: block
+  background: #eef3fa
+  border-radius: 50%
+.sp .bigwx .cb
+  left: 0
+  top: 2em
+  width: 8em
+  height: 3em
+  border-radius: 1.5em
+.sp .bigwx .c1
+  left: 1em
+  top: .8em
+  width: 3.2em
+  height: 3.2em
+.sp .bigwx .c2
+  left: 3.2em
+  top: 0
+  width: 3.8em
+  height: 3.8em
+.sp .temp
+  font-weight: 800
+  font-variant-numeric: tabular-nums
+  line-height: 1
+.sp .facts
+  display: flex
+  flex-wrap: wrap
+.sp .fact
+  margin: 0 1.4em .5em 0
+  font-weight: 600
+.sp .fact small
+  display: block
+  font-size: .6em
+  letter-spacing: .08em
+  text-transform: uppercase
+  opacity: .7
+  font-weight: 700
+  margin-bottom: .1em
+.sp .days
+  display: flex
+.sp .day
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-right: 1.1em
+  font-weight: 700
+.sp .day small
+  font-size: .6em
+  letter-spacing: .08em
+  text-transform: uppercase
+  opacity: .75
+  margin-bottom: .3em
+.sp .day svg
+  width: 1.6em
+  height: 1.6em
+  margin-bottom: .2em
+.sp .day .lo
+  opacity: .65
+  font-weight: 600
+  font-size: .85em
+// quotes
+.sp .qbadge
+  display: flex
+  align-items: center
+  font-weight: 800
+  letter-spacing: .06em
+.sp .qbadge b
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 2.4em
+  height: 2.4em
+  border-radius: 50%
+  margin-right: .6em
+  font-size: .9em
+.sp .flag
+  display: block
+  flex: none
+  width: 3em
+  height: 3em
+  border-radius: 50%
+  margin-right: .7em
+  object-fit: cover
+  box-shadow: 0 .05em .3em rgba(0,0,0,.25)
+.sf-tall .flag
+  width: 2.6em
+  height: 2.6em
+.sf-band .flag
+  width: 2.2em
+  height: 2.2em
+.sp .price
+  font-weight: 800
+  font-variant-numeric: tabular-nums
+  line-height: 1
+.sp .delta
+  display: inline-block
+  font-weight: 800
+  padding: .1em .45em
+  border-radius: .4em
+  font-size: .38em
+  vertical-align: middle
+  margin-left: .6em
+.sp .chartbox
+  position: relative
+.sp .chartbox .bars
+  width: 100%
+  height: 100%
+.sp .chartbox svg
+  display: block
+  width: 100%
+  height: 100%
+.sp .stats
+  display: flex
+// holidays
+.sp .cal
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 7em
+  border-radius: .8em
+  overflow: hidden
+  font-weight: 800
+  text-align: center
+.sp .cal .mon
+  width: 100%
+  padding: .4em 0
+  font-size: .9em
+  letter-spacing: .15em
+.sp .cal .day2
+  font-size: 3.6em
+  line-height: 1.1
+  padding: .1em 0 .2em 0
+.sp .hrow
+  display: flex
+  align-items: center
+  margin-bottom: .7em
+.sp .hrow .hd
+  flex: none
+  width: 2.6em
+  font-weight: 800
+  font-size: 1.1em
+  text-align: center
+  margin-right: .7em
+  line-height: 1
+.sp .hrow .hd small
+  display: block
+  font-size: .5em
+  letter-spacing: .1em
+  margin-top: .15em
+.sp .hrow .hn
+  font-weight: 700
+  font-size: 1em
+  min-width: 0
+.sp .hrow .hw
+  margin-left: auto
+  padding-left: 1em
+  opacity: .75
+  font-size: .7em
+  font-weight: 600
+  white-space: nowrap
+// countdown
+.sp .bignum
+  font-weight: 900
+  line-height: .9
+  font-variant-numeric: tabular-nums
+.sp .sub1
+  font-weight: 600
+  opacity: .85
+// horoscope
+.sp .sign
+  display: flex
+  align-items: center
+  justify-content: center
+  border-radius: 50%
+.sp .sign svg
+  display: block
+  width: 60%
+  height: 60%
+// joke: the icon and the tag stay, the text swaps
+.sp .jsw
+  position: relative
+  min-width: 0
+.sp .jq
+  opacity: 1
+  transition: opacity .4s ease, transform .4s ease
+
+.sp .slide.ph1 .jq
+  opacity: 0
+  transform: translateY(-.3em)
+.sp .ja
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  opacity: 0
+  transform: translateY(.4em)
+  transition: opacity .4s ease, transform .4s ease
+
+.sp .slide.ph1 .ja
+  opacity: 1
+  transform: none
+.sp .bigic svg
+  display: block
+  width: 100%
+  height: 100%
+// ---------- formats ----------
+.sf-landscape
+  font-size: 30px
+.sf-landscape .slide
+  flex-direction: row
+.sf-landscape .hero
+  width: 46%
+  height: 100%
+.sf-landscape .info
+  flex: 1
+  padding: 1em 2em 1em 1.6em
+.sf-landscape .title
+  font-size: 2.3em
+.sf-landscape .text
+  font-size: .95em
+  margin-top: .7em
+.sf-landscape .temp
+  font-size: 4.6em
+.sf-landscape .price
+  font-size: 4.2em
+.sf-landscape .bignum
+  font-size: 9em
+.sf-landscape .sign
+  width: 8.5em
+  height: 8.5em
+.sf-landscape .bigic
+  width: 8em
+  height: 8em
+.sf-landscape .qbadge
+  font-size: 1.1em
+  margin-bottom: .5em
+.sf-square
+  font-size: 26px
+.sf-square .slide
+  flex-direction: column
+.sf-square .hero
+  width: 100%
+  height: 46%
+.sf-square .info
+  flex: 1
+  padding: 1em 1.6em
+.sf-square .title
+  font-size: 2em
+.sf-square .text
+  font-size: .9em
+  margin-top: .5em
+.sf-square .temp
+  font-size: 3.6em
+.sf-square .price
+  font-size: 3.4em
+.sf-square .bignum
+  font-size: 7em
+.sf-square .sign
+  width: 7em
+  height: 7em
+.sf-square .bigic
+  width: 6.5em
+  height: 6.5em
+.sf-portrait
+  font-size: 34px
+.sf-portrait .slide
+  flex-direction: column
+.sf-portrait .hero
+  width: 100%
+  height: 42%
+.sf-portrait .info
+  flex: 1
+  padding: 1.2em 1.6em
+.sf-portrait .title
+  font-size: 2.1em
+.sf-portrait .text
+  font-size: .95em
+  margin-top: .6em
+.sf-portrait .temp
+  font-size: 4.2em
+.sf-portrait .price
+  font-size: 4em
+.sf-portrait .bignum
+  font-size: 8em
+.sf-portrait .sign
+  width: 8em
+  height: 8em
+.sf-portrait .bigic
+  width: 7.5em
+  height: 7.5em
+.sf-tall
+  font-size: 15px
+.sf-tall .slide
+  flex-direction: column
+.sf-tall .hero
+  width: 100%
+  height: 30%
+.sf-tall .info
+  flex: 1
+  padding: .9em .9em
+.sf-tall .title
+  font-size: 1.9em
+.sf-tall .text
+  font-size: 1em
+  margin-top: .6em
+.sf-tall .temp
+  font-size: 3.6em
+.sf-tall .price
+  font-size: 3.2em
+.sf-tall .bignum
+  font-size: 5.6em
+.sf-tall .sign
+  width: 6em
+  height: 6em
+.sf-tall .bigic
+  width: 5.5em
+  height: 5.5em
+.sf-tall .slogo
+  width: 3.6em
+  height: 2.2em
+.sf-tall .days
+  flex-wrap: wrap
+.sf-tall .day
+  margin-bottom: .6em
+.sf-tall .bigwx
+  font-size: .7em
+// slim: a strip too thin for a spotlight, so each slide shows its one line (the compact version)
+.sf-slim
+  font-size: 23px
+  flex-direction: row
+  align-items: center
+.sf-slim .head
+  flex: none
+  padding: 0 .6em
+.sf-slim .stage
+  flex: 1
+.sf-slim .foot
+  display: none
+.sf-slim .hero,
+.sf-slim .info
+  display: none
+.sf-slim .slide
+  align-items: center
+  padding: 0 .6em
+.sf-slim .sline
+  display: block
+  font-weight: 700
+  font-size: .9em
+  line-height: 1.15
+  overflow: hidden
+  width: 100%
+.sf-slim .sline .lead
+  font-weight: 800
+  text-transform: uppercase
+  letter-spacing: .04em
+.sf-slim .sdate
+  display: inline
+// the icon before the strip's line: the channel's logo in a light box, or the widget's icon (the sign for the horoscope)
+.sf-slim .sicon
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 1.5em
+  height: 1.5em
+  margin-right: .5em
+.sf-slim .sicon svg
+  width: 100%
+  height: 100%
+// the animated weather icon: the forecast day's, at the size of the strip's text
+.sf-slim .sicon.wx
+  width: 1.9em
+  height: 1.6em
+  // a soft shadow so the white cloud still shows on a light background
+  -webkit-filter: drop-shadow(0 .03em .06em rgba(0,0,0,.45))
+  filter: drop-shadow(0 .03em .06em rgba(0,0,0,.45))
+.sf-slim .sicon.wx .dwx
+  position: relative
+  width: 1.6em
+  height: 1.4em
+  flex: none
+.sf-slim .sicon.logo
+  width: auto
+  min-width: 1.5em
+.sf-slim .sicon.logo img
+  display: block
+  height: 100%
+  max-width: 3em
+  object-fit: contain
+.sf-slim .slogo
+  order: 3
+  margin-left: .6em
+// ---------- layout: overlay (poster, night) = the hero is the background, the text sits over it ----------
+.lay-overlay .hero
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  width: 100%
+  height: 100%
+.lay-overlay .info
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0
+  top: auto
+  justify-content: flex-end
+  padding-bottom: 1.4em
+.lay-overlay.sf-landscape .info
+  padding: 1em 2.4em 1.4em 2.4em
+.lay-overlay .head,
+.lay-overlay .foot
+  z-index: 2
+// the quotes: two rows with their charts take the lower half, so the flags sit at the top of the picture, clear of them (and the overlay's text grows less than the side layouts')
+.lay-overlay.sf-landscape .sl-quotes2 .hero,
+.lay-overlay.sf-square .sl-quotes2 .hero,
+.lay-overlay.sf-portrait .sl-quotes2 .hero,
+.lay-overlay.sf-tall .sl-quotes2 .hero
+  align-items: flex-start
+  padding-top: 6%
+// ---------- style: poster ----------
+.st-poster
+  color: #fff
+.st-poster .sbg
+  background: #10131a
+.st-poster .slogo
+  background: #fff
+  color: #14171d
+.st-poster .hero
+  background: linear-gradient(135deg,#ff6b4a,#c0306a)
+.st-poster .lay-overlay .info,
+.st-poster .info
+  background: linear-gradient(0deg,rgba(8,10,16,.88) 0%,rgba(8,10,16,.55) 62%,rgba(8,10,16,0) 100%)
+.st-poster .tag
+  color: #ffd23f
+.st-poster .delta
+  background: rgba(255,255,255,.2)
+.st-poster .price,
+.st-poster .temp,
+.st-poster .bignum
+  text-shadow: 0 .04em .2em rgba(0,0,0,.35)
+// ---------- style: cards ----------
+.st-cards
+  color: #1c2430
+.st-cards .sbg
+  background: #e9edf4
+.st-cards .slogo
+  background: #fff
+  color: #1c2430
+  box-shadow: 0 .1em .4em rgba(20,30,50,.12)
+.st-cards .slide
+  padding: .3em 1em 0 1em
+.st-cards .slide > .hero,
+.st-cards .slide > .info
+  background: #fff
+  box-shadow: 0 .2em .8em rgba(20,30,50,.12)
+.st-cards.sf-landscape .hero
+  border-radius: 1em 0 0 1em
+  width: 44%
+.st-cards.sf-landscape .info
+  border-radius: 0 1em 1em 0
+.st-cards.sf-square .hero,
+.st-cards.sf-portrait .hero,
+.st-cards.sf-tall .hero
+  border-radius: 1em 1em 0 0
+.st-cards.sf-square .info,
+.st-cards.sf-portrait .info,
+.st-cards.sf-tall .info
+  border-radius: 0 0 1em 1em
+.st-cards .tag
+  color: #2563eb
+.st-cards .hero
+  background: #dbe6fb !important
+.st-cards .delta
+  background: #e8eefc
+.st-cards .price,
+.st-cards .temp
+  color: #10223f
+// ---------- style: split (two tones) ----------
+.st-split
+  color: #12262a
+.st-split .sbg
+  background: #fbfaf6
+.st-split .head
+  background: transparent
+.st-split .slogo
+  background: #0f766e
+  color: #fff
+.st-split .hero
+  background: #0f766e
+  color: #fff
+.st-split .tag
+  color: #0f766e
+.st-split .delta
+  background: #d7efe9
+  color: #0f4f49
+.st-split .title
+  color: #0b3b36
+// ---------- style: night ----------
+.st-night
+  color: #e8f6ff
+  font-family: 'Space Grotesk',Inter,sans-serif
+.st-night .sbg
+  background: #06070d
+.st-night .slogo
+  background: transparent
+  border: 1px solid #29f0ff
+  color: #29f0ff
+  box-shadow: 0 0 .6em rgba(41,240,255,.4)
+.st-night .hero
+  background: radial-gradient(circle at 30% 30%,#14213d,#06070d 70%)
+.st-night .info
+  background: linear-gradient(0deg,rgba(6,7,13,.92) 0%,rgba(6,7,13,.6) 60%,rgba(6,7,13,0) 100%)
+.st-night .tag
+  color: #ff3dd0
+.st-night .temp,
+.st-night .price,
+.st-night .bignum
+  color: #29f0ff
+  filter: drop-shadow(0 0 .22em rgba(41,240,255,.6))
+.st-night .delta
+  border: 1px solid #ff3dd0
+  color: #ff3dd0
+// ---------- style: minimal ----------
+.st-minimal
+  color: #161616
+.st-minimal .sbg
+  background: #f7f5f0
+.st-minimal .slogo
+  background: #161616
+  color: #f7f5f0
+.st-minimal .title,
+.st-minimal .bignum
+  font-family: Newsreader,Georgia,serif
+  font-weight: 700
+.st-minimal .tag
+  color: #b3261e
+  border-bottom: 2px solid #b3261e
+  padding-bottom: .2em
+  display: inline-flex
+  align-self: flex-start
+.st-minimal .hero
+  background: #ece6d8
+.st-minimal .delta
+  background: transparent
+  border-bottom: 2px solid #161616
+  border-radius: 0
+  padding: .1em .1em
+.st-poster .sl-weather .hero
+  background: linear-gradient(160deg,#4aa3ff,#1d5fc4)
+.st-poster .sl-quotes .hero
+  background: linear-gradient(160deg,#10a37f,#0b5a52)
+.st-poster .sl-hol .hero
+  background: linear-gradient(160deg,#f7708b,#a3203f)
+.st-poster .sl-count .hero
+  background: linear-gradient(160deg,#f9c85c,#c26b12)
+.st-poster .sl-up .hero
+  background: linear-gradient(160deg,#4ecb8a,#14715a)
+.st-poster .sl-horo .hero
+  background: linear-gradient(160deg,#a47bff,#5a2fb8)
+.st-poster .sl-joke .hero
+  background: linear-gradient(160deg,#ffd23f,#d07a00)
+.st-night .sl-weather .hero,
+.st-night .sl-quotes .hero,
+.st-night .sl-hol .hero
+  background: radial-gradient(circle at 30% 30%,#14213d,#06070d 70%)
+.st-cards .sl-weather .hero
+  background: #cfe3ff !important
+.st-cards .sl-quotes .hero
+  background: #d4f1e6 !important
+.st-cards .sl-hol .hero
+  background: #fde0e7 !important
+.st-cards .sl-count .hero,
+.st-cards .sl-joke .hero
+  background: #fdeccb !important
+.st-cards .sl-up .hero
+  background: #d9f3de !important
+.st-cards .sl-horo .hero
+  background: #e6dcfb !important
+.sp .qline
+  stroke: currentColor
+// ---------- the clock and the logo as slides (the default); pinned they live in the top bar instead (a template variable) ----------
+.sp .sl-clock .hero
+  flex-direction: column
+.sp .bigtime
+  font-weight: 900
+  line-height: .95
+  font-variant-numeric: tabular-nums
+  white-space: nowrap
+.sp .biglogo
+  width: 12em
+  height: 7em
+  border-radius: .6em
+  font-weight: 900
+.sp .biglogo b
+  font-size: .9em
+.sp .sl-logo .info
+  display: none
+.sp .sl-logo .hero
+  width: 100% !important
+  height: 100% !important
+  flex: 1
+  border-radius: 1em !important
+.sf-landscape .bigtime
+  font-size: 9.5em
+.sf-square .bigtime
+  font-size: 7.4em
+.sf-portrait .bigtime
+  font-size: 8.6em
+.sf-tall .bigtime
+  font-size: 4.6em
+.sf-landscape .biglogo
+  font-size: 1.2em
+.sf-square .biglogo
+  font-size: 1em
+.sf-portrait .biglogo
+  font-size: 1.1em
+.sf-tall .biglogo
+  font-size: .8em
+.sp.nohead .head
+  display: none
+// ---------- horizontal banners (the h-banner family: 4:1 to 10:1): the picture is a square on the left, the detail beside it, one widget at a time ----------
+.sf-band
+  flex-direction: row
+  align-items: stretch
+.sf-band.b4
+  font-size: 56px
+.sf-band.b6
+  font-size: 38px
+.sf-band.b8
+  font-size: 30px
+.sf-band.b10
+  font-size: 24px
+.sf-band .stage
+  flex: 1
+.sf-band .foot
+  display: none
+.sf-band .head
+  flex: none
+  flex-direction: column
+  justify-content: center
+  align-items: flex-start
+  padding: 0 1em
+.sf-band .head .slogo
+  margin-top: .5em
+  width: 3.2em
+  height: 1.8em
+.sf-band .slide
+  flex-direction: row
+.sf-band .hero
+  position: relative !important
+  left: auto !important
+  top: auto !important
+  width: 8em !important
+  height: 100% !important
+  flex: none
+.sf-band .info
+  position: relative !important
+  left: auto !important
+  right: auto !important
+  bottom: auto !important
+  flex: 1
+  padding: .5em 1.4em .5em 1.2em !important
+  justify-content: center
+  background: transparent !important
+.sf-band .tag
+  font-size: .5em
+  margin-bottom: .35em
+.sf-band .title
+  font-size: 1.5em
+.sf-band .text
+  font-size: .62em
+  margin-top: .3em
+.sf-band .temp
+  font-size: 2.1em
+.sf-band .price
+  font-size: 2.4em
+.sf-band .qbadge
+  font-size: .6em
+  margin-bottom: .2em
+.sf-band .qbadge b
+  width: 1.8em
+  height: 1.8em
+.sf-band .bignum
+  font-size: 3.7em
+.sf-band .bigtime
+  font-size: 2.5em
+.sf-band .sign
+  width: 6em
+  height: 6em
+.sf-band .bigic
+  width: 5.6em
+  height: 5.6em
+.sf-band .cal
+  width: 5em
+.sf-band .cal .day2
+  font-size: 2.6em
+.sf-band .bigwx
+  font-size: .7em
+.sf-band .biglogo
+  width: 9em
+  height: 5em
+  font-size: .8em
+.sf-band .facts,
+.sf-band .days,
+.sf-band .hrow:nth-of-type(n+3)
+  display: none
+.sf-band.b4 .days
+  display: flex
+.sf-band .days
+  font-size: .5em
+  margin-top: .3em
+.sf-band.b4 .hrow:nth-of-type(n+3),
+.sf-band.b6 .hrow:nth-of-type(n+3)
+  display: flex
+.sf-band.b10 .text,
+.sf-band.b8 .sub1
+  display: none
+.sf-band.b10 .tag
+  display: none
+.sf-band .hrow
+  margin-bottom: .3em
+.sf-band .chartbox
+  width: 70% !important
+  height: 56% !important
+.sf-band .photo .sun
+  right: 14%
+.st-poster .sl-clock .hero
+  background: linear-gradient(160deg,#3d5afe,#1a237e)
+.st-poster .sl-logo .hero
+  background: linear-gradient(160deg,#2a2f45,#10131a)
+.st-night .sl-clock .hero,
+.st-night .sl-logo .hero
+  background: radial-gradient(circle at 30% 30%,#14213d,#06070d 70%)
+.st-cards .sl-clock .hero
+  background: #dbe6fb !important
+.st-cards .sl-logo .hero
+  background: #f3f5f9 !important
+.st-split .biglogo
+  background: #fff
+  color: #0f766e
+.sf-band.b4 .title
+  font-size: 1.2em
+.sf-band.b4 .text
+  font-size: .55em
+// ---------- quotes with both currencies: the horizontal banners (and the slim strip's line) have room for two, side by side ----------
+.sp .flags2
+  display: flex
+  align-items: center
+.sp .fgroup
+  display: flex
+  flex-direction: column
+  align-items: center
+.sp .fpair
+  position: relative
+  width: 7.4em
+  height: 4em
+.sp .fpair .flag
+  position: absolute
+  top: 0
+  width: 4em
+  height: 4em
+  margin: 0
+  border: .14em solid rgba(255,255,255,.9)
+.sp .fpair .f1
+  left: 0
+.sp .fpair .f2
+  left: 3.2em
+// the base currency: one ball of its own (a flag, or the code where the currency has none), a rule between it and the pair, and a name under each
+.sp .fbase .flag
+  width: 4em
+  height: 4em
+  margin: 0
+  border: .14em solid rgba(255,255,255,.9)
+.sp .flag.nof
+  display: flex
+  align-items: center
+  justify-content: center
+  background: rgba(255,255,255,.22)
+  font-weight: 800
+  font-size: .9em
+  letter-spacing: .04em
+.sp .fsep
+  flex: none
+  width: .08em
+  height: 3.6em
+  margin: 0 .8em
+  background: currentColor
+  opacity: .35
+.sp .flabel
+  margin-top: .5em
+  font-size: .55em
+  font-weight: 800
+  letter-spacing: .1em
+  text-transform: uppercase
+  opacity: .85
+  white-space: nowrap
+.sf-band .fbase,
+.sf-band .fsep,
+.sf-band .flabel,
+.sf-tall .fbase,
+.sf-tall .fsep,
+.sf-tall .flabel
+  display: none
+.sp .q2row
+  display: flex
+  align-items: center
+  width: 100%
+.sp .q2
+  flex: 1
+  display: flex
+  align-items: center
+  min-width: 0
+  padding-right: 2em
+.sp .q2 + .q2
+  padding-left: 2em
+  padding-right: 0
+  border-left: 1px solid rgba(127,127,127,.4)
+.sp .q2m
+  flex: none
+.sp .q2chart
+  flex: 1
+  min-width: 4em
+  height: 3.4em
+  margin-left: 1.6em
+.sp .q2chart .bars
+  width: 100%
+  height: 100%
+.sp .q2chart svg
+  display: block
+  width: 100%
+  height: 100%
+.sp .q2chart.up
+  color: #3ddc8c
+.sp .q2chart.down
+  color: #ff6b81
+.st-paper .q2chart.up,
+.st-minimal .q2chart.up
+  color: #1c7a45
+.st-paper .q2chart.down,
+.st-minimal .q2chart.down
+  color: #b3261e
+.sf-band.b4 .q2p
+  font-size: 1.35em
+.sf-band.b4 .q2h
+  font-size: .5em
+.sf-band.b6 .q2p
+  font-size: 1.8em
+.sp .q2chart
+  overflow: hidden
+.sf-band.b4 .q2chart
+  height: 3.6em
+.sp .q2h
+  display: flex
+  align-items: center
+  font-weight: 800
+  letter-spacing: .06em
+  font-size: .55em
+  margin-bottom: .25em
+.sp .q2h .flag
+  width: 1.9em
+  height: 1.9em
+  margin: 0 .6em 0 0
+.sp .q2p
+  display: flex
+  align-items: center
+  font-weight: 800
+  font-variant-numeric: tabular-nums
+  font-size: 2.1em
+  line-height: 1
+.sp .q2p .delta
+  font-size: .34em
+.st-night .q2p
+  color: #29f0ff
+  filter: drop-shadow(0 0 .2em rgba(41,240,255,.5))
+.st-cards .q2p
+  color: #10223f
+.sf-band .flags2
+  font-size: .9em
+.sf-band.b10 .flags2
+  font-size: .75em
+// the horoscope names its sign under the icon where the tag is small or gone (the banners)
+.sp .signbox
+  display: flex
+  flex-direction: column
+  align-items: center
+.sp .signname
+  display: none
+  font-weight: 800
+  text-align: center
+  line-height: 1.1
+.sf-band .signname,
+.sf-tall .signname
+  display: block
+  margin-top: .35em
+  font-size: 1.1em
+.sf-band .sign
+  width: 4.4em
+  height: 4.4em
+.sf-band.b10 .sign
+  width: 3.8em
+  height: 3.8em
+.sf-tall .sign
+  width: 5em
+  height: 5em
+.sf-tall .signname
+  font-size: 1.5em
+// the forecast: a thermometer with a high level and red for the maximum, a low level and blue for the minimum
+.sp .trow
+  display: flex
+  align-items: center
+  font-weight: 800
+  line-height: 1.15
+.sp .trow svg
+  display: block
+  width: .85em
+  height: 1.1em
+  margin-right: .1em
+  flex: none
+.sp .tmax
+  color: #e5392c
+.sp .tmin
+  color: #2b7de0
+  font-weight: 700
+.st-poster .tmax,
+.st-night .tmax
+  color: #ff7a6b
+.st-poster .tmin,
+.st-night .tmin
+  color: #7dbcff
+// the thermometer drawn with HTML boxes (a tube, its mercury and the bulb): high level for the maximum, low for the minimum
+.sp .th
+  position: relative
+  display: block
+  flex: none
+  width: .62em
+  height: 1.1em
+  margin-right: .2em
+.sp .th i
+  display: block
+  position: absolute
+.sp .th .tube
+  left: .18em
+  top: 0
+  width: .26em
+  height: .8em
+  border: .07em solid currentColor
+  border-radius: .16em
+  overflow: hidden
+  box-sizing: border-box
+.sp .th .mer
+  left: 0
+  right: 0
+  bottom: 0
+  background: currentColor
+.sp .th.hi .mer
+  height: 72%
+.sp .th.lo .mer
+  height: 28%
+.sp .th .bulb
+  left: .07em
+  bottom: 0
+  width: .48em
+  height: .48em
+  border-radius: 50%
+  background: currentColor
+// quotes with both currencies in every format: a row each (flag, price and change, chart); stacked in the big formats and the tall banner, side by side in the horizontal ones
+.sp .q2n
+  margin-left: .6em
+  font-weight: 600
+  opacity: .85
+  letter-spacing: 0
+.sp .q2f
+  font-size: .55em
+  opacity: .8
+  margin-top: .35em
+  font-weight: 600
+  white-space: nowrap
+.sf-band .q2n,
+.sf-band .q2f
+  display: none
+.sf-landscape .q2row,
+.sf-square .q2row,
+.sf-portrait .q2row,
+.sf-tall .q2row
+  flex-direction: column
+  align-items: stretch
+.sf-landscape .q2,
+.sf-square .q2,
+.sf-portrait .q2,
+.sf-tall .q2
+  padding: 0 0 .9em 0
+.sf-landscape .q2 + .q2,
+.sf-square .q2 + .q2,
+.sf-portrait .q2 + .q2,
+.sf-tall .q2 + .q2
+  border-left: 0
+  padding: .9em 0 0 0
+  border-top: 1px solid rgba(127,127,127,.4)
+.sf-landscape .q2h,
+.sf-square .q2h,
+.sf-portrait .q2h
+  font-size: .9em
+.sf-landscape .q2p
+  font-size: 3.6em
+.sf-square .q2p,
+.sf-portrait .q2p
+  font-size: 3.2em
+.sf-landscape .q2chart,
+.sf-square .q2chart,
+.sf-portrait .q2chart
+  height: 3.4em
+.sf-landscape .flags2
+  font-size: 1.4em
+.sf-square .flags2
+  font-size: 1.2em
+.sf-portrait .flags2
+  font-size: 1.4em
+.sf-tall .flags2
+  font-size: 1.1em
+.sf-tall .q2
+  flex-direction: column
+  align-items: flex-start
+.sf-tall .q2chart
+  margin: .5em 0 0 0
+  width: 100%
+  height: 3em
+  flex: none
+.sf-tall .q2h
+  font-size: .85em
+.sf-tall .q2p
+  font-size: 1.9em
+.sf-tall .q2n
+  display: none
+
+// ---------- the loop ----------
+// The slides take turns by script (lib/rotation.js): the one showing has the class `on`, and a joke's second phase `ph1`. The animations inside a slide play once, when it comes on.
+.sp .slide.on
+  opacity: 1
+  visibility: visible
+  transition: opacity .5s ease, visibility 0s
+  animation: slidein .6s ease both
+
+.sp .dot
+  transition: opacity .3s ease, transform .3s ease
+
+.sp .dot.on
+  opacity: 1
+  transform: scale(1.5)
+
+// the real template draws the photo of a news item over the drawn one, and the logo it is given
+.sp .photo.real
+  background-size: cover
+  background-position: center
+
+.sp .photo.real i
+  display: none
+
+.sp .slogo img, .sp .biglogo img
+  display: block
+  max-width: 100%
+  max-height: 100%
+  object-fit: contain
+
+.sp .cal
+  background: #fff
+  color: #c01e48
+
+.sp .cal .mon
+  background: #d93a5c
+  color: #fff
+
+// the forecast's little icons, drawn with HTML boxes so they can move (no animation on SVG for Android 4.4): the sun's rays turn, the cloud drifts, the drops fall
+@keyframes kfall
+  0%
+    opacity: 0
+    transform: translateY(-.12em)
+  30%
+    opacity: 1
+  100%
+    opacity: 0
+    transform: translateY(.28em)
+
+.sp .day .dwx
+  position: relative
+  width: 1.6em
+  height: 1.4em
+  margin-bottom: .2em
+  flex: none
+
+.sp .dwx .dsun
+  position: absolute
+  left: .05em
+  top: 0
+  width: .95em
+  height: .95em
+
+.sp .dwx .dsun .dspin
+  position: absolute
+  left: 0
+  top: 0
+  width: .95em
+  height: .95em
+  animation: kspin 14s linear infinite
+
+.sp .dwx .dsun .dcore
+  position: absolute
+  left: .2em
+  top: .2em
+  width: .55em
+  height: .55em
+  border-radius: 50%
+  background: #ffd93b
+
+.sp .dwx .dsun .dray
+  position: absolute
+  left: .42em
+  top: 0
+  width: .11em
+  height: .16em
+  border-radius: .05em
+  background: #ffd93b
+  transform-origin: .055em .475em
+
+.sp .dwx .dcloud
+  position: absolute
+  left: .38em
+  top: .5em
+  width: 1.15em
+  height: .75em
+  animation: kdrift 6s ease-in-out infinite
+
+.sp .dwx .dcloud i
+  position: absolute
+  display: block
+  background: #eef3fa
+  border-radius: 50%
+
+.sp .dwx .dcloud .b
+  left: 0
+  top: .32em
+  width: 1.15em
+  height: .43em
+  border-radius: .26em
+
+.sp .dwx .dcloud .c1
+  left: .12em
+  top: .12em
+  width: .48em
+  height: .48em
+
+.sp .dwx .dcloud .c2
+  left: .47em
+  top: 0
+  width: .52em
+  height: .52em
+
+.sp .dwx .ddrops
+  position: absolute
+  left: .42em
+  top: 1.08em
+  width: 1.1em
+  height: .35em
+
+.sp .dwx .ddrops i
+  position: absolute
+  top: 0
+  width: .08em
+  height: .2em
+  border-radius: .04em
+  background: #7fc4ff
+  animation: kfall 1s linear infinite
+
+.sp .dwx .ddrops i:nth-child(1)
+  left: .12em
+
+.sp .dwx .ddrops i:nth-child(2)
+  left: .5em
+  animation-delay: .33s
+
+.sp .dwx .ddrops i:nth-child(3)
+  left: .88em
+  animation-delay: .66s
+
+// the weather alert slide: the hero takes the severity's color in every style (a safety message is read by its color first)
+.sp .sl-alert.sev-moderate .hero
+  background: linear-gradient(160deg,#f7c548,#c98a05) !important
+
+.sp .sl-alert.sev-severe .hero
+  background: linear-gradient(160deg,#ff8a3d,#c2410c) !important
+
+.sp .sl-alert.sev-extreme .hero
+  background: linear-gradient(160deg,#ef4444,#7f1020) !important
+
+.sp .alertic
+  color: #fff
+  border-radius: 50%
+  background: rgba(0,0,0,.18)
+
+.sp .sl-alert.sev-moderate .alertic
+  color: #3a2a00
+  background: rgba(255,255,255,.35)
+
+.sp .sl-alert .tag
+  background: transparent

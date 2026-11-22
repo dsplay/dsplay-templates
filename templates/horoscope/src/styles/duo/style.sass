@@ -1,0 +1,202 @@
+@import ../mixins
+
+.duo
+  color: #eef1fb
+  font-family: 'Inter', sans-serif
+  background: #0d1030
+  background: linear-gradient(160deg, #0d1030 0%, #171346 55%, #0a0d24 100%)
+
+.duo .stage__plate
+  display: flex
+  flex-direction: column
+  padding: u(44) u(56) u(36)
+
+.duo__top
+  display: flex
+  align-items: center
+  justify-content: space-between
+  flex: none
+
+.duo__title
+  display: flex
+  align-items: baseline
+  font-family: 'Cormorant Garamond', serif
+  font-weight: 700
+  font-size: u(44)
+
+.duo__date
+  margin-left: u(16)
+  font-family: 'Inter', sans-serif
+  font-weight: 500
+  font-size: u(18)
+  color: #a7aed2
+
+.duo__pages
+  display: flex
+  align-items: center
+
+.duo__page
+  display: block
+  width: u(8)
+  height: u(8)
+  margin-left: u(8)
+  border-radius: u(999)
+  background: rgba(255, 255, 255, 0.3)
+
+.duo__page.is-current
+  width: u(34)
+  background: #ffffff
+
+.duo__cards
+  flex: 1
+  min-height: 0
+  display: flex
+  margin: u(22) 0
+
+.duo__card
+  position: relative
+  flex: 1
+  min-width: 0
+  display: flex
+  flex-direction: column
+  margin-right: u(28)
+  padding: u(28) u(32)
+  border-radius: u(28)
+  border: u(1) solid rgba(255, 255, 255, 0.12)
+  background: rgba(255, 255, 255, 0.06)
+  overflow: hidden
+
+  &:last-child
+    margin-right: 0
+
+.duo__stars
+  position: absolute
+  right: u(10)
+  top: u(8)
+  width: u(240)
+  height: u(170)
+
+.duo__head
+  display: flex
+  align-items: center
+
+.duo__glyph
+  width: u(34)
+  height: u(34)
+  margin-right: u(12)
+
+.duo__range
+  font-size: u(15)
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  color: #aab2d5
+  font-weight: 500
+
+.duo__name
+  margin: u(12) 0 0
+  font-family: 'Cormorant Garamond', serif
+  font-weight: 700
+  line-height: 1
+  white-space: nowrap
+
+.duo__chip
+  align-self: flex-start
+  margin-top: u(8)
+  padding: u(3) u(12)
+  border: u(1) solid
+  border-radius: u(999)
+  font-size: u(15)
+  font-weight: 600
+
+.duo__body
+  flex: 1
+  min-height: 0
+  margin-top: u(18)
+  overflow: hidden
+
+.duo__text
+  margin: 0
+  color: #f2f4ff
+  font-weight: 500
+
+.duo__meters
+  display: flex
+  flex: none
+  margin-top: u(10)
+
+  .meter
+    margin-right: u(26)
+
+  .meter__label
+    display: block
+    margin-bottom: u(6)
+    font-size: u(14)
+    letter-spacing: 0.1em
+    text-transform: uppercase
+    color: #9aa2cb
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(13)
+    height: u(13)
+    margin-right: u(5)
+    border-radius: 50%
+    background: rgba(255, 255, 255, 0.16)
+
+  .meter__unit.is-on
+    background: #eef1fb
+
+.duo__disclaimer
+  flex: none
+  margin: 0
+  text-align: center
+  font-size: u(13)
+  color: #7f87b3
+
+// ---- portrait: the two cards one above the other
+.stage--portrait.duo .stage__plate
+  padding: u(40)
+
+.stage--portrait
+  .duo__cards
+    flex-direction: column
+
+  .duo__card
+    margin-right: 0
+    margin-bottom: u(24)
+
+    &:last-child
+      margin-bottom: 0
+
+  .duo__title
+    font-size: u(40)
+
+  .duo__date
+    font-size: u(16)
+
+// ---- square: side by side, narrower
+.stage--square
+  .duo__card
+    padding: u(24)
+    margin-right: u(22)
+
+  .duo__stars
+    width: u(190)
+    height: u(135)
+    right: u(4)
+
+  .duo__title
+    font-size: u(38)
+
+  .duo__date
+    font-size: u(15)
+
+  .duo__meters
+    flex-wrap: wrap
+
+    .meter
+      margin-right: u(16)
+      margin-bottom: u(8)

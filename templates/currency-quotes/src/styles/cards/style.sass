@@ -1,0 +1,368 @@
+@import ../mixins
+
+// Entrance (from `dsplay-ready`, see docs/entrance-style.md): the cards pop in one after the other and the chart of each is drawn from the left.
+// Idle: every card floats slowly, each at its own moment. Only opacity and transform, on HTML boxes (never on SVG).
++keyframes(cards-fade)
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
++keyframes(cards-pop)
+  0%
+    opacity: 0
+    +transform(translateY(3rem) scale(0.94))
+  100%
+    opacity: 1
+    +transform(translateY(0) scale(1))
+
++keyframes(cards-float)
+  0%
+    +transform(translateY(0))
+  50%
+    +transform(translateY(-0.9rem))
+  100%
+    +transform(translateY(0))
+
+.cards
+  font-family: 'Inter', sans-serif
+  color: #141a33
+  background: #2b1a6b
+  background: linear-gradient(135deg, #2b1a6b 0%, #1a3f8f 55%, #0f5c8f 100%)
+
+.cards .stage__plate
+  display: flex
+  flex-direction: column
+  padding: u(34) u(40) u(10)
+
+.cards__top
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: u(76)
+  margin-bottom: u(14)
+  color: #fff
+
+.cards__topmain
+  display: flex
+  align-items: center
+  min-width: 0
+
+.cards__basebadge
+  margin-right: u(18)
+
+.cards__base
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+  font-size: u(52)
+  letter-spacing: -0.02em
+  margin-right: u(18)
+
+.cards__title
+  font-weight: 500
+  font-size: u(24)
+  color: rgba(255, 255, 255, 0.82)
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.cards__period
+  flex: none
+  margin-left: u(20)
+  padding: u(7) u(18)
+  border-radius: u(22)
+  background: rgba(255, 255, 255, 0.16)
+  font-weight: 600
+  font-size: u(20)
+
+.cards__period:empty
+  display: none
+
+.cards__list
+  flex: 1 1 0%
+  min-height: 0
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: stretch
+
+.cards__card
+  flex: none
+  height: 100%
+  margin-right: u(24)
+
+.cards__card:last-child
+  margin-right: 0
+
+.cards__inner
+  height: 100%
+  display: flex
+  flex-direction: column
+  padding: u(28)
+  border-radius: u(32)
+  background: #fff
+  box-shadow: 0 u(14) u(36) rgba(8, 12, 40, 0.35)
+  overflow: hidden
+
+.cards__head
+  flex: none
+  display: flex
+  align-items: center
+
+.cards__who
+  min-width: 0
+  margin-left: u(16)
+  display: flex
+  flex-direction: column
+
+.cards__name
+  font-weight: 600
+  font-size: u(24)
+  line-height: 1.12
+  max-height: 2.3em
+  overflow: hidden
+
+.cards__code
+  font-weight: 500
+  font-size: u(18)
+  color: #6b7592
+  letter-spacing: 0.04em
+
+.cards__figures
+  flex: none
+  margin-top: u(26)
+
+.cards__price
+  display: block
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+  line-height: 1.1
+  letter-spacing: -0.02em
+
+.cards__change
+  margin-top: u(6)
+  font-size: u(26)
+
+.cards__priceline
+  display: flex
+  align-items: baseline
+  white-space: nowrap
+
+.cards__unit
+  margin-left: u(10)
+  font-weight: 600
+  font-size: u(20)
+  color: #6b7592
+
+.cards__spark
+  flex: none
+  margin-top: auto
+
+// colors of a direction that read on a white card
+.cards
+  .change--up
+    color: #0f9d63
+  .change--down
+    color: #e0364a
+  .change--flat
+    color: #6b7592
+  .spark--up
+    .spark__line
+      stroke: #0f9d63
+    .spark__area
+      fill: rgba(15, 157, 99, 0.14)
+  .spark--down
+    .spark__line
+      stroke: #e0364a
+    .spark__area
+      fill: rgba(224, 54, 74, 0.13)
+  .spark--flat
+    .spark__line
+      stroke: #6b7592
+    .spark__area
+      fill: rgba(107, 117, 146, 0.14)
+
+.cards__foot
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: u(56)
+  font-weight: 500
+  font-size: u(20)
+  color: rgba(255, 255, 255, 0.78)
+
+// ── portrait: a column of wide cards ──
+.cards--portrait
+  .stage__plate
+    padding: u(40) u(32) u(10)
+  .cards__top
+    height: u(96)
+  .cards__base
+    font-size: u(58)
+  .cards__list
+    flex-direction: column
+    align-items: center
+    justify-content: center
+  .cards__card
+    height: u(336)
+    margin: 0 0 u(24)
+  .cards__card:last-child
+    margin-bottom: 0
+  .cards__figures
+    margin-top: u(20)
+
+// ── square: two by two ──
+.cards--square
+  .stage__plate
+    padding: u(30) u(36) u(8)
+  .cards__list
+    flex-wrap: wrap
+    align-content: center
+    align-items: flex-start
+  .cards__card
+    height: u(340)
+    margin: 0 u(24) u(24) 0
+  .cards__card:nth-child(2n)
+    margin-right: 0
+  .cards__figures
+    margin-top: u(18)
+
+// ── banners: the base on a fixed block, then the cards ──
+.cards--h-banner,
+.cards--v-banner
+  .stage__plate
+    padding: 0
+
+.cards__lead
+  flex: none
+  display: flex
+  background: rgba(255, 255, 255, 0.12)
+  color: #fff
+
+.cards--h-banner
+  .stage__plate
+    flex-direction: row
+  .cards__lead
+    flex-direction: column
+    justify-content: center
+    width: u(210)
+    padding: 0 u(22) 0 u(30)
+  .cards__basebadge
+    margin: 0 0 u(8)
+  .cards__base
+    margin: 0
+    font-size: u(50)
+  .cards__title
+    margin-top: u(6)
+    font-size: u(17)
+    white-space: normal
+    line-height: 1.25
+  .cards__list
+    flex: 1 1 0%
+    min-width: 0
+
+.cards--v-banner
+  .cards__lead
+    align-items: center
+    justify-content: center
+    height: u(96)
+  .cards__basebadge
+    margin: 0 u(12) 0 0
+  .cards__base
+    margin: 0
+    font-size: u(46)
+
+.cards--h-banner
+  .cards__list
+    display: block
+  .cards__card
+    width: u(344)
+    height: u(212)
+    margin: 0
+  .cards__inner
+    padding: u(14) u(18)
+    border-radius: u(24)
+  .cards__figures
+    margin-top: 0
+  .cards__code--strong
+    margin: 0 u(14) 0 u(12)
+    font-weight: 600
+    font-size: u(22)
+    color: #141a33
+  .cards__head
+    margin-bottom: u(4)
+  .cards__change
+    margin: 0 0 0 auto
+    font-size: u(22)
+  .cards__spark
+    margin-top: u(6)
+
+.cards--v-banner
+  .cards__list
+    display: block
+    padding: u(10) u(10) 0
+  .cards__card
+    height: u(126)
+    margin: 0
+  .cards__inner
+    padding: u(12) u(14)
+    border-radius: u(20)
+  .cards__code--strong
+    margin: 0 u(8) 0 u(10)
+    font-weight: 600
+    font-size: u(20)
+    color: #141a33
+  .cards__head
+    margin-bottom: u(4)
+  .cards__change
+    margin: 0 0 0 auto
+    font-size: u(18)
+
+// ── motion ──
+.dsplay-ready
+  .cards__foot,
+  .cards__top,
+  .cards__lead
+    +animation(cards-fade 0.5s ease-out both)
+
+  .cards__card
+    +animation(cards-pop 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both)
+
+  .cards--h-banner .marquee,
+  .cards--v-banner .marquee
+    +animation(cards-fade 0.6s ease-out both)
+
+  .cards__spark .reveal__win
+    +animation(reveal-window 0.7s ease-out both)
+
+  .cards__spark .reveal__in
+    +animation(reveal-content 0.7s ease-out both)
+
+  .cards__inner
+    +animation(cards-float 7s ease-in-out infinite)
+
+@for $i from 1 through 12
+  .dsplay-ready .cards__card:nth-child(#{$i})
+    +animation-delay-n(($i - 1) * 90ms)
+
+  .dsplay-ready .cards__card:nth-child(#{$i}) .cards__spark
+    +animation-delay-n(($i - 1) * 90ms + 350ms)
+
+  .dsplay-ready .cards__card:nth-child(#{$i}) .cards__inner
+    +animation-delay-n(1s + ($i - 1) * 1.1s)
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready
+    .cards__foot,
+    .cards__top,
+    .cards__lead,
+    .cards__card,
+    .cards--h-banner .marquee,
+    .cards--v-banner .marquee,
+    .cards__spark .reveal__win,
+    .cards__spark .reveal__in,
+    .cards__inner
+      -webkit-animation: none
+      animation: none

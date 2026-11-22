@@ -5,7 +5,9 @@ import { render, cleanup } from '@testing-library/react';
 import UserProfile from '.';
 
 const template = {};
-vi.mock('@dsplay/react-template-utils', () => ({
+// the real library with only the template hooks replaced: the name is drawn by its FittedText
+vi.mock('@dsplay/react-template-utils', async (importOriginal) => ({
+  ...(await importOriginal()),
   useTemplateVal: (key, fallback) => template[key] || fallback,
   useTemplateBoolVal: (_key, fallback) => fallback,
 }));

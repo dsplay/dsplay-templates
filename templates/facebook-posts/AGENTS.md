@@ -22,14 +22,13 @@ src/
     use-highlight.js             <-- wraps hashtags/links/mentions/phone numbers in colored spans
   util/defaults.js            <-- default color/style constants
   components/
-    app/                        <-- top-level component (loader, fonts, background)
+    app/                        <-- top-level component (loader in reveal mode, fonts, background)
     main/                       <-- reads media, paginates posts, optional logo overlay
     posts/                      <-- cycles through the selected posts on a timer
     post/                       <-- lays out one post (user, media, text, info)
     user-profile/                <-- avatar + name
     media-slider/                <-- slides through a post's photos/videos
     info/                        <-- QR code, timestamp, reaction counts
-    intro/                       <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

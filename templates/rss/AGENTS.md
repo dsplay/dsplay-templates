@@ -19,7 +19,7 @@ src/
   setup-tests.js              <-- Vitest setup (referenced by vite.config.js)
   util/defaults.js            <-- default values for the color/background Template Vars
   components/
-    app/                       <-- top-level component (loader, fonts)
+    app/                       <-- top-level component (loader in reveal mode, fonts)
     news-item/                 <-- lays out title/image/description
     title/                     <-- logo + title text
     description/                <-- description text + QR code
@@ -28,7 +28,6 @@ src/
     qr-code/                    <-- QR code linking to media.link
     fit-text/                   <-- local FitText wrapper (see note below)
     debugger/                   <-- dev-only overlay dumping media/template/config/screen-info, toggled by the `debug` variable
-    intro/                      <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

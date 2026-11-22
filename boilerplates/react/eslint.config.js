@@ -34,7 +34,6 @@ export default [
       react: {
         version: 'detect',
       },
-      // so that `import x from '../intro'` finds intro/index.jsx
       'import/resolver': {
         node: { extensions: ['.js', '.jsx'] },
       },

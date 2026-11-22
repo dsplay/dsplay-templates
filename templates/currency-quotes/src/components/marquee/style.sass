@@ -1,0 +1,78 @@
+@import ../../styles/mixins
+
+// The loop of a banner: the track holds two equal groups and moves by half its own length, so the second group takes the place of the first. Only transform,
+// on HTML boxes. A banner whose quotes fit stands still, spread over its length.
++keyframes(marquee-run)
+  0%
+    +transform(translateX(0))
+  100%
+    +transform(translateX(-50%))
+
++keyframes(marquee-run-down)
+  0%
+    +transform(translateY(0))
+  100%
+    +transform(translateY(-50%))
+
+.marquee
+  position: relative
+  overflow: hidden
+  width: 100%
+  height: 100%
+
+.marquee--horizontal
+  display: flex
+  align-items: center
+
+.marquee__track
+  flex: none
+  display: flex
+  flex-direction: row
+  align-items: center
+  +animation(marquee-run 60s linear infinite)
+
+.marquee__group
+  flex: none
+  display: flex
+  flex-direction: row
+  align-items: center
+
+.marquee__item
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: center
+
+.marquee--static
+  justify-content: space-evenly
+
+.marquee--static .marquee__item
+  flex: 1 1 0%
+
+.marquee--vertical
+  display: block
+
+.marquee--vertical .marquee__track
+  display: block
+  width: 100%
+  +animation(marquee-run-down 60s linear infinite)
+
+.marquee--vertical .marquee__group
+  display: block
+
+.marquee--vertical .marquee__item
+  display: block
+  width: 100%
+
+.marquee--vertical.marquee--static
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+
+.marquee--vertical.marquee--static .marquee__item
+  flex: none
+
+@media (prefers-reduced-motion: reduce)
+  .marquee__track
+    -webkit-animation: none
+    animation: none

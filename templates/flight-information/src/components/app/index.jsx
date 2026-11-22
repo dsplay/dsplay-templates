@@ -2,13 +2,11 @@ import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Loader, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
 import Main from '../main';
-import Intro from '../intro';
 import i18n from '../../i18n';
 import './style.sass';
 import ThemeContextParent from '../../contexts/theme-context';
 import { useFlightsInfoPromise } from '../../hooks/use-flights-info';
-
-const MIN_LOADING_DURATION = 2800;
+import '../../entrance.css';
 
 // fonts to preload
 // @font-face's must be defined in fonts.sass or another in-use style file
@@ -32,9 +30,8 @@ function App() {
     <I18nextProvider i18n={i18n}>
       <ThemeContextParent>
         <Loader
-          placeholder={<Intro />}
+          reveal
           fonts={fonts}
-          minDuration={MIN_LOADING_DURATION}
           tasks={[firstLoad]}
         >
           <div className={`app fade-in ${screenFormat}`}>

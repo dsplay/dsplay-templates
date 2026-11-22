@@ -1,12 +1,11 @@
+import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { Loader, useScreenInfo } from '@dsplay/react-template-utils';
-import Intro from '../intro';
+import { Loader, useScreenInfo, useConfig } from '@dsplay/react-template-utils';
 import Main from '../main';
 import i18n from '../../i18n';
 import { iconImages } from '../icon';
 import './style.sass';
-
-const MIN_LOADING_DURATION = 2500;
+import '../../entrance.css';
 
 // images to preload
 const images = iconImages;
@@ -20,16 +19,22 @@ const fonts = [
 
 function App() {
   const { screenFormat } = useScreenInfo();
+  const { locale } = useConfig();
+
+  const [lng] = (locale || 'en').split('_');
+
+  useEffect(() => {
+    i18n.changeLanguage(lng);
+  }, [lng]);
 
   return (
     <I18nextProvider i18n={i18n}>
       <Loader
-        placeholder={<Intro />}
-        minDuration={MIN_LOADING_DURATION}
+        reveal
         fonts={fonts}
         images={images}
       >
-        <div className={`app fade-in ${screenFormat}`}>
+        <div className={`app ${screenFormat}`}>
           <Main />
         </div>
       </Loader>

@@ -27,6 +27,19 @@
     img
       width: 40%
 
+// Landscape: the logo takes everything left of the frame and is centred there (the frame keeps its place against the right margin)
+.landscape
+  .wifi-symbol
+    width: auto
+    -webkit-box-flex: 1
+    -webkit-flex: 1 1 0
+    flex: 1 1 0
+  #Frame
+    -webkit-box-flex: 0
+    -webkit-flex-grow: 0
+    flex-grow: 0
+    margin-left: 0
+
 .portrait, .v-banner
   .main
     flex-direction: column
@@ -41,18 +54,56 @@
 .portrait
   #Frame
     margin: 0em 10em 15em 10em
+// Banners are short or narrow: a smaller logo and a slim frame, so the QR code gets the room
+// two equal cells: the logo centred in the first half, the frame centred in the other (auto margins take the free space of the second half)
+.v-banner
+  .wifi-symbol
+    height: 50%
+    img
+      width: 60%
+  #Frame
+    margin: auto 1em
+
+.h-banner
+  .wifi-symbol img
+    width: auto
+    height: auto
+    max-width: 30%
+    max-height: 45vh
+  #Frame
+    margin: 1em auto
+
+.h-banner, .v-banner
+  #Frame
+    -webkit-box-flex: 0
+    -webkit-flex-grow: 0
+    flex-grow: 0
+    border-width: 5px
+    box-shadow: 0 3px 8px rgba(0,0,0,.45)
+  #Frames
+    margin: .5em
+
+// The logo is centred in what is left beside the frame (below it on a square screen), keeping its ratio
 .square
     .main
       flex-direction: column-reverse
-    .main .wifi-symbol img
-      height: 12em
     .wifi-symbol
       justify-content: center
       align-items: center
-      width: 22%
-      height: 12%
-      margin-top: 2em
+      width: 100%
+      -webkit-box-flex: 1
+      -webkit-flex: 1 1 0
+      flex: 1 1 0
+      min-height: 0
+      img
+        width: auto
+        height: auto
+        max-width: 40%
+        max-height: 80%
     .ssid
       width: 100%
     #Frame
+      -webkit-box-flex: 0
+      -webkit-flex-grow: 0
+      flex-grow: 0
       margin: 3em 10em 1em

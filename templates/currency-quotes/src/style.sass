@@ -1,0 +1,27 @@
+@import ./styles/mixins
+
+html
+  width: 100%
+  height: 100%
+  margin: 0
+
+body
+  box-sizing: border-box
+  margin: 0
+  width: 100%
+  height: 100%
+  background-color: black
+
+#root
+  width: 100%
+  height: 100%
+
+*, *::before, *::after
+  box-sizing: border-box
+
++keyframes(fade-in)
+  from
+    opacity: 0
+
+.dsplay-ready .fade-in
+  +animation(fade-in 0.8s ease-in)

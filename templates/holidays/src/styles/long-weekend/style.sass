@@ -1,0 +1,187 @@
+@import ../mixins
+
+.lw
+  font-family: 'Fredoka', sans-serif
+  color: #fff
+  background: #064e3b
+  background: linear-gradient(160deg, #0e7c66 0%, #064e3b 75%)
+
+.lw .stage__plate
+  padding: u(56)
+
+.lw__label
+  font-size: u(26)
+  font-weight: 600
+  letter-spacing: 0.16em
+  text-transform: uppercase
+  color: #ffd23f
+
+.lw__big
+  margin-top: u(6)
+  font-size: u(104)
+  font-weight: 700
+  line-height: 1.02
+  letter-spacing: -0.01em
+
+.lw__when
+  margin-top: u(12)
+  font-size: u(34)
+  font-weight: 500
+  opacity: 0.88
+
+.lw__tiles
+  display: flex
+
+.lw__tile
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: u(20) u(14)
+  border-radius: u(30)
+  background: rgba(255, 255, 255, 0.12)
+  text-align: center
+  min-width: 0
+
+.lw__tile--holiday
+  background: #ffd23f
+  color: #3a2a00
+
+.lw__tile
+  justify-content: center
+
+.lw__tile--today
+  box-shadow: 0 0 0 u(6) #fff
+
+.lw__wd
+  font-size: u(26)
+  font-weight: 600
+  text-transform: uppercase
+  letter-spacing: 0.08em
+  opacity: 0.85
+
+.lw__num
+  font-size: u(92)
+  font-weight: 700
+  line-height: 1
+
+.lw__what
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-top: u(10)
+  min-width: 0
+  max-width: 100%
+
+.lw__medal
+  width: u(64)
+  height: u(64)
+  margin-bottom: u(8)
+  border-radius: u(18)
+  background: rgba(58, 42, 0, 0.12)
+  color: #3a2a00
+
+.lw__sun
+  width: u(52)
+  height: u(52)
+  margin-bottom: u(8)
+  opacity: 0.6
+
+.lw__name
+  font-size: u(26)
+  font-weight: 600
+  line-height: 1.1
+
+// landscape: head on top, tiles across the bottom
+.lw--landscape .stage__plate
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.lw--landscape .lw__tile
+  margin-right: u(20)
+  height: u(360)
+
+.lw--landscape .lw__tile:last-child
+  margin-right: 0
+
+// portrait and square: the tiles are rows under the head
+.lw--portrait .stage__plate,
+.lw--square .stage__plate
+  display: flex
+  flex-direction: column
+
+.lw--portrait .lw__tiles,
+.lw--square .lw__tiles
+  flex-direction: column
+  flex: 1
+  min-height: 0
+  margin-top: u(34)
+
+.lw--portrait .lw__tile,
+.lw--square .lw__tile
+  flex-direction: row
+  align-items: center
+  justify-content: flex-start
+  flex: 1
+  max-height: u(170)
+  margin-bottom: u(16)
+  padding: u(12) u(28)
+  text-align: left
+
+.lw--portrait .lw__wd,
+.lw--square .lw__wd
+  width: u(110)
+
+.lw--portrait .lw__num,
+.lw--square .lw__num
+  width: u(110)
+  font-size: u(70)
+
+.lw--portrait .lw__what,
+.lw--square .lw__what
+  flex-direction: row
+  margin-top: 0
+  flex: 1
+
+.lw--portrait .lw__medal,
+.lw--square .lw__medal
+  margin: 0 u(18) 0 0
+
+.lw--portrait .lw__sun,
+.lw--square .lw__sun
+  margin: 0 u(18) 0 0
+
+.lw--portrait .lw__big
+  font-size: u(92)
+
+.lw--square .lw__big
+  font-size: u(78)
+
+.lw--square .lw__num
+  font-size: u(54)
+
+.lw--square .lw__tile
+  padding: u(8) u(20)
+
+.lw--square .lw__medal
+  width: u(52)
+  height: u(52)
+
+// banners
+.lw .banner
+  background: #064e3b
+  background: linear-gradient(160deg, #0e7c66 0%, #064e3b 75%)
+  font-family: 'Fredoka', sans-serif
+  color: #fff
+
+.lw .banner__medal
+  background: #ffd23f
+  color: #3a2a00
+
+.lw .banner__label
+  color: #ffd23f
+  font-weight: 600
+
+.lw .banner__when
+  font-weight: 500
+  opacity: 0.88

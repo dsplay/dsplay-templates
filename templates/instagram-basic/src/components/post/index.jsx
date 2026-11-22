@@ -84,7 +84,8 @@ function PostMedia({
   overlayPosition,
 }) {
   return (
-    <div className="media" style={{ borderColor, backgroundImage: `url("${url}")` }}>
+    <div className="media" style={{ borderColor }}>
+      <div className="media-pic" style={{ backgroundImage: `url("${url}")` }} />
       { type === 'video' && <div className="playWrapper" /> }
       { overlay && <img alt="overlay" className="photo-overlay" src={overlay} style={{ ...overlayStyle[overlayPosition] }} /> }
     </div>

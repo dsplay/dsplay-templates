@@ -17,11 +17,9 @@ public/
 src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
-  images/loader.gif          <-- intro spinner asset
   components/
-    app/                      <-- top-level component (loader, images-to-preload, grid shuffle)
+    app/                      <-- top-level component (loader in reveal mode, images-to-preload, grid shuffle)
     main/                     <-- renders GridGallery with the preloaded images
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```
@@ -57,6 +55,7 @@ This template has **no static, developer-authored UI text** — the entire scree
 ## Runtime model
 
 - `public/dsplay-data.js` defines `dsplay_config`/`dsplay_media`/`dsplay_template` mock globals used only in **development**. `scripts/pack.mjs` blanks its content in the production build — the DSPLAY Android app injects the real `window.DSPLAY.getData()` before any script runs.
+- **The loader depends on where the pictures come from** (`fromPosts` in `app/index.jsx`): the collage loader (`intro`) while the pictures of an image media (`images`) load, and **no loader** for the pictures of social posts (`result.data.posts`, Instagram), like the Instagram templates (`instagram-basic`, `instagram-image-only`), which show no spinner and just fade their content in. A media with both gets the collage loader.
 - Images come from `dsplay_media`, not a `dsplay_template` variable: `useMedia()` reads a plain `images` array (URLs) and/or a `result.data.posts[].media[]` structure (each item's `cached_media_url` or `urls.lg`) — the latter shape matches a connected social/Instagram-style media source. Both are merged and preloaded by `src/components/app/index.jsx` before the grid renders.
 - [`@dsplay/react-template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/react-template-utils) exposes `GridGallery` (the justified-grid layout, added in `5.2.0` — ported from the now-retired `@dsplay/react-template-components`), `Loader`/`LoaderContext`, `useMedia`, `useTemplateBoolVal`/`useTemplateIntVal`, and `useScreenInfo`.
 - **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call [`@dsplay/template-utils`](https://github.com/dsplay/dsplay-templates/tree/main/packages/template-utils)'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).

@@ -13,6 +13,7 @@ import City from '../city';
 import './style.sass';
 import clockOffset from '../../utils/clock-offset';
 import { LOCAL_CITY } from '../../utils/constants';
+import gridLayout from '../../utils/grid-layout';
 
 function Main() {
   const context = useContext(LoaderContext);
@@ -25,7 +26,7 @@ function Main() {
 
   const brandImage = useTemplateVal('brand');
   const background = useTemplateVal('background');
-  const { screenFormat } = useScreenInfo();
+  const { screenFormat, w, h } = useScreenInfo();
 
   let maxCities = brandImage ? 7 : 8;
   if (screenFormat === screen.SQUARE) {
@@ -33,6 +34,17 @@ function Main() {
   } else if (screenFormat === screen.V_BANNER || screenFormat === screen.H_BANNER) {
     maxCities += 1;
   }
+
+  const shownCities = cities.slice(0, maxCities);
+  // every city (and the brand) takes one equal cell; the grid fits their number to the shape of the screen
+  const layout = gridLayout(shownCities.length + (brandImage ? 1 : 0), w, h);
+  const cellStyle = {
+    width: `${layout.cellWidthPercent}vw`,
+    height: `${layout.cellHeightPercent}vh`,
+  };
+  const clockStyle = { width: `${layout.clockPercent}%` };
+  const cityStyle = { height: `${layout.cityPercent}%` };
+  const dateStyle = { height: `${layout.datePercent}%` };
 
   // The player says what time it is (the server's), so a device with a wrong clock still shows the right hour.
   const { timestamp } = useConfig();
@@ -53,7 +65,7 @@ function Main() {
         {
           brandImage
           && (
-            <div className="ds-grid-item brand-box ds-center hsidden-square">
+            <div className="ds-grid-item brand-box ds-center hsidden-square" style={cellStyle}>
               <div className="brand " style={{ backgroundImage: `url(${brandImage})` }} />
             </div>
           )
@@ -62,12 +74,16 @@ function Main() {
         {
            
 
-          cities.slice(0, maxCities).map((city, i) => (
+          shownCities.map((city, i) => (
 
             <City
               key={`${city.name}:${i}`}
               {...city}
               date={date}
+              cellStyle={cellStyle}
+              clockStyle={clockStyle}
+              cityStyle={cityStyle}
+              dateStyle={dateStyle}
               clockClassName={city.name === LOCAL_CITY ? 'local-timezone' : ''}
               name={city.name === LOCAL_CITY ? t('Local Time') : city.name}
             />

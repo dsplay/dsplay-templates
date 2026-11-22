@@ -1,0 +1,171 @@
+@import ../mixins
+
+.mc
+  font-family: 'Inter', sans-serif
+  color: #14233f
+  background: #eef3fb
+
+.mc .stage__plate
+  padding: u(48) u(56)
+
+.mc__head
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+
+.mc__title
+  font-size: u(58)
+  font-weight: 700
+  text-transform: capitalize
+  letter-spacing: -0.01em
+
+.mc__place
+  font-size: u(26)
+  font-weight: 600
+  color: #5b6f94
+
+.mc__grid
+  margin-top: u(22)
+
+.mc__row
+  display: flex
+
+.mc__name
+  flex: 1
+  text-align: center
+  font-size: u(22)
+  font-weight: 600
+  text-transform: uppercase
+  letter-spacing: 0.08em
+  color: #5b6f94
+  padding-bottom: u(8)
+
+.mc__cell
+  flex: 1
+  display: flex
+  align-items: center
+  justify-content: center
+  margin: u(3)
+  height: u(66)
+  border-radius: u(14)
+  background: #fff
+  font-size: u(30)
+  font-weight: 600
+
+.mc__cell--empty
+  background: transparent
+
+.mc__cell--holiday
+  background: #e8505b
+  color: #fff
+  font-weight: 700
+
+.mc__cell--optional
+  background: #f6c9cd
+  color: #8a1f2a
+
+.mc__cell--today
+  border: u(4) solid #1d3a6b
+
+.mc__list-title
+  font-size: u(22)
+  font-weight: 700
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: #5b6f94
+  margin-bottom: u(12)
+
+.mc__item
+  display: flex
+  align-items: center
+  margin-bottom: u(10)
+  padding: u(10) u(16)
+  border-radius: u(18)
+  background: #fff
+
+.mc__item--past
+  opacity: 0.5
+
+.mc__item-medal
+  width: u(60)
+  height: u(60)
+  margin-right: u(18)
+  border-radius: u(16)
+  background: #fde7e9
+  color: #e8505b
+
+.mc__item-text
+  min-width: 0
+  flex: 1
+
+.mc__item-text b
+  display: block
+  font-size: u(30)
+  line-height: 1.15
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.mc__item-text span
+  display: block
+  font-size: u(22)
+  font-weight: 500
+  color: #5b6f94
+
+// landscape: grid left, list right
+.mc--landscape .stage__plate
+  display: flex
+  flex-wrap: wrap
+  align-content: flex-start
+
+.mc--landscape .mc__head
+  width: 100%
+
+.mc--landscape .mc__grid
+  width: u(640)
+  margin-right: u(48)
+
+.mc--landscape .mc__list
+  flex: 1
+  min-width: 0
+  margin-top: u(22)
+
+.mc--landscape .mc__cell
+  height: u(70)
+  font-size: u(32)
+
+// portrait and square: grid on top, list below
+.mc--portrait .mc__cell
+  height: u(92)
+  font-size: u(36)
+
+.mc--portrait .mc__item
+  margin-bottom: u(14)
+
+.mc--square .mc__cell
+  height: u(60)
+
+.mc--square .stage__plate
+  padding: u(40) u(48)
+
+.mc--portrait .mc__list,
+.mc--square .mc__list
+  margin-top: u(24)
+
+// banners
+.mc .banner
+  background: #eef3fb
+  font-family: 'Inter', sans-serif
+  color: #14233f
+
+.mc .banner__medal
+  background: #e8505b
+  color: #fff
+
+.mc .banner__label
+  color: #e8505b
+  font-weight: 700
+
+.mc .banner__when
+  font-weight: 600
+  color: #5b6f94

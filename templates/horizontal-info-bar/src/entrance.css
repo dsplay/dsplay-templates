@@ -1,0 +1,30 @@
+/* Entrance: Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and images are in. The animation starts from that class, never before: started at mount it would run while the template is still hidden. Only opacity, prefixed for old Android WebViews. */
+@-webkit-keyframes dsplay-enter {
+  from { opacity: 0; }
+}
+
+@keyframes dsplay-enter {
+  from { opacity: 0; }
+}
+
+.dsplay-reveal.dsplay-ready > * {
+  -webkit-animation: dsplay-enter 800ms ease-in both;
+  animation: dsplay-enter 800ms ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-reveal.dsplay-ready > * {
+    -webkit-animation: none;
+    animation: none;
+  }
+}
+
+/* The reveal wrapper sits between #root and .App: #root centers its child vertically (flex), so the wrapper has to do the same or the strip sticks to the top. */
+.dsplay-reveal {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}

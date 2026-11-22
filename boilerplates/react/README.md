@@ -104,11 +104,11 @@ export default Main;
 
 > Once you've settled on your template's variables, document them in your own README (a `Key | Type | Default | Description` table) and remember to register them as Template Vars (same name and type) when configuring your template in the DSPLAY CMS.
 
-### Running tasks during the intro (and handling failures)
+### Running tasks before the reveal (and handling failures)
 
-`Loader`'s `tasks` prop (see `src/components/app/index.jsx`) accepts an array of promises to await before the intro placeholder is dismissed — useful if your template needs to fetch some data before it can render anything meaningful. Their settled values are exposed via `LoaderContext` as `tasksResults`, in the same order.
+`Loader`'s `tasks` prop (see `src/components/app/index.jsx`) accepts an array of promises to await before the template is revealed — useful if your template needs to fetch some data before it can render anything meaningful. Their settled values are exposed via `LoaderContext` as `tasksResults`, in the same order.
 
-A rejected task doesn't block the others, and it won't leave the intro stuck forever either: it settles as `undefined` in `tasksResults` at that index, with the rejection reason exposed in parallel via `tasksErrors`. Check `tasksErrors` anywhere you'd otherwise assume a task's data loaded successfully:
+A rejected task doesn't block the others, and it won't leave the template hidden forever either: it settles as `undefined` in `tasksResults` at that index, with the rejection reason exposed in parallel via `tasksErrors`. Check `tasksErrors` anywhere you'd otherwise assume a task's data loaded successfully:
 
 ```jsx
 // src/components/main/index.jsx

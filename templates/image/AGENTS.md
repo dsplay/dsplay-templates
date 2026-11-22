@@ -20,7 +20,6 @@ src/
   components/
     app/                      <-- top-level component (loader)
     main/                     <-- renders the media image as a full-screen background
-    intro/                    <-- loading placeholder (unused by default, see below)
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```
@@ -51,7 +50,7 @@ Skip a numbered section entirely rather than including it empty.
 
 ## Internationalization (i18n)
 
-This template renders **no static UI text at all** — `main`'s job is purely to render `media.imagePath` as a full-screen background image; `intro`'s spinner has no text either. There is no `i18n.js` here and none should be added unless a future change actually introduces on-screen copy — don't add i18n scaffolding speculatively.
+This template renders **no static UI text at all** — `main`'s job is purely to render `media.imagePath` as a full-screen background image. There is no `i18n.js` here and none should be added unless a future change actually introduces on-screen copy — don't add i18n scaffolding speculatively.
 
 ## Runtime model
 
@@ -60,7 +59,7 @@ This template renders **no static UI text at all** — `main`'s job is purely to
 - **Always read template data through `@dsplay/react-template-utils`'s hooks (`useTemplateVal`/`useTemplateBoolVal`/`useTemplateIntVal`/`useTemplateFloatVal`/`useTemplate()`/`useMedia()`/`useConfig()`), called inside the function component that uses the value — never call `@dsplay/template-utils`'s vanilla `tval`/`tbval`/`tival`/`tfval`/`config`/`media`/`template` directly, and never read them at module scope as a one-time constant. `@dsplay/template-utils` should not appear as a direct dependency in this template's `package.json` (it's still pulled in transitively via `@dsplay/react-template-utils`).
 - **New `dsplay_template` variable keys should use `snake_case`** (e.g. `background_color`, not `backgroundColor`) — the DSPLAY CMS Manager auto-generates each variable's on-screen label from its key name, and snake_case reads more naturally there. This only applies to variables added from now on — never rename this template's existing keys just to match, since they're already registered/in use in production CMS configurations.
 - `src/components/main/index.jsx` renders the image as a `background-image` on a full-screen `div`, mapping the `fit` variable to a CSS `background-size` value.
-- The `Loader`'s `placeholder` is set to `null` (`showLoader = false` in `src/components/app/index.jsx`) rather than `<Intro />` — the intro spinner exists in the codebase but isn't currently shown, since a single preloaded image loads fast enough that the spinner just causes an extra flash. Flip `showLoader` if a future change needs it back.
+- The `Loader` runs in `reveal` mode: no placeholder and no minimum time. `Main` is mounted hidden while the image preloads, then shown with the class `dsplay-ready`, which starts the 1 s fade of `.fade-in` (`src/style.sass`). There is no loader mark. If the image is slow, a 4 s cap shows the template anyway.
 
 ## Browser/WebView compatibility (Android SDK 23 minimum)
 

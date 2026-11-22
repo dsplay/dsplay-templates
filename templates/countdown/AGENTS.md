@@ -20,11 +20,10 @@ src/
   contexts/
     count-down-context/       <-- computes the day/hour/minute/second breakdown, ticks every second
   components/
-    app/                      <-- top-level component (loader, i18n)
+    app/                      <-- top-level component (loader in reveal mode, i18n)
     count-down/               <-- title/date header + the box-timer row
     box-timer/                <-- a two-digit hours/minutes/seconds box
     box-timer-days/            <-- the (variable-width) days box
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

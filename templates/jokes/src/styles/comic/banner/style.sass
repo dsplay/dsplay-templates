@@ -1,0 +1,115 @@
+@import ../../mixins
+
+=outline($w, $color)
+  text-shadow: (-$w) (-$w) 0 $color, $w (-$w) 0 $color, (-$w) $w 0 $color, $w $w 0 $color, 0 (-$w) 0 $color, 0 $w 0 $color, (-$w) 0 0 $color, $w 0 0 $color
+
+.comicb
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+
+.comicb__panel
+  display: flex
+  flex-direction: column
+  justify-content: center
+  background: #fff
+  border: u(5) solid #111
+  border-radius: u(10)
+  box-shadow: u(8) u(8) 0 #111
+
+  &.is-label
+    border-width: u(3)
+    box-shadow: u(4) u(4) 0 #111
+    +animation(comic-label 0.4s ease-out)
+    +animation-fill(both)
+
+.comicb__mark
+  flex: none
+  width: u(100)
+  height: u(100)
+  border: u(5) solid #111
+  border-radius: 50%
+  background: #ffd84d
+  text-align: center
+  font-family: 'Bangers', cursive
+  font-size: u(76)
+  line-height: u(92)
+  +transform(rotate(10deg))
+
+.comicb__answer
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  +animation(comic-pop 0.6s ease-out)
+  +animation-fill(both)
+
+.comicb__burst
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.comicb__answer-box
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  text-align: center
+
+.comicb__haha
+  flex: none
+  font-family: 'Bangers', cursive
+  color: #fff
+  +outline(u(1.2), #111)
+  +transform(rotate(8deg))
+  +animation(comic-haha 0.5s ease-out 0.5s)
+  +animation-fill(both)
+
+.comicb--h
+  flex-direction: row
+  align-items: center
+  padding: u(26) u(28)
+
+  .comicb__panel
+    padding: u(10) u(24)
+    margin-right: u(20)
+    max-height: 100%
+
+  .comicb__mark
+    margin-left: auto
+
+  .comicb__answer
+    height: 100%
+    margin-right: u(10)
+
+  .comicb__haha
+    margin-left: auto
+    font-size: u(40)
+
+.comicb--v
+  flex-direction: column
+  align-items: stretch
+  padding: u(22) u(18)
+
+  .comicb__panel
+    padding: u(10) u(16)
+    margin-bottom: u(16)
+    margin-top: auto
+
+  .comicb__mark
+    align-self: center
+    margin-top: auto
+
+  .comicb__answer
+    width: 100%
+    margin-bottom: auto
+
+  .comicb__haha
+    align-self: center
+    margin-top: auto
+    font-size: u(40)

@@ -21,7 +21,7 @@ src/
   translate-settings/
     language-settings.js        <-- i18next resources, plus a date-fns Locale object per language (see below)
   components/
-    app/                        <-- top-level component (loader, fonts, i18n)
+    app/                        <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                       <-- ticks the clock, lays out today-calendar + calendar
     today-calendar/              <-- current date/time panel
     calendar/                    <-- month grid, with a compact single-week layout for short/banner screens

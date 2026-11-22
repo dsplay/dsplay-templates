@@ -1,0 +1,106 @@
+.fire-map
+  position: relative
+  width: 100%
+  height: 100%
+  background: #0f141b
+  border-radius: 0.4vw
+  overflow: hidden
+
+.fire-map__svg
+  display: block
+
+.fire-map__land
+  fill: #1c2531
+  stroke: #46566b
+  stroke-width: 0.6
+  stroke-linejoin: round
+
+.fire-map__state
+  fill: none
+  stroke: #2f3c4d
+  stroke-width: 0.5
+  stroke-linejoin: round
+
+.fire-map__land--scope
+  fill: #263447
+
+.fire-map__radius
+  fill: none
+  stroke: #ffb300
+  stroke-width: 1.5
+  stroke-dasharray: 8 6
+  opacity: 0.8
+
+.fire-map__label
+  fill: #8d9aab
+  stroke: #0f141b
+  stroke-width: 3px
+  stroke-linejoin: round
+  paint-order: stroke
+  font-family: 'Roboto Regular', sans-serif
+  pointer-events: none
+
+.fire-map__label--state
+  fill: #c3ccd8
+
+.fire-map__label--city
+  fill: #b7c2d0
+
+.fire-map__label--place
+  fill: #ffffff
+  font-family: 'Oswald', sans-serif
+  letter-spacing: 0.04em
+
+.fire-map__city
+  fill: #b7c2d0
+  stroke: #0f141b
+  stroke-width: 1px
+
+.fire-map__city--place
+  fill: #ffffff
+
+.fire-map__label--scope
+  fill: #e6ebf2
+  font-family: 'Oswald', sans-serif
+  letter-spacing: 0.08em
+  text-transform: uppercase
+
+.fire-map__center-ring
+  fill: none
+  stroke: #ffffff
+  stroke-width: 1.5
+
+.fire-map__center-dot
+  fill: #ffffff
+
+.fire-map__legend
+  position: absolute
+  left: 0.8vw
+  bottom: 0.8vw
+  display: flex
+  align-items: center
+  padding: 0.3em 0.7em
+  background: rgba(11, 14, 18, 0.78)
+  border: 1px solid #232c38
+  border-radius: 0.3vw
+  font-size: 0.8vw
+  color: #aeb8c6
+  z-index: 2
+
+.fire-map__legend-title
+  margin-right: 0.8em
+  text-transform: uppercase
+  letter-spacing: 0.05em
+
+.fire-map__legend-label
+  margin: 0 0.5em
+
+.fire-map__legend-swatch
+  display: inline-block
+  width: 1.4em
+  height: 0.7em
+
+.dashboard--stacked .fire-map__legend
+  font-size: 1.6vw
+  left: 1.6vw
+  bottom: 1.6vw

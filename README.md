@@ -20,7 +20,7 @@ Requires Node.js 22.22.2+, 24.15.0+ or 26+ (see `.nvmrc`). It is an [npm workspa
 | [`packages/template-manifest`](packages/template-manifest/) | [`@dsplay/template-manifest`](https://www.npmjs.com/package/@dsplay/template-manifest): scans a template's variables for the CMS |
 | [`boilerplates/react`](boilerplates/react/), [`javascript`](boilerplates/javascript/), [`jquery`](boilerplates/jquery/) | starting points: copy one with `npx degit dsplay/dsplay-templates/boilerplates/<name> my-template` |
 
-The 30 templates (each has its own README with its variables and screen formats):
+The 33 templates (each has its own README with its variables and screen formats):
 
 | Template | |
 |---|---|
@@ -31,18 +31,23 @@ The 30 templates (each has its own README with its variables and screen formats)
 | [`chamador-loterias-caixa`](templates/chamador-loterias-caixa/) | Chamador Loterias Caixa |
 | [`count-up`](templates/count-up/) | Count Up Template |
 | [`countdown`](templates/countdown/) | Countdown Template |
+| [`currency-quotes`](templates/currency-quotes/) | Currency Quotes: three styles (board, cards, spotlight), one zip each |
 | [`digital-clock-basic`](templates/digital-clock-basic/) | Digital Clock |
+| [`environment-monitor`](templates/environment-monitor/) | Environment Monitor Template |
 | [`facebook-posts`](templates/facebook-posts/) | Facebook Posts Template |
 | [`flight-information`](templates/flight-information/) | Flight Information Template |
 | [`horizontal-info-bar`](templates/horizontal-info-bar/) | Horizontal Information Bar |
+| [`horoscope`](templates/horoscope/) | Daily Horoscope: eight styles, one zip each |
 | [`hotel-rates`](templates/hotel-rates/) | Hotel Rates Template |
 | [`image`](templates/image/) | Image Template |
 | [`instagram-basic`](templates/instagram-basic/) | Instagram Basic Template |
 | [`instagram-image-only`](templates/instagram-image-only/) | Instagram Image Only Template |
+| [`jokes`](templates/jokes/) | Jokes: four styles, one zip each |
 | [`lottery-br-caixa-economica-federal`](templates/lottery-br-caixa-economica-federal/) | Loterias Caixa Template |
 | [`meeting-room`](templates/meeting-room/) | Meeting Room Template |
 | [`menuboard-featured-products`](templates/menuboard-featured-products/) | Menu Board (Featured Products) Template |
 | [`menuboard-standard`](templates/menuboard-standard/) | Menu Board (Standard) Template |
+| [`menuboard-two-products`](templates/menuboard-two-products/) | Menu Board (two products) Template |
 | [`menuboard`](templates/menuboard/) | Menu Board |
 | [`photo-collage`](templates/photo-collage/) | Photo Collage Template |
 | [`qrcode-wifi`](templates/qrcode-wifi/) | Wi-Fi QR Code Template |
@@ -54,6 +59,8 @@ The 30 templates (each has its own README with its variables and screen formats)
 | [`voice-ai`](templates/voice-ai/) | Voice AI Template |
 | [`weather-forecast`](templates/weather-forecast/) | Weather Forecast Template |
 | [`world-clocks-analog`](templates/world-clocks-analog/) | World Clocks (analog) Template |
+
+No template shows a loader screen: each is revealed once its fonts and images are in, with an entrance made of its own components, in the house style of [`docs/entrance-style.md`](docs/entrance-style.md).
 
 ## Everyday commands
 

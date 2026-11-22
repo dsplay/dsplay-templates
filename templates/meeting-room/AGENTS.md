@@ -21,9 +21,8 @@ src/
     use-language.js           <-- derives an Intl-compatible locale from dsplay_config.locale
     use-dominant-color.js     <-- dominant color (hex) of an image, extracted with colorthief
   components/
-    app/                      <-- top-level component (loader, fonts)
+    app/                      <-- top-level component (loader in reveal mode, fonts)
     main/                     <-- lays out event name/dates/location/logos
-    intro/                    <-- loading placeholder
     beautyloader/             <-- animated dots shown inside the loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)

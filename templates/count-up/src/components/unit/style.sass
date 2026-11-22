@@ -1,0 +1,34 @@
+// Every size here is in em of the font size the timer is given (`pickLayout`), so the whole timer scales as one; the measures are the ones `layout.js` counts with.
+.unit
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.unit__digits
+  display: flex
+
+.unit__digit
+  width: 0.82em
+  height: 1.3em
+  line-height: 1.3em
+  margin-right: 0.06em
+  text-align: center
+  font-weight: bold
+  color: #fff
+  border-radius: 0.12em
+  background-color: #29292E
+
+  &:last-child
+    margin-right: 0
+
+.unit__label
+  height: 0.45em
+  display: flex
+  align-items: center
+
+  p
+    margin: 0
+    font-size: 0.22em
+    font-weight: bold
+    text-transform: uppercase
+    color: #fff

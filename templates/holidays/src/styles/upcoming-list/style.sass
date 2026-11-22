@@ -1,0 +1,124 @@
+@import ../mixins
+
+.ul
+  font-family: 'Inter', sans-serif
+  color: #e6e9f2
+  background: #14171f
+
+.ul .stage__plate
+  padding: u(52) u(60)
+  display: flex
+  flex-direction: column
+
+.ul__head
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  margin-bottom: u(24)
+
+.ul__title
+  font-size: u(52)
+  font-weight: 700
+  color: #fff
+  letter-spacing: -0.01em
+
+.ul__place
+  font-size: u(26)
+  font-weight: 600
+  color: #f6b94c
+
+.ul__row
+  display: flex
+  align-items: center
+  margin-bottom: u(14)
+  padding: u(14) u(24)
+  border-radius: u(24)
+  background: #1f2430
+
+.ul__row--on
+  background: #f6b94c
+  color: #2a1d00
+
+.ul__medal
+  width: u(84)
+  height: u(84)
+  margin-right: u(26)
+  border-radius: u(24)
+  background: #2b3242
+  color: #f6b94c
+
+.ul__row--on .ul__medal
+  background: rgba(42, 29, 0, 0.14)
+  color: #2a1d00
+
+.ul__text
+  min-width: 0
+  flex: 1
+
+.ul__text b
+  display: block
+  font-size: u(38)
+  line-height: 1.15
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.ul__text span
+  display: block
+  font-size: u(24)
+  font-weight: 500
+  opacity: 0.7
+
+.ul__when
+  margin-left: u(24)
+  font-size: u(32)
+  font-weight: 700
+  white-space: nowrap
+
+.ul__row--on .ul__when
+  text-transform: uppercase
+  letter-spacing: 0.08em
+
+.ul--portrait .ul__row
+  padding: u(16) u(24)
+
+.ul--portrait .ul__medal
+  width: u(84)
+  height: u(84)
+
+.ul--portrait .ul__text b,
+.ul--square .ul__text b
+  font-size: u(34)
+
+.ul--portrait .ul__text span,
+.ul--square .ul__text span
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.ul--square .stage__plate
+  padding: u(44) u(52)
+
+.ul--square .ul__row
+  padding: u(10) u(22)
+
+.ul--square .ul__medal
+  width: u(72)
+  height: u(72)
+
+// banners
+.ul .banner
+  font-family: 'Inter', sans-serif
+  color: #fff
+
+.ul .banner__medal
+  background: #f6b94c
+  color: #2a1d00
+
+.ul .banner__label
+  color: #f6b94c
+  font-weight: 700
+
+.ul .banner__when
+  font-weight: 600
+  opacity: 0.8

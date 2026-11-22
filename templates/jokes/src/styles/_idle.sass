@@ -1,0 +1,116 @@
+@import ./mixins
+
+// Idle motion: while a joke stays on screen, a few details keep moving very slowly. Nothing here changes how a style looks at rest: every keyframe starts and
+// ends on the resting state. Only opacity and transform, on HTML boxes (never on SVG, see AGENTS.md) that carry no entrance animation of their own.
+
+// a face or an avatar bobs
++keyframes(idle-bob)
+  0%, 100%
+    +transform(translateY(0) rotate(0deg))
+  50%
+    +transform(translateY(-6%) rotate(-3deg))
+
+// a reaction wiggles now and then: two quick tilts, then rest
++keyframes(idle-wiggle)
+  0%, 55%, 100%
+    +transform(rotate(0deg))
+  63%
+    +transform(rotate(-10deg))
+  71%
+    +transform(rotate(9deg))
+  79%
+    +transform(rotate(-6deg))
+  87%
+    +transform(rotate(0deg))
+
+// a big "?" leans from side to side
++keyframes(idle-lean)
+  0%, 100%
+    +transform(rotate(-4deg) scale(1))
+  50%
+    +transform(rotate(4deg) scale(1.05))
+
+// a full-plate decoration breathes (it only grows, so no edge shows)
++keyframes(idle-swell)
+  0%, 100%
+    +transform(scale(1))
+  50%
+    +transform(scale(1.035))
+
+// a full-plate decoration drifts
++keyframes(idle-drift)
+  0%, 100%
+    +transform(translate(0, 0) rotate(0deg))
+  50%
+    +transform(translate(0.7%, -1%) rotate(0.8deg))
+
+// sunburst rays turn around their centre
++keyframes(idle-spin)
+  from
+    +transform(rotate(0deg))
+  to
+    +transform(rotate(360deg))
+
+// a soft light pulses
++keyframes(idle-glow)
+  0%, 100%
+    opacity: 0.55
+  50%
+    opacity: 1
+
+// a bubble rises, fading in and out
++keyframes(idle-rise)
+  0%
+    opacity: 0
+    +transform(translateY(0) scale(0.9))
+  20%
+    opacity: 0.5
+  80%
+    opacity: 0.35
+  100%
+    opacity: 0
+    +transform(translateY(-70vh) scale(1.1))
+
+.idle-box
+  display: inline-block
+
+.idle-box svg
+  display: block
+  width: 100%
+  height: 100%
+
+.idle-plate
+  display: block
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.idle-plate svg
+  display: block
+  width: 100%
+  height: 100%
+
+.dsplay-ready
+  .idle-bob
+    +animation(idle-bob 5.5s ease-in-out 1.5s infinite)
+  .idle-wiggle
+    +animation(idle-wiggle 6s ease-in-out 2s infinite)
+  .idle-lean
+    +animation(idle-lean 4.5s ease-in-out 1s infinite)
+  .idle-swell
+    +animation(idle-swell 6.5s ease-in-out 1s infinite)
+  .idle-drift
+    +animation(idle-drift 14s ease-in-out 1s infinite)
+  .idle-spin
+    +animation(idle-spin 80s linear 0s infinite)
+  .idle-glow
+    +animation(idle-glow 5s ease-in-out 0s infinite)
+  .idle-rise
+    +animation(idle-rise 12s ease-in infinite)
+
+@media (prefers-reduced-motion: reduce)
+  .idle-bob, .idle-wiggle, .idle-lean, .idle-swell, .idle-drift, .idle-spin, .idle-glow, .idle-rise
+    -webkit-animation: none !important
+    animation: none !important

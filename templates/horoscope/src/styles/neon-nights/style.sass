@@ -1,0 +1,252 @@
+@import ../mixins
+
+=glow($color)
+  .neon__kicker, .neon__chip
+    color: $color
+  .neon__square
+    background: $color
+    box-shadow: 0 0 u(12) $color
+  .neon__chip
+    border-color: $color
+    box-shadow: 0 0 u(10) $color
+  .neon__name
+    text-shadow: 0 0 u(6) #fff, 0 0 u(22) $color, 0 0 u(46) $color
+  .neon__number
+    text-shadow: 0 0 u(16) $color
+  .neon__bars .meter__unit.is-on
+    background: $color
+    box-shadow: 0 0 u(10) $color
+
+.neon
+  color: #f1e9ff
+  font-family: 'Space Grotesk', sans-serif
+  background: #1a0638
+  background: linear-gradient(180deg, #0a0316 0%, #1a0638 60%, #2b0a54 100%)
+
+  &.neon--fire
+    +glow(#ff9a3c)
+  &.neon--earth
+    +glow(#4dffa0)
+  &.neon--air
+    +glow(#3dd9ff)
+  &.neon--water
+    +glow(#9d8bff)
+
+.neon__grid
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.neon__art
+  position: absolute
+  left: u(730)
+  top: u(130)
+  width: u(400)
+  height: u(400)
+
+.neon__ring, .neon__stars
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+.neon__stars
+  left: u(30)
+  top: u(30)
+  width: u(340)
+  height: u(340)
+
+.neon__info
+  position: absolute
+  left: u(70)
+  top: u(70)
+  width: u(650)
+  height: u(540)
+  display: flex
+  flex-direction: column
+
+.neon__kicker
+  display: flex
+  align-items: center
+  font-family: 'Orbitron', sans-serif
+  font-size: u(16)
+  letter-spacing: 0.28em
+  text-transform: uppercase
+  font-weight: 600
+
+.neon__square
+  display: block
+  width: u(10)
+  height: u(10)
+  margin-right: u(14)
+
+.neon__name
+  margin: u(22) 0 0
+  font-family: 'Orbitron', sans-serif
+  font-weight: 800
+  line-height: 1.02
+  color: #fff
+  white-space: nowrap
+
+.neon__meta
+  display: flex
+  align-items: center
+  margin-top: u(16)
+  font-size: u(20)
+  color: #cdbcf5
+
+.neon__chip
+  margin-left: u(16)
+  padding: u(3) u(14)
+  border: u(1.5) solid
+  border-radius: u(6)
+  font-weight: 500
+
+.neon__body
+  flex: 1
+  min-height: 0
+  margin-top: u(28)
+  overflow: hidden
+
+.neon__text
+  margin: 0
+  font-weight: 500
+  color: #f6f0ff
+
+.neon__bars
+  position: absolute
+  left: u(70)
+  bottom: u(62)
+  width: u(650)
+  display: flex
+
+  .meter
+    flex: 1
+    margin-right: u(22)
+
+    &:last-child
+      margin-right: 0
+
+  .meter__label
+    display: block
+    margin-bottom: u(8)
+    font-family: 'Orbitron', sans-serif
+    font-size: u(13)
+    letter-spacing: 0.2em
+    text-transform: uppercase
+    color: #b9a6e8
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    flex: 1
+    height: u(10)
+    margin-right: u(5)
+    border-radius: u(2)
+    background: rgba(255, 255, 255, 0.14)
+
+  .meter__unit:last-child
+    margin-right: 0
+
+.neon__lucky
+  position: absolute
+  right: u(70)
+  bottom: u(62)
+  text-align: right
+  font-family: 'Orbitron', sans-serif
+  font-size: u(14)
+  letter-spacing: 0.2em
+  text-transform: uppercase
+  color: #b9a6e8
+
+.neon__number
+  margin-top: u(4)
+  font-size: u(44)
+  color: #fff
+
+.neon__disclaimer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: u(18)
+  margin: 0
+  text-align: center
+  font-size: u(12)
+  color: #8a78b8
+
+// ---- portrait and square: the ring on top, then the text, the bars under it
+.stage--portrait, .stage--square
+  .neon__art
+    left: 50%
+    top: u(60)
+    margin-left: u(-170)
+    width: u(340)
+    height: u(340)
+
+  .neon__stars
+    left: u(25)
+    top: u(25)
+    width: u(290)
+    height: u(290)
+
+  .neon__info
+    left: u(60)
+    top: u(430)
+    width: u(600)
+    text-align: center
+
+  .neon__kicker, .neon__meta
+    justify-content: center
+
+  .neon__bars
+    left: u(60)
+    width: u(600)
+    bottom: u(150)
+
+  .neon__lucky
+    right: auto
+    left: 0
+    width: 100%
+    text-align: center
+    bottom: u(60)
+
+  .neon__number
+    display: inline-block
+    margin-left: u(14)
+    font-size: u(36)
+
+.stage--portrait
+  .neon__info
+    height: u(640)
+
+.stage--square
+  .neon__art
+    top: u(30)
+    margin-left: u(-130)
+    width: u(260)
+    height: u(260)
+
+  .neon__stars
+    left: u(20)
+    top: u(20)
+    width: u(220)
+    height: u(220)
+
+  .neon__info
+    top: u(300)
+    left: u(80)
+    width: u(740)
+    height: u(380)
+
+  .neon__bars
+    left: u(80)
+    width: u(740)
+    bottom: u(120)
+
+  .neon__lucky
+    bottom: u(44)

@@ -20,11 +20,10 @@ src/
   hooks/
     use-language.js           <-- derives the base ISO language code from dsplay_config.locale
   components/
-    app/                      <-- top-level component (loader, fonts, i18n)
+    app/                      <-- top-level component (loader in reveal mode, fonts, i18n)
     main/                     <-- reads background/theme template variables, ticks the clock
     city/                     <-- lays out one clock + formatted date/time
     clock/                    <-- the animated analog clock face (SVG + rotated hand divs)
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

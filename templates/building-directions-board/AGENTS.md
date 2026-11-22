@@ -18,10 +18,9 @@ src/
   index.jsx                 <-- React entry point
   setup-tests.js             <-- Vitest setup (referenced by vite.config.js)
   components/
-    app/                      <-- top-level component (loader, i18n, pagination)
+    app/                      <-- top-level component (loader in reveal mode, i18n, pagination)
     main/                     <-- top logo bar
     secondary/                <-- one row per destination
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

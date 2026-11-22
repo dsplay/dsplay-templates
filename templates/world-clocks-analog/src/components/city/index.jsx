@@ -7,6 +7,10 @@ import { utcOffsetMinutes } from '../../services/time-zones';
 
 function City({
   clockClassName = '',
+  cellStyle,
+  clockStyle,
+  cityStyle,
+  dateStyle,
   timeZone,
   name,
   date,
@@ -30,14 +34,14 @@ function City({
   }, [instant, language, timeZone]);
 
   return (
-    <div className="ds-grid-item">
-      <div className={`clock-box ${clockClassName}`}>
+    <div className="ds-grid-item" style={cellStyle}>
+      <div className={`clock-box ${clockClassName}`} style={clockStyle}>
         <Clock className="the-clock" date={finalDate} />
       </div>
-      <div className="city">
+      <div className="city" style={cityStyle}>
         <FitText>{name}</FitText>
       </div>
-      <div className="date">
+      <div className="date" style={dateStyle}>
         <FitText className="time">
           {dateText}
         </FitText>

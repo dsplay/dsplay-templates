@@ -20,12 +20,11 @@ src/
   utils/
     logger.js                 <-- dev-only console logger (no-ops in production builds)
   components/
-    app/                      <-- top-level component (loader, i18n)
+    app/                      <-- top-level component (loader in reveal mode, i18n)
     main/                     <-- mounts Home
     home/                     <-- requests microphone permission, then mounts VoiceFX
     voicefx/                  <-- 3-second audio-level test, then mounts VapiAssistant
     vapi/                     <-- loads the Vapi widget script, renders the animated visualizer
-    intro/                    <-- loading placeholder
 scripts/
   pack.mjs                   <-- zips the Vite build output into template.zip (Windows/macOS/Linux)
 ```

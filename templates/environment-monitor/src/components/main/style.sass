@@ -1,0 +1,1178 @@
+@import ../../styles/mixins
+
+// Severity colors
+$c-fraca: #29b6f6
+$c-moderada: #ffd54f
+$c-forte: #ff9800
+$c-muito-forte: #f44336
+$c-extrema: #ce93d8
+
+// Alert colors
+$c-normal: #2e7d32
+$c-pre-alerta: #f57f17
+$c-alerta: #e65100
+$c-enchente: #b71c1c
+
+// Layout colors
+$bg-header: #0a1628
+$bg-body: #080f1a
+$bg-section: #0d1f38
+$bg-card: #111927
+$border: #1e3a5f
+$text-primary: #e8f4fd
+$text-secondary: #7ba3c8
+$accent: #1565c0
+
+// Dashboard root
+.dashboard
+  display: flex
+  flex-direction: column
+  width: 100%
+  height: 100%
+  box-sizing: border-box
+  padding: 1.5vw
+  background: $bg-body
+  color: $text-primary
+  font-family: 'Roboto Regular', sans-serif
+  overflow: hidden
+
+// Header
+.dashboard__header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0.5em 1.2em
+  background: $bg-header
+  border-bottom: 2px solid $accent
+  flex-shrink: 0
+
+.dashboard__title
+  display: flex
+  flex-direction: column
+
+.dashboard__title-main
+  font-family: 'Oswald', sans-serif
+  font-size: 1.5vw
+  font-weight: 400
+  letter-spacing: 0.05em
+  color: $text-primary
+  text-transform: uppercase
+
+.dashboard__title-sub
+  font-size: 0.8vw
+  color: $text-secondary
+  letter-spacing: 0.08em
+
+.dashboard__clock
+  font-family: 'Roboto Light', sans-serif
+  font-size: 2.2vw
+  letter-spacing: 0.1em
+  color: #4fc3f7
+
+// Alert banner
+.alert-banner
+  display: flex
+  align-items: center
+  padding: 0.35em 1.2em
+  background: #7f1919
+  border-bottom: 1px solid $c-enchente
+  flex-shrink: 0
+  gap: 0.8em
+  +animation(pulse-bg 2s ease-in-out infinite)
+
++keyframes(pulse-bg)
+  0%, 100%
+    background: #7f1919
+  50%
+    background: #9e2424
+
+.alert-banner__icon
+  font-size: 1.2vw
+  flex-shrink: 0
+
+.alert-banner__list
+  display: flex
+  gap: 1.2em
+  flex-wrap: wrap
+
+.alert-banner__item
+  font-size: 0.8vw
+  font-family: 'Roboto Medium', sans-serif
+  text-transform: uppercase
+  letter-spacing: 0.06em
+
+.alert-banner__item--pre-alerta
+  color: #ffcc02
+
+.alert-banner__item--alerta
+  color: #ff8c00
+
+.alert-banner__item--enchente
+  color: #ff4444
+
+// Body layout
+.dashboard__body
+  display: flex
+  flex-direction: row
+  flex: 1
+  gap: 0.5vw
+  padding: 0
+  overflow: hidden
+
+.dashboard__left
+  flex: 0 0 55%
+  display: flex
+  flex-direction: column
+  gap: 0.5vw
+  overflow: hidden
+
+.dashboard__right
+  flex: 1
+  min-width: 0
+  overflow: hidden
+
+// Section shared styles
+.section-header
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  padding: 0.3em 0.6em
+  background: $bg-section
+  border-bottom: 1px solid $border
+  flex-shrink: 0
+
+.section-header__title
+  font-family: 'Oswald', sans-serif
+  font-size: 0.95vw
+  letter-spacing: 0.06em
+  text-transform: uppercase
+  color: $text-primary
+
+.section-header__meta
+  font-size: 0.65vw
+  color: $text-secondary
+
+.section-empty
+  display: flex
+  align-items: center
+  justify-content: center
+  color: $text-secondary
+  font-size: 1.2vw
+  font-family: 'Roboto Light', sans-serif
+  padding: 1em
+  text-align: center
+  -webkit-flex: 1
+  flex: 1
+
+// A panel with nothing to list: its message fills the panel and sits in the middle (inside a grid it would take the first cell, top left, and look like a
+// stray label). The panel is a flex box while it is empty; the doubled class beats the grid definitions further down the file.
+.rain-section__grid.rain-section__grid--empty, .rivers-section__list.rivers-section__list--empty, .meteo-section__grid.meteo-section__grid--empty, .alerts-section__grid.alerts-section__grid--empty
+  display: -webkit-flex
+  display: flex
+  -webkit-align-items: stretch
+  align-items: stretch
+
+// Rainfall section
+.rain-section
+  flex: 0 0 55%
+  display: flex
+  flex-direction: column
+  background: rgba(255, 255, 255, 0.02)
+  border: 1px solid $border
+  border-radius: 4px
+  overflow: hidden
+
+.rain-section__grid
+  flex: 1
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: repeat(4, 1fr)
+  gap: .5vw
+  padding: .5vw
+  overflow: hidden
+
+// Station card
+.station-card
+  display: flex
+  background: $bg-card
+  border: 1px solid $border
+  border-radius: 3px
+  overflow: hidden
+
+.station-card__bar
+  width: 4px
+  flex-shrink: 0
+
+.station-card--fraca .station-card__bar
+  background: $c-fraca
+
+.station-card--moderada .station-card__bar
+  background: $c-moderada
+
+.station-card--forte .station-card__bar
+  background: $c-forte
+
+.station-card--muito-forte .station-card__bar
+  background: $c-muito-forte
+
+.station-card--extrema .station-card__bar
+  background: $c-extrema
+
+.station-card__body
+  flex: 1
+  padding: 0.3em 0.5em
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  min-width: 0
+  position: relative
+
+.station-card__rain
+  font-size: 1.8vw
+  font-family: 'Roboto Medium', sans-serif
+  line-height: 1
+  display: flex
+  align-items: baseline
+  gap: 0.2em
+
+.station-card--fraca .station-card__rain
+  color: $c-fraca
+
+.station-card--moderada .station-card__rain
+  color: $c-moderada
+
+.station-card--forte .station-card__rain
+  color: $c-forte
+
+.station-card--muito-forte .station-card__rain
+  color: $c-muito-forte
+
+.station-card--extrema .station-card__rain
+  color: $c-extrema
+
+.station-card__unit
+  font-size: 0.7vw
+  opacity: 0.8
+
+.station-card__label
+  font-size: 0.55vw
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: $text-secondary
+
+.station-card__name
+  font-size: 0.72vw
+  color: $text-primary
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  position: absolute
+  top: 0.3em
+  right: 0.5em
+  max-width: 50%
+
+.station-card__meta
+  display: flex
+  align-items: center
+  gap: 0.4em
+  flex-wrap: wrap
+
+.station-card__city
+  font-size: 1vw
+  color: $text-primary
+  font-family: 'Roboto Medium', sans-serif
+  text-transform: uppercase
+
+.station-card__org
+  font-size: 0.55vw
+  color: $text-secondary
+  background: rgba(255, 255, 255, 0.05)
+  padding: 0.3em 0.3em
+  border-radius: 2px
+
+.station-card__time
+  font-size: 0.55vw
+  color: $text-secondary
+  margin-left: auto
+
+// Rivers section
+.rivers-section
+  flex: 1
+  display: flex
+  flex-direction: column
+  background: rgba(255, 255, 255, 0.02)
+  border: 1px solid $border
+  border-radius: 4px
+  overflow: hidden
+
+.rivers-section__list
+  flex: 1
+  display: flex
+  flex-direction: column
+  gap: 0.25vw
+  padding: 0.4vw
+  overflow: hidden
+
+// River card
+.river-card
+  display: flex
+  align-items: center
+  background: $bg-card
+  border-left: 3px solid $c-normal
+  border-radius: 2px
+  padding: 0.25em 0.5em
+  gap: 0.5em
+  flex-shrink: 0
+
+.river-card--pre-alerta
+  border-left-color: $c-pre-alerta
+
+.river-card--alerta
+  border-left-color: $c-alerta
+
+.river-card--enchente
+  border-left-color: $c-enchente
+
+.river-card__info
+  flex: 1
+  min-width: 0
+  display: flex
+  flex-direction: column
+
+.river-card__name
+  font-size: 0.9108vw
+  color: $text-primary
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.river-card__rio
+  font-size: 0.759vw
+  color: $text-secondary
+
+.river-card__right
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  gap: 0.2em
+  flex-shrink: 0
+
+.river-card__nivel
+  font-size: 1.1385vw
+  font-family: 'Roboto Medium', sans-serif
+  color: $text-primary
+  display: flex
+  align-items: baseline
+  gap: 0.15em
+
+.river-card--pre-alerta .river-card__nivel
+  color: $c-pre-alerta
+
+.river-card--alerta .river-card__nivel
+  color: $c-alerta
+
+.river-card--enchente .river-card__nivel
+  color: $c-enchente
+
+.river-card__unit
+  font-size: 0.69575vw
+  opacity: 0.7
+
+.river-card__bar-track
+  width: 5vw
+  height: 0.3vw
+  background: rgba(255, 255, 255, 0.1)
+  border-radius: 2px
+  overflow: hidden
+
+.river-card__bar-fill
+  height: 100%
+  background: $c-normal
+  border-radius: 2px
+  +transition(width 0.5s ease)
+
+.river-card--pre-alerta .river-card__bar-fill
+  background: $c-pre-alerta
+
+.river-card--alerta .river-card__bar-fill
+  background: $c-alerta
+
+.river-card--enchente .river-card__bar-fill
+  background: $c-enchente
+
+// Meteo section
+.meteo-section
+  height: 100%
+  display: flex
+  flex-direction: column
+  background: rgba(255, 255, 255, 0.02)
+  border: 1px solid $border
+  border-radius: 4px
+  overflow: hidden
+
+.meteo-section__grid
+  flex: 1
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  gap: 0.3vw
+  padding: 0.4vw
+  align-content: start
+  overflow: hidden
+
+// Meteo card
+.meteo-card
+  background: $bg-card
+  border: 1px solid $border
+  border-radius: 3px
+  padding: 0.35em 0.5em
+  display: flex
+  flex-direction: column
+  gap: 0.2em
+
+.meteo-card__name
+  font-size: 0.7475vw
+  color: $text-secondary
+  text-transform: uppercase
+  letter-spacing: 0.05em
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.meteo-card__data
+  display: flex
+  align-items: baseline
+  gap: 0.6em
+
+.meteo-card__temp
+  font-size: 1.61vw
+  font-family: 'Roboto Medium', sans-serif
+  color: #ff8a65
+  display: flex
+  align-items: baseline
+  gap: 0.1em
+
+.meteo-card__umid
+  font-size: 0.9775vw
+  color: #4fc3f7
+  display: flex
+  align-items: baseline
+  gap: 0.1em
+
+.meteo-card__vento
+  font-size: 0.8625vw
+  color: $text-secondary
+  display: flex
+  align-items: baseline
+  gap: 0.1em
+  margin-left: auto
+
+.meteo-card__unit
+  font-size: 0.6325vw
+  opacity: 0.7
+
+// Footer
+.dashboard__footer
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0.3em 1.2em
+  background: $bg-header
+  border-top: 1px solid $border
+  flex-shrink: 0
+  gap: 1em
+
+.dashboard__legend
+  display: table
+  table-layout: fixed
+  width: 40%
+  border-spacing: 0.4em 0
+
+.dashboard__legend-item
+  display: table-cell
+  vertical-align: middle
+  font-size: 0.65vw
+  text-align: left
+  white-space: nowrap
+
+.dashboard__legend-dot
+  display: inline-block
+  width: 0.52em
+  height: 0.52em
+  border-radius: 50%
+  margin-right: 0.35em
+  vertical-align: middle
+
+.dashboard__legend-item--fraca
+  color: $c-fraca
+
+.dashboard__legend-item--moderada
+  color: $c-moderada
+
+.dashboard__legend-item--forte
+  color: $c-forte
+
+.dashboard__legend-item--muito-forte
+  color: $c-muito-forte
+
+.dashboard__legend-item--extrema
+  color: $c-extrema
+
+.dashboard__legend-dot--fraca
+  background: $c-fraca
+
+.dashboard__legend-dot--moderada
+  background: $c-moderada
+
+.dashboard__legend-dot--forte
+  background: $c-forte
+
+.dashboard__legend-dot--muito-forte
+  background: $c-muito-forte
+
+.dashboard__legend-dot--extrema
+  background: $c-extrema
+
+.dashboard__legend-label
+  display: inline-block
+  vertical-align: middle
+
+.dashboard__footer-center
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 0.1em
+
+.dashboard__last-update
+  font-size: 0.7vw
+  color: $text-secondary
+
+.dashboard__stations-count
+  font-size: 0.6vw
+  color: $text-secondary
+
+.dashboard__attribution
+  font-size: 0.5vw
+  color: $text-secondary
+  opacity: 0.8
+  text-align: center
+
+.dashboard__pagination
+  display: flex
+  gap: 0.4em
+  align-items: center
+
+.dashboard__dot
+  width: 0.5vw
+  height: 0.5vw
+  border-radius: 50%
+  background: $border
+  +transition(background 0.3s ease)
+
+.dashboard__dot--active
+  background: $accent
+
+// Climate bar — mesoregion summary
+.climate-bar
+  display: flex
+  align-items: center
+  padding: 0.35vw 0.8vw
+  background: #091523
+  border-top: 1px solid $border
+  gap: 0.8vw
+  flex-shrink: 0
+
+.climate-bar__label
+  font-size: 0.55vw
+  color: $text-secondary
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  writing-mode: vertical-rl
+  transform: rotate(180deg)
+  flex-shrink: 0
+
+.climate-bar__cards
+  display: flex
+  flex: 1
+  gap: 0.5vw
+
+// Meso card
+.meso-card
+  flex: 1
+  background: $bg-card
+  border: 1px solid $border
+  border-top: 2px solid #4fc3f7
+  border-radius: 3px
+  padding: 0.3vw 0.45vw
+  display: flex
+  flex-direction: column
+  gap: 0.15em
+  min-width: 0
+
+.meso-card__header
+  display: flex
+  justify-content: space-between
+  align-items: baseline
+
+.meso-card__name
+  font-family: 'Oswald', sans-serif
+  font-size: 0.7vw
+  color: $text-primary
+  text-transform: uppercase
+  letter-spacing: 0.04em
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.meso-card__stations
+  font-size: 0.5vw
+  color: $text-secondary
+  flex-shrink: 0
+
+.meso-card__temp
+  font-size: 1.3vw
+  font-family: 'Roboto Medium', sans-serif
+  color: #ff8a65
+  display: flex
+  align-items: baseline
+  gap: 0.1em
+  line-height: 1.1
+
+.meso-card__unit
+  font-size: 0.5vw
+  opacity: 0.7
+
+.meso-card__range
+  font-size: 0.6vw
+  color: $text-secondary
+  line-height: 1
+
+.meso-card__metrics
+  display: flex
+  gap: 0.35em
+  flex-wrap: wrap
+  margin-top: 0.1em
+
+.meso-card__metric
+  font-size: 0.58vw
+  padding: 0.1em 0.3em
+  border-radius: 2px
+
+.meso-card__metric--rh
+  color: #4fc3f7
+  background: rgba(79, 195, 247, 0.1)
+
+.meso-card__metric--rain
+  color: #29b6f6
+  background: rgba(41, 182, 246, 0.15)
+
+.meso-card__metric--etos
+  color: #a5d6a7
+  background: rgba(165, 214, 167, 0.1)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Stacked layout: a portrait or square screen, where the panels sit one under the other
+// vw em portrait ≈ 56% do vw em landscape (ex: 1080px vs 1920px de largura)
+// → fontes escaladas ~1.5× para compensar; grids ajustados para aproveitar
+//   a largura total disponível quando as colunas são empilhadas verticalmente
+// ─────────────────────────────────────────────────────────────────────────────
+.dashboard--stacked
+
+  // Empilha colunas verticalmente
+  .dashboard__body
+    -webkit-flex-direction: column
+    flex-direction: column
+    gap: 0.8vw
+    padding: 0
+
+  .dashboard__left
+    -webkit-flex: 0 0 50%
+    flex: 0 0 50%
+    gap: 0.8vw
+
+  .dashboard__right
+    -webkit-flex: 1
+    flex: 1
+    min-width: 0
+    min-height: 0
+
+  // Chuva: 3 colunas × 3 linhas (9 células para 8 cards, ocupa a largura total)
+  .rain-section__grid
+    grid-template-columns: repeat(3, 1fr)
+    grid-template-rows: repeat(3, 1fr)
+    gap: 0.6vw
+    padding: 0.6vw
+
+  // Rios: grid 2 colunas — melhor aproveitamento da largura total disponível
+  .rivers-section__list
+    display: -webkit-box
+    display: -webkit-flex
+    display: flex
+    -webkit-flex-wrap: wrap
+    flex-wrap: wrap
+    gap: 0.5vw
+
+  .river-card
+    width: 49%
+    -webkit-box-sizing: border-box
+    box-sizing: border-box
+
+  .river-card__bar-track
+    width: 8vw
+    height: 0.5vw
+
+  // Meteo: 3 colunas em largura total
+  .meteo-section__grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 0.5vw
+    padding: 0.5vw
+
+  // Climate bar: rótulo horizontal (evita writing-mode em Android antigo)
+  .climate-bar__label
+    -webkit-writing-mode: horizontal-tb
+    writing-mode: horizontal-tb
+    -webkit-transform: none
+    transform: none
+    font-size: 0.9vw
+
+  // ── Escala de fontes ──────────────────────────────
+
+  .dashboard__title-main
+    font-size: 2.2vw
+
+  .dashboard__title-sub
+    font-size: 1.2vw
+
+  .dashboard__clock
+    font-size: 3.3vw
+
+  .alert-banner__icon
+    font-size: 1.8vw
+
+  .alert-banner__item
+    font-size: 1.2vw
+
+  .section-header__title
+    font-size: 1.4vw
+
+  .section-header__meta
+    font-size: 1.0vw
+
+  .section-empty
+    font-size: 1.3vw
+
+  .station-card__rain
+    font-size: 2.7vw
+
+  .station-card__unit
+    font-size: 1.0vw
+
+  .station-card__label
+    font-size: 0.8vw
+
+  .station-card__name
+    font-size: 1.1vw
+
+  .station-card__city
+    font-size: 1vw
+
+  .station-card__org
+    font-size: 0.8vw
+
+  .station-card__time
+    font-size: 0.8vw
+
+  .river-card__name
+    font-size: 1.3915vw
+
+  .river-card__rio
+    font-size: 1.1385vw
+
+  .river-card__nivel
+    font-size: 1.771vw
+
+  .river-card__unit
+    font-size: 1.012vw
+
+  .meteo-card__name
+    font-size: 1.15vw
+
+  .meteo-card__temp
+    font-size: 2.415vw
+
+  .meteo-card__umid
+    font-size: 1.495vw
+
+  .meteo-card__vento
+    font-size: 1.265vw
+
+  .meteo-card__unit
+    font-size: 0.92vw
+
+  .meso-card__name
+    font-size: 1.1vw
+
+  .meso-card__stations
+    font-size: 0.8vw
+
+  .meso-card__temp
+    font-size: 2.0vw
+
+  .meso-card__unit
+    font-size: 0.8vw
+
+  .meso-card__range
+    font-size: 0.9vw
+
+  .meso-card__metric
+    font-size: 0.9vw
+
+  .dashboard__legend-item
+    font-size: 1.0vw
+
+  .dashboard__last-update
+    font-size: 1.0vw
+
+  .dashboard__stations-count
+    font-size: 0.9vw
+
+  .dashboard__attribution
+    font-size: 0.8vw
+
+  .dashboard__dot
+    width: 0.8vw
+    height: 0.8vw
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Adaptive panels: only the information the answer brings has a panel, and a column
+// with nothing in it is not drawn, so the one that is takes the whole width (or height)
+// ─────────────────────────────────────────────────────────────────────────────
+.dashboard__left.dashboard__left--alone, .dashboard__right.dashboard__right--alone
+  -webkit-flex: 1 1 auto
+  flex: 1 1 auto
+
+.rain-section.rain-section--alone
+  -webkit-flex: 1 1 auto
+  flex: 1 1 auto
+
+.dashboard__body > .section-empty
+  flex: 1
+
+// Alerts panel: the warnings of a place whose only information is warnings
+.alerts-section
+  height: 100%
+  display: flex
+  flex-direction: column
+  background: rgba(255, 255, 255, 0.02)
+  border: 1px solid $border
+  border-radius: 4px
+  overflow: hidden
+
+.alerts-section__grid
+  flex: 1
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: repeat(2, 1fr)
+  gap: .5vw
+  padding: .5vw
+  overflow: hidden
+
+.alert-card
+  display: flex
+  min-height: 0
+  background: $bg-card
+  border: 1px solid $border
+  border-radius: 3px
+  overflow: hidden
+
+.alert-card__bar
+  flex: 0 0 .35vw
+  background: $c-pre-alerta
+
+.alert-card--alerta .alert-card__bar
+  background: $c-alerta
+
+.alert-card--enchente .alert-card__bar
+  background: $c-enchente
+
+.alert-card__body
+  flex: 1
+  min-width: 0
+  display: flex
+  flex-direction: column
+  gap: .25em
+  padding: .8vw 1vw
+
+.alert-card__event
+  font-family: 'Oswald', sans-serif
+  font-size: 1.6vw
+  letter-spacing: .03em
+  color: $text-primary
+
+.alert-card__places
+  font-size: 1.05vw
+  color: $text-secondary
+
+.alert-card__text
+  flex: 1
+  min-height: 0
+  overflow: hidden
+  font-size: 1vw
+  line-height: 1.35
+  color: $text-primary
+  opacity: .85
+
+.alert-card__until
+  font-size: .85vw
+  color: $text-secondary
+
+.dashboard--stacked
+  .alerts-section__grid
+    grid-template-columns: 1fr
+    grid-template-rows: repeat(4, 1fr)
+    gap: .8vw
+    padding: .8vw
+
+  .alert-card__bar
+    flex-basis: .6vw
+
+  .alert-card__event
+    font-size: 2.6vw
+
+  .alert-card__places
+    font-size: 1.8vw
+
+  .alert-card__text
+    font-size: 1.7vw
+
+  .alert-card__until
+    font-size: 1.4vw
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Banner formats: a thin strip (horizontal) and a narrow column (vertical) with the
+// most urgent items, a few at a time. Plain vh/vw units (no CSS variables: the WebView
+// of Android 4.4 has none).
+// ─────────────────────────────────────────────────────────────────────────────
+.banner
+  display: flex
+  width: 100%
+  height: 100%
+  box-sizing: border-box
+  overflow: hidden
+  background: $bg-body
+  color: $text-primary
+  font-family: 'Roboto Regular', sans-serif
+
+.banner__brand
+  display: flex
+  justify-content: center
+  flex-shrink: 0
+
+.banner__title
+  font-family: 'Oswald', sans-serif
+  text-transform: uppercase
+  letter-spacing: .06em
+  white-space: nowrap
+
+.banner__clock
+  color: #4fc3f7
+  font-family: 'Roboto Light', sans-serif
+
+.banner__items
+  display: flex
+  flex: 1
+  min-width: 0
+  min-height: 0
+
+.banner__none
+  align-self: center
+  color: $text-secondary
+
+.banner-item
+  display: flex
+  flex: 1
+  min-width: 0
+  min-height: 0
+  background: $bg-card
+  border: 1px solid $border
+  border-radius: 3px
+  overflow: hidden
+
+.banner-item__bar
+  background: $c-fraca
+  flex-shrink: 0
+
+.banner-item--moderada .banner-item__bar
+  background: $c-moderada
+
+.banner-item--forte .banner-item__bar
+  background: $c-forte
+
+.banner-item--muito-forte .banner-item__bar
+  background: $c-muito-forte
+
+.banner-item--extrema .banner-item__bar
+  background: $c-extrema
+
+.banner-item--pre-alerta .banner-item__bar
+  background: $c-pre-alerta
+
+.banner-item--alerta .banner-item__bar
+  background: $c-alerta
+
+.banner-item--enchente .banner-item__bar
+  background: $c-enchente
+
+.banner-item__text
+  display: flex
+  flex-direction: column
+  min-width: 0
+
+.banner-item__title
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.banner-item__detail
+  color: $text-secondary
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.banner-item__value
+  font-family: 'Oswald', sans-serif
+  color: $text-primary
+  white-space: nowrap
+
+.banner-item__unit
+  margin-left: .15em
+  color: $text-secondary
+  font-family: 'Roboto Light', sans-serif
+
+// Horizontal: one row, the brand on the left, the items side by side (1 unit = 1% of the height)
+$hb: 1vh
+
+.banner--h
+  flex-direction: row
+  align-items: stretch
+  padding: 8 * $hb 2 * $hb
+  gap: 6 * $hb
+  border-top: 2px solid $accent
+
+  .banner__brand
+    flex-direction: column
+    padding-left: 4 * $hb
+    padding-right: 2 * $hb
+
+  .banner__title
+    font-size: 20 * $hb
+
+  .banner__clock
+    font-size: 34 * $hb
+    line-height: 1.1
+
+  .banner__items
+    flex-direction: row
+    align-items: stretch
+    gap: 5 * $hb
+
+  .banner__none
+    font-size: 22 * $hb
+
+  .banner-item
+    flex: 1 1 auto
+    align-items: center
+    gap: 5 * $hb
+
+  .banner-item__text
+    flex: 1 1 auto
+
+  .banner-item__bar
+    align-self: stretch
+    width: 3 * $hb
+
+  .banner-item__title
+    font-size: 17 * $hb
+
+  .banner-item__detail
+    font-size: 13 * $hb
+
+  .banner-item__value
+    flex-shrink: 0
+    font-size: 30 * $hb
+    padding-right: 5 * $hb
+
+  .banner-item__unit
+    font-size: 15 * $hb
+
+// Vertical: one column, the brand on top, the items one under the other (1 unit = 1% of the width)
+$vb: 1vw
+
+.banner--v
+  flex-direction: column
+  padding: 6 * $vb
+  gap: 5 * $vb
+  border-left: 2px solid $accent
+
+  .banner__brand
+    flex-direction: column
+    align-items: center
+    text-align: center
+
+  .banner__title
+    font-size: 11 * $vb
+    white-space: normal
+
+  .banner__clock
+    font-size: 22 * $vb
+    line-height: 1.2
+
+  .banner__items
+    flex-direction: column
+    gap: 4 * $vb
+    justify-content: flex-start
+
+  .banner__none
+    font-size: 11 * $vb
+    text-align: center
+
+  .banner-item
+    flex: 0 0 auto
+    flex-direction: column
+    align-items: stretch
+    padding-bottom: 3 * $vb
+
+  .banner-item__bar
+    height: 2 * $vb
+    width: 100%
+
+  .banner-item__text
+    padding: 3 * $vb 4 * $vb 0
+
+  .banner-item__title
+    font-size: 10 * $vb
+
+  .banner-item__detail
+    font-size: 8.5 * $vb
+
+  .banner-item__value
+    font-size: 22 * $vb
+    padding: 0 4 * $vb
+
+  .banner-item__unit
+    font-size: 10 * $vb
+
+// Stacked: the conditions grid fills the room it is given, so a tall screen has no blank band under it
+.dashboard--stacked .meteo-section__grid
+  align-content: stretch
+  grid-auto-rows: 1fr
+
+// Square: less height than a portrait screen has for the same stack, so 6 rain cards (3 by 2) and a smaller banner
+.dashboard--square
+  .rain-section__grid
+    grid-template-rows: repeat(2, 1fr)
+
+  .alert-banner__item
+    font-size: 1.15vw
+
+  .alert-banner__icon
+    font-size: 1.6vw

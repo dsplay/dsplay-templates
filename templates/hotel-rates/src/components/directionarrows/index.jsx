@@ -15,13 +15,13 @@ function DirectionArrows({ number }) {
   const renderIcon = () => {
     switch (number) {
       case 'down':
-        return <FaAngleDown style={{ color: `${primaryCardFontColor}`, fontSize: '3em' }} />;
+        return <FaAngleDown style={{ color: primaryCardFontColor, fontSize: '3em' }} />;
       case 'left':
-        return <FaAngleLeft style={{ color: `${primaryCardFontColor}`, fontSize: '3em' }} />;
+        return <FaAngleLeft style={{ color: primaryCardFontColor, fontSize: '3em' }} />;
       case 'right':
-        return <FaAngleRight style={{ color: `${primaryCardFontColor}`, fontSize: '3em' }} />;
+        return <FaAngleRight style={{ color: primaryCardFontColor, fontSize: '3em' }} />;
       case 'up':
-        return <FaAngleUp style={{ color: `${primaryCardFontColor}`, fontSize: '3em' }} />;
+        return <FaAngleUp style={{ color: primaryCardFontColor, fontSize: '3em' }} />;
       default:
         return null;
     }

@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
+import { I18nextProvider } from 'react-i18next';
 import {
   Loader,
+  useConfig,
   useTemplateBoolVal,
   useMedia,
   useScreenInfo,
 } from '@dsplay/react-template-utils';
-import Intro from '../intro';
 import Main from '../main';
+import i18n from '../../i18n';
 import './style.sass';
-
-const MIN_LOADING_DURATION = 2000;
+import '../../entrance.css';
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -51,6 +53,12 @@ function App() {
 
   const random = useTemplateBoolVal('random');
   const { screenFormat } = useScreenInfo();
+  const { locale } = useConfig();
+  const [lng] = (locale || 'en').split('_');
+
+  useEffect(() => {
+    i18n.changeLanguage(lng);
+  }, [lng]);
 
   const imagesToShow = [...images, ...allMediaImages];
 
@@ -79,16 +87,17 @@ function App() {
   }
 
   return (
-    <Loader
-      placeholder={<Intro />}
-      images={imagesToLoad}
-      minDuration={MIN_LOADING_DURATION}
-      tasks={imageTasks}
-    >
-      <div className={`app fade-in ${screenFormat}`}>
-        <Main />
-      </div>
-    </Loader>
+    <I18nextProvider i18n={i18n}>
+      <Loader
+        reveal
+        images={imagesToLoad}
+        tasks={imageTasks}
+      >
+        <div className={`app fade-in ${screenFormat}`}>
+          <Main />
+        </div>
+      </Loader>
+    </I18nextProvider>
   );
 }
 

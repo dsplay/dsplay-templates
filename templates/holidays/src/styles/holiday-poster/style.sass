@@ -1,0 +1,97 @@
+@import ../mixins
+
+.hp
+  font-family: 'Poppins', sans-serif
+  color: #fff
+
+.hp--today
+  background: #e5420d
+  background: linear-gradient(150deg, #ff7a1a 0%, #e5420d 100%)
+
+.hp--ahead
+  background: #0b6070
+  background: linear-gradient(150deg, #0e9aa7 0%, #0b6070 100%)
+
+.hp .stage__plate
+  padding: u(64)
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.hp__top
+  display: flex
+  align-items: flex-start
+  justify-content: space-between
+
+.hp__label
+  padding: u(10) u(28)
+  border-radius: u(40)
+  background: rgba(255, 255, 255, 0.2)
+  font-size: u(28)
+  font-weight: 700
+  letter-spacing: 0.16em
+  text-transform: uppercase
+
+.hp__medal
+  width: u(170)
+  height: u(170)
+  border-radius: u(48)
+  background: rgba(255, 255, 255, 0.2)
+  color: #fff
+
+.hp__name
+  margin: 0
+  font-weight: 800
+  letter-spacing: -0.03em
+  text-transform: uppercase
+
+.hp__date
+  font-size: u(42)
+  font-weight: 600
+
+.hp__chips
+  margin-top: u(16)
+
+.hp__chip
+  display: inline-block
+  margin-right: u(12)
+  padding: u(8) u(24)
+  border-radius: u(30)
+  border: u(3) solid rgba(255, 255, 255, 0.7)
+  font-size: u(26)
+  font-weight: 700
+  letter-spacing: 0.08em
+  text-transform: uppercase
+
+.hp__chip--when
+  background: #fff
+  color: #0b6070
+
+.hp--portrait .hp__medal
+  width: u(140)
+  height: u(140)
+
+.hp--square .hp__medal
+  width: u(130)
+  height: u(130)
+
+.hp--square .stage__plate
+  padding: u(54)
+
+// banners: the strip takes the poster's colour from the stage (orange on a holiday, teal ahead)
+.hp .banner
+  font-family: 'Poppins', sans-serif
+  color: #fff
+
+.hp .banner__medal
+  background: rgba(255, 255, 255, 0.22)
+  color: #fff
+
+.hp .banner__label
+  font-weight: 700
+
+.hp .banner__name
+  text-transform: uppercase
+
+.hp .banner__when
+  font-weight: 600

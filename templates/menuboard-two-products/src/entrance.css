@@ -1,0 +1,77 @@
+/* Entrance: Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and images are in. The animations start from that class, never before: started at mount they would run while the template is still hidden. The title tab slides in, the promotions pop in, the menu lines rise one after the other; on a horizontal banner each item rises in as it takes the screen. Distances are percentages of each element (never px). Only opacity and transform, prefixed for old Android WebViews; scale only on the round picture, because FitText measures the text boxes. */
+@-webkit-keyframes mb-slide {
+  from { opacity: 0; -webkit-transform: translateX(-30%); transform: translateX(-30%); }
+}
+
+@keyframes mb-slide {
+  from { opacity: 0; -webkit-transform: translateX(-30%); transform: translateX(-30%); }
+}
+
+@-webkit-keyframes mb-pop {
+  from { opacity: 0; -webkit-transform: scale(0.7); transform: scale(0.7); }
+}
+
+@keyframes mb-pop {
+  from { opacity: 0; -webkit-transform: scale(0.7); transform: scale(0.7); }
+}
+
+@-webkit-keyframes mb-rise {
+  from { opacity: 0; -webkit-transform: translateY(40%); transform: translateY(40%); }
+}
+
+@keyframes mb-rise {
+  from { opacity: 0; -webkit-transform: translateY(40%); transform: translateY(40%); }
+}
+
+.dsplay-ready .title-tab {
+  -webkit-animation: mb-slide 450ms ease-out both;
+  animation: mb-slide 450ms ease-out both;
+}
+
+.dsplay-ready .promo-circle-box {
+  -webkit-animation: mb-pop 500ms ease-out 100ms both;
+  animation: mb-pop 500ms ease-out 100ms both;
+}
+
+.dsplay-ready .promo + .promo .promo-circle-box {
+  -webkit-animation-delay: 220ms;
+  animation-delay: 220ms;
+}
+
+.dsplay-ready .promo-text {
+  -webkit-animation: mb-rise 450ms ease-out 200ms both;
+  animation: mb-rise 450ms ease-out 200ms both;
+}
+
+.dsplay-ready .promo + .promo .promo-text {
+  -webkit-animation-delay: 320ms;
+  animation-delay: 320ms;
+}
+
+.dsplay-ready .row {
+  -webkit-animation: mb-rise 380ms ease-out 300ms both;
+  animation: mb-rise 380ms ease-out 300ms both;
+}
+
+.dsplay-ready .row:nth-child(2) { -webkit-animation-delay: 340ms; animation-delay: 340ms; }
+.dsplay-ready .row:nth-child(3) { -webkit-animation-delay: 380ms; animation-delay: 380ms; }
+.dsplay-ready .row:nth-child(4) { -webkit-animation-delay: 420ms; animation-delay: 420ms; }
+.dsplay-ready .row:nth-child(5) { -webkit-animation-delay: 460ms; animation-delay: 460ms; }
+.dsplay-ready .row:nth-child(6) { -webkit-animation-delay: 500ms; animation-delay: 500ms; }
+.dsplay-ready .row:nth-child(7) { -webkit-animation-delay: 540ms; animation-delay: 540ms; }
+
+.dsplay-ready .banner-item {
+  -webkit-animation: mb-rise 450ms ease-out both;
+  animation: mb-rise 450ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .title-tab,
+  .dsplay-ready .promo-circle-box,
+  .dsplay-ready .promo-text,
+  .dsplay-ready .row,
+  .dsplay-ready .banner-item {
+    -webkit-animation: none;
+    animation: none;
+  }
+}

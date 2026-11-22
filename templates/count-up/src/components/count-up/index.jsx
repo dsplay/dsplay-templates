@@ -3,10 +3,12 @@ import {
   getMinutes,
   format,
 } from 'date-fns';
+import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import BoxTimer from '../box-timer';
-import BoxTimerDays from '../box-timer-days';
+import { useScreenInfo } from '@dsplay/react-template-utils';
+import Unit from '../unit';
 import { useCountUpContext } from '../../contexts/count-up-context';
+import { headerSizes, pickLayout } from '../../lib/layout';
 import './style.sass';
 import i18n from '../../i18n';
 
@@ -21,14 +23,23 @@ function CountUp() {
   } = useCountUpContext();
 
   const { t } = useTranslation();
+  const { w, h } = useScreenInfo();
 
-  const arrayDays = oclock.days.split('');
+  const layout = useMemo(() => pickLayout({ width: w, height: h, dayDigits: oclock.days.length }), [w, h, oclock.days.length]);
+  const sizes = headerSizes(w, h);
+
+  const units = [
+    { digits: oclock.days.split(''), label: t('days') },
+    { digits: oclock.hours.split(''), label: t('hours') },
+    { digits: oclock.minutes.split(''), label: t('minutes') },
+    { digits: oclock.seconds.split(''), label: t('seconds') },
+  ];
 
   return (
     <div className="container" style={{ background: backgroundImage || backgroundColor }}>
       <div className="header">
-        <h1 style={{ color: colorFont }}>{title}</h1>
-        <p style={{ color: colorFont }}>
+        <h1 style={{ color: colorFont, fontSize: `${sizes.title}px` }}>{title}</h1>
+        <p style={{ color: colorFont, fontSize: `${sizes.date}px` }}>
           {format(startDate, 'P', { locale: i18n.t('locale', { returnObjects: true }) })}
           {', '}
           {String(getHours(startDate)).padStart(2, '0')}
@@ -38,54 +49,17 @@ function CountUp() {
         </p>
       </div>
 
-      <div className="timer">
-        {
-          arrayDays.length > 2
-            ? (
-              <div className="boxs-days-hours display-flex">
-                <BoxTimerDays
-                  days={oclock.days}
-                  text={t('days')}
-                  IsSemicolon
-                />
-                <BoxTimer
-                  box1={oclock.hours[0]}
-                  box2={oclock.hours[1]}
-                  text={t('hours')}
-                  IsSemicolon
-                />
-              </div>
-            )
-            : (
-              <div className="boxs-days-hours">
-                <BoxTimerDays
-                  days={oclock.days}
-                  text={t('days')}
-                  IsSemicolon
-                />
-                <BoxTimer
-                  box1={oclock.hours[0]}
-                  box2={oclock.hours[1]}
-                  text={t('hours')}
-                  IsSemicolon
-                />
-              </div>
-            )
-        }
-
-        <div>
-          <BoxTimer
-            box1={oclock.minutes[0]}
-            box2={oclock.minutes[1]}
-            text={t('minutes')}
-            IsSemicolon
-          />
-          <BoxTimer
-            box1={oclock.seconds[0]}
-            box2={oclock.seconds[1]}
-            text={t('seconds')}
-          />
-        </div>
+      <div className="timer" style={{ fontSize: `${layout.fontSize}px` }}>
+        {layout.rows.map((row) => (
+          <div key={row.join('-')} className="timer-row">
+            {row.map((index, position) => (
+              <Fragment key={index}>
+                {position > 0 && <span className="timer-colon">:</span>}
+                <Unit digits={units[index].digits} label={units[index].label} color={colorFont} />
+              </Fragment>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );

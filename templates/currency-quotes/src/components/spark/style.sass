@@ -1,0 +1,32 @@
+@import ../../styles/mixins
+
+.spark
+  flex: none
+  display: block
+  overflow: hidden
+
+.spark svg
+  display: block
+
+.spark__line
+  stroke-width: 3
+  stroke-linecap: round
+  stroke-linejoin: round
+
+.spark--up
+  .spark__line
+    stroke: #2be3a0
+  .spark__area
+    fill: rgba(43, 227, 160, 0.16)
+
+.spark--down
+  .spark__line
+    stroke: #ff6b7a
+  .spark__area
+    fill: rgba(255, 107, 122, 0.16)
+
+.spark--flat
+  .spark__line
+    stroke: #8d99b3
+  .spark__area
+    fill: rgba(141, 153, 179, 0.14)

@@ -1,0 +1,92 @@
+@import ../../mixins
+
+.showb
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+
+.showb__tile
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: center
+  border-radius: u(30)
+  background: #ffd84d
+  box-shadow: 0 u(10) u(24) rgba(0, 0, 0, 0.35)
+
+  span
+    font-weight: 800
+    line-height: 1
+    color: rgba(80, 50, 0, 0.55)
+
+.showb__card
+  display: flex
+  flex-direction: column
+  justify-content: center
+  border-radius: u(26)
+  box-shadow: 0 u(12) u(28) rgba(0, 0, 0, 0.4)
+
+.showb__card--question
+  background: #f4f7ff
+
+  &.is-small
+    padding: u(10) u(18)
+    background: #f4f7ff
+    box-shadow: 0 u(6) u(14) rgba(0, 0, 0, 0.35)
+    +animation(show-small 0.4s ease-out)
+    +animation-fill(both)
+
+.showb__card--answer
+  background: #ffd84d
+  color: #3d2800
+  +animation(show-pop 0.6s ease-out)
+  +animation-fill(both)
+
+.showb .showb__badge
+  align-self: flex-start
+  margin-bottom: u(6)
+  padding: u(3) u(12)
+  font-size: u(12)
+
+.showb--h
+  flex-direction: row
+  align-items: center
+  padding: u(18) u(28)
+
+  .showb__tile
+    width: u(150)
+    height: u(150)
+    margin-right: u(28)
+
+    span
+      font-size: u(110)
+
+  .showb__card
+    max-height: 100%
+    padding: u(14) u(26)
+
+  .showb__card--question
+    margin-right: u(24)
+
+.showb--v
+  flex-direction: column
+  align-items: center
+  padding: u(14) u(16)
+
+  .showb__tile
+    width: u(96)
+    height: u(96)
+    margin-bottom: u(16)
+
+    span
+      font-size: u(70)
+
+  .showb__card
+    width: 92%
+    padding: u(12) u(16)
+
+  .showb__card--answer
+    margin-top: u(18)

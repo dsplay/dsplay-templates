@@ -1,0 +1,134 @@
+@import ../../styles/mixins
+
+// The slim banner draws its own full-plate box (it replaces the style's layout), so each style gives it its own colors here. Only opacity and transform move.
++keyframes(slim-fade)
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+.slim
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  display: flex
+  align-items: stretch
+  overflow: hidden
+  font-family: 'Inter', sans-serif
+
+.slim__lead
+  flex: none
+  display: flex
+  align-items: center
+  width: u(250)
+  padding: 0 u(20)
+  position: relative
+  z-index: 3
+
+.slim__basebadge
+  margin-right: u(12)
+
+.slim__base
+  font-weight: 700
+  font-size: u(40)
+  letter-spacing: -0.02em
+  margin-right: u(12)
+
+.slim__title
+  display: none
+
+.slim__line
+  flex: 1 1 0%
+  min-width: 0
+  height: 100%
+
+// quotes that fit keep the width of a chip and are spread over the line (they are not stretched to share it)
+.slim .marquee--static
+  justify-content: space-evenly
+
+.slim .marquee--static .marquee__item
+  flex: none
+
+.slim__chip
+  display: flex
+  align-items: center
+  width: u(490)
+  padding: 0 u(18)
+
+.slim__code
+  margin: 0 u(14) 0 u(12)
+  font-weight: 600
+  font-size: u(26)
+
+.slim__price
+  margin-right: u(14)
+  font-weight: 700
+  line-height: 1
+
+.slim__change
+  font-size: u(26)
+
+// ── board: dark, with a hairline between the quotes ──
+.slim--board
+  color: #eef2ff
+  background: #0a0f1e
+  background: linear-gradient(90deg, #0a0f1e 0%, #111b36 100%)
+
+.slim--board .slim__lead
+  background: #0d1426
+  border-right: u(2) solid rgba(255, 255, 255, 0.1)
+
+.slim--board .slim__code
+  color: #8d99b3
+
+.slim--board .slim__chip
+  border-right: u(2) solid rgba(255, 255, 255, 0.08)
+
+// ── cards: the colorful screen with a white pill per quote ──
+.slim--cards
+  color: #141a33
+  background: #2b1a6b
+  background: linear-gradient(90deg, #2b1a6b 0%, #1a3f8f 55%, #0f5c8f 100%)
+
+.slim--cards .slim__lead
+  color: #fff
+  background: rgba(255, 255, 255, 0.14)
+
+.slim--cards .slim__base
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+
+.slim--cards .marquee__item
+  padding: u(9) u(8)
+
+.slim--cards .slim__chip
+  height: 100%
+  width: 100%
+  border-radius: u(30)
+  background: #fff
+  padding: 0 u(18)
+
+.slim--cards .slim__code
+  color: #6b7592
+
+.slim--cards .slim__price
+  font-family: 'Poppins', 'Inter', sans-serif
+  font-weight: 800
+
+.slim--cards
+  .change--up
+    color: #0f9d63
+  .change--down
+    color: #e0364a
+  .change--flat
+    color: #6b7592
+
+.dsplay-ready .slim
+  +animation(slim-fade 0.6s ease-out both)
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready .slim
+    -webkit-animation: none
+    animation: none

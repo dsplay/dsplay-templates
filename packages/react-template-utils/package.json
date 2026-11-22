@@ -1,6 +1,6 @@
 {
   "name": "@dsplay/react-template-utils",
-  "version": "5.2.3",
+  "version": "5.3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dsplay/dsplay-templates.git",
@@ -19,6 +19,7 @@
     "build-examples": "vite build",
     "linter": "eslint src",
     "linter:fix": "eslint src --fix",
+    "test": "vitest run",
     "prebuild": "npm run linter",
     "build": "rimraf dist && NODE_ENV=production webpack --mode production && npm run build:types",
     "build:types": "tsc -p tsconfig.json",
@@ -36,6 +37,7 @@
     "@eslint/js": "^9.39.5",
     "@storybook/addon-docs": "^10.5.7",
     "@storybook/react-vite": "^10.5.7",
+    "@testing-library/react": "16.3.3",
     "@types/react": "^19.2.17",
     "@vitejs/plugin-react": "6.1.2",
     "babel-loader": "^10.1.1",
@@ -46,6 +48,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "17.13.0",
+    "jsdom": "30.1.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "rimraf": "^6.1.3",
@@ -55,6 +58,7 @@
     "style-loader": "^4.0.0",
     "typescript": "^7.0.2",
     "vite": "8.3.4",
+    "vitest": "5.0.3",
     "webpack": "^5.108.4",
     "webpack-cli": "^7.2.1"
   },

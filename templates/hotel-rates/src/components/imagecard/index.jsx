@@ -5,7 +5,7 @@ function ImageCard({ source }) {
     <div
       className="h-full max-w-full  rounded overflow-hidden shadow-lg"
       style={{
-        backgroundImage: `url(${source})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center',
+        backgroundImage: source ? `url(${source})` : undefined, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center',
       }}
     >
       &nbsp;

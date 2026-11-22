@@ -1,0 +1,107 @@
+@import ../../mixins
+
+.bubb
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+
+.bubb__face
+  flex: none
+  position: relative
+
+  .bubbles__face
+    position: static
+    display: block
+    width: 100%
+    height: 100%
+
+.bubb__question, .bubb__answer
+  position: relative
+  display: flex
+  flex-direction: column
+  justify-content: center
+  background: #fff
+  box-shadow: 0 u(6) 0 rgba(58, 42, 0, 0.18)
+
+.bubb__question.is-small
+  background: rgba(255, 255, 255, 0.35)
+  box-shadow: none
+  +animation(bubbles-chip 0.4s ease-out)
+  +animation-fill(both)
+
+.bubb__answer
+  +animation(bubbles-pop 0.6s ease-out)
+  +animation-fill(both)
+
+// ---- horizontal: the face, then the question (its tail points left at the face), then the answer
+.bubb--h
+  flex-direction: row
+  align-items: center
+  padding: u(18) u(28)
+
+  .bubb__face
+    width: u(150)
+    height: u(150)
+    margin-right: u(28)
+
+  .bubb__question, .bubb__answer
+    padding: u(14) u(28)
+    border-radius: u(40)
+
+  .bubb__question
+    margin-right: u(24)
+    max-height: 100%
+
+    &:before
+      content: ''
+      position: absolute
+      left: u(-18)
+      top: 50%
+      margin-top: u(-14)
+      border-top: u(14) solid transparent
+      border-bottom: u(14) solid transparent
+      border-right: u(22) solid #fff
+
+    &.is-small:before
+      border-right-color: rgba(255, 255, 255, 0.35)
+
+  .bubb__question.is-small
+    padding: u(10) u(22)
+    border-radius: u(30)
+
+// ---- vertical: the face on top, the question under it (tail up), the answer under that
+.bubb--v
+  flex-direction: column
+  align-items: center
+  padding: u(14) u(16)
+
+  .bubb__face
+    width: u(110)
+    height: u(110)
+    margin-bottom: u(16)
+
+  .bubb__question, .bubb__answer
+    width: 100%
+    padding: u(12) u(18)
+    border-radius: u(30)
+    text-align: center
+
+  .bubb__question:before
+    content: ''
+    position: absolute
+    left: 50%
+    top: u(-16)
+    margin-left: u(-12)
+    border-left: u(12) solid transparent
+    border-right: u(12) solid transparent
+    border-bottom: u(18) solid #fff
+
+  .bubb__question.is-small:before
+    border-bottom-color: rgba(255, 255, 255, 0.35)
+
+  .bubb__answer
+    width: 92%
+    margin-top: u(20)

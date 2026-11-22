@@ -1,0 +1,62 @@
+@import ../../styles/mixins
+
+// Only the geometry: the colours and fonts of a banner come from the style it sits in.
+.banner
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  display: flex
+  align-items: center
+  overflow: hidden
+
+.banner--h
+  flex-direction: row
+  padding: 0 u(40)
+
+.banner--h .banner__medal
+  width: u(156)
+  height: u(156)
+  margin-right: u(40)
+  border-radius: u(40)
+
+.banner--v
+  flex-direction: column
+  justify-content: center
+  padding: u(40) u(18)
+  text-align: center
+
+.banner--v .banner__medal
+  width: u(150)
+  height: u(150)
+  margin-bottom: u(26)
+  border-radius: u(38)
+
+.banner__text
+  min-width: 0
+  flex: 1
+
+.banner--v .banner__text
+  flex: none
+  width: 100%
+
+.banner__label
+  font-size: u(22)
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  margin-bottom: u(10)
+
+.banner--v .banner__label
+  font-size: u(15)
+
+.banner__name
+  margin: 0
+  font-weight: 800
+
+.banner__when
+  margin-top: u(10)
+  font-size: u(30)
+
+.banner--v .banner__when
+  font-size: u(20)

@@ -54,4 +54,28 @@ $(document).ready(function () {
       }
     }
   });
+
+  // the loader goes away when the slider has its pictures (loaded or failed);
+  // Skitter preloads the same pictures, so they come from the cache
+  var pending = imagesToShow.length;
+  var hidden = false;
+
+  function hideLoader() {
+    if (!hidden && pending <= 0) {
+      hidden = true;
+      $('#overlay').fadeOut(500);
+    }
+  }
+
+  $.each(imagesToShow, function (i, image) {
+    var preload = new Image();
+    preload.onload = preload.onerror = function () {
+      pending -= 1;
+      hideLoader();
+    };
+    preload.src = image;
+  });
+
+  // no picture to wait for: the slider shows at once
+  hideLoader();
 });

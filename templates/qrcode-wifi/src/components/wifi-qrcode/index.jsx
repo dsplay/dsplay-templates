@@ -1,5 +1,6 @@
 import {
   QrCode,
+  useScreenInfo,
   useMedia,
   useTemplateVal,
   useTemplateFloatVal,
@@ -10,6 +11,8 @@ import calculateQrCodeSize from '../../utils/calculate-qr-code-size';
 import { authTypes, AUTH_TYPE_NOPASS } from '../../utils/auth-types';
 
 function WifiQrCode() {
+  const { screenFormat } = useScreenInfo();
+  const isBanner = screenFormat === 'h-banner' || screenFormat === 'v-banner';
   const {
     ssid,
     auth_type: authentication,
@@ -25,7 +28,7 @@ function WifiQrCode() {
   const logo = useTemplateVal('qr_code_logo');
   const logoBackgroundTransparent = useTemplateBoolVal('qr_code_logo_background_transparent');
 
-  const { size, quietZone, logoSize } = calculateQrCodeSize(60);
+  const { size, quietZone, logoSize } = calculateQrCodeSize(isBanner ? 70 : 60);
 
   const finalAuthentication = authTypes[authentication] || AUTH_TYPE_NOPASS;
   const finalPassword = finalAuthentication === AUTH_TYPE_NOPASS ? AUTH_TYPE_NOPASS : password;

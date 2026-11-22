@@ -12,7 +12,7 @@ function WeatherCard() {
       <div className="grid grid-cols-2 items-center">
         <div className="col-span-2 h-10">
           <FitText>
-            {`${city}`}
+            {city}
           </FitText>
         </div>
         <div className="col-span-2 h-24">

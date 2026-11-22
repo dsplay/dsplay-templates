@@ -1,0 +1,106 @@
+@import ../../mixins
+@import ../../banner
+
++banner(dayb)
+
+.dayb__tile
+  display: flex
+  align-items: center
+  justify-content: center
+  width: u(132)
+  height: u(132)
+  border-radius: u(38)
+  box-shadow: 0 u(10) u(24) rgba(0, 0, 0, 0.2)
+
+.dayb__glyph
+  width: u(80)
+  height: u(80)
+
+.dayb__name
+  margin: 0
+
+.dayb__range
+  margin-top: u(6)
+  font-size: u(16)
+  color: #6d5d86
+  font-weight: 500
+
+.dayb__chip
+  display: inline-block
+  margin-top: u(10)
+  padding: u(3) u(14)
+  border-radius: u(999)
+  color: #fff
+  font-size: u(14)
+  font-weight: 600
+
+.dayb__notice
+  margin: u(6) 0 0
+  font-size: u(11)
+  color: #8a7aa0
+
+.dayb__card
+  padding: u(14) u(18)
+  border-radius: u(22)
+  background: rgba(255, 255, 255, 0.8)
+  box-shadow: 0 u(6) u(18) rgba(60, 30, 90, 0.12)
+  text-align: left
+
+  .meter
+    display: flex
+    align-items: center
+    margin-bottom: u(7)
+
+  .meter__label
+    width: u(82)
+    font-size: u(12)
+    letter-spacing: 0.08em
+    text-transform: uppercase
+    color: #8a7aa0
+    font-weight: 600
+
+  .meter__scale
+    display: flex
+
+  .meter__unit
+    display: block
+    width: u(12)
+    height: u(12)
+    margin-right: u(5)
+    border-radius: 50%
+    background: #e7dcef
+
+  .meter__unit.is-on
+    background: #ff8a4c
+
+.dayb__lucky
+  font-size: u(14)
+  color: #6d5d86
+
+  b
+    margin-left: u(4)
+    font-size: u(24)
+
+.dayb--h
+  .dayb__art
+    margin-right: u(28)
+
+  .dayb__who
+    width: u(300)
+    margin-right: u(28)
+
+  .dayb__side
+    width: u(230)
+    margin-left: u(28)
+
+.dayb--v
+  .dayb__art
+    display: flex
+    justify-content: center
+    margin-top: u(6)
+
+  .dayb__who
+    margin-top: u(14)
+
+  .dayb__notice
+    text-align: center

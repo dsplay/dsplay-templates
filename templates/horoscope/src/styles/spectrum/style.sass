@@ -1,0 +1,186 @@
+@import ../mixins
+
+=theme($from, $to, $ink)
+  background: $to
+  background: linear-gradient(135deg, $from 0%, $to 100%)
+  .spectrum__chip, .spectrum__lucky
+    color: $ink
+
+.spectrum
+  color: #fff
+  font-family: 'Poppins', sans-serif
+
+  &.spectrum--fire
+    +theme(#ff9a3c, #e8362d, #c42b22)
+  &.spectrum--earth
+    +theme(#7fcf6a, #1f8a5a, #16694a)
+  &.spectrum--air
+    +theme(#5fd0ff, #3a63e0, #2a4cc0)
+  &.spectrum--water
+    +theme(#8f8cff, #5a2fc9, #4a24a8)
+
+.spectrum__watermark
+  position: absolute
+  right: u(-120)
+  top: u(-20)
+  width: u(760)
+  height: u(760)
+  opacity: 0.16
+
+.spectrum__content
+  position: absolute
+  left: u(72)
+  top: u(64)
+  right: u(72)
+  bottom: u(70)
+  display: flex
+  flex-direction: column
+
+.spectrum__kicker
+  display: flex
+  align-items: center
+  font-size: u(18)
+  font-weight: 700
+  letter-spacing: 0.2em
+  text-transform: uppercase
+  opacity: 0.9
+
+.spectrum__icon
+  width: u(34)
+  height: u(34)
+  margin-right: u(14)
+
+.spectrum__name
+  margin: u(18) 0 0
+  font-weight: 800
+  line-height: 0.95
+  letter-spacing: -0.03em
+  white-space: nowrap
+
+.spectrum__meta
+  display: flex
+  align-items: center
+  margin-top: u(16)
+  font-size: u(24)
+  font-weight: 600
+
+.spectrum__chip
+  margin-left: u(16)
+  padding: u(4) u(18)
+  border-radius: u(999)
+  background: #fff
+  font-size: u(20)
+  font-weight: 700
+
+.spectrum__body
+  flex: 1
+  min-height: 0
+  margin-top: u(26)
+  overflow: hidden
+
+.spectrum__text
+  margin: 0
+  font-weight: 600
+
+.spectrum__bars
+  display: flex
+  flex: none
+  margin-top: u(16)
+
+  .meter
+    flex: 1
+    margin-right: u(18)
+    padding: u(14) u(18)
+    border-radius: u(18)
+    background: rgba(255, 255, 255, 0.18)
+
+  .meter__label
+    display: block
+    margin-bottom: u(10)
+    font-size: u(15)
+    font-weight: 700
+    letter-spacing: 0.12em
+    text-transform: uppercase
+
+  .meter__track
+    display: block
+    height: u(10)
+    border-radius: u(999)
+    background: rgba(255, 255, 255, 0.25)
+
+  .meter__fill
+    display: block
+    height: u(10)
+    border-radius: u(999)
+    background: #fff
+
+.spectrum__lucky
+  padding: u(14) u(22)
+  border-radius: u(18)
+  background: #fff
+  text-align: center
+
+.spectrum__lucky-label
+  font-size: u(14)
+  font-weight: 700
+  letter-spacing: 0.12em
+  text-transform: uppercase
+
+.spectrum__number
+  font-size: u(44)
+  font-weight: 800
+  line-height: 1.1
+
+.spectrum__disclaimer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: u(22)
+  margin: 0
+  text-align: center
+  font-size: u(13)
+  font-weight: 600
+  opacity: 0.8
+
+// ---- portrait and square
+.stage--portrait, .stage--square
+  .spectrum__content
+    left: u(52)
+    right: u(52)
+
+  .spectrum__bars
+    flex-wrap: wrap
+
+    .meter
+      min-width: u(160)
+      margin-bottom: u(14)
+
+  .spectrum__lucky
+    margin-bottom: u(14)
+
+.stage--portrait
+  .spectrum__watermark
+    right: u(-200)
+    width: u(900)
+    height: u(900)
+
+  .spectrum__bars .meter
+    flex: none
+    width: 100%
+    margin-right: 0
+
+  .spectrum__lucky
+    width: 100%
+
+.stage--square
+  .spectrum__content
+    top: u(48)
+    bottom: u(60)
+
+  .spectrum__watermark
+    right: u(-140)
+    width: u(640)
+    height: u(640)
+
+  .spectrum__meta
+    font-size: u(22)

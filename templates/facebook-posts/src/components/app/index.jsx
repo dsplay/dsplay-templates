@@ -1,13 +1,12 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { I18nextProvider } from 'react-i18next';
 import {
-  Loader, useMedia, useScreenInfo, useTemplateVal, screen,
+  Loader, useConfig, useMedia, useScreenInfo, useTemplateVal, screen,
 } from '@dsplay/react-template-utils';
-import Intro from '../intro';
 import Main from '../main';
 import defaultBg from '../../images/bg.png';
+import i18n from '../../i18n';
 import './style.sass';
-
-const MIN_LOADING_DURATION = 2500;
 
 // fonts to preload
 // @font-face's must be defined in fonts.sass or another in-use style file
@@ -18,6 +17,12 @@ const fonts = [
 
 function App() {
   const { screenFormat } = useScreenInfo();
+  const { locale } = useConfig();
+  const [lng] = (locale || 'en').split('_');
+
+  useEffect(() => {
+    i18n.changeLanguage(lng);
+  }, [lng]);
 
   const horizontalBackground = useTemplateVal('bg_horizontal', defaultBg);
   const verticalBackground = useTemplateVal('bg_vertical', horizontalBackground);
@@ -69,19 +74,20 @@ function App() {
   };
 
   return (
-    <Loader
-      placeholder={<Intro />}
-      minDuration={MIN_LOADING_DURATION}
-      fonts={fonts}
-      images={images}
-    >
-      <div
-        className={`app fade-in ${screenFormat}`}
-        style={appStyle}
+    <I18nextProvider i18n={i18n}>
+      <Loader
+        reveal
+        fonts={fonts}
+        images={images}
       >
-        <Main />
-      </div>
-    </Loader>
+        <div
+          className={`app fade-in ${screenFormat}`}
+          style={appStyle}
+        >
+          <Main />
+        </div>
+      </Loader>
+    </I18nextProvider>
   );
 }
 
