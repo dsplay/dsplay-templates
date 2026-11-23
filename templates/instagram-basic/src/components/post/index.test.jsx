@@ -75,6 +75,16 @@ describe('Post media', () => {
     expect(container.querySelector('.playWrapper')).not.toBeNull();
   });
 
+  it('plays a video inside a carousel that starts with an image, and gives a video without videoUrl its play icon', async () => {
+    vi.spyOn(window.HTMLMediaElement.prototype, 'play').mockResolvedValue();
+    const playable = await renderPost([image, { ...video, videoUrl: 'https://cdn.example/b.mp4' }]);
+    expect(playable.container.querySelector('.media-slider video').getAttribute('src')).toBe('https://cdn.example/b.mp4');
+    cleanup();
+    const still = await renderPost([image, video]);
+    expect(still.container.querySelector('.media-slider video')).toBeNull();
+    expect(still.container.querySelectorAll('.media-slider .playWrapper')).toHaveLength(1);
+  });
+
   it('leaves an image as it was', async () => {
     const { container } = await renderPost([image]);
     expect(container.querySelector('video')).toBeNull();
