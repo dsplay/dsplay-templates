@@ -125,10 +125,15 @@
   min-width: 0
   flex: 1
 
-// landscape: the count on the left, the name on the right
+// landscape: the count on the left (the word under the number, so a wide number never runs into the name), the name on the right
 .nh--landscape .nh__count
   width: u(430)
   flex: none
+  flex-direction: column
+  align-items: flex-start
+
+.nh--landscape .nh__count i
+  margin: u(20) 0 0 u(8)
 
 // portrait and square: the count over the name
 .nh--portrait .nh__body,
@@ -155,6 +160,10 @@
 
 .nh--square .nh__count i
   font-size: u(48)
+
+// three digits (100 days or more) take a smaller number on every plate, or it runs past its column
+.nh .nh__count--long b
+  font-size: u(200)
 
 .nh--portrait .nh__label
   max-width: u(420)

@@ -36,7 +36,7 @@ function NextHoliday({ view }) {
       <div className="nh__label">{t(today ? 'Holiday today' : 'Next holiday')}</div>
       <div className="nh__body">
         {!today && (
-          <div className="nh__count">
+          <div className={`nh__count${String(away).length > 2 ? ' nh__count--long' : ''}`}>
             <b>{away}</b>
             <i>{t(away === 1 ? 'day' : 'days')}</i>
           </div>
