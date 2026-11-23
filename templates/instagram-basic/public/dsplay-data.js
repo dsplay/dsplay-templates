@@ -157,6 +157,24 @@ var dsplay_media = {
           "tags": ["latteart", "competition"],
           "likes": 118,
           "comments": 4
+        },
+        {
+          "id": "example-post-video",
+          "text": "Behind the scenes of this morning's bake 🎬 #weekendvibes",
+          "created": "2024-01-20T10:05:00.000Z",
+          "media": [
+            {
+              "id": "example-post-video",
+              "type": "video",
+              "urls": {
+                "tb": "https://picsum.photos/seed/dgc-video/640/640",
+                "sm": "https://picsum.photos/seed/dgc-video/640/640",
+                "md": "https://picsum.photos/seed/dgc-video/640/640",
+                "lg": "https://picsum.photos/seed/dgc-video/640/640"
+              },
+              "videoUrl": "https://developer.mozilla.org/shared-assets/videos/flower.mp4"
+            }
+          ]
         }
       ]
     }

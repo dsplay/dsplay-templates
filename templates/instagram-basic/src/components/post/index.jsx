@@ -1,4 +1,6 @@
-import { Fragment } from 'react';
+import {
+  Fragment, useCallback, useEffect, useRef, useState,
+} from 'react';
 import { useTemplateVal, useTemplateBoolVal } from '@dsplay/react-template-utils';
 import Info from '../info';
 import UserProfile from '../user-profile';
@@ -74,19 +76,49 @@ function PostContent({
   );
 }
 
+// A video plays its own file when the answer brings one (`videoUrl`). Until it really plays it looks as before (poster and
+// play icon), so a video that never starts (blocked, stalled) or fails (the signed url expired) still reads as a video.
+function PostVideo({ src, poster, onFail }) {
+  const ref = useRef(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const video = ref.current;
+    // React sets `muted` only as a property; some WebView autoplay policies read the attribute.
+    video.muted = true;
+    video.setAttribute('muted', '');
+    const playing = video.play();
+    if (playing && playing.catch) playing.catch(onFail);
+  }, [src, onFail]);
+
+  return (
+    <Fragment>
+      <video ref={ref} className="media-video" src={src} poster={poster} muted autoPlay loop playsInline onPlaying={() => setStarted(true)} onError={onFail} />
+      { !started && <div className="playWrapper" /> }
+    </Fragment>
+  );
+}
+
 function PostMedia({
   type,
   urls: {
     md: url,
   },
+  videoUrl,
   borderColor,
   overlay,
   overlayPosition,
 }) {
+  const [failedUrl, setFailedUrl] = useState(null);
+  const fail = useCallback(() => setFailedUrl(videoUrl), [videoUrl]);
+  const playable = type === 'video' && !!videoUrl && failedUrl !== videoUrl;
+
   return (
     <div className="media" style={{ borderColor }}>
-      <div className="media-pic" style={{ backgroundImage: `url("${url}")` }} />
-      { type === 'video' && <div className="playWrapper" /> }
+      { playable
+        ? <PostVideo src={videoUrl} poster={url} onFail={fail} />
+        : <div className="media-pic" style={{ backgroundImage: `url("${url}")` }} /> }
+      { type === 'video' && !playable && <div className="playWrapper" /> }
       { overlay && <img alt="overlay" className="photo-overlay" src={overlay} style={{ ...overlayStyle[overlayPosition] }} /> }
     </div>
   );
