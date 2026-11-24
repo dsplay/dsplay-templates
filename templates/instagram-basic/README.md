@@ -6,6 +6,10 @@ A [React](https://reactjs.org/) [HTML-based template](https://developers.dsplay.
 
 > Built with [Vite](https://vitejs.dev/), requires Node.js 22.22.2+, 24.15.0+, or 26+ (see the repository's [`.nvmrc`](https://github.com/dsplay/dsplay-templates/blob/main/.nvmrc)).
 
+## Video posts
+
+A video post (including a Reel), and every video inside a carousel, plays muted and looped when the answer carries its file as `videoUrl`. Without one (an older answer, or a video whose audio Instagram does not let apps download) it shows its cover image with a play icon, as before. If the video cannot load, it falls back to the same cover image.
+
 ## Supported screen formats
 
 | Landscape | Portrait | Square |

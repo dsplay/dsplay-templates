@@ -3,6 +3,7 @@ import { useTemplateVal, useTemplateBoolVal } from '@dsplay/react-template-utils
 import Info from '../info';
 import UserProfile from '../user-profile';
 import MediaSlider from '../media-slider';
+import { VideoLayer } from '../post-video';
 
 const overlayStyle = {
   'top-right': {
@@ -79,6 +80,7 @@ function PostMedia({
   urls: {
     md: url,
   },
+  videoUrl,
   borderColor,
   overlay,
   overlayPosition,
@@ -86,7 +88,7 @@ function PostMedia({
   return (
     <div className="media" style={{ borderColor }}>
       <div className="media-pic" style={{ backgroundImage: `url("${url}")` }} />
-      { type === 'video' && <div className="playWrapper" /> }
+      <VideoLayer type={type} videoUrl={videoUrl} poster={url} />
       { overlay && <img alt="overlay" className="photo-overlay" src={overlay} style={{ ...overlayStyle[overlayPosition] }} /> }
     </div>
   );

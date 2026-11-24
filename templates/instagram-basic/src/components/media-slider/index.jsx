@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { useTemplateVal } from '@dsplay/react-template-utils';
+import { VideoLayer } from '../post-video';
 
 const overlayStyle = {
   'top-right': {
@@ -70,12 +71,14 @@ class MediaSliderBase extends Component {
       <div className="media" style={{ borderColor }}>
         <div className={`media-slider ${sliding ? 'slide' : ''}`}>
           <div className="media-item" style={{ backgroundImage: `url("${media[img1].urls.md}")` }}>
+            <VideoLayer type={media[img1].type} videoUrl={media[img1].videoUrl} poster={media[img1].urls.md} />
             { overlay && <img alt="" className="photo-overlay" style={{ ...overlayStyle[overlayPosition] }} src={overlay} /> }
           </div>
           {
             media.length > 1
             && (
               <div className="media-item" style={{ backgroundImage: `url("${media[img2].urls.md}")` }}>
+                <VideoLayer type={media[img2].type} videoUrl={media[img2].videoUrl} poster={media[img2].urls.md} />
                 { overlay && <img alt="" className="photo-overlay" style={{ ...overlayStyle[overlayPosition] }} src={overlay} /> }
               </div>
             )
