@@ -9,11 +9,13 @@ import {
 } from '@dsplay/react-template-utils';
 
 import NewsItem from '../news-item';
+import useLogo from '../../util/use-logo';
+import useRssItem from '../../util/use-rss-item';
 import { DEFAULT_BG_COLOR } from '../../util/defaults';
 import i18n from '../../i18n';
 import Debugger from '../debugger';
 import './style.sass';
-import '../../entrance.css';
+import '../../styles/motion.sass';
 
 const fonts = [
   'Roboto Condensed',
@@ -33,6 +35,11 @@ function App() {
   const backgroundColor = useTemplateVal('bg_color', DEFAULT_BG_COLOR);
   const debug = useTemplateBoolVal('debug');
 
+  // the pictures the first frame needs: the Loader waits for them before it reveals the template
+  const { src: logo } = useLogo();
+  const { hasImage, imageUrl } = useRssItem();
+  const images = [logo, hasImage && imageUrl].filter(Boolean);
+
   // component properties
   const style = {
     backgroundColor,
@@ -43,6 +50,7 @@ function App() {
       <Loader
         reveal
         fonts={fonts}
+        images={images}
       >
         <div className={`app ${screenFormat}`} style={style}>
           <NewsItem />

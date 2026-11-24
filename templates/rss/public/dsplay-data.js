@@ -1,3 +1,13 @@
+// Local development only. Query string switches, to try every way the template is fed:
+//   (none)          an old player: the item comes ready-made in the flat keys (itemTitle, ...) and there is no `result`
+//   ?player=new     a new player: no flat keys, the gateway's body in `media.result.data` (the template picks the item)
+//   &clogo=0        (new player) the channel declares no logo
+//   &tlogo=0        the `logo` template variable is empty
+var dev_query = typeof location !== 'undefined' ? location.search : '';
+var dev_new_player = /player=new/.test(dev_query);
+var dev_channel_logo = !/clogo=0/.test(dev_query);
+var dev_template_logo = !/tlogo=0/.test(dev_query);
+
 var dsplay_config = {
   // config parameters
   locale: 'pt_br',
@@ -42,10 +52,37 @@ var dsplay_media = {
   // source: 'UOLIndoor', // An internal control field indicating the source of RSS.
 };
 
+if (dev_new_player) {
+  delete dsplay_media.itemTitle;
+  delete dsplay_media.itemDescription;
+  delete dsplay_media.itemContent;
+  delete dsplay_media.imageUrl;
+  delete dsplay_media.source;
+  delete dsplay_media.link;
+  delete dsplay_media.qrCode;
+  dsplay_media.result = {
+    data: {
+      title: 'Feed title',
+      link: 'https://dsplay.tv',
+      logo: dev_channel_logo ? 'test-assets/channel-logo.svg' : null,
+      items: [
+        {
+          title: 'Jogo criado na UFPR é registrado no INPI como programa de computador',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          content: 'Content',
+          link: 'https://dsplay.tv',
+          categories: [],
+          images: [{ url: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Hopper_Nighthawks.jpg', title: 'Image Title' }],
+        },
+      ],
+    },
+  };
+}
+
 var dsplay_template = {
   show_qr_code: 'true',
   bg_color: 'black',
-  logo: 'https://developers.dsplay.tv/assets/images/dsplay-logo.png',
+  logo: dev_template_logo ? 'test-assets/template-logo.svg' : '',
   logo_bg_color: 'white',
   title_color: 'white',
   title_bg_color: 'darkorange',
