@@ -32,6 +32,7 @@ The 33 templates (each has its own README with its variables and screen formats)
 | [`count-up`](templates/count-up/) | Count Up Template |
 | [`countdown`](templates/countdown/) | Countdown Template |
 | [`currency-quotes`](templates/currency-quotes/) | Currency Quotes: three styles (board, cards, spotlight), one zip each |
+| [`document`](templates/document/) | Document Template (the implicit one of the document media types) |
 | [`digital-clock-basic`](templates/digital-clock-basic/) | Digital Clock |
 | [`environment-monitor`](templates/environment-monitor/) | Environment Monitor Template |
 | [`facebook-posts`](templates/facebook-posts/) | Facebook Posts Template |
