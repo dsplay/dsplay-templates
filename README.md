@@ -86,6 +86,12 @@ npm run new-template -- --from boilerplate-react --name my-widget
 
 This copies the source to `templates/<name>`, renames the package to `dsplay-template-<name>`, resets the version, links it into the workspace, and lists the files that still mention the source so you can review them. Outside this repo, copy a single folder with `npx degit dsplay/dsplay-templates/templates/countdown my-template` (the folder works on its own: it depends on the libraries by version).
 
+## Updating a template that is live
+
+1. Download the live zip first (Templates → the template → Baixar): it is the rollback.
+2. Try the new `template.zip` as a **project template** in the demo project (Café Aurora, 13476): create it with the same type, Responsivo and **the live template's variables only**, then point a demo media at it. When a template has no variables yet, the editor adds every variable found in `template-variables.json`; delete the ones the live template doesn't have. An empty **Imagem** variable reaches the player as `<name>/null`, which is truthy: a `bg_horizontal` the live template never declared turns the background black.
+3. Replace the zip on the live template (Editar → Substituir arquivo zip). Leave the "Detectadas no pacote" suggestions unapplied unless the change needs them. Screens get the new zip within ~5–15 min (the content-sync cron).
+
 ## Dependencies
 
 - **Exact versions everywhere** (`save-exact`), with install scripts disabled and a minimum release age (`.npmrc`). One lockfile, at the root.
