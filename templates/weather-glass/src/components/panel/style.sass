@@ -1,0 +1,12 @@
+.panel
+  position: absolute
+  box-sizing: border-box
+
+  &.shadow
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.25)
+
+// the blur: only where the device has it (Chrome 76+; Chrome 45 evaluates this false and ignores the block) and only with glass_effect=auto
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))
+  .app.glass-on .panel.blur
+    -webkit-backdrop-filter: blur(1.2rem)
+    backdrop-filter: blur(1.2rem)

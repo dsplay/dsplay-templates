@@ -1,0 +1,76 @@
+@import ../../styles/mixins
+
+.news
+  flex: 1
+  min-width: 0
+  display: flex
+  align-items: center
+
+  // the feed's logo: a small, quiet circle; no tile, no shadow
+  .feed-logo
+    flex: none
+    box-sizing: border-box
+    border-width: 0.15rem
+    border-style: solid
+    border-radius: 50%
+    margin-right: 3rem
+    img
+      display: block
+      width: 100%
+      height: 100%
+      border-radius: 50%
+      object-fit: cover
+  .marker
+    flex: none
+    width: 0.6rem
+    height: 8rem
+    border-radius: 0.3rem
+    margin-right: 2rem
+  .headline
+    position: relative
+    flex: 1
+    min-width: 0
+    font-family: 'Roboto Condensed', sans-serif
+  .layer
+    position: absolute
+    left: 0
+    right: 0
+    top: 50%
+    overflow: hidden
+    text-overflow: ellipsis
+    +transform(translateY(-50%))
+  .layer.fade
+    +transition(opacity 800ms ease-in-out)
+
+.set-a .news
+  .feed-logo
+    width: 5.6rem
+    height: 5.6rem
+  .headline
+    height: 6rem
+  .layer
+    font-size: 4.6rem
+    line-height: 1.15
+    white-space: nowrap
+.set-b .news,
+.set-p .news
+  .feed-logo
+    width: 5rem
+    height: 5rem
+.set-c .news
+  .feed-logo
+    width: 4.4rem
+    height: 4.4rem
+.set-b .news,
+.set-p .news,
+.set-c .news
+  // up to 3 lines of 2.8 rem, line-height 1.12: a 9.4 rem block, centered (1.3 rem of air above and below)
+  .headline
+    height: 9.4rem
+  .layer
+    display: -webkit-box
+    -webkit-box-orient: vertical
+    -webkit-line-clamp: 3
+    max-height: 9.4rem
+    font-size: 2.8rem
+    line-height: 1.12

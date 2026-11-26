@@ -1,0 +1,25 @@
+.bg
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+
+  &.photo
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+
+// the discs exist only in the glass mode: hidden by default, shown inside @supports with glass_effect=auto (no cost otherwise)
+.lights
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: none
+  pointer-events: none
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))
+  .app.glass-on .lights
+    display: block

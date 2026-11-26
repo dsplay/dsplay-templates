@@ -1,0 +1,35 @@
+@import ../../styles/effects
+
+// `.window` (components/news) is the square clip; the viewport fills it
+.viewport
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  overflow: hidden
+  -webkit-transition: opacity 400ms linear
+  transition: opacity 400ms linear
+
+.track
+  display: inline-block
+  white-space: nowrap
+  font-weight: 400
+  // the only layer that moves: one translate3d, no shadow inside
+  +animation(ticker linear infinite)
+
+  .copy
+    display: inline-block
+    vertical-align: top
+
+  .unit
+    display: inline-block
+    vertical-align: top
+
+  .piece
+    display: inline-block
+    vertical-align: top
+
+  .item
+    display: inline-block
+    vertical-align: top

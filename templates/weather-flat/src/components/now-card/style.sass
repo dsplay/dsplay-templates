@@ -1,0 +1,61 @@
+.now-card
+  position: absolute
+  box-sizing: border-box
+  padding: 3rem
+  // the content stacks from the top: if it overflows, what is left is below, never the city cut at the top
+  display: block
+
+  .city
+    font-family: Oswald, sans-serif
+    line-height: 1.2
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .main
+    display: flex
+    align-items: center
+    margin-top: 0.6rem
+
+  .temp
+    font-family: Oswald, sans-serif
+    line-height: 1
+    margin-left: 2rem
+
+  .minmax
+    font-family: 'Roboto Condensed', sans-serif
+    text-transform: uppercase
+    letter-spacing: 0.08em
+    line-height: 1.2
+    margin-top: 0.8rem
+    white-space: nowrap
+
+    .second
+      margin-left: 3rem
+
+    b
+      font-family: Oswald, sans-serif
+      font-weight: 400
+
+  .description
+    font-family: 'Roboto Condensed', sans-serif
+    line-height: 1.2
+    margin-top: 0.6rem
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .line
+    font-family: 'Roboto Condensed', sans-serif
+    line-height: 1.2
+    margin-top: 0.6rem
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .badge
+    font-family: 'Roboto Condensed', sans-serif
+    font-size: 3rem
+    line-height: 1.2
+    margin-top: 0.6rem
+    white-space: nowrap

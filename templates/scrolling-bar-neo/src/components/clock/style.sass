@@ -1,0 +1,35 @@
+.clock
+  display: flex
+  flex-direction: column
+  justify-content: center
+  text-align: left
+  white-space: nowrap
+
+  .time
+    font-family: 'Oswald', sans-serif
+    line-height: 1
+    min-width: 2.75em
+  .date
+    font-family: 'Roboto Condensed', sans-serif
+    line-height: 1
+    margin-bottom: 0.5rem
+
+.set-a .clock .time
+  font-size: 6rem
+.set-b .clock .time,
+.set-p .clock .time
+  font-size: 5.2rem
+.set-b .clock .date,
+.set-p .clock .date
+  font-size: 2.8rem
+.set-c .clock .time
+  font-size: 4.4rem
+.set-c .clock .date
+  font-size: 2.8rem
+.set-v .clock
+  text-align: center
+  .time
+    font-size: 5rem
+    min-width: 0
+  .date
+    font-size: 2.8rem

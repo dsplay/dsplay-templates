@@ -1,0 +1,103 @@
+// The box is the quote box of the info bar (components/quotes): height, padding, capsule and relief per set. No label chip.
+.news
+  // takes ALL the free room (spec M-013 section 4.1): the other widgets are flex: none
+  -webkit-box-flex: 1
+  -webkit-flex: 1 1 0%
+  flex: 1 1 0%
+  min-width: 0
+  display: flex
+  align-items: center
+  white-space: nowrap
+
+  // the feed's logo: a small discreet circle at the left of the box (no tile, no relief), 3 rem from it (spec M-013 3)
+  .feed-logo
+    flex: none
+    box-sizing: border-box
+    border-width: 0.15rem
+    border-style: solid
+    border-radius: 50%
+    margin-right: 3rem
+    img
+      display: block
+      width: 100%
+      height: 100%
+      border-radius: 50%
+      object-fit: cover
+
+  .well
+    flex: 1
+    min-width: 0
+    position: relative
+    box-sizing: border-box
+
+  // the clip is square and inside the padding: nothing that moves touches the rounded edge
+  .window
+    position: absolute
+    top: 0
+    bottom: 0
+    overflow: hidden
+
+  .track, .empty, .rotator .slide
+    font-family: 'Roboto Condensed', sans-serif
+
+=news-set($well, $pad, $font)
+  .well
+    height: $well
+  .window
+    left: $pad
+    right: $pad
+  .track
+    height: $well
+    line-height: $well
+    font-size: $font
+  .empty, .rotator .slide
+    line-height: $well
+    font-size: $font
+  .sep
+    height: $well
+
+.set-a .news
+  .feed-logo
+    width: 5.6rem
+    height: 5.6rem
+  +news-set(8rem, 3rem, 6rem)
+.set-b .news,
+.set-p .news
+  .feed-logo
+    width: 5rem
+    height: 5rem
+  +news-set(7rem, 2.4rem, 5.2rem)
+.set-c .news
+  .feed-logo
+    width: 4.4rem
+    height: 4.4rem
+  +news-set(6.4rem, 2rem, 4.8rem)
+
+// vertical bar: the capsule takes the column (16 rem wide), one item at a time
+.set-v .news
+  flex-direction: column
+  align-items: center
+  width: 16rem
+  .feed-logo
+    width: 6rem
+    height: 6rem
+    margin: 0 0 3rem
+  .well
+    width: 16rem
+    flex: 1
+    height: auto
+  .window
+    left: 1.2rem
+    right: 1.2rem
+
+// The box takes ALL the free room (decision of 15/nov): next to it the space is the 2 rem the info bar puts between two quote
+// capsules (the tile's relief reaches 1.8 rem), not the 12 / 6 / 5 rem between the other widgets. Not in V (a column).
+.app.set-a .row > .news + .widget,
+.app.set-a .row > .widget + .news,
+.app.set-b .row > .news + .widget,
+.app.set-b .row > .widget + .news,
+.app.set-p .panel .row > .news + .widget,
+.app.set-p .panel .row > .widget + .news,
+.app.set-c .panel .row > .news + .widget,
+.app.set-c .panel .row > .widget + .news
+  margin-left: 2rem

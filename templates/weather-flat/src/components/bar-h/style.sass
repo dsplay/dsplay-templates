@@ -1,0 +1,88 @@
+.bar-h
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+  align-items: center
+  padding: 0 4rem 0 4rem
+  box-sizing: border-box
+  font-family: 'Roboto Condensed', sans-serif
+  white-space: nowrap
+
+  .city
+    font-family: Oswald, sans-serif
+    font-size: 4.6rem
+    margin-right: 3rem
+    max-width: 60rem
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .temp
+    font-family: Oswald, sans-serif
+    font-size: 6rem
+    line-height: 1
+    margin-left: 2rem
+
+  .minmax
+    font-family: Oswald, sans-serif
+    font-size: 4.6rem
+    margin-left: 3rem
+
+  .description, .details
+    font-size: 4.6rem
+    margin-left: 4rem
+
+  .days
+    flex: 1
+    display: flex
+    justify-content: flex-end
+    margin-left: 4rem
+
+  .forecast-day
+    display: flex
+    align-items: center
+    margin-left: 8rem
+
+    .d
+      font-family: Oswald, sans-serif
+      font-size: 4.6rem
+      margin-right: 1.5rem
+
+    .m
+      font-family: Oswald, sans-serif
+      font-size: 4.6rem
+      margin-left: 1.5rem
+
+  .bar-logo
+    margin-left: 6rem
+    flex: none
+
+  &.compact
+    padding: 0 4rem 0 4rem
+
+    .city
+      font-size: 4.6rem
+      max-width: 16rem
+
+    .temp
+      font-size: 6.5rem
+
+    .days
+      justify-content: center
+      margin-left: 2rem
+
+    .forecast-day
+      margin-left: 2.5rem
+
+      .d
+        font-size: 3.2rem
+        margin-right: 1rem
+
+      .m
+        font-size: 4rem
+        margin-left: 1rem
+
+    .bar-logo
+      margin-left: 4rem

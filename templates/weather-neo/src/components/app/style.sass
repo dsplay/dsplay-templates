@@ -1,0 +1,64 @@
+@import ../../styles/mixins
+
+.app
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+  display: flex
+  align-items: center
+  justify-content: center
+  font-family: 'Roboto Condensed', sans-serif
+
+  .stage
+    position: relative
+    flex: none
+  // the previous base color, fading out over the new one
+  .veil
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    +animation(fade-out 800ms ease-in-out both)
+
+// portrait: the details sit under the card, on the plain base (spec 2.2)
+.details-row
+  position: absolute
+  left: 4rem
+  top: 74rem
+  width: 100rem
+
+.set-land .forecast
+  position: absolute
+  left: 120rem
+  top: 4rem
+  width: 68rem
+  height: 100rem
+.set-port .forecast
+  position: absolute
+  left: 4rem
+  top: 104rem
+  width: 100rem
+  height: 84rem
+.set-sq .forecast
+  position: absolute
+  left: 4rem
+  top: 64rem
+  width: 100rem
+  height: 40rem
+.set-wide .forecast
+  position: absolute
+  left: 92rem
+  top: 4rem
+  width: 96rem
+  height: 40rem
+
+.debug
+  position: absolute
+  left: 0.5rem
+  bottom: 0.2rem
+  font-size: 2rem
+  opacity: 0.6

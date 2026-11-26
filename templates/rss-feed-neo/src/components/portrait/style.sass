@@ -1,0 +1,34 @@
+.portrait
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+
+  // the blocks keep their natural height; what is left of the screen goes between them
+  .stack
+    position: absolute
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+  .lead-block
+    flex: none
+
+  .lead-bottom
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+    margin-top: 3rem
+
+  .third-block
+    position: relative
+    flex: none
+
+  // the hairline sits 2 rem above N3 (the gap between blocks is never smaller than 4 rem)
+  .hrule
+    position: absolute
+    left: 0
+    right: 0
+    top: -2rem
+    height: 0.15rem

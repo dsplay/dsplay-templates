@@ -1,0 +1,126 @@
+/* Entrance and idle motion. Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and the cover photo are in; everything here starts from that class, never at mount (the template is hidden until then). Only opacity and transform, prefixed for old Android WebViews, on HTML boxes (never on SVG, so not on the QR code itself). Everything is off when the animation_enabled variable is false (no .animated on .app) and under prefers-reduced-motion. The cover photo and the cards keep their own fade/rise (style.sass, gated the same way); this file adds the rest, in this order: company tile, clock, headline block (160 ms), then the cards (160-320 ms); the bars rise child by child, 80 ms apart. Distances are percentages of each element, so the motion scales with any resolution. */
+@-webkit-keyframes rss-rise {
+  from { opacity: 0; -webkit-transform: translateY(25%); transform: translateY(25%); }
+}
+
+@keyframes rss-rise {
+  from { opacity: 0; -webkit-transform: translateY(25%); transform: translateY(25%); }
+}
+
+/* idle: every keyframe starts and ends at rest */
+@-webkit-keyframes rss-kenburns {
+  0%, 100% { -webkit-transform: scale(1); transform: scale(1); }
+  50% { -webkit-transform: scale(1.045); transform: scale(1.045); }
+}
+
+@keyframes rss-kenburns {
+  0%, 100% { -webkit-transform: scale(1); transform: scale(1); }
+  50% { -webkit-transform: scale(1.045); transform: scale(1.045); }
+}
+
+@-webkit-keyframes rss-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes rss-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@-webkit-keyframes rss-nudge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes rss-nudge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* hero, cards, wide: company tile, then the clock */
+.dsplay-ready .app.animated .hero-content .top-left {
+  -webkit-animation: rss-rise 500ms ease-out both;
+  animation: rss-rise 500ms ease-out both;
+}
+
+.dsplay-ready .app.animated .hero-content .top-right {
+  -webkit-animation: rss-rise 500ms ease-out 80ms both;
+  animation: rss-rise 500ms ease-out 80ms both;
+}
+
+/* the headline block fades in (fade-in, style.sass) after them */
+.dsplay-ready .app.animated .hero-content .bottom.fade-in {
+  -webkit-animation-delay: 160ms;
+  animation-delay: 160ms;
+}
+
+/* bars: the pieces rise one after the other (the bar itself fades in) */
+.dsplay-ready .app.animated .bar-h .bar-circle,
+.dsplay-ready .app.animated .bar-v .bar-circle {
+  -webkit-animation: rss-rise 500ms ease-out both;
+  animation: rss-rise 500ms ease-out both;
+}
+
+.dsplay-ready .app.animated .bar-h .bar-text,
+.dsplay-ready .app.animated .bar-v .bar-text {
+  -webkit-animation: rss-rise 500ms ease-out 160ms both;
+  animation: rss-rise 500ms ease-out 160ms both;
+}
+
+.dsplay-ready .app.animated .bar-h .bar-logo {
+  -webkit-animation: rss-rise 500ms ease-out 240ms both;
+  animation: rss-rise 500ms ease-out 240ms both;
+}
+
+.dsplay-ready .app.animated .bar-v .bar-qr {
+  -webkit-animation: rss-rise 500ms ease-out 240ms both;
+  animation: rss-rise 500ms ease-out 240ms both;
+}
+
+.dsplay-ready .app.animated .bar-v .bar-logo {
+  -webkit-animation: rss-rise 500ms ease-out 320ms both;
+  animation: rss-rise 500ms ease-out 320ms both;
+}
+
+/* the category chip: arrives with its bar (rise, 80 ms) and then breathes; in the hero it only breathes */
+.dsplay-ready .app.animated .chip {
+  -webkit-animation: rss-glow 5s ease-in-out 1.5s infinite;
+  animation: rss-glow 5s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .app.animated .bar-chip {
+  -webkit-animation: rss-rise 500ms ease-out 80ms both, rss-glow 5s ease-in-out 1.5s infinite;
+  animation: rss-rise 500ms ease-out 80ms both, rss-glow 5s ease-in-out 1.5s infinite;
+}
+
+/* idle: the cover photo drifts closer and back (the cover clips it), "Read more" calls for the QR code */
+.dsplay-ready .app.animated .cover .photo-layers > .picture,
+.dsplay-ready .app.animated .cover .photo-layers > .blurred {
+  -webkit-animation: rss-kenburns 36s ease-in-out 1s infinite;
+  animation: rss-kenburns 36s ease-in-out 1s infinite;
+}
+
+.dsplay-ready .app.animated .qr-box .read-more {
+  -webkit-animation: rss-nudge 4.5s ease-in-out 2s infinite;
+  animation: rss-nudge 4.5s ease-in-out 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .fade-in,
+  .dsplay-ready .crossfade,
+  .dsplay-ready .rise-in,
+  .dsplay-ready .app .top-left,
+  .dsplay-ready .app .top-right,
+  .dsplay-ready .app .chip,
+  .dsplay-ready .app .bar-circle,
+  .dsplay-ready .app .bar-text,
+  .dsplay-ready .app .bar-logo,
+  .dsplay-ready .app .bar-qr,
+  .dsplay-ready .app .photo-layers > .picture,
+  .dsplay-ready .app .photo-layers > .blurred,
+  .dsplay-ready .app .read-more {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}

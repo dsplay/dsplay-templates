@@ -1,0 +1,30 @@
+@import ./styles/effects
+
+html
+  width: 100%
+  height: 100%
+  margin: 0
+  // fallback until the scale is applied from the window size (design screens in rem, 1rem = 10px)
+  font-size: 0.5208vw
+
+body
+  box-sizing: border-box
+  margin: 0
+  width: 100%
+  height: 100%
+  overflow: hidden
+  background-color: #E4E9F0
+
+#root
+  width: 100%
+  height: 100%
+
+// started from .dsplay-ready (Loader reveal), never at mount: the template is still hidden then
+.dsplay-ready .fade-in
+  @include animation(fade-in 500ms ease-out both)
+
+.dsplay-ready .crossfade
+  @include animation(fade-in 600ms ease-out both)
+
+.dsplay-ready .rise-in
+  @include animation(rise-in 500ms ease-out both)

@@ -1,0 +1,41 @@
+.app
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+  font-family: 'Roboto Condensed', sans-serif
+
+  // the design screen is the window (in rem): panels are placed on it by the layouts
+  .stage
+    position: absolute
+    left: 0
+    top: 0
+
+  .logo-slot
+    position: absolute
+
+  .days-col
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+  .days-row, .wide-days
+    height: 100%
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+
+  .wide-days
+    position: absolute
+    width: 81.3rem
+
+  .debug
+    position: absolute
+    left: 0.5rem
+    bottom: 0.2rem
+    font-size: 2rem
+    opacity: 0.6

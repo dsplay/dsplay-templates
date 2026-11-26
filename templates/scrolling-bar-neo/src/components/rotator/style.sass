@@ -1,0 +1,31 @@
+.rotator
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+
+  // horizontal bar: one line with an ellipsis (accepted by the spec: the headlines are cut)
+  .slide
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+    font-weight: 400
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  // vertical bar: up to 12 lines of 3.4 rem, centered in the capsule
+  &.multi .slide
+    top: 50%
+    display: -webkit-box
+    -webkit-box-orient: vertical
+    white-space: normal
+    text-align: center
+    font-size: 3.4rem
+    line-height: 4.2rem
+    word-wrap: break-word
+    text-overflow: clip
+    -webkit-transform: translateY(-50%)
+    transform: translateY(-50%)

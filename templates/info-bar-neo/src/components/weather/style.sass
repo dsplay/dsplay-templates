@@ -1,0 +1,56 @@
+.weather
+  display: flex
+  align-items: center
+  white-space: nowrap
+
+  .icon
+    display: block
+    flex: none
+  .temp
+    font-family: 'Oswald', sans-serif
+    line-height: 1
+
+  .unit
+    font-family: 'Roboto Condensed', sans-serif
+    line-height: 1
+    margin-left: 0.3rem
+
+.set-a .weather
+  .icon
+    width: 6.4rem
+    height: 6.4rem
+    margin-right: 1rem
+  .temp
+    font-size: 6rem
+  .unit
+    display: none
+.set-b .weather,
+.set-p .weather
+  .icon
+    width: 6rem
+    height: 6rem
+    margin-right: 1rem
+  .temp
+    font-size: 5.2rem
+  .unit
+    font-size: 2.8rem
+.set-c .weather
+  .icon
+    width: 5.6rem
+    height: 5.6rem
+    margin-right: 1rem
+  .temp
+    font-size: 4.4rem
+  .unit
+    font-size: 2.8rem
+.set-v .weather
+  flex-direction: column
+  .icon
+    width: 8rem
+    height: 8rem
+  .temp
+    font-size: 4.4rem
+    margin-top: 0.5rem
+    min-width: 0
+  .unit
+    display: none

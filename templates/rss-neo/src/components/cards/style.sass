@@ -1,0 +1,39 @@
+.cards-list
+  position: absolute
+  display: flex
+
+  &.portrait
+    flex-direction: column
+
+  .slot
+    display: flex
+    min-width: 0
+    min-height: 0
+
+    &.current
+      flex: 1
+
+  &.portrait .slot
+    flex: none
+
+  .column
+    flex: none
+
+  .card .text
+    flex: 1
+    min-width: 0
+    margin-right: 2rem
+
+  .card .side
+    flex: none
+
+  .card .label
+    font-family: 'Roboto Condensed', sans-serif
+    font-size: 3rem
+    line-height: 1.2
+    text-transform: uppercase
+    letter-spacing: 0.12em
+    margin-bottom: 0.4rem
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis

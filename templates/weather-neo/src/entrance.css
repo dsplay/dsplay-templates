@@ -1,0 +1,218 @@
+/* Entrance and idle motion. Loader (reveal mode) shows the template with the class dsplay-ready once fonts and images are in; everything here starts from that class, never before (started at mount it would run while the template is hidden). Both only run when the animation_enabled variable is on (the app gets the class "animated"). Only opacity and transform, prefixed for old Android WebViews, on HTML boxes (never on SVG: the weather icons are <img>). The boxes that contain measured text (.now sub row, .bar .city) only move on Y, never scale, so their measured widths stay true; scale is only on leaf images. The whole entrance fits in 600 ms (300 ms each, up to 300 ms of stagger). */
+
+@-webkit-keyframes wn-rise {
+  from { opacity: 0; -webkit-transform: translateY(8%); transform: translateY(8%); }
+}
+
+@keyframes wn-rise {
+  from { opacity: 0; -webkit-transform: translateY(8%); transform: translateY(8%); }
+}
+
+@-webkit-keyframes wn-pop {
+  from { opacity: 0; -webkit-transform: scale(0.7); transform: scale(0.7); }
+}
+
+@keyframes wn-pop {
+  from { opacity: 0; -webkit-transform: scale(0.7); transform: scale(0.7); }
+}
+
+/* Idle: every keyframe starts and ends on the resting state. */
+@-webkit-keyframes wn-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+}
+
+@keyframes wn-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+}
+
+@-webkit-keyframes wn-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes wn-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* Entrance: the cards rise one after the other, the icons pop in. */
+.dsplay-ready .animated .now {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 0ms;
+  animation-delay: 0ms;
+}
+
+.dsplay-ready .animated .details-row {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 80ms;
+  animation-delay: 80ms;
+}
+
+.dsplay-ready .animated .forecast {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 160ms;
+  animation-delay: 160ms;
+}
+
+.dsplay-ready .animated .badge {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 240ms;
+  animation-delay: 240ms;
+}
+
+.dsplay-ready .animated .unavailable {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 0ms;
+  animation-delay: 0ms;
+}
+
+.dsplay-ready .animated .now .disc .icon {
+  -webkit-animation: wn-pop 300ms ease-out 120ms both;
+  animation: wn-pop 300ms ease-out 120ms both;
+}
+
+.dsplay-ready .animated .bar .now-icon .icon {
+  -webkit-animation: wn-pop 300ms ease-out both;
+  animation: wn-pop 300ms ease-out both;
+}
+
+.dsplay-ready .animated .bar .temp {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 60ms;
+  animation-delay: 60ms;
+}
+
+.dsplay-ready .animated .bar .city {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 120ms;
+  animation-delay: 120ms;
+}
+
+.dsplay-ready .animated .bar .range {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 180ms;
+  animation-delay: 180ms;
+}
+
+.dsplay-ready .animated .bar .days {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 240ms;
+  animation-delay: 240ms;
+}
+
+.dsplay-ready .animated .vbar > :nth-child(1) {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 0ms;
+  animation-delay: 0ms;
+}
+
+.dsplay-ready .animated .vbar > :nth-child(2) {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 60ms;
+  animation-delay: 60ms;
+}
+
+.dsplay-ready .animated .vbar > :nth-child(3) {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 120ms;
+  animation-delay: 120ms;
+}
+
+.dsplay-ready .animated .vbar > :nth-child(4) {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 180ms;
+  animation-delay: 180ms;
+}
+
+.dsplay-ready .animated .vbar > :nth-child(5) {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 240ms;
+  animation-delay: 240ms;
+}
+
+.dsplay-ready .animated .vbar > :nth-child(6) {
+  -webkit-animation: wn-rise 300ms ease-out both;
+  animation: wn-rise 300ms ease-out both;
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms;
+}
+
+/* Idle: the condition icons bob slowly (out of step), the place marker glows. */
+.dsplay-ready .animated .now .disc {
+  -webkit-animation: wn-bob 6s ease-in-out 1.5s infinite;
+  animation: wn-bob 6s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .animated .bar .now-icon {
+  -webkit-animation: wn-bob 6s ease-in-out 1.5s infinite;
+  animation: wn-bob 6s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .animated .vbar > .icon {
+  -webkit-animation: wn-rise 300ms ease-out both, wn-bob 6s ease-in-out 1.5s infinite;
+  animation: wn-rise 300ms ease-out both, wn-bob 6s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .animated .unavailable .icon {
+  -webkit-animation: wn-bob 6s ease-in-out 1.5s infinite;
+  animation: wn-bob 6s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .animated .now .marker {
+  -webkit-animation: wn-glow 4s ease-in-out 1.5s infinite;
+  animation: wn-glow 4s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .animated .day .icon {
+  -webkit-animation: wn-bob 7s ease-in-out 2s infinite;
+  animation: wn-bob 7s ease-in-out 2s infinite;
+}
+
+.dsplay-ready .animated .day:nth-child(1) .icon {
+  -webkit-animation-delay: 2.4s;
+  animation-delay: 2.4s;
+}
+
+.dsplay-ready .animated .day:nth-child(2) .icon {
+  -webkit-animation-delay: 2.9s;
+  animation-delay: 2.9s;
+}
+
+.dsplay-ready .animated .day:nth-child(3) .icon {
+  -webkit-animation-delay: 3.4s;
+  animation-delay: 3.4s;
+}
+
+.dsplay-ready .animated .day:nth-child(4) .icon {
+  -webkit-animation-delay: 3.9s;
+  animation-delay: 3.9s;
+}
+
+.dsplay-ready .animated .day:nth-child(5) .icon {
+  -webkit-animation-delay: 4.4s;
+  animation-delay: 4.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .animated *,
+  .dsplay-ready .animated *::before {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}

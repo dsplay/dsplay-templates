@@ -1,0 +1,36 @@
+.photo
+  position: relative
+  flex: none
+  box-sizing: border-box
+
+  .photo-layers
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+
+    &.ready
+      opacity: 1
+
+  .blurred
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+
+  .picture
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+
+    &.cover
+      object-fit: cover
+      object-position: 50% 30%
+
+    &.contain
+      object-fit: contain

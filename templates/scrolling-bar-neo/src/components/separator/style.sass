@@ -1,0 +1,32 @@
+// 3 rem on each side; decorative, drawn with boxes, never a shadow. Height set by `.news` per set.
+.sep
+  display: inline-block
+  vertical-align: top
+  margin: 0 3rem
+  white-space: nowrap
+
+  .mark
+    display: inline-block
+    vertical-align: middle
+    opacity: 0.55
+
+    &.dot
+      width: 1.6rem
+      height: 1.6rem
+      border-radius: 50%
+
+    &.bar
+      width: 0.4rem
+      height: 4.4rem
+
+    &.diamond
+      width: 1.5rem
+      height: 1.5rem
+      -webkit-transform: rotate(45deg)
+      transform: rotate(45deg)
+
+  &:before
+    content: ''
+    display: inline-block
+    height: 100%
+    vertical-align: middle

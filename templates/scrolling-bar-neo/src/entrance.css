@@ -1,0 +1,47 @@
+/* Entrance: Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and images are in. Every animation starts from that class, never before: started at mount it would run while the template is still hidden. The bar (or panel) fades in (.fade-in, src/style.sass), then its widgets rise one after the other: clock, weather, rolling box, company logo, 80 ms apart, 360 ms each (600 ms in all). Distances are percentages of each widget (never px). Only opacity and transform on HTML boxes, prefixed for old Android WebViews, never on SVG. The relief (box-shadow) is never animated. Nothing runs when the operator turns the animation setting off (no .fade-in then) or the system asks for reduced motion. */
+@-webkit-keyframes bar-rise {
+  from { opacity: 0; -webkit-transform: translateY(25%); transform: translateY(25%); }
+}
+
+@keyframes bar-rise {
+  from { opacity: 0; -webkit-transform: translateY(25%); transform: translateY(25%); }
+}
+
+.dsplay-ready .fade-in .widget {
+  -webkit-animation: bar-rise 360ms ease-out both;
+  animation: bar-rise 360ms ease-out both;
+}
+
+.dsplay-ready .fade-in .row .widget:nth-child(1) { -webkit-animation-delay: 0ms; animation-delay: 0ms; }
+.dsplay-ready .fade-in .row .widget:nth-child(2) { -webkit-animation-delay: 80ms; animation-delay: 80ms; }
+.dsplay-ready .fade-in .row .widget:nth-child(3) { -webkit-animation-delay: 160ms; animation-delay: 160ms; }
+.dsplay-ready .fade-in .row .widget:nth-child(4) { -webkit-animation-delay: 240ms; animation-delay: 240ms; }
+
+/* portrait and square: the second row follows the first */
+.dsplay-ready .fade-in .row:nth-child(2) .widget:nth-child(1) { -webkit-animation-delay: 80ms; animation-delay: 80ms; }
+.dsplay-ready .fade-in .row:nth-child(2) .widget:nth-child(2) { -webkit-animation-delay: 160ms; animation-delay: 160ms; }
+
+/* Idle motion: the weather icon bobs very slowly while the media stays on screen. It starts and ends at rest; the ticker's own scroll is untouched. */
+@-webkit-keyframes bar-idle-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-6%); transform: translateY(-6%); }
+}
+
+@keyframes bar-idle-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-6%); transform: translateY(-6%); }
+}
+
+.dsplay-ready .weather .icon {
+  -webkit-animation: bar-idle-bob 5.5s ease-in-out 1.5s infinite;
+  animation: bar-idle-bob 5.5s ease-in-out 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .fade-in,
+  .dsplay-ready .fade-in .widget,
+  .dsplay-ready .weather .icon {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}

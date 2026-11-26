@@ -1,0 +1,31 @@
+.pill
+  position: absolute
+  box-sizing: border-box
+  display: flex
+  font-family: Oswald, sans-serif
+  line-height: 1.1
+
+  .day
+    font-family: Oswald, sans-serif
+
+  .date
+    font-family: 'Roboto Condensed', sans-serif
+    line-height: 1.2
+
+  .min
+    font-family: Oswald, sans-serif
+
+  &.horizontal
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    padding: 0 3rem
+
+    .when
+      min-width: 0
+
+  &.vertical
+    flex-direction: column
+    align-items: center
+    justify-content: space-around
+    padding: 1rem 0.5rem

@@ -1,0 +1,30 @@
+.card
+  position: relative
+  box-sizing: border-box
+  flex: 1
+  min-width: 0
+  min-height: 0
+
+  &.abs
+    position: absolute
+    flex: none
+
+  .body
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    display: flex
+    align-items: center
+    padding: 0 3rem 0 4rem
+    box-sizing: border-box
+
+    // current item's card: marker 3 rem from the edge, text at 6.0 rem (see MarkedText)
+    &.with-marker
+      padding-left: 3rem
+
+    &.column
+      flex-direction: column
+      justify-content: center
+      padding: 0 3rem

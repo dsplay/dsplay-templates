@@ -1,0 +1,93 @@
+.app
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  font-family: 'Roboto Condensed', sans-serif
+
+  .row
+    display: flex
+    align-items: center
+    box-sizing: border-box
+    justify-content: space-between
+  .widget
+    flex: none
+  .widget.news
+    flex: 1
+
+// Bars: the bar is the whole screen (12 rem tall; 20 x 192 rem for the vertical one)
+.set-a .bar,
+.set-b .bar
+  width: 100%
+  height: 100%
+  .row
+    height: 100%
+
+.set-a .row
+  padding: 0 10rem
+.set-a .row > .widget + .widget
+  margin-left: 12rem
+.set-b .row
+  padding: 0 5rem
+.set-b .row > .widget + .widget
+  margin-left: 6rem
+
+// Panel over a plain screen (wide, landscape, 4:3, 16:9, square, portrait)
+.set-p,
+.set-c
+  justify-content: center
+  align-items: center
+.set-p.pos-top,
+.set-c.pos-top
+  justify-content: flex-start
+.set-p.pos-bottom,
+.set-c.pos-bottom
+  justify-content: flex-end
+.panel
+  box-sizing: border-box
+  margin: 4rem
+  align-self: stretch
+.set-p .panel
+  height: 12rem
+  .row
+    height: 100%
+    padding: 0 5rem
+  .row > .widget + .widget
+    margin-left: 6rem
+.set-c .panel
+  height: 30rem
+  padding: 5rem 0
+  .row
+    height: 10rem
+    padding: 0 5rem
+  .row + .row
+    margin-top: 3rem
+  .row > .widget + .widget
+    margin-left: 5rem
+
+// Vertical bar: a column without news
+.set-v
+  justify-content: flex-start
+  .bar
+    width: 100%
+    height: 100%
+  .row
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    height: 100%
+    padding: 4rem 2rem
+    width: 100%
+  .row > .widget + .widget
+    margin-top: 5rem
+
+.debug
+  position: absolute
+  left: 0.5rem
+  bottom: 0.2rem
+  font-size: 2rem
+  opacity: 0.6

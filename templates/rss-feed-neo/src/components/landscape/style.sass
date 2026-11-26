@@ -1,0 +1,58 @@
+.landscape
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+
+  .main
+    position: absolute
+    display: flex
+    flex-direction: row
+
+  .n1
+    flex: none
+
+  .n1-top
+    display: flex
+    flex-direction: row
+
+  .lead-head
+    margin-left: 4rem
+
+  // no photo: the accent marker keeps 2.4 rem from the text and 4 rem from the window edge; it is as tall as the stacked text
+  .no-photo
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+
+    .marker
+      flex: none
+      align-self: stretch
+      width: 0.8rem
+      margin-right: 2.4rem
+      border-radius: 0.4rem
+
+    .no-photo-text
+      flex: none
+
+  .n1-bottom
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+
+  // the hairline between the lead and the right column: 2 rem (1.925 + 1.925 + 0.15 = 4 rem) on each side of it
+  .vrule
+    flex: none
+    width: 0.15rem
+    margin: 0 1.925rem
+
+  .col
+    flex: none
+    display: flex
+    flex-direction: column
+
+  .hrule
+    flex: none
+    height: 0.15rem
+    margin: 1.925rem 0

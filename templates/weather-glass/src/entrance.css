@@ -1,0 +1,89 @@
+/* Entrance and idle motion. Loader (reveal mode) shows the template with the class dsplay-ready once fonts and images are in; everything here starts from that class, never at mount (it would run while the template is still hidden). The block of the main panel rises first, then the detail cards, the forecast days and the logo tile follow ~60-80 ms apart (about 600 ms in total). The glass panels themselves (the ones with backdrop-filter) are never animated: only their content, so the blur is not recomputed on every frame. Only opacity and transform, on HTML boxes (never on SVG), prefixed for old Android WebViews; no CSS custom properties. Idle motion: the weather icon bobs and the glass-mode lights breathe, slowly, every keyframe starts and ends on the resting state. The .anim class is on .app only when the animation_enabled variable is on. */
+@-webkit-keyframes wg-rise {
+  from { opacity: 0; -webkit-transform: translateY(2rem); transform: translateY(2rem); }
+}
+
+@keyframes wg-rise {
+  from { opacity: 0; -webkit-transform: translateY(2rem); transform: translateY(2rem); }
+}
+
+@-webkit-keyframes wg-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+}
+
+@keyframes wg-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+}
+
+@-webkit-keyframes wg-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes wg-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* the main panel's content, the detail cards, the forecast days, the logo tile */
+.dsplay-ready .app.anim .now-body,
+.dsplay-ready .app.anim .unavailable-body {
+  -webkit-animation: wg-rise 400ms ease-out both;
+  animation: wg-rise 400ms ease-out both;
+}
+
+.dsplay-ready .app.anim .stat,
+.dsplay-ready .app.anim .day,
+.dsplay-ready .app.anim .b-day,
+.dsplay-ready .app.anim .v-day,
+.dsplay-ready .app.anim .company-tile {
+  -webkit-animation: wg-rise 280ms ease-out both;
+  animation: wg-rise 280ms ease-out both;
+}
+
+.dsplay-ready .app.anim .stat:nth-child(1) { -webkit-animation-delay: 80ms; animation-delay: 80ms; }
+.dsplay-ready .app.anim .stat:nth-child(2) { -webkit-animation-delay: 160ms; animation-delay: 160ms; }
+.dsplay-ready .app.anim .stat:nth-child(3) { -webkit-animation-delay: 240ms; animation-delay: 240ms; }
+
+.dsplay-ready .app.anim .day:nth-child(1), .dsplay-ready .app.anim .b-day:nth-child(1), .dsplay-ready .app.anim .v-day:nth-child(1) { -webkit-animation-delay: 80ms; animation-delay: 80ms; }
+.dsplay-ready .app.anim .day:nth-child(2), .dsplay-ready .app.anim .b-day:nth-child(2), .dsplay-ready .app.anim .v-day:nth-child(2) { -webkit-animation-delay: 140ms; animation-delay: 140ms; }
+.dsplay-ready .app.anim .day:nth-child(3), .dsplay-ready .app.anim .b-day:nth-child(3), .dsplay-ready .app.anim .v-day:nth-child(3) { -webkit-animation-delay: 200ms; animation-delay: 200ms; }
+.dsplay-ready .app.anim .day:nth-child(4), .dsplay-ready .app.anim .b-day:nth-child(4), .dsplay-ready .app.anim .v-day:nth-child(4) { -webkit-animation-delay: 260ms; animation-delay: 260ms; }
+.dsplay-ready .app.anim .day:nth-child(5), .dsplay-ready .app.anim .b-day:nth-child(5), .dsplay-ready .app.anim .v-day:nth-child(5) { -webkit-animation-delay: 320ms; animation-delay: 320ms; }
+
+.dsplay-ready .app.anim .company-tile {
+  -webkit-animation-delay: 320ms;
+  animation-delay: 320ms;
+}
+
+/* idle: the weather icon of the main panel and of the bars bobs, the lights of the glass mode breathe */
+.dsplay-ready .app.anim .now .icon-img,
+.dsplay-ready .app.anim .b-icon .icon-img,
+.dsplay-ready .app.anim .v-icon .icon-img {
+  -webkit-animation: wg-bob 5.5s ease-in-out 1.5s infinite;
+  animation: wg-bob 5.5s ease-in-out 1.5s infinite;
+}
+
+.dsplay-ready .app.anim .lights {
+  -webkit-animation: wg-glow 9s ease-in-out 1s infinite;
+  animation: wg-glow 9s ease-in-out 1s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .app.anim .now-body,
+  .dsplay-ready .app.anim .unavailable-body,
+  .dsplay-ready .app.anim .stat,
+  .dsplay-ready .app.anim .day,
+  .dsplay-ready .app.anim .b-day,
+  .dsplay-ready .app.anim .v-day,
+  .dsplay-ready .app.anim .company-tile,
+  .dsplay-ready .app.anim .now .icon-img,
+  .dsplay-ready .app.anim .b-icon .icon-img,
+  .dsplay-ready .app.anim .v-icon .icon-img,
+  .dsplay-ready .app.anim .lights {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}

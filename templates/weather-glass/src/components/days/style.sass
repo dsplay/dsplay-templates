@@ -1,0 +1,49 @@
+.day
+  box-sizing: border-box
+  flex: none
+  display: flex
+  align-items: center
+  white-space: nowrap
+
+  .dow
+    font-family: 'Roboto Condensed', sans-serif
+    text-transform: uppercase
+    letter-spacing: 0.08em
+    line-height: 1.1
+
+  .dt
+    font-family: 'Roboto Condensed', sans-serif
+    line-height: 1.1
+
+  .max, .min
+    font-family: Oswald, sans-serif
+    line-height: 1.1
+
+  // a wide pill (landscape): day and date | icon | maximum and minimum on a line
+  &.row
+    flex-direction: row
+    justify-content: space-between
+    padding: 0 3.5rem
+    margin-bottom: 3rem
+    height: 15rem
+    width: 100%
+
+    &:last-child
+      margin-bottom: 0
+
+    .mm
+      display: flex
+      align-items: baseline
+
+    .min
+      margin-left: 2rem
+
+  // a tall pill (portrait, wide, square column): everything in a column, spread
+  &.col
+    flex-direction: column
+    justify-content: space-around
+    text-align: center
+    padding: 1.5rem 0
+
+    .mm
+      text-align: center

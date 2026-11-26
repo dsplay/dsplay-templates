@@ -1,0 +1,112 @@
+.now
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  border-radius: 3rem
+  padding: 5rem
+
+  .head
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+  .where
+    min-width: 0
+    flex: 1
+    margin-right: 3rem
+  .city
+    font-family: 'Oswald', sans-serif
+    line-height: 1.2
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+  .marker
+    width: 8rem
+    height: 0.6rem
+    border-radius: 0.3rem
+    margin-top: 1rem
+  .main
+    display: flex
+    align-items: center
+    justify-content: space-between
+  .temp
+    font-family: 'Oswald', sans-serif
+    line-height: 1
+    min-width: 3.4em
+    text-align: center
+    flex: 1
+  .sub
+    display: flex
+    justify-content: space-between
+    align-items: baseline
+  .description,
+  .range
+    white-space: nowrap
+    font-family: 'Roboto Condensed', sans-serif
+    font-size: 4.5rem
+    line-height: 1.2
+  .range
+    text-align: right
+
+.set-land .now
+  position: absolute
+  left: 4rem
+  top: 4rem
+  width: 112rem
+  height: 100rem
+
+.set-land .now.alone
+  left: 40rem
+
+.set-port .now
+  position: absolute
+  left: 4rem
+  top: 4rem
+  width: 100rem
+  height: 66rem
+  padding: 5rem
+  .main
+    justify-content: center
+  .disc
+    margin-right: 4rem
+  .temp
+    flex: none
+    min-width: 0
+
+.set-sq .now
+  position: absolute
+  left: 4rem
+  top: 4rem
+  width: 100rem
+  height: 56rem
+  padding: 4rem 5rem
+  .city
+    font-size: 4.5rem
+  .main
+    justify-content: center
+  .disc
+    margin-right: 4rem
+  .range
+    font-size: 4.2rem
+  .temp
+    flex: none
+    min-width: 0
+
+.set-wide .now
+  position: absolute
+  left: 4rem
+  top: 4rem
+  width: 84rem
+  height: 40rem
+  padding: 3rem 4rem
+  .main
+    justify-content: flex-start
+  .disc
+    margin-right: 3rem
+  .temp
+    flex: none
+    min-width: 0
+    margin-right: 3rem
+  .range
+    font-size: 4rem
+    text-align: left

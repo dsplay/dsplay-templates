@@ -1,0 +1,115 @@
+/* Entrance and idle motion. Loader (reveal mode) shows the template with the class dsplay-ready once fonts and images are in; everything here starts from that class, never at mount (it would run while the template is still hidden).
+   The entrance is the template's own pieces, one after the other (80 ms apart, 600 ms in total): photo and feed circle, then the category chip and accent marker, the headline, the description and the clock/footer last. Only leaf boxes are animated (never a box that holds another animated one), only opacity and transform, which do not change layout, so the text-fitting code measures the same sizes.
+   The idle motion keeps the screen alive while the story stays: the accent marker and the category chip breathe, the feed circle of the bars bobs. Every keyframe starts and ends at the resting state.
+   Old Android WebView (4.4): prefixed, opacity and transform only, no custom properties, no animation on SVG. */
+@-webkit-keyframes rf-rise {
+  from { opacity: 0; -webkit-transform: translateY(6%); transform: translateY(6%); }
+}
+
+@keyframes rf-rise {
+  from { opacity: 0; -webkit-transform: translateY(6%); transform: translateY(6%); }
+}
+
+@-webkit-keyframes rf-fade {
+  from { opacity: 0; }
+}
+
+@keyframes rf-fade {
+  from { opacity: 0; }
+}
+
+@-webkit-keyframes rf-idle-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.78; }
+}
+
+@keyframes rf-idle-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.78; }
+}
+
+@-webkit-keyframes rf-idle-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-6%); transform: translateY(-6%); }
+}
+
+@keyframes rf-idle-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-6%); transform: translateY(-6%); }
+}
+
+/* 0 ms: the picture side */
+.dsplay-ready .photo,
+.dsplay-ready .kicker-logo {
+  -webkit-animation: rf-fade 400ms ease-out 0ms both;
+  animation: rf-fade 400ms ease-out 0ms both;
+}
+
+/* 80 ms: the marks */
+.dsplay-ready .kicker {
+  -webkit-animation: rf-rise 400ms ease-out 80ms both;
+  animation: rf-rise 400ms ease-out 80ms both;
+}
+
+/* 160 ms: the headlines */
+.dsplay-ready .headline,
+.dsplay-ready .bar-text {
+  -webkit-animation: rf-rise 440ms ease-out 160ms both;
+  animation: rf-rise 440ms ease-out 160ms both;
+}
+
+/* 240 ms: description, QR and clocks */
+.dsplay-ready .n1-bottom,
+.dsplay-ready .lead-bottom,
+.dsplay-ready .brief-row,
+.dsplay-ready .qr-box,
+.dsplay-ready .bar-qr,
+.dsplay-ready .bar-tile,
+.dsplay-ready .hour {
+  -webkit-animation: rf-rise 440ms ease-out 240ms both;
+  animation: rf-rise 440ms ease-out 240ms both;
+}
+
+/* 320 ms: the footer */
+.dsplay-ready .footer,
+.dsplay-ready .footer-rule {
+  -webkit-animation: rf-fade 280ms ease-out 320ms both;
+  animation: rf-fade 280ms ease-out 320ms both;
+}
+
+/* the entrance and the idle motion share one animation list: the idle one starts 2 s later, when the entrance is over */
+.dsplay-ready .bar-circle {
+  -webkit-animation: rf-fade 400ms ease-out 0ms both, rf-idle-bob 5.5s ease-in-out 2s infinite;
+  animation: rf-fade 400ms ease-out 0ms both, rf-idle-bob 5.5s ease-in-out 2s infinite;
+}
+
+.dsplay-ready .lead-chip,
+.dsplay-ready .bar-chip,
+.dsplay-ready .marker {
+  -webkit-animation: rf-rise 400ms ease-out 80ms both, rf-idle-glow 6s ease-in-out 2s infinite;
+  animation: rf-rise 400ms ease-out 80ms both, rf-idle-glow 6s ease-in-out 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .photo,
+  .dsplay-ready .bar-circle,
+  .dsplay-ready .kicker-logo,
+  .dsplay-ready .lead-chip,
+  .dsplay-ready .bar-chip,
+  .dsplay-ready .marker,
+  .dsplay-ready .kicker,
+  .dsplay-ready .headline,
+  .dsplay-ready .bar-text,
+  .dsplay-ready .n1-bottom,
+  .dsplay-ready .lead-bottom,
+  .dsplay-ready .brief-row,
+  .dsplay-ready .qr-box,
+  .dsplay-ready .bar-qr,
+  .dsplay-ready .bar-tile,
+  .dsplay-ready .hour,
+  .dsplay-ready .footer,
+  .dsplay-ready .footer-rule {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}

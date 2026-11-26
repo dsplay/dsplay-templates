@@ -1,0 +1,95 @@
+/* Entrance and idle motion. Loader (reveal mode) shows the template with the class dsplay-ready once the fonts and images are in; everything here starts from that class, never at mount (it would run while the template is still hidden). Both are off when the animation_enabled variable is false (no .fade-in on the screen root).
+   Entrance: the blocks of the screen rise a little and fade in one after the other (about 40 ms apart, 600 ms in all): the "now" card first, then the logo, the stat cards, the forecast pills; in the bars, the texts in reading order, then the forecast days. The weather icon rises with them and then keeps bobbing.
+   Idle: only the icons move, very slowly (a flat bob, no relief); every keyframe starts and ends at rest.
+   Old Android WebView: only opacity and transform, prefixed, on HTML boxes (the icon is the span around the SVG, the SVG itself is never animated), no custom properties. Distances are percentages of each box, so the motion scales with any screen. */
+@-webkit-keyframes wfl-rise {
+  from { opacity: 0; -webkit-transform: translateY(8%); transform: translateY(8%); }
+}
+
+@keyframes wfl-rise {
+  from { opacity: 0; -webkit-transform: translateY(8%); transform: translateY(8%); }
+}
+
+@-webkit-keyframes wfl-bob {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+}
+
+@keyframes wfl-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4%); }
+}
+
+/* full screen (landscape, portrait, square, wide) */
+.dsplay-ready .full-screen.fade-in .now-card,
+.dsplay-ready .full-screen.fade-in .logo-slot,
+.dsplay-ready .full-screen.fade-in .stat-card,
+.dsplay-ready .full-screen.fade-in .pill {
+  -webkit-animation: wfl-rise 340ms ease-out both;
+  animation: wfl-rise 340ms ease-out both;
+}
+
+.dsplay-ready .full-screen.fade-in .logo-slot { -webkit-animation-delay: 40ms; animation-delay: 40ms; }
+.dsplay-ready .full-screen.fade-in .stat-card { -webkit-animation-delay: 80ms; animation-delay: 80ms; }
+.dsplay-ready .full-screen.fade-in .stat-card ~ .stat-card { -webkit-animation-delay: 120ms; animation-delay: 120ms; }
+.dsplay-ready .full-screen.fade-in .stat-card ~ .stat-card ~ .stat-card { -webkit-animation-delay: 160ms; animation-delay: 160ms; }
+.dsplay-ready .full-screen.fade-in .stat-card ~ .stat-card ~ .stat-card ~ .stat-card { -webkit-animation-delay: 200ms; animation-delay: 200ms; }
+.dsplay-ready .full-screen.fade-in .pill { -webkit-animation-delay: 140ms; animation-delay: 140ms; }
+.dsplay-ready .full-screen.fade-in .pill ~ .pill { -webkit-animation-delay: 180ms; animation-delay: 180ms; }
+.dsplay-ready .full-screen.fade-in .pill ~ .pill ~ .pill { -webkit-animation-delay: 220ms; animation-delay: 220ms; }
+.dsplay-ready .full-screen.fade-in .pill ~ .pill ~ .pill ~ .pill { -webkit-animation-delay: 260ms; animation-delay: 260ms; }
+.dsplay-ready .full-screen.fade-in .pill ~ .pill ~ .pill ~ .pill ~ .pill { -webkit-animation-delay: 260ms; animation-delay: 260ms; }
+
+/* bars (horizontal and vertical): the direct children in reading order, then each forecast day */
+.dsplay-ready .bar-h.fade-in > *,
+.dsplay-ready .bar-v.fade-in > *,
+.dsplay-ready .fade-in .forecast-day {
+  -webkit-animation: wfl-rise 340ms ease-out both;
+  animation: wfl-rise 340ms ease-out both;
+}
+
+.dsplay-ready .bar-h.fade-in > :nth-child(2),
+.dsplay-ready .bar-v.fade-in > :nth-child(2) { -webkit-animation-delay: 40ms; animation-delay: 40ms; }
+.dsplay-ready .bar-h.fade-in > :nth-child(3),
+.dsplay-ready .bar-v.fade-in > :nth-child(3) { -webkit-animation-delay: 80ms; animation-delay: 80ms; }
+.dsplay-ready .bar-h.fade-in > :nth-child(4),
+.dsplay-ready .bar-v.fade-in > :nth-child(4) { -webkit-animation-delay: 120ms; animation-delay: 120ms; }
+.dsplay-ready .bar-h.fade-in > :nth-child(5),
+.dsplay-ready .bar-v.fade-in > :nth-child(5) { -webkit-animation-delay: 160ms; animation-delay: 160ms; }
+.dsplay-ready .bar-h.fade-in > :nth-child(6),
+.dsplay-ready .bar-v.fade-in > :nth-child(6) { -webkit-animation-delay: 200ms; animation-delay: 200ms; }
+.dsplay-ready .bar-h.fade-in > :nth-child(n+7),
+.dsplay-ready .bar-v.fade-in > :nth-child(n+7) { -webkit-animation-delay: 240ms; animation-delay: 240ms; }
+
+.dsplay-ready .fade-in .forecast-day { -webkit-animation-delay: 160ms; animation-delay: 160ms; }
+.dsplay-ready .fade-in .forecast-day ~ .forecast-day { -webkit-animation-delay: 200ms; animation-delay: 200ms; }
+.dsplay-ready .fade-in .forecast-day ~ .forecast-day ~ .forecast-day { -webkit-animation-delay: 240ms; animation-delay: 240ms; }
+.dsplay-ready .fade-in .forecast-day ~ .forecast-day ~ .forecast-day ~ .forecast-day { -webkit-animation-delay: 260ms; animation-delay: 260ms; }
+
+/* the icon: rises with its block, then bobs for as long as the media lasts (the later animation wins the transform once it runs) */
+.dsplay-ready .fade-in .weather-icon {
+  -webkit-animation: wfl-rise 340ms ease-out 80ms both, wfl-bob 6s ease-in-out 1.6s infinite;
+  animation: wfl-rise 340ms ease-out 80ms both, wfl-bob 6s ease-in-out 1.6s infinite;
+}
+
+/* the icons of the forecast bob out of step with the big one */
+.dsplay-ready .fade-in .pill .weather-icon,
+.dsplay-ready .fade-in .forecast-day .weather-icon {
+  -webkit-animation: wfl-rise 340ms ease-out 180ms both, wfl-bob 7s ease-in-out 2.4s infinite;
+  animation: wfl-rise 340ms ease-out 180ms both, wfl-bob 7s ease-in-out 2.4s infinite;
+}
+
+.dsplay-ready .fade-in .pill ~ .pill .weather-icon,
+.dsplay-ready .fade-in .forecast-day ~ .forecast-day .weather-icon {
+  -webkit-animation-delay: 220ms, 3.2s;
+  animation-delay: 220ms, 3.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsplay-ready .fade-in,
+  .dsplay-ready .fade-in *,
+  .dsplay-ready .fade-in .weather-icon {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}
