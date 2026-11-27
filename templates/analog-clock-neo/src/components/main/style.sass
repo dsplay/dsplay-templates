@@ -1,0 +1,82 @@
+.main
+  position: relative
+  width: 100%
+  height: 100%
+  overflow: hidden
+  margin: 0
+  padding: 0
+  font-family: 'Roboto', sans-serif
+
+.stage
+  position: relative
+  z-index: 1
+  box-sizing: border-box
+  width: 100%
+  height: 100%
+  padding: 4rem // the 4 rem frame around the face
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  flex-direction: column
+  -webkit-align-items: center
+  align-items: center
+  -webkit-justify-content: center
+  justify-content: center
+
+// Full-screen formats: the face is the stage; label and date sit on it (positions come from Main)
+.face-label
+  font-size: 3.6rem
+
+.face-date
+  font-size: 4rem
+
+// Compact formats (face sizes come from Main; text sizes from M-007 §3)
+.fmt-wide
+  .stage
+    -webkit-flex-direction: row
+    flex-direction: row
+    padding: 5rem 4rem
+  .info
+    margin: 0 0 0 4rem
+    min-width: 0
+    text-align: left
+  .info-time
+    font-size: 9rem
+  .info-line
+    font-size: 5rem
+
+.fmt-strip-h
+  .stage
+    -webkit-flex-direction: row
+    flex-direction: row
+    padding: 0 2rem
+  .info
+    margin: 0
+    min-width: 0
+    display: -webkit-flex
+    display: flex
+    -webkit-align-items: center
+    align-items: center
+  .info-time
+    font-size: 3.6rem
+    margin-left: 2rem
+    -webkit-flex: none
+    flex: none
+  .info-line
+    font-size: 2.8rem
+    margin-left: 2rem
+
+.fmt-strip-v
+  .stage
+    padding: 1rem
+  .info
+    margin-top: 2rem
+    width: 100%
+  .info-time
+    font-size: 5.5rem
+  .info-weekday, .info-month
+    font-size: 3.6rem
+    margin-top: 1rem
+  .info-day
+    font-size: 6rem
+    margin-top: 1rem

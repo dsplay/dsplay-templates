@@ -1,0 +1,9 @@
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=animation($property)
+  -webkit-animation: #{$property}
+  animation: #{$property}

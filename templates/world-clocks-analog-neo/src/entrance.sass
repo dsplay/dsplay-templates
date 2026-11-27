@@ -1,0 +1,55 @@
+// Entrance (docs/entrance-style.md): Loader runs in reveal mode and puts `dsplay-ready` on a wrapper once the font is in, so
+// everything here starts from that class, never at mount. It only runs on the first page (`.entering`, dropped by Main once it
+// is over: pages that mount at each turn must not replay it). The logo and map fade first, then the discs and wells, then the
+// dials and hands, then the names and hours: 300 ms each, 80 ms apart, 540 ms in total. Only opacity and transform, prefixed,
+// on HTML boxes (never on SVG, and never on the hands' own transform: it is their rotation).
+// `.animated` is on the app only while the animation_enabled variable is on.
+@-webkit-keyframes wc-fade
+  from
+    opacity: 0
+
+@keyframes wc-fade
+  from
+    opacity: 0
+
+@-webkit-keyframes wc-pop
+  from
+    opacity: 0
+    -webkit-transform: scale(0.6)
+
+@keyframes wc-pop
+  from
+    opacity: 0
+    transform: scale(0.6)
+
+.dsplay-ready .animated .entering
+  .logo-tile, .map-band > .world-map, .map-behind
+    -webkit-animation: wc-fade 300ms ease-out both
+    animation: wc-fade 300ms ease-out both
+
+  .disc, .well
+    -webkit-animation: wc-fade 300ms ease-out 80ms both
+    animation: wc-fade 300ms ease-out 80ms both
+
+  .dial-wrap
+    -webkit-animation: wc-fade 300ms ease-out 160ms both
+    animation: wc-fade 300ms ease-out 160ms both
+
+  .hand
+    -webkit-animation: wc-fade 300ms ease-out 200ms both
+    animation: wc-fade 300ms ease-out 200ms both
+
+  .pin
+    -webkit-animation: wc-pop 300ms ease-out 200ms both
+    animation: wc-pop 300ms ease-out 200ms both
+
+  // the names are centred with translate(-50%, -50%): they only fade, like the hours and the dots
+  .face-text, .city-name, .city-time, .page-dots
+    -webkit-animation: wc-fade 300ms ease-out 240ms both
+    animation: wc-fade 300ms ease-out 240ms both
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready .animated .entering
+    .logo-tile, .map-band > .world-map, .map-behind, .disc, .well, .dial-wrap, .hand, .pin, .face-text, .city-name, .city-time, .page-dots
+      -webkit-animation: none
+      animation: none

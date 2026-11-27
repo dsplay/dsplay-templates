@@ -1,0 +1,205 @@
+@import ../../styles/effects
+
+// Ink of the template (tokens-impact.md): text, borders, hard shadow, stripes.
+$ink: #141414
+
+// Layers (4), bottom to top: plate (.alert background) / perforation (.plate-holes) / frame (stripes, plate edge) / ink (symbol + text).
+// Nothing here animates except the symbol's opacity pulse. Hard shadows have blur 0.
+.alert
+  position: relative
+  box-sizing: border-box
+  width: 100%
+  height: 100%
+  // the frame: stripes of ink (transparent between them, so the plate color shows through), only on the edge band
+  background-image: -webkit-repeating-linear-gradient(45deg, transparent 0, transparent 2rem, #141414 2rem, #141414 4rem)
+  background-image: repeating-linear-gradient(45deg, transparent 0, transparent 2rem, #141414 2rem, #141414 4rem)
+
+// The plate: covers everything but the frame band.
+.plate-field
+  position: absolute
+  top: 3rem
+  right: 3rem
+  bottom: 3rem
+  // definite height: Chrome 44 resolves flex-basis % of column children against it (top/bottom alone is not enough)
+  height: calc(100% - 6rem)
+  left: 3rem
+  box-sizing: border-box
+  background-color: inherit
+  // 4rem to the frame; the hard shadow (1.2rem) is added on the right and bottom
+  padding: 4rem 5.2rem 5.2rem 4rem
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  flex-direction: row
+  -webkit-align-items: stretch
+  align-items: stretch
+
+// The perforation: ONE static layer BELOW the ink and the message block (which covers it). Never animates.
+.plate-holes
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  pointer-events: none
+  background-image: url(../../assets/image/plate-holes.svg)
+  background-size: 11rem 11rem
+  background-repeat: repeat
+
+.alert-icon
+  position: relative
+  -webkit-flex: 0 0 38%
+  flex: 0 0 38%
+  // the symbol pulses (opacity only); the plate, holes, frame, block and shadow never move
+  @include animation(pulse 2s ease-in-out infinite)
+
+// The message block: white paper, thick ink border, square corners, hard shadow. Covers the holes under the text.
+.alert-panel
+  position: relative
+  -webkit-flex: 1 1 0
+  flex: 1 1 0
+  margin-left: 4rem
+  box-sizing: border-box
+  background-color: #FFFFFF
+  border: 1rem solid $ink
+  -webkit-box-shadow: 1.2rem 1.2rem 0 $ink
+  box-shadow: 1.2rem 1.2rem 0 $ink
+
+.alert.long-text .alert-icon
+  -webkit-flex-basis: 28%
+  flex-basis: 28%
+
+// No message: the symbol takes the whole screen, no block, no shadow.
+.alert.no-message .alert-icon
+  -webkit-flex: 1 1 0
+  flex: 1 1 0
+
+// ---- formats ----
+
+.alert.portrait,
+.alert.square
+  .plate-field
+    -webkit-flex-direction: column
+    flex-direction: column
+
+.alert.portrait
+  .alert-icon
+    -webkit-flex-basis: 40%
+    flex-basis: 40%
+  &.long-text .alert-icon
+    -webkit-flex-basis: 30%
+    flex-basis: 30%
+  .alert-panel
+    margin-left: 0
+    margin-top: 4rem
+
+.alert.square
+  .plate-field
+    padding: 3rem 4.2rem 4.2rem 3rem
+  .alert-icon
+    -webkit-flex-basis: 32%
+    flex-basis: 32%
+  &.long-text .alert-icon
+    -webkit-flex-basis: 24%
+    flex-basis: 24%
+  .alert-panel
+    margin-left: 0
+    margin-top: 3rem
+
+// 1920x480 (48rem high): frame 2rem, square symbol 36rem, medium block (border 0.6, shadow 0.8).
+.alert.wide
+  .plate-field
+    top: 2rem
+    right: 2rem
+    bottom: 2rem
+    // definite height: Chrome 44 resolves flex-basis % of column children against it (top/bottom alone is not enough)
+    height: calc(100% - 4rem)
+    left: 2rem
+    padding: 2rem 2.8rem 2.8rem 2rem
+  .alert-icon, &.long-text .alert-icon
+    -webkit-flex: 0 0 36rem
+    flex: 0 0 36rem
+  &.no-message .alert-icon
+    -webkit-flex: 1 1 0
+    flex: 1 1 0
+  .alert-panel
+    margin-left: 3rem
+    border-width: .6rem
+    -webkit-box-shadow: .8rem .8rem 0 $ink
+    box-shadow: .8rem .8rem 0 $ink
+
+// 1920x52: flat ink rules on top and bottom, no stripes; one line, no block, no shadow, text straight on the plate.
+.alert.strip-h
+  background-image: none
+  border-top: .3rem solid $ink
+  border-bottom: .3rem solid $ink
+  .plate-field
+    top: 0
+    right: 0
+    bottom: 0
+    // definite height: Chrome 44 resolves flex-basis % of column children against it (top/bottom alone is not enough)
+    height: 100%
+    left: 0
+    padding: .3rem 1.5rem
+    -webkit-align-items: center
+    align-items: center
+  .plate-holes
+    background-image: url(../../assets/image/plate-holes-simple.svg)
+    background-size: 4rem 4rem
+  .alert-icon, &.long-text .alert-icon
+    -webkit-flex: 0 0 4rem
+    flex: 0 0 4rem
+    height: 4rem
+  .alert-panel
+    min-width: 0
+    margin-left: 1.5rem
+    background-color: transparent
+    border: 0
+    -webkit-box-shadow: none
+    box-shadow: none
+  h1.one-line
+    margin: 0
+    font-family: Oswald, 'Arial Narrow', sans-serif
+    font-weight: 700
+    text-transform: uppercase
+    font-size: 2.6rem
+    line-height: 3.2rem
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+// 200x1920: symbol on top, message on a white block (no shadow, border 0.3) so it reads with the holes outside it.
+.alert.strip-v
+  background-image: none
+  border-left: .3rem solid $ink
+  border-right: .3rem solid $ink
+  .plate-field
+    top: 0
+    right: 0
+    bottom: 0
+    // definite height: Chrome 44 resolves flex-basis % of column children against it (top/bottom alone is not enough)
+    height: 100%
+    left: 0
+    padding: .6rem
+    -webkit-flex-direction: column
+    flex-direction: column
+  .plate-holes
+    background-image: url(../../assets/image/plate-holes-simple.svg)
+    background-size: 4rem 4rem
+  .alert-icon, &.long-text .alert-icon
+    -webkit-flex: 0 0 15rem
+    flex: 0 0 15rem
+  &.no-message .alert-icon
+    -webkit-flex: 1 1 0
+    flex: 1 1 0
+  .alert-panel
+    margin-left: 0
+    margin-top: .6rem
+    border-width: .3rem
+    -webkit-box-shadow: none
+    box-shadow: none
+  .fit-box
+    top: 1rem
+    right: 0
+    bottom: 1rem
+    left: 0

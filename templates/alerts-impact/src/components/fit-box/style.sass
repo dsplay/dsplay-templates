@@ -1,0 +1,37 @@
+@import ../../styles/effects
+
+// Box with a definite size: the text is measured against it.
+.fit-box
+  position: absolute
+  top: 3rem
+  right: 3rem
+  bottom: 3rem
+  left: 3rem
+  overflow: hidden
+  display: -webkit-flex
+  display: flex
+  -webkit-align-items: center
+  align-items: center
+  -webkit-justify-content: center
+  justify-content: center
+
+.fit-text
+  margin: 0
+  width: 100%
+  max-width: 100%
+  box-sizing: border-box
+  font-family: Oswald, 'Arial Narrow', sans-serif
+  font-weight: 700
+  line-height: 1.4
+  text-align: center
+  text-transform: uppercase
+  word-wrap: normal
+  overflow-wrap: normal
+  visibility: hidden
+  &.fit-ready
+    visibility: visible
+  &.clamped
+    display: -webkit-box
+    -webkit-box-orient: vertical
+    overflow: hidden
+    text-overflow: ellipsis

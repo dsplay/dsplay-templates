@@ -1,0 +1,93 @@
+.city
+  box-sizing: border-box
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  flex-direction: column
+  -webkit-align-items: center
+  align-items: center
+  min-width: 0
+  font-family: 'Roboto', sans-serif
+  line-height: 1.15
+
+.city-clock
+  -webkit-flex: none
+  flex: none
+
+.city-name, .city-time
+  max-width: 100%
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.city-name
+  font-size: 4.5rem
+  margin-top: 0.8rem
+
+.city-time
+  font-size: 3.6rem
+  margin-top: 0.8rem
+
+.city-day
+  font-size: 2.6rem
+  margin-left: 1rem
+
+// in the grid the hour may be wider than the face (`00:20 +1 dia` on a small one): it overflows, centred
+.city-cell .city-time
+  max-width: none
+  overflow: visible
+
+// a horizontal slice of the bar: [clock] name .... time
+.city-strip-h
+  -webkit-flex-direction: row
+  flex-direction: row
+  -webkit-flex: 1 1 0%
+  flex: 1 1 0%
+  padding: 0 0.6rem
+  .city-name
+    -webkit-flex: 1 1 auto
+    flex: 1 1 auto
+    font-size: 3rem
+    margin: 0 0 0 1.2rem
+  .city-time
+    -webkit-flex: none
+    flex: none
+    font-size: 3rem
+    margin-top: 0
+    margin-left: 1.2rem
+  .city-day
+    font-size: 2.2rem
+    margin-left: 0.6rem
+
+// a vertical slice: clock over name over time
+.city-strip-v
+  justify-content: center
+  .city-name
+    font-size: 3.2rem
+    margin-top: 0.3rem
+  .city-time
+    font-size: 3.2rem
+    margin-top: 0
+  .city-day
+    font-size: 2.2rem
+    margin-left: 0.6rem
+
+// more than 5 cities on the horizontal bar: 3-letter names and a smaller time, so nothing is cut mid-word
+.city-strip-h.dense
+  padding: 0 0.3rem
+  .city-name
+    font-size: 2.6rem
+    margin-left: 0.8rem
+  .city-time
+    font-size: 2.6rem
+    margin-top: 0
+    margin-left: 0.8rem
+  .city-day
+    font-size: 2.2rem
+    margin-left: 0.3rem
+
+// the hour text: an inline-block so the day label sits beside it
+.city-time-text
+  position: relative
+  display: inline-block
+

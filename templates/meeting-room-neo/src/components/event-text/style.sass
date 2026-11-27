@@ -1,0 +1,65 @@
+.event-block
+  display: flex
+  flex-direction: column
+  overflow: hidden
+
+  &.top
+    justify-content: flex-start
+  &.center
+    justify-content: center
+
+.event-row
+  display: flex
+  flex-direction: row
+  align-items: stretch
+
+.marker
+  flex: none
+  border-radius: 0.4rem
+
+.event-col
+  min-width: 0
+
+.event-name
+  font-weight: 700
+  line-height: 1.15
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-box-orient: vertical
+  word-wrap: break-word
+
+.event-date
+  font-weight: 500
+  line-height: 1.15
+
+.event-place
+  font-weight: 500
+  line-height: 1.15
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-box-orient: vertical
+  word-wrap: break-word
+
+// the arrow between the two dates of a long event is drawn in CSS (no glyph in the font)
+.arrow
+  display: inline-block
+  position: relative
+  width: 1.3em
+  height: 0.09em
+  margin: 0 0.5em
+  vertical-align: middle
+  background-color: currentColor
+
+  &::after
+    content: ''
+    position: absolute
+    right: 0
+    top: -0.2em
+    width: 0.4em
+    height: 0.4em
+    border-top: 0.09em solid currentColor
+    border-right: 0.09em solid currentColor
+    -webkit-transform: rotate(45deg)
+    transform: rotate(45deg)

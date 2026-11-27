@@ -1,0 +1,50 @@
+// Entrance (docs/entrance-style.md): Loader runs in reveal mode and puts `dsplay-ready` on a wrapper once the font is in, so
+// everything here starts from that class, never at mount (it would run while the template is hidden). The face and well
+// fade in first, then the dial, the hands and pin, then the text: 300 ms each, 80 ms apart, 540 ms in total. Only opacity
+// and transform, prefixed, on HTML boxes (never on SVG, and never on the hands' own transform: it is their rotation).
+// `.animated` is on the app only while the animation_enabled variable is on.
+@-webkit-keyframes ac-fade
+  from
+    opacity: 0
+
+@keyframes ac-fade
+  from
+    opacity: 0
+
+@-webkit-keyframes ac-pop
+  from
+    opacity: 0
+    -webkit-transform: scale(0.6)
+
+@keyframes ac-pop
+  from
+    opacity: 0
+    transform: scale(0.6)
+
+.dsplay-ready .animated
+  .face, .well
+    -webkit-animation: ac-fade 300ms ease-out both
+    animation: ac-fade 300ms ease-out both
+
+  .dial-wrap
+    -webkit-animation: ac-fade 300ms ease-out 80ms both
+    animation: ac-fade 300ms ease-out 80ms both
+
+  .hand
+    -webkit-animation: ac-fade 300ms ease-out 160ms both
+    animation: ac-fade 300ms ease-out 160ms both
+
+  .pin
+    -webkit-animation: ac-pop 300ms ease-out 160ms both
+    animation: ac-pop 300ms ease-out 160ms both
+
+  // the label and date are centred with translate(-50%, -50%) and the digital text is plain: they only fade
+  .face-text, .info
+    -webkit-animation: ac-fade 300ms ease-out 240ms both
+    animation: ac-fade 300ms ease-out 240ms both
+
+@media (prefers-reduced-motion: reduce)
+  .dsplay-ready .animated
+    .face, .well, .dial-wrap, .hand, .pin, .face-text, .info
+      -webkit-animation: none
+      animation: none

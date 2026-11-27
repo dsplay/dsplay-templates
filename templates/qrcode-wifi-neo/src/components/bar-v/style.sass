@@ -1,0 +1,57 @@
+.bar-v
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  box-sizing: border-box
+  padding: 4rem 1rem
+  text-align: center
+
+.bar-v-seal
+  flex: none
+  width: 12rem
+  height: 12rem
+  margin-bottom: 4rem
+
+  svg
+    display: block
+    width: 100%
+    height: 100%
+
+.bar-v-qr
+  flex: none
+  box-sizing: border-box
+  width: 18rem
+  height: 18rem
+  padding: 2rem
+  border-radius: 1.2rem
+  margin-bottom: 5rem
+
+  img, canvas
+    display: block
+
+.bar-v-row
+  width: 100%
+  margin-bottom: 3rem
+
+.bar-v-label
+  font-size: 2.6rem
+  line-height: 1.2
+
+.bar-v-value
+  font-weight: 700
+  line-height: 1.15
+  word-wrap: break-word
+  overflow-wrap: break-word
+  -webkit-hyphens: none
+
+  &.net
+    font-size: 3.2rem
+  &.pw
+    font-size: 2.8rem
+    word-break: break-all

@@ -1,0 +1,11 @@
+@import ./mixins
+
+// Only opacity/transform animations (see the design spec's animation catalog).
+// Alert frame pulse: opacity only.
++keyframes(pulse)
+  0%
+    opacity: 1
+  50%
+    opacity: .75
+  100%
+    opacity: 1
